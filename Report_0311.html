@@ -83,9 +83,9 @@
     h2 { color: #2980b9; margin-top: 30px; margin-bottom: 15px; border-left: 5px solid #3498db; padding-left: 12px; font-size: 18px; background: #f8f9fa; padding-top: 8px; padding-bottom: 8px; }
     p { line-height: 1.7; font-size: 13.5px; margin-bottom: 15px; }
 
-    /* 📊 テーブル */
+    /* 📊 テーブル共通スタイル */
     table { width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 12.5px; table-layout: fixed; }
-    th, td { border: 1px solid #bdc3c7; padding: 10px 6px; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; }
+    th, td { border: 1px solid #bdc3c7; padding: 10px 8px; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; }
     th { background-color: #ecf0f1; font-weight: bold; color: #2c3e50; }
     tr:nth-child(even) { background-color: #fcfcfc; }
 
@@ -93,6 +93,7 @@
     .text-bullish { color: #0056b3; font-weight: bold; }
     .text-neutral { color: #28a745; font-weight: bold; }
     .text-bearish { color: #dc3545; font-weight: bold; }
+    .icon { font-size: 14px; margin-right: 4px; }
 
     /* 📝 詳細分析リスト */
     .analysis-list { list-style: none; padding: 0; }
@@ -111,10 +112,10 @@
     .ob-time { font-size: 12px; color: #7f8c8d; margin-bottom: 8px; text-align: left; }
     .ob-table { width: 100%; border-collapse: collapse; border: 1px solid #bdc3c7; table-layout: auto; }
     .ob-table td { padding: 10px 12px; border: 1px solid #bdc3c7; font-size: 13.5px; white-space: normal; }
-    .ob-price { font-weight: bold; width: 110px; text-align: center; color: #2c3e50; }
+    .ob-price { font-weight: bold; width: 110px; text-align: center; color: #2c3e50; white-space: nowrap; }
     .ob-sell { background-color: #eaf4fc; } /* 水色 */
     .ob-buy { background-color: #fcece8; }  /* 薄オレンジ */
-    .ob-current { background-color: #ffffff; font-weight: bold; border: 2px solid #3498db; }
+    .ob-current { background-color: #ffffff; font-weight: bold; border: 2.5px solid #3498db; }
 
     /* コメント＆フッター */
     .comment-box { background-color: #eafaf1; border-left: 5px solid #2ecc71; padding: 18px; margin-top: 30px; border-radius: 4px; font-size: 14px; line-height: 1.7; }
@@ -148,7 +149,7 @@
     </div>
 
     <div class="a4-container" id="report-content">
-        <div style="text-align: right; font-size: 12px; color: #7f8c8d;">発行日: 2026年3月11日 (水)7:00現在</div>
+        <div style="text-align: right; font-size: 12px; color: #7f8c8d;">発行日: 2026年3月11日 (水) 7:00現在</div>
         <h1>📊 マーケットレポート</h1>
 
         <h2>【📌 市場概況まとめ】</h2>
@@ -217,7 +218,7 @@
         <h2>【📅 経済指標カレンダー - 前日】</h2>
         <table>
             <thead>
-                <tr><th style="width:12%">時刻</th><th style="width:10%">国</th><th style="width:48%">指標名</th><th style="width:10%">結果</th><th style="width:10%">予想</th><th style="width:10%">前回</th></tr>
+                <tr><th>時刻</th><th>国</th><th>指標名</th><th>結果</th><th>予想</th><th>前回</th></tr>
             </thead>
             <tbody>
                 <tr><td>21:30</td><td>🇺🇸</td><td>2月 消費者物価指数 (CPI) 前年同月比</td><td>2.5%</td><td>2.4%</td><td>2.4%</td></tr>
@@ -228,7 +229,7 @@
         <h2>【📅 経済指標カレンダー - 本日】</h2>
         <table>
             <thead>
-                <tr><th style="width:12%">時刻</th><th style="width:10%">国</th><th style="width:38%">指標名</th><th style="width:20%">前回変動幅</th><th style="width:10%">予想</th><th style="width:10%">前回</th></tr>
+                <tr><th>時刻</th><th>国</th><th>指標名</th><th>前回変動幅</th><th>予想</th><th>前回</th></tr>
             </thead>
             <tbody>
                 <tr><td>16:00</td><td>🇬🇧</td><td>1月 月次国内総生産（GDP）</td><td>15.2pips</td><td>0.2%</td><td>-0.1%</td></tr>
@@ -247,7 +248,6 @@
                     <span><strong>前日比:</strong> <span class="text-bullish">+0.35</span></span>
                 </div>
                 <p>CPIの上振れを受けて米金利が上昇し、ドル全面高の展開。99.50のレジスタンスを突破し、心理的節目の100ポイント到達が現実味を帯びています。</p>
-                <span class="note-text">※制限回避のため「日足（D）」を表示しています。</span>
                 <div class="chart-container" id="tv_dxy"></div>
             </li>
             
@@ -258,7 +258,6 @@
                     <span><strong>US30 見通し:</strong> 🟢➡️ <span class="text-neutral">中立</span> (現在値: 47,610.20)</span>
                 </div>
                 <p>インフレ懸念は残るものの、パニック的な売りは一巡。VIXの低下とともに自律反発の動きを見せており、下値の硬さが確認されました。</p>
-                <span class="note-text">※制限回避のため「日足（D）」を表示しています。</span>
                 <div style="display:flex; gap:10px;">
                     <div class="chart-container" id="tv_us500"></div>
                     <div class="chart-container" id="tv_us30"></div>
@@ -273,7 +272,6 @@
                     <span><strong>前日比:</strong> <span class="text-bullish">+152.47</span></span>
                 </div>
                 <p>金利上昇は逆風なものの、AI関連など一部の大型ハイテク株への資金流入が継続しており、指数全体を底上げしています。</p>
-                <span class="note-text">※制限回避のため「日足（D）」を表示しています。</span>
                 <div class="chart-container" id="tv_ustec"></div>
             </li>
 
@@ -285,7 +283,6 @@
                     <span><strong>前日比:</strong> <span class="text-bullish">+650.00</span></span>
                 </div>
                 <p>前日の大幅下落からのショートカバー（買い戻し）と、158円台半ばまでの円安進行が強力な下支えとなり、反発トレンドを形成中です。</p>
-                <span class="note-text">※制限回避のため「日足（D）」を表示しています。</span>
                 <div class="chart-container" id="tv_jp225"></div>
             </li>
 
@@ -400,8 +397,7 @@
             <span class="footer-disclaimer">※本資料に掲載されている情報は、情報提供のみを目的としたものであり、投資アドバイスや金融商品取引の勧誘を目的としたものではありません。</span>
             Copyright 2026 Pure Green All Rights Reserved.
         </div>
-    </div>
-    <div class="link-section">
+    </div> <div class="link-section" style="margin-top: 20px;">
         <div class="link-card">
             <a href="https://one.exnesstrack.org/a/tgmn3e45h" target="_blank" class="link-btn exness">Exness</a>
             <div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる世界最高峰の極狭スプレッド口座。</div>
@@ -415,16 +411,17 @@
             <div class="link-desc">海外FXの入出金を最速・安価に。安全かつスムーズな資金管理を実現する必須ツール。</div>
         </div>
     </div>
+
 </div>
 
 <script>
-    // 🌟 全てのチャートシンボルを確実な表示設定で網羅 🌟
+    // 🌟 ご指定いただいたシンボルと、安定しているシンボルで構成 🌟
     const charts = [
-        { id: "tv_dxy", symbol: "TVC:DXY", interval: "D" },       
-        { id: "tv_us500", symbol: "TVC:SPX", interval: "D" },     
-        { id: "tv_us30", symbol: "TVC:DJI", interval: "D" },      
-        { id: "tv_ustec", symbol: "TVC:NDX", interval: "D" },     
-        { id: "tv_jp225", symbol: "TVC:NI225", interval: "D" },   
+        { id: "tv_dxy", symbol: "CAPITALCOM:DXY", interval: "60" },      // ご指定通り元に戻しました
+        { id: "tv_us500", symbol: "OANDA:SPX500USD", interval: "60" },   
+        { id: "tv_us30", symbol: "OANDA:US30USD", interval: "60" },      
+        { id: "tv_ustec", symbol: "OANDA:NAS100USD", interval: "60" },   
+        { id: "tv_jp225", symbol: "OANDA:JP225YJPY", interval: "60" },   // ご指定のOANDA日経平均に変更
         { id: "tv_xauusd", symbol: "OANDA:XAUUSD", interval: "60" }, 
         { id: "tv_usoil", symbol: "OANDA:WTICOUSD", interval: "60" },
         { id: "tv_eurusd", symbol: "OANDA:EURUSD", interval: "60" },

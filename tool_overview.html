@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 コモディティ＆重要銘柄 動向</title>
+<style>
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f4f7f6; padding: 20px; margin: 0; }
+    .container { max-width: 1000px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 0 auto; box-sizing: border-box; }
+    h2 { color: #2980b9; margin-top: 0; border-left: 5px solid #3498db; padding-left: 10px; font-size: 20px; }
+    .back-link { display: inline-block; margin-top: 20px; font-size: 14px; color: #3498db; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>【📊 コモディティ＆重要銘柄 動向】</h2>
+    <div class="tradingview-widget-container" style="height:600px; width:100%; border: 1px solid #ecf0f1;">
+        <div class="tradingview-widget-container__widget" style="height:100%; width:100%;"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+        {
+          "colorTheme": "light",
+          "dateRange": "1D",
+          "showChart": true,
+          "locale": "ja",
+          "width": "100%",
+          "height": "100%",
+          "tabs": [
+            {
+              "title": "コモディティ",
+              "symbols": [
+                { "s": "OANDA:XAUUSD", "d": "Gold (金)" },
+                { "s": "OANDA:XAGUSD", "d": "Silver (銀)" },
+                { "s": "OANDA:WTICOUSD", "d": "WTI Oil (原油)" }
+              ]
+            },
+            {
+              "title": "暗号資産",
+              "symbols": [
+                { "s": "BITSTAMP:BTCUSD", "d": "Bitcoin (BTC)" },
+                { "s": "BITSTAMP:ETHUSD", "d": "Ethereum (ETH)" }
+              ]
+            }
+          ]
+        }
+        </script>
+    </div>
+    <a href="index.html" class="back-link">← 目次へ戻る</a>
+</div>
+</body>
+</html>

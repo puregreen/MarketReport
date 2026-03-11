@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>機関投資家レベルの最高水準環境 - XS（エックスエス）</title>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* 🌟 ヒーローセクション（ファーストビュー） 🌟 */
+    .hero {
+        /* XSのブランドイメージに合わせたダーク＆グリーンのグラデーション */
+        background: linear-gradient(135deg, #1e272e 0%, #2c3e50 100%);
+        color: #ffffff;
+        padding: 60px 30px;
+        text-align: center;
+        border-bottom: 5px solid #2ecc71;
+    }
+    .hero h1 {
+        font-size: 32px;
+        margin: 0 0 15px 0;
+        letter-spacing: 1px;
+        color: #2ecc71; /* XSのアクセントカラー */
+    }
+    .hero p {
+        font-size: 16px;
+        margin: 0 0 30px 0;
+        color: #ecf0f1;
+        font-weight: 300;
+        line-height: 1.8;
+    }
+    
+    /* CTAボタン（リンクボタン） */
+    .cta-btn {
+        display: inline-block;
+        background-color: #2ecc71;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 16px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        box-shadow: 0 6px 15px rgba(46, 204, 113, 0.4);
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
+    }
+    .cta-btn:hover {
+        background-color: #27ae60;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(46, 204, 113, 0.6);
+    }
+
+    /* コンテンツエリア */
+    .content-area {
+        padding: 40px 30px;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 24px;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #2ecc71;
+        margin: 15px auto 0;
+    }
+
+    /* 🌟 選ばれる理由（特徴グリッド） 🌟 */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+    .feature-card {
+        background-color: #f9fbfd;
+        border: 1px solid #e1e8ed;
+        border-radius: 10px;
+        padding: 25px 20px;
+        text-align: left;
+        transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #bdc3c7;
+    }
+    .feature-icon {
+        font-size: 30px;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+    .feature-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+    .feature-desc {
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+    }
+
+    /* 🌟 口座タイプ比較表 🌟 */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 50px;
+        font-size: 14px;
+    }
+    th, td {
+        border: 1px solid #bdc3c7;
+        padding: 15px 12px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    th {
+        background-color: #ecf0f1;
+        color: #2c3e50;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+    .highlight-col {
+        background-color: #eafaf1; 
+        font-weight: bold;
+        color: #27ae60;
+    }
+
+    /* 🌟 ターゲット訴求 🌟 */
+    .target-box {
+        background-color: #f4fcfa;
+        border-left: 5px solid #2ecc71;
+        padding: 25px;
+        border-radius: 4px;
+        margin-bottom: 40px;
+    }
+    .target-box h3 {
+        margin: 0 0 15px 0;
+        color: #27ae60;
+        font-size: 19px;
+    }
+    .target-box ul {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14.5px;
+        color: #444;
+    }
+    .target-box li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    /* 🌟 フッターCTA 🌟 */
+    .bottom-cta {
+        text-align: center;
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        border-top: 1px solid #ecf0f1;
+    }
+    .bottom-cta p {
+        font-size: 15px;
+        margin-bottom: 25px;
+        color: #7f8c8d;
+    }
+
+    .footer-copy {
+        text-align: center;
+        font-size: 12px;
+        color: #95a5a6;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 600px) {
+        .hero h1 { font-size: 24px; }
+        .hero p { font-size: 14px; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .content-area { padding: 30px 20px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="hero">
+        <h1>機関投資家レベルの最高水準環境</h1>
+        <p>B2B（企業向け）クラスの圧倒的な流動性を、個人トレーダーへ解放。<br>全世界で急成長を遂げる次世代マルチアセットブローカー「XS」で、スリップのない完璧なトレードを。</p>
+        <a href="https://my.xs.com/ja/links/go/962" target="_blank" class="cta-btn">XSで無料口座を開設する</a>
+    </div>
+
+    <div class="content-area">
+        
+        <h2 class="section-title">プロがXSに乗り換える6つの絶対的理由</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏢</div>
+                <div class="feature-title">機関投資家レベルの「深い流動性」</div>
+                <p class="feature-desc">トップクラスの金融機関と直接提携。大口の注文（数十ロット〜）でも価格が滑りにくく、リクオート（約定拒否）のない極めて安定した約定力を誇ります。</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title">真のマルチアセットブローカー</div>
+                <p class="feature-desc">FX、貴金属、エネルギー、仮想通貨、そして世界中の個別株や株価指数まで。あらゆる金融商品を1つのプラットフォームで取引可能です。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">極限まで最適化されたインフラ</div>
+                <p class="feature-desc">Equinix社の超高速サーバーを採用。ミリ秒単位の遅延が命取りになるスキャルピングやEA（自動売買）において、最強のアドバンテージを提供します。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">強固な規制と最高峰のセキュリティ</div>
+                <p class="feature-desc">世界中の複数の厳格な金融ライセンスを保有。顧客資金は完全に分別管理されており、業界最高水準の透明性と安全性が確保されています。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <div class="feature-title">限界まで圧縮されたスプレッド</div>
+                <p class="feature-desc">「ロースプレッド口座」や「プロ口座」を活用すれば、主要通貨ペアは0.0pips〜。取引コストを徹底的に抑え、利益を最大化します。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <div class="feature-title">手厚い日本語カスタマーサポート</div>
+                <p class="feature-desc">グローバルブローカーでありながら、日本人スタッフによる高品質なサポートを提供。口座開設から取引のトラブルまで迅速に解決へ導きます。</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">あなたの戦略に合わせて選べる口座タイプ</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>項目</th>
+                        <th>スタンダード口座<br><span style="font-size:10px; font-weight:normal;">(オールラウンダー)</span></th>
+                        <th class="highlight-col">プロ口座<br><span style="font-size:10px; font-weight:normal;">(大口・裁量トレーダー向け)</span></th>
+                        <th>ロースプレッド口座<br><span style="font-size:10px; font-weight:normal;">(スキャルピング・EA向け)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>特徴</td>
+                        <td>手数料無料でバランス抜群。<br>初心者〜中級者に最適。</td>
+                        <td class="highlight-col">取引手数料無料で極薄スプレッド。<br>大ロットの裁量取引に。</td>
+                        <td>スプレッド0.0pips〜。<br>取引コストの透明性を重視。</td>
+                    </tr>
+                    <tr>
+                        <td>スプレッド</td>
+                        <td>0.9 pips〜</td>
+                        <td class="highlight-col">0.1 pips〜</td>
+                        <td>0.0 pips〜</td>
+                    </tr>
+                    <tr>
+                        <td>取引手数料</td>
+                        <td>無料</td>
+                        <td class="highlight-col">無料</td>
+                        <td>片道$3（1ロット）</td>
+                    </tr>
+                    <tr>
+                        <td>約定力</td>
+                        <td>高速</td>
+                        <td class="highlight-col">超高速・スリップ極小</td>
+                        <td>超高速</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="target-box">
+            <h3>💡 XSはこんなトレーダーに強烈に推奨します</h3>
+            <ul>
+                <li><strong>約定拒否やスリッページに悩まされている方：</strong> XSの「機関投資家レベルの流動性」は、重要な経済指標発表時や大ロット取引の際にその真価を発揮します。狙った価格で確実にポジションを持てます。</li>
+                <li><strong>あらゆる市場を1つの口座で狙いたい方：</strong> FXだけでなく、米国株やビットコイン、ゴールドまでシームレスに取引できるため、資金効率とチャンスが劇的に広がります。</li>
+                <li><strong>EA（自動売買）を24時間フル稼働させる方：</strong> 超低遅延のサーバー環境とロースプレッド口座の組み合わせは、EAのロジックを100%発揮させるためのベストな選択です。</li>
+            </ul>
+        </div>
+
+    </div> <div class="bottom-cta">
+        <p>インフラの強さが、長期的なトレードの勝敗を分けます。<br>個人投資家の枠を超えた「本物の環境」を、今すぐ体験してください。</p>
+        <a href="https://my.xs.com/ja/links/go/962" target="_blank" class="cta-btn">XSでアカウントを作成する</a>
+    </div>
+
+    <div class="footer-copy">
+        Copyright 2026 Pure Green All Rights Reserved.<br>
+        ※FXやCFD取引には元本を上回る損失が生じるリスクがあります。取引はご自身の判断と責任で行ってください。
+    </div>
+
+</div>
+
+</body>
+</html>

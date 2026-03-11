@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>世界最高峰の取引環境 - Exness（エクスネス）</title>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* 🌟 ヒーローセクション（ファーストビュー） 🌟 */
+    .hero {
+        background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+        color: #ffffff;
+        padding: 60px 30px;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 32px;
+        margin: 0 0 15px 0;
+        letter-spacing: 1px;
+        color: #f1c40f; /* アクセントカラー */
+    }
+    .hero p {
+        font-size: 16px;
+        margin: 0 0 30px 0;
+        color: #ecf0f1;
+        font-weight: 300;
+    }
+    
+    /* CTAボタン（リンクボタン） */
+    .cta-btn {
+        display: inline-block;
+        background-color: #f39c12;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 16px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        box-shadow: 0 6px 15px rgba(243, 156, 18, 0.4);
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
+    }
+    .cta-btn:hover {
+        background-color: #e67e22;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(243, 156, 18, 0.6);
+    }
+
+    /* コンテンツエリア */
+    .content-area {
+        padding: 40px 30px;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 24px;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #3498db;
+        margin: 15px auto 0;
+    }
+
+    /* 🌟 選ばれる理由（特徴グリッド） 🌟 */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+    .feature-card {
+        background-color: #f9fbfd;
+        border: 1px solid #e1e8ed;
+        border-radius: 10px;
+        padding: 25px 20px;
+        text-align: left;
+        transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #bdc3c7;
+    }
+    .feature-icon {
+        font-size: 30px;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+    .feature-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2980b9;
+        margin-bottom: 10px;
+    }
+    .feature-desc {
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+    }
+
+    /* 🌟 口座タイプ比較表 🌟 */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 50px;
+        font-size: 14px;
+    }
+    th, td {
+        border: 1px solid #bdc3c7;
+        padding: 12px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    th {
+        background-color: #ecf0f1;
+        color: #2c3e50;
+        font-weight: bold;
+    }
+    .highlight-col {
+        background-color: #eafaf1; /* プロ口座を目立たせる */
+        font-weight: bold;
+        color: #27ae60;
+    }
+
+    /* 🌟 ターゲット訴求 🌟 */
+    .target-box {
+        background-color: #fff9e6;
+        border-left: 5px solid #f39c12;
+        padding: 20px;
+        border-radius: 4px;
+        margin-bottom: 40px;
+    }
+    .target-box h3 {
+        margin: 0 0 10px 0;
+        color: #d35400;
+        font-size: 18px;
+    }
+    .target-box ul {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14.5px;
+        color: #444;
+    }
+    .target-box li {
+        margin-bottom: 8px;
+    }
+
+    /* 🌟 フッターCTA 🌟 */
+    .bottom-cta {
+        text-align: center;
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        border-top: 1px solid #ecf0f1;
+    }
+    .bottom-cta p {
+        font-size: 15px;
+        margin-bottom: 25px;
+        color: #7f8c8d;
+    }
+
+    .footer-copy {
+        text-align: center;
+        font-size: 12px;
+        color: #95a5a6;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 600px) {
+        .hero h1 { font-size: 24px; }
+        .hero p { font-size: 14px; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .content-area { padding: 30px 20px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="hero">
+        <h1>プロトレーダーが行き着く究極の口座</h1>
+        <p>取引コストの限界へ。<br>無制限レバレッジと業界極狭スプレッドで、あなたのトレードを次の次元へ引き上げます。</p>
+        <a href="https://one.exnesstrack.org/a/tgmn3e45h" target="_blank" class="cta-btn">無料でExness口座を開設する</a>
+    </div>
+
+    <div class="content-area">
+        
+        <h2 class="section-title">Exnessが圧倒的に選ばれる5つの理由</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">♾️</div>
+                <div class="feature-title">無制限レバレッジ</div>
+                <p class="feature-desc">条件を満たすことで「無制限（21億倍）」のレバレッジが解放。少額の資金からでもダイナミックな利益を狙うことが可能です。</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">業界トップクラスの極狭スプレッド</div>
+                <p class="feature-desc">プロ口座やゼロ口座を利用すれば、スプレッドは0.0pips〜。無駄な取引コストを極限まで削り、スキャルピングに最適な環境を提供します。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💸</div>
+                <div class="feature-title">24時間365日の即時入出金</div>
+                <p class="feature-desc">Exness最大の特徴。自動処理システムにより、土日祝日を問わず数秒〜数分で着金。bitwalletとの相性も抜群で、資金移動のストレスがゼロです。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">ロスカット水準 0%</div>
+                <p class="feature-desc">証拠金が完全にゼロになるまでポジションを維持可能。ハイレバレッジとの組み合わせで、資金効率を最大化する「ゼロカット前提」のトレードが活きます。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌙</div>
+                <div class="feature-title">優位性の高いスワップフリー</div>
+                <p class="feature-desc">仮想通貨、ゴールド、主要株価指数などはマイナススワップが発生しません。ポジションを日またぎで持ち越すスイングトレードでもコストがかかりません。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏢</div>
+                <div class="feature-title">圧倒的な信頼と約定力</div>
+                <p class="feature-desc">月間取引高は世界トップクラス。巨大なリクイディティ（流動性）に支えられ、大ロットの注文でもスリップしにくく、確実な約定力を誇ります。</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">スタイルに合わせて選べる口座タイプ</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>項目</th>
+                        <th>スタンダード<br><span style="font-size:10px; font-weight:normal;">(初心者向け)</span></th>
+                        <th class="highlight-col">プロ<br><span style="font-size:10px; font-weight:normal;">(裁量トレード特化)</span></th>
+                        <th>ロースプレッド<br><span style="font-size:10px; font-weight:normal;">(EA・自動売買向け)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>最低入金額</td>
+                        <td>$10〜</td>
+                        <td class="highlight-col">$1,000〜</td>
+                        <td>$1,000〜</td>
+                    </tr>
+                    <tr>
+                        <td>スプレッド</td>
+                        <td>0.3 pips〜</td>
+                        <td class="highlight-col">0.1 pips〜</td>
+                        <td>0.0 pips〜</td>
+                    </tr>
+                    <tr>
+                        <td>取引手数料</td>
+                        <td>無料</td>
+                        <td class="highlight-col">無料</td>
+                        <td>片道$3.5〜</td>
+                    </tr>
+                    <tr>
+                        <td>約定方式</td>
+                        <td>成行約定</td>
+                        <td class="highlight-col">即時約定 (スリップなし)</td>
+                        <td>成行約定</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="target-box">
+            <h3>💡 Exnessはこんなトレーダーに最適です</h3>
+            <ul>
+                <li><strong>スキャルピングを極めたい方：</strong> 「プロ口座」なら取引手数料無料でスプレッドが極限まで狭いため、数pipsを抜くトレードの利益率が飛躍的に向上します。</li>
+                <li><strong>少額から一攫千金を狙いたい方：</strong> ロスカット水準0%と無制限レバレッジを利用し、リスクを限定しながら大きなリターンを狙えます。</li>
+                <li><strong>資金管理を徹底したい方：</strong> 稼いだ利益をその日のうちに、数秒でbitwallet等へ出金できるため、利益を守る資金管理が非常に容易です。</li>
+            </ul>
+        </div>
+
+    </div> <div class="bottom-cta">
+        <p>トレード環境の差が、そのまま利益の差になります。<br>今すぐ世界最高水準の取引環境を手に入れましょう。</p>
+        <a href="https://one.exnesstrack.org/a/tgmn3e45h" target="_blank" class="cta-btn">Exnessで口座を開設する</a>
+    </div>
+
+    <div class="footer-copy">
+        Copyright 2026 Pure Green All Rights Reserved.<br>
+        ※暗号資産やFXの取引には高いリスクが伴います。取引はご自身の判断と責任で行ってください。
+    </div>
+
+</div>
+
+</body>
+</html>

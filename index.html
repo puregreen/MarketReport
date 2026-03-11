@@ -42,7 +42,50 @@
         margin: 0;
     }
 
+    /* 🌟 新設：リアルタイム分析ツール リンクグリッド 🌟 */
+    .section-title {
+        font-size: 18px;
+        color: #2c3e50;
+        margin: 30px 0 15px 0;
+        padding-left: 10px;
+        border-left: 4px solid #2ecc71; /* ツール用は緑のライン */
+    }
+    
+    .tool-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 40px;
+    }
+    .tool-card {
+        background-color: #f9fbfd;
+        border: 1px solid #dcdde1;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+        color: #2980b9;
+        font-weight: bold;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .tool-card:hover {
+        background-color: #3498db;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+    }
+
     /* アーカイブリスト（カード形式） */
+    .month-header {
+        font-size: 18px;
+        color: #2c3e50;
+        margin: 30px 0 15px 0;
+        padding-left: 10px;
+        border-left: 4px solid #e67e22; /* レポート用はオレンジのライン */
+    }
+
     .archive-list {
         display: flex;
         flex-direction: column;
@@ -121,15 +164,7 @@
         color: #3498db;
     }
 
-    .month-header {
-        font-size: 18px;
-        color: #2c3e50;
-        margin: 30px 0 15px 0;
-        padding-left: 10px;
-        border-left: 4px solid #e67e22;
-    }
-
-    /* フッター＆リンクボタンセクション */
+    /* フッター＆外部リンクボタンセクション */
     .footer {
         margin-top: 40px;
         border-top: 1px solid #bdc3c7;
@@ -142,15 +177,15 @@
         margin-bottom: 30px;
     }
 
-    /* 🌟 コピーライト下のリンクカード 🌟 */
-    .link-section {
+    /* 外部へのリンクカード */
+    .ext-link-section {
         display: flex;
         justify-content: space-between;
         gap: 15px;
         width: 100%;
         box-sizing: border-box;
     }
-    .link-card {
+    .ext-link-card {
         background-color: #f9fbfd;
         border: 1px solid #e1e8ed;
         border-radius: 8px;
@@ -160,7 +195,7 @@
         display: flex;
         flex-direction: column;
     }
-    .link-btn {
+    .ext-link-btn {
         display: inline-block;
         color: #ffffff;
         text-decoration: none;
@@ -172,14 +207,14 @@
         margin-bottom: 10px;
         transition: background-color 0.3s;
     }
-    .link-btn.exness { background-color: #f39c12; }
-    .link-btn.exness:hover { background-color: #e67e22; }
-    .link-btn.xs { background-color: #2ecc71; }
-    .link-btn.xs:hover { background-color: #27ae60; }
-    .link-btn.bitwallet { background-color: #34495e; }
-    .link-btn.bitwallet:hover { background-color: #2c3e50; }
+    .ext-link-btn.exness { background-color: #f39c12; }
+    .ext-link-btn.exness:hover { background-color: #e67e22; }
+    .ext-link-btn.xs { background-color: #2ecc71; }
+    .ext-link-btn.xs:hover { background-color: #27ae60; }
+    .ext-link-btn.bitwallet { background-color: #34495e; }
+    .ext-link-btn.bitwallet:hover { background-color: #2c3e50; }
     
-    .link-desc {
+    .ext-link-desc {
         font-size: 11px;
         color: #7f8c8d;
         line-height: 1.4;
@@ -189,6 +224,10 @@
 
     /* スマホ向け調整 */
     @media (max-width: 650px) {
+        .tool-grid {
+            grid-template-columns: 1fr; /* スマホでは1列に並べる */
+            gap: 10px;
+        }
         .report-card {
             flex-direction: column;
             align-items: flex-start;
@@ -202,13 +241,12 @@
         .arrow-icon {
             display: none;
         }
-        /* リンクボタンはスマホでも横に並べるかスワイプ可能にする */
-        .link-section {
+        .ext-link-section {
             flex-wrap: nowrap;
             overflow-x: auto;
             padding-bottom: 10px;
         }
-        .link-card {
+        .ext-link-card {
             min-width: 130px;
         }
     }
@@ -220,6 +258,14 @@
     <div class="header">
         <h1>📊 マーケットレポート アーカイブ</h1>
         <p>日々の市場動向、大口注文情報、テクニカル分析の記録</p>
+    </div>
+
+    <h3 class="section-title">🛠 リアルタイム分析ツール</h3>
+    <div class="tool-grid">
+        <a href="tool_meter.html" class="tool-card">🔥 通貨・銘柄 24時間強弱メーター</a>
+        <a href="tool_forex_heat.html" class="tool-card">💪 法定通貨 強弱ヒートマップ</a>
+        <a href="tool_crypto_heat.html" class="tool-card">🪙 暗号資産 強弱ヒートマップ</a>
+        <a href="tool_overview.html" class="tool-card">📊 コモディティ＆重要銘柄 動向</a>
     </div>
 
     <h3 class="month-header">2026年 3月</h3>
@@ -252,7 +298,7 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-        <a href="Report_0306.pdf" class="report-card">
+        <a href="Report_0306.html" class="report-card">
             <div class="date-badge">3月6日</div>
             <div class="report-info">
                 <div class="report-title">中東情勢緊迫化とインフレ懸念再燃によるリスクオフ相場</div>
@@ -261,7 +307,7 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-        <a href="Report_0305.pdf" class="report-card">
+        <a href="Report_0305.html" class="report-card">
             <div class="date-badge">3月5日</div>
             <div class="report-info">
                 <div class="report-title">日経平均、1,000円超の大幅反発で55,000円台回復</div>
@@ -270,7 +316,7 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-        <a href="Report_0304.pdf" class="report-card">
+        <a href="Report_0304.html" class="report-card">
             <div class="date-badge">3月4日</div>
             <div class="report-info">
                 <div class="report-title">日経平均が一時2,600円超の急落、中東リスクと原油高を警戒</div>
@@ -284,18 +330,18 @@
     <div class="footer">
         <div class="copyright">Copyright 2026 Pure Green All Rights Reserved.</div>
         
-        <div class="link-section">
-            <div class="link-card">
-                <a href="https://one.exnesstrack.org/a/tgmn3e45h" target="_blank" class="link-btn exness">Exness</a>
-                <div class="link-desc">圧倒的な約定力と無制限レバレッジ。プロに選ばれる極狭スプレッド口座。</div>
+        <div class="ext-link-section">
+            <div class="ext-link-card">
+                <a href="https://one.exnesstrack.org/a/tgmn3e45h" target="_blank" class="ext-link-btn exness">Exness</a>
+                <div class="ext-link-desc">圧倒的な約定力と無制限レバレッジ。プロに選ばれる極狭スプレッド口座。</div>
             </div>
-            <div class="link-card">
-                <a href="https://my.xs.com/ja/links/go/962" target="_blank" class="link-btn xs">XS</a>
-                <div class="link-desc">機関レベルの最高水準環境。多種多様な銘柄を誇る次世代ブローカー。</div>
+            <div class="ext-link-card">
+                <a href="https://my.xs.com/ja/links/go/962" target="_blank" class="ext-link-btn xs">XS</a>
+                <div class="ext-link-desc">機関レベルの最高水準環境。多種多様な銘柄を誇る次世代ブローカー。</div>
             </div>
-            <div class="link-card">
-                <a href="https://bitwallet.com/ja/" target="_blank" class="link-btn bitwallet">bitwallet</a>
-                <div class="link-desc">海外FXの入出金を最安・最速で。スムーズな資金管理を実現するツール。</div>
+            <div class="ext-link-card">
+                <a href="https://bitwallet.com/ja/" target="_blank" class="ext-link-btn bitwallet">bitwallet</a>
+                <div class="ext-link-desc">海外FXの入出金を最安・最速で。スムーズな資金管理を実現するツール。</div>
             </div>
         </div>
     </div>

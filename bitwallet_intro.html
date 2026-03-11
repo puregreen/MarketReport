@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外FXの必須ツール - bitwallet（ビットウォレット）</title>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* 🌟 ヒーローセクション（ファーストビュー） 🌟 */
+    .hero {
+        background: linear-gradient(135deg, #1f3b52 0%, #34495e 100%);
+        color: #ffffff;
+        padding: 60px 30px;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 32px;
+        margin: 0 0 15px 0;
+        letter-spacing: 1px;
+        color: #64b5f6; /* アクセントカラー（ブルー系） */
+    }
+    .hero p {
+        font-size: 16px;
+        margin: 0 0 30px 0;
+        color: #ecf0f1;
+        font-weight: 300;
+    }
+    
+    /* CTAボタン（リンクボタン） */
+    .cta-btn {
+        display: inline-block;
+        background-color: #f39c12; /* クリックされやすいオレンジ */
+        color: #ffffff;
+        text-decoration: none;
+        padding: 16px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        box-shadow: 0 6px 15px rgba(243, 156, 18, 0.4);
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
+    }
+    .cta-btn:hover {
+        background-color: #e67e22;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(243, 156, 18, 0.6);
+    }
+
+    /* コンテンツエリア */
+    .content-area {
+        padding: 40px 30px;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 24px;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #3498db;
+        margin: 15px auto 0;
+    }
+
+    /* 🌟 選ばれる理由（特徴グリッド） 🌟 */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+    .feature-card {
+        background-color: #f9fbfd;
+        border: 1px solid #e1e8ed;
+        border-radius: 10px;
+        padding: 25px 20px;
+        text-align: left;
+        transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #bdc3c7;
+    }
+    .feature-icon {
+        font-size: 30px;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+    .feature-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2980b9;
+        margin-bottom: 10px;
+    }
+    .feature-desc {
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+    }
+
+    /* 🌟 手数料比較などの訴求ボックス 🌟 */
+    .highlight-box {
+        background-color: #eafaf1;
+        border-left: 5px solid #2ecc71;
+        padding: 25px;
+        border-radius: 4px;
+        margin-bottom: 40px;
+    }
+    .highlight-box h3 {
+        margin: 0 0 15px 0;
+        color: #27ae60;
+        font-size: 19px;
+    }
+    .highlight-box p {
+        font-size: 14.5px;
+        color: #444;
+        margin-bottom: 10px;
+    }
+    .fee-list {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #dcdde1;
+        font-weight: bold;
+        color: #2c3e50;
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .fee-item span {
+        display: block;
+        font-size: 12px;
+        color: #7f8c8d;
+        font-weight: normal;
+        margin-bottom: 5px;
+    }
+    .fee-price {
+        font-size: 18px;
+        color: #e74c3c;
+    }
+
+    /* 🌟 フッターCTA 🌟 */
+    .bottom-cta {
+        text-align: center;
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        border-top: 1px solid #ecf0f1;
+    }
+    .bottom-cta p {
+        font-size: 15px;
+        margin-bottom: 25px;
+        color: #7f8c8d;
+    }
+
+    .footer-copy {
+        text-align: center;
+        font-size: 12px;
+        color: #95a5a6;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 600px) {
+        .hero h1 { font-size: 24px; }
+        .hero p { font-size: 14px; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .content-area { padding: 30px 20px; }
+        .fee-list { flex-direction: column; gap: 15px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="hero">
+        <h1>海外FXトレーダーの「必須インフラ」</h1>
+        <p>入出金の手数料・遅延ストレスから解放されましょう。<br>利益を最速で手元に引き出し、複数の口座を自在に操るための最強ウォレット。</p>
+        <a href="https://bitwallet.com/ja/" target="_blank" class="cta-btn">無料でアカウントを作成する</a>
+    </div>
+
+    <div class="content-area">
+        
+        <h2 class="section-title">bitwalletが絶対に欠かせない5つの理由</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">FX口座との入出金が「即時」</div>
+                <p class="feature-desc">Exnessなどの主要ブローカーとbitwallet間の資金移動は、基本的に24時間365日いつでも瞬時に反映されます。チャンスを逃しません。</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💸</div>
+                <div class="feature-title">格安の出金手数料</div>
+                <p class="feature-desc">海外銀行送金では数千円かかることが多い出金手数料が、bitwalletなら国内銀行口座へ【一律824円】で出金可能。利益を大きく残せます。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-title">🔄</div>
+                <div class="feature-title">複数ブローカー間のハブとして</div>
+                <p class="feature-desc">A社の口座から出金し、B社の口座へ入金する。bitwalletを中継地点にすることで、異なるFX業者間での資金移動が無料で一瞬にして完了します。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">利益の「安全な避難所」</div>
+                <p class="feature-desc">トレードで得た利益をこまめにbitwalletへ移すことで、FX口座の強制ロスカットリスクから資金を完全に隔離・保護することができます。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <div class="feature-title">多彩な入金方法に対応</div>
+                <p class="feature-desc">国内銀行振込（みずほ銀行等）のほか、各種クレジットカード（VISA, Mastercard, JCBなど）からの入金にも対応しており、利便性が抜群です。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🇯🇵</div>
+                <div class="feature-title">完全な日本語サポート</div>
+                <p class="feature-desc">海外のサービスでありながら、管理画面からサポートデスクの対応まで全て完璧な日本語で提供されており、初心者でも安心して利用できます。</p>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3>💡 なぜ「直接の銀行送金」ではなくbitwalletなのか？</h3>
+            <p>海外FX業者から直接ご自身の日本の銀行口座へ出金（海外送金）すると、中継銀行の手数料や為替手数料が引かれ、<strong>1回の出金で3,000円〜5,000円以上</strong>のコストがかかる上、着金までに数日を要することがあります。</p>
+            <p>bitwalletを間に挟むだけで、このコストと時間を劇的に削減できます。</p>
+            
+            <div class="fee-list">
+                <div class="fee-item">
+                    <span>FX業者 ⇒ bitwallet</span>
+                    <div class="fee-price">即時・手数料 無料</div>
+                </div>
+                <div class="fee-item">
+                    <span>bitwallet ⇒ 国内銀行</span>
+                    <div class="fee-price">一律 824円</div>
+                </div>
+            </div>
+        </div>
+
+    </div> <div class="bottom-cta">
+        <p>稼いだ利益を、確実に、そして最安で手元に残すために。<br>海外FXで勝ち続けるトレーダーは、例外なくbitwalletを使っています。</p>
+        <a href="https://bitwallet.com/ja/" target="_blank" class="cta-btn">bitwalletアカウントを開設する</a>
+    </div>
+
+    <div class="footer-copy">
+        Copyright 2026 Pure Green All Rights Reserved.
+    </div>
+
+</div>
+
+</body>
+</html>

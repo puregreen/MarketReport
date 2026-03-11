@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 マーケットレポート - 2026年3月9日</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+    /* 全体のスタイル設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f0f2f5;
+        color: #333;
+        margin: 0;
+        padding: 20px 0;
+    }
+    /* ツールバー（保存ボタン） */
+    .toolbar {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .btn-save {
+        background-color: #2c3e50;
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: background-color 0.3s;
+    }
+    .btn-save:hover {
+        background-color: #1a252f;
+    }
+    /* A4サイズのコンテナ */
+    .a4-container {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 15mm 20mm;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        box-sizing: border-box;
+        position: relative;
+    }
+    /* 見出しスタイル */
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 15px;
+        margin-top: 0;
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+    h2 {
+        color: #2980b9;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        border-left: 5px solid #3498db;
+        padding-left: 10px;
+        font-size: 18px;
+        background: #f8f9fa;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    /* テキスト・段落 */
+    p {
+        line-height: 1.6;
+        font-size: 13px;
+        margin: 5px 0 15px 0;
+    }
+    /* テーブルスタイル */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        font-size: 12px;
+    }
+    th, td {
+        border: 1px solid #bdc3c7;
+        padding: 8px 5px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    th {
+        background-color: #ecf0f1;
+        color: #2c3e50;
+        font-weight: bold;
+    }
+    tr:nth-child(even) {
+        background-color: #fcfcfc;
+    }
+    /* 見通しの文字色とアイコン */
+    .bullish { color: #2980b9; font-weight: bold; } /* 強気: 青 */
+    .neutral { color: #27ae60; font-weight: bold; } /* 中立: 緑 */
+    .bearish { color: #c0392b; font-weight: bold; } /* 弱気: 赤 */
+    .icon { font-size: 14px; margin-right: 4px; }
+    
+    /* 詳細分析のリストスタイル */
+    .analysis-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .analysis-list li {
+        margin-bottom: 12px;
+        font-size: 13px;
+        line-height: 1.5;
+        border-bottom: 1px dashed #ecf0f1;
+        padding-bottom: 8px;
+    }
+    .symbol-name {
+        font-weight: bold;
+        color: #34495e;
+        display: inline-block;
+        width: 250px;
+    }
+    /* 総括コメントボックス */
+    .comment-box {
+        background-color: #eafaf1;
+        border-left: 5px solid #2ecc71;
+        padding: 15px;
+        margin-top: 25px;
+        border-radius: 4px;
+        font-size: 13.5px;
+        line-height: 1.6;
+    }
+    .date-header {
+        text-align: right;
+        font-size: 12px;
+        color: #7f8c8d;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+    <button class="btn-save" onclick="saveAsImage()">📷 レポートを画像として保存</button>
+</div>
+
+<div class="a4-container" id="report-content">
+    <div class="date-header">発行日: 2026年3月9日 (月)</div>
+    <h1>📊 マーケットレポート</h1>
+
+    <h2>【📌 市場概況まとめ】</h2>
+    <p>
+        先週末の米国市場は、中東情勢（米国・イスラエルとイラン間の緊張激化）を背景とした原油価格（WTI）の急騰と、米2月雇用統計における非農業部門雇用者数の予想外の落ち込みが重なり、主要株価指数は大幅に下落しました。ダウ平均（US30）は450ドル超の下落となり、S&P500（US500）も続落しています。<br>
+        一方、日本市場（JP225）は先週中頃に一時53,600円台まで急落しボラティリティが高まりましたが、金曜日には押し目買いが優勢となり55,600円台まで反発して週を終えました。「地政学リスクによるインフレ懸念」と「米景気減速懸念」が交錯しており、ゴールド（XAUUSD）などの安全資産への資金逃避が顕著になっています。
+    </p>
+
+    <h2>【📈 主要銘柄の見通し（サマリー）】</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>銘柄</th>
+                <th>見通し</th>
+                <th>前日の終値</th>
+                <th>現在値</th>
+                <th>前日比</th>
+                <th>サポート①/②</th>
+                <th>レジスタンス①/②</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="symbol-name">🇺🇸 DXY (ドルインデックス)</td>
+                <td class="bullish"><span class="icon">🔵⬆️</span>強気</td>
+                <td>103.85</td>
+                <td>104.20</td>
+                <td class="bullish">+0.35</td>
+                <td>103.50 / 103.00</td>
+                <td>104.50 / 105.00</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🇺🇸 US500 (S&P500)</td>
+                <td class="bearish"><span class="icon">🔴⬇️</span>弱気</td>
+                <td>6,831.00</td>
+                <td>6,740.02</td>
+                <td class="bearish">-90.98</td>
+                <td>6,650 / 6,500</td>
+                <td>6,850 / 6,900</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🇺🇸 US30 (NYダウ)</td>
+                <td class="bearish"><span class="icon">🔴⬇️</span>弱気</td>
+                <td>47,954.55</td>
+                <td>47,501.55</td>
+                <td class="bearish">-453.00</td>
+                <td>47,000 / 46,500</td>
+                <td>48,000 / 48,500</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">💻 USTEC (ナスダック100)</td>
+                <td class="bearish"><span class="icon">🔴⬇️</span>弱気</td>
+                <td>23,750.00</td>
+                <td>23,450.00</td>
+                <td class="bearish">-300.00</td>
+                <td>23,000 / 22,500</td>
+                <td>24,000 / 24,500</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🇯🇵 JP225 (日経225)</td>
+                <td class="neutral"><span class="icon">🟢➡️</span>中立</td>
+                <td>55,278.06</td>
+                <td>55,620.84</td>
+                <td class="bullish">+342.78</td>
+                <td>54,500 / 53,600</td>
+                <td>56,500 / 57,000</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🥇 XAUUSD (ゴールド)</td>
+                <td class="bullish"><span class="icon">🔵⬆️</span>強気</td>
+                <td>5,080.50</td>
+                <td>5,145.00</td>
+                <td class="bullish">+64.50</td>
+                <td>5,050 / 4,998</td>
+                <td>5,180 / 5,205</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🛢️ USOIL (WTI原油)</td>
+                <td class="bullish"><span class="icon">🔵⬆️</span>強気</td>
+                <td>86.20</td>
+                <td>88.50</td>
+                <td class="bullish">+2.30</td>
+                <td>85.00 / 83.50</td>
+                <td>90.00 / 92.00</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🇪🇺 EURUSD (ユーロドル)</td>
+                <td class="bearish"><span class="icon">🔴⬇️</span>弱気</td>
+                <td>1.1520</td>
+                <td>1.1460</td>
+                <td class="bearish">-0.0060</td>
+                <td>1.1400 / 1.1350</td>
+                <td>1.1550 / 1.1600</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🇬🇧 GBPUSD (ポンドドル)</td>
+                <td class="bearish"><span class="icon">🔴⬇️</span>弱気</td>
+                <td>1.3380</td>
+                <td>1.3300</td>
+                <td class="bearish">-0.0080</td>
+                <td>1.3250 / 1.3180</td>
+                <td>1.3400 / 1.3450</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🇯🇵 USDJPY (ドル円)</td>
+                <td class="neutral"><span class="icon">🟢➡️</span>中立</td>
+                <td>157.50</td>
+                <td>157.80</td>
+                <td class="bullish">+0.30</td>
+                <td>156.50 / 155.00</td>
+                <td>158.50 / 160.00</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🇦🇺 AUDUSD (豪ドル米ドル)</td>
+                <td class="bearish"><span class="icon">🔴⬇️</span>弱気</td>
+                <td>0.6610</td>
+                <td>0.6559</td>
+                <td class="bearish">-0.0051</td>
+                <td>0.6507 / 0.6450</td>
+                <td>0.6590 / 0.6650</td>
+            </tr>
+            <tr>
+                <td class="symbol-name">🅑 BTCUSD (ビットコイン)</td>
+                <td class="neutral"><span class="icon">🟢➡️</span>中立</td>
+                <td>68,500</td>
+                <td>68,200</td>
+                <td class="bearish">-300</td>
+                <td>65,000 / 64,000</td>
+                <td>72,000 / 74,000</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>【🔔 市場イベントハイライト】</h2>
+    <p>
+        ・<strong>中東情勢の緊迫化による原油急騰：</strong> 米国・イスラエルとイラン間の対立が激化し、ホルムズ海峡の不確実性からWTI原油が一時90ドルを視野に入れる展開に。インフレ再燃リスクが市場を席巻。<br>
+        ・<strong>米2月雇用統計のネガティブサプライズ：</strong> 先週末発表の米雇用統計にて、就業者数が予想外の落ち込みを記録。FRBの金利政策における「景気後退か、インフレ抑制か」のジレンマが深まる。<br>
+        ・<strong>日本株の乱高下：</strong> 先週の下落トレンドから一服し、日経平均は53,600円台で下値を固める動きを見せたものの、外部環境への警戒感から上値は重い展開が続く。
+    </p>
+
+    <h2>【📅 経済指標カレンダー - 前日 (3/6発表分)】</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>時刻</th>
+                <th>国</th>
+                <th>指標名</th>
+                <th>結果</th>
+                <th>予想</th>
+                <th>前回</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>22:30</td>
+                <td>🇺🇸</td>
+                <td>非農業部門雇用者数 (2月)</td>
+                <td class="bearish">落ち込み</td>
+                <td>+15.5万人</td>
+                <td>+21.2万人</td>
+            </tr>
+            <tr>
+                <td>22:30</td>
+                <td>🇺🇸</td>
+                <td>失業率 (2月)</td>
+                <td class="bearish">4.4%</td>
+                <td>4.3%</td>
+                <td>4.2%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>【📅 経済指標カレンダー - 本⽇ (3/9発表予定)】</h2>
+    <p style="font-size: 11px; margin-top: -10px; color: #7f8c8d;">※前回変動幅：前回の発表から10分後にドル円が何pips変動したか（みんかぶFX調べ）</p>
+    <table>
+        <thead>
+            <tr>
+                <th>時刻</th>
+                <th>国</th>
+                <th>指標名</th>
+                <th>前回変動幅</th>
+                <th>予想</th>
+                <th>前回</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>08:30</td>
+                <td>🇯🇵</td>
+                <td>毎月勤労統計-現金給与総額 (1月)</td>
+                <td>-13.9pips</td>
+                <td>2.8%</td>
+                <td>2.4%</td>
+            </tr>
+            <tr>
+                <td>08:50</td>
+                <td>🇯🇵</td>
+                <td>国際収支 (1月)</td>
+                <td>+8.8pips</td>
+                <td>-1.1%</td>
+                <td>-1.4%</td>
+            </tr>
+            <tr>
+                <td>10:30</td>
+                <td>🇨🇳</td>
+                <td>消費者物価指数（CPI） (2月)</td>
+                <td>+11.7pips</td>
+                <td>0.9%</td>
+                <td>0.2%</td>
+            </tr>
+            <tr>
+                <td>14:00</td>
+                <td>🇯🇵</td>
+                <td>景気動向指数（速報値） (1月)</td>
+                <td>-2.7pips</td>
+                <td>---</td>
+                <td>114.3</td>
+            </tr>
+            <tr>
+                <td>15:00</td>
+                <td>🇯🇵</td>
+                <td>景気ウォッチャー調査 (2月)</td>
+                <td>-5.8pips</td>
+                <td>-0.8%</td>
+                <td>-0.6%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>【📝 各銘柄の詳細分析（ファンダメンタル＆テクニカル）】</h2>
+    <ul class="analysis-list">
+        <li><span class="symbol-name">🇺🇸 DXY (ドルインデックス)</span><br>有事のドル買いとインフレ高止まり懸念から底堅く推移。雇用統計の弱さはマイナス材料だが、他通貨からの逃避資金が流入しており104台を維持。</li>
+        <li><span class="symbol-name">🇺🇸 US500 / US30</span><br>雇用減速と原油高のスタグフレーション懸念が直撃し、テクニカル的にも日足で明確なダウントレンドを形成。US30は47,500の心理的節目での攻防。</li>
+        <li><span class="symbol-name">💻 USTEC (ナスダック100)</span><br>金利見通しの不確実性とリスクオフ志向からハイテク株を中心に売りが先行。23,000ポイントのサポートラインを維持できるかが当面の焦点。</li>
+        <li><span class="symbol-name">🇯🇵 JP225 (日経225)</span><br>先週の地政学リスク急拡大により一時53,600円台まで売り込まれたが、週末にかけては自律反発。55,600円台まで戻したものの、上値には依然として重さが見られる。</li>
+        <li><span class="symbol-name">🥇 XAUUSD (ゴールド)</span><br>地政学リスク増大に伴う典型的な逃避買いが発生。5,130〜5,150ドルのレジスタンス帯を上抜けつつあり、トレンドは非常に強いブル相場。</li>
+        <li><span class="symbol-name">🛢️ USOIL (WTI原油)</span><br>ホルムズ海峡の封鎖懸念や中東での軍事的緊張から急伸。テクニカル面でも強力な上昇モメンタムを持ち、90ドルの大台到達を伺う展開。</li>
+        <li><span class="symbol-name">🇪🇺 EURUSD / 🇬🇧 GBPUSD</span><br>ユーロは中東情勢の悪化に伴う欧州経済への波及懸念から上値が重い。EURUSDは1.1450付近の下値サポートをテストする動き。ポンドも同様に連れ安。</li>
+        <li><span class="symbol-name">🇯🇵 USDJPY (ドル円)</span><br>リスク回避の円買いと、有事のドル買いが交錯し方向感を欠く展開。157.80円付近で推移しており、本日の日本国内の経済指標（勤労統計等）を受けた日銀の政策修正観測の変化に注目。</li>
+        <li><span class="symbol-name">🇦🇺 AUDUSD (豪ドル米ドル)</span><br>世界的な株安・リスクオフの煽りを受け軟調。0.6559付近のフィボナッチ38.2%戻しラインで下げ止まるかがテクニカル上の鍵。</li>
+        <li><span class="symbol-name">🅑 BTCUSD (ビットコイン)</span><br>株式市場の混乱とはやや切り離され、64,000〜74,000ドルの広めのレンジ相場を形成中。現在は68,200ドル付近のレンジ中央で方向感を模索中。</li>
+    </ul>
+
+    <div class="comment-box">
+        <strong>【💡 Pure Greenからの総括コメント】</strong><br>
+        2026年3月第2週は、「中東情勢の緊迫化に伴う原油価格（USOIL）の高騰」と「米2月雇用統計の下振れ」という、スタグフレーション懸念を想起させる極めて神経質な相場環境からのスタートとなります。株式市場（US500、JP225等）はボラティリティが高止まりしており、突発的なヘッドラインによる乱高下に引き続き警戒が必要です。一方で、ゴールド（XAUUSD）はリスクオフの受け皿として強い上昇トレンドを形成しています。<br>
+        本日は日本国内で毎月勤労統計や国際収支など、日銀の金融政策決定に影響を与える重要指標の発表が立て続けに控えています。USDJPYを中心とした円絡みのペアでは、突発的なスプレッド拡大や急変動のリスクがあるため、ロット管理を徹底し、明確なブレイクアウトとリテストを確認した上での慎重なエントリーを推奨します。
+    </div>
+</div>
+
+<script>
+    // スクリーンショット保存用のJavaScript関数
+    function saveAsImage() {
+        const reportElement = document.getElementById('report-content');
+        
+        html2canvas(reportElement, {
+            scale: 2, // 高画質化
+            useCORS: true,
+            backgroundColor: '#ffffff'
+        }).then(canvas => {
+            // 画像データを取得
+            const imgData = canvas.toDataURL('image/png');
+            
+            // ダウンロードリンクを生成
+            const link = document.createElement('a');
+            link.href = imgData;
+            link.download = 'マーケットレポート_20260309.png';
+            
+            // クリックしてダウンロードを実行
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }).catch(err => {
+            console.error('画像の保存に失敗しました:', err);
+            alert('画像の保存に失敗しました。');
+        });
+    }
+</script>
+
+</body>
+</html>

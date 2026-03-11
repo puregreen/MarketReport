@@ -63,7 +63,6 @@
         overflow: hidden;
     }
     
-    /* ホバー時のアクション */
     .report-card:hover {
         background-color: #ffffff;
         border-color: #3498db;
@@ -71,7 +70,6 @@
         box-shadow: 0 4px 10px rgba(52, 152, 219, 0.15);
     }
     
-    /* カード左側の青いライン */
     .report-card::before {
         content: '';
         position: absolute;
@@ -87,7 +85,6 @@
         opacity: 1;
     }
 
-    /* 日付バッジ */
     .date-badge {
         background-color: #2c3e50;
         color: #fff;
@@ -100,7 +97,6 @@
         text-align: center;
     }
 
-    /* レポートタイトル＆サマリー */
     .report-info {
         flex-grow: 1;
     }
@@ -116,7 +112,6 @@
         margin: 0;
     }
 
-    /* 矢印アイコン */
     .arrow-icon {
         color: #bdc3c7;
         font-size: 20px;
@@ -126,7 +121,6 @@
         color: #3498db;
     }
 
-    /* 月別見出し */
     .month-header {
         font-size: 18px;
         color: #2c3e50;
@@ -135,49 +129,34 @@
         border-left: 4px solid #e67e22;
     }
 
-    /* フッター */
+    /* フッター＆リンクボタンセクション */
     .footer {
         margin-top: 40px;
         border-top: 1px solid #bdc3c7;
         padding-top: 20px;
         text-align: center;
+    }
+    .copyright {
         color: #7f8c8d;
         font-size: 12px;
+        margin-bottom: 30px;
     }
 
-    /* スマホ向け調整 */
-    @media (max-width: 600px) {
-        .report-card {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 15px;
-        }
-        .date-badge {
-            margin-bottom: 10px;
-            font-size: 12px;
-            padding: 6px 10px;
-        }
-        .arrow-icon {
-            display: none; /* スマホでは矢印を隠してスッキリさせる */
-        }
-    }
-
-        /* 🔗 リンクカード */
+    /* 🌟 コピーライト下のリンクカード 🌟 */
     .link-section {
         display: flex;
         justify-content: space-between;
         gap: 15px;
-        margin-bottom: 20px;
+        width: 100%;
         box-sizing: border-box;
     }
     .link-card {
-        background-color: #ffffff;
-        border: 1px solid #dcdde1;
+        background-color: #f9fbfd;
+        border: 1px solid #e1e8ed;
         border-radius: 8px;
-        padding: 12px;
+        padding: 15px;
         flex: 1;
         text-align: center;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         display: flex;
         flex-direction: column;
     }
@@ -189,13 +168,50 @@
         width: 100%;
         border-radius: 5px;
         font-weight: bold;
-        font-size: 15px;
-        margin-bottom: 8px;
+        font-size: 14px;
+        margin-bottom: 10px;
+        transition: background-color 0.3s;
     }
     .link-btn.exness { background-color: #f39c12; }
+    .link-btn.exness:hover { background-color: #e67e22; }
     .link-btn.xs { background-color: #2ecc71; }
+    .link-btn.xs:hover { background-color: #27ae60; }
     .link-btn.bitwallet { background-color: #34495e; }
-    .link-desc { font-size: 11px; color: #7f8c8d; line-height: 1.4; text-align: left; flex-grow: 1; }
+    .link-btn.bitwallet:hover { background-color: #2c3e50; }
+    
+    .link-desc {
+        font-size: 11px;
+        color: #7f8c8d;
+        line-height: 1.4;
+        text-align: left;
+        flex-grow: 1;
+    }
+
+    /* スマホ向け調整 */
+    @media (max-width: 650px) {
+        .report-card {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px;
+        }
+        .date-badge {
+            margin-bottom: 10px;
+            font-size: 12px;
+            padding: 6px 10px;
+        }
+        .arrow-icon {
+            display: none;
+        }
+        /* リンクボタンはスマホでも横に並べるかスワイプ可能にする */
+        .link-section {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .link-card {
+            min-width: 130px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -203,7 +219,7 @@
 <div class="container">
     <div class="header">
         <h1>📊 マーケットレポート アーカイブ</h1>
-        <p>日々の市場動向、大口注文情報、ファンダメンタルズ分析、テクニカル分析の記録</p>
+        <p>日々の市場動向、大口注文情報、テクニカル分析の記録</p>
     </div>
 
     <h3 class="month-header">2026年 3月</h3>
@@ -235,6 +251,7 @@
             </div>
             <div class="arrow-icon">➔</div>
         </a>
+
         <a href="Report_0306.pdf" class="report-card">
             <div class="date-badge">3月6日</div>
             <div class="report-info">
@@ -262,26 +279,24 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-
     </div>
 
     <div class="footer">
-        Copyright 2026 Pure Green All Rights Reserved.
-    </div>
-
-    <div class="link-section">
-        <br>
-        <div class="link-card">
-            <a href="https://one.exnesstrack.org/a/tgmn3e45h" target="_blank" class="link-btn exness">Exness</a>
-            <div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる世界最高峰の極狭スプレッド口座。</div>
-        </div>
-        <div class="link-card">
-            <a href="https://my.xs.com/ja/links/go/962" target="_blank" class="link-btn xs">XS</a>
-            <div class="link-desc">機関投資家レベルの最高水準環境。多種多様な銘柄を誇る次世代マルチアセットブローカー。</div>
-        </div>
-        <div class="link-card">
-            <a href="https://bitwallet.com/ja/" target="_blank" class="link-btn bitwallet">bitwallet</a>
-            <div class="link-desc">海外FXの入出金を最速・安価に。安全かつスムーズな資金管理を実現する必須ツール。</div>
+        <div class="copyright">Copyright 2026 Pure Green All Rights Reserved.</div>
+        
+        <div class="link-section">
+            <div class="link-card">
+                <a href="https://one.exnesstrack.org/a/tgmn3e45h" target="_blank" class="link-btn exness">Exness</a>
+                <div class="link-desc">圧倒的な約定力と無制限レバレッジ。プロに選ばれる極狭スプレッド口座。</div>
+            </div>
+            <div class="link-card">
+                <a href="https://my.xs.com/ja/links/go/962" target="_blank" class="link-btn xs">XS</a>
+                <div class="link-desc">機関レベルの最高水準環境。多種多様な銘柄を誇る次世代ブローカー。</div>
+            </div>
+            <div class="link-card">
+                <a href="https://bitwallet.com/ja/" target="_blank" class="link-btn bitwallet">bitwallet</a>
+                <div class="link-desc">海外FXの入出金を最安・最速で。スムーズな資金管理を実現するツール。</div>
+            </div>
         </div>
     </div>
 </div>

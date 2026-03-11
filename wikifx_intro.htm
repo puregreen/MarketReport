@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>悪徳業者から資金を守る必須アプリ - WikiFX</title>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* 🌟 ヒーローセクション 🌟 */
+    .hero {
+        background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+        color: #ffffff;
+        padding: 60px 30px;
+        text-align: center;
+        border-bottom: 5px solid #ffb300;
+    }
+    .hero h1 {
+        font-size: 32px;
+        margin: 0 0 15px 0;
+        letter-spacing: 1px;
+        color: #ffb300; /* 星や評価を表すゴールド/イエロー */
+    }
+    .hero p {
+        font-size: 16px;
+        margin: 0 0 30px 0;
+        color: #e3f2fd;
+        font-weight: 300;
+        line-height: 1.8;
+    }
+    
+    /* CTAボタン */
+    .cta-btn {
+        display: inline-block;
+        background-color: #ffb300;
+        color: #111;
+        text-decoration: none;
+        padding: 16px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        box-shadow: 0 6px 15px rgba(255, 179, 0, 0.4);
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
+    }
+    .cta-btn:hover {
+        background-color: #ffa000;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 179, 0, 0.6);
+    }
+
+    /* コンテンツエリア */
+    .content-area {
+        padding: 40px 30px;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 24px;
+        color: #1565c0;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #ffb300;
+        margin: 15px auto 0;
+    }
+
+    /* 🌟 選ばれる理由（特徴グリッド） 🌟 */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+    .feature-card {
+        background-color: #f9fbfd;
+        border: 1px solid #e1e8ed;
+        border-radius: 10px;
+        padding: 25px 20px;
+        text-align: left;
+        transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #90caf9;
+    }
+    .feature-icon {
+        font-size: 30px;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+    .feature-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #1565c0;
+        margin-bottom: 10px;
+    }
+    .feature-desc {
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+    }
+
+    /* 🌟 スコア解説ボックス 🌟 */
+    .score-box {
+        background-color: #fff9e6;
+        border: 1px solid #ffe082;
+        border-left: 5px solid #ffb300;
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 40px;
+    }
+    .score-box h3 {
+        margin: 0 0 15px 0;
+        color: #f57f17;
+        font-size: 19px;
+    }
+    .score-box p {
+        font-size: 14.5px;
+        color: #444;
+        margin-bottom: 15px;
+    }
+    .score-meters {
+        display: flex;
+        gap: 15px;
+        justify-content: space-between;
+    }
+    .meter-item {
+        flex: 1;
+        background: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        border: 1px solid #f1f2f6;
+    }
+    .meter-val {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1565c0;
+        margin-bottom: 5px;
+    }
+    .meter-label {
+        font-size: 12px;
+        color: #7f8c8d;
+    }
+
+    /* 🌟 フッターCTA 🌟 */
+    .bottom-cta {
+        text-align: center;
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        border-top: 1px solid #ecf0f1;
+    }
+    .bottom-cta p {
+        font-size: 15px;
+        margin-bottom: 25px;
+        color: #7f8c8d;
+    }
+
+    .footer-copy {
+        text-align: center;
+        font-size: 12px;
+        color: #95a5a6;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 600px) {
+        .hero h1 { font-size: 24px; }
+        .hero p { font-size: 14px; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .content-area { padding: 30px 20px; }
+        .score-meters { flex-direction: column; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="hero">
+        <h1>海外FXの安全性を丸裸にする</h1>
+        <p>「出金拒否されないか？」「詐欺業者ではないか？」<br>全世界5万社以上のブローカー情報を網羅した、トレーダー資金防衛のための必須プラットフォーム。</p>
+        <a href="https://www.wikifx.com/ja/" target="_blank" class="cta-btn">WikiFX公式サイト（無料）を見る</a>
+    </div>
+
+    <div class="content-area">
+        
+        <h2 class="section-title">WikiFXが「絶対に必要」な6つの理由</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">金融ライセンスの厳格な検証</div>
+                <p class="feature-desc">FCA(英国)やASIC(豪州)など、ブローカーが主張するライセンスが本物かどうか、規制当局のデータと照合して一目で確認できます。</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🚨</div>
+                <div class="feature-title">詐欺・悪徳業者の即時警告</div>
+                <p class="feature-desc">ポンジスキームや偽装ブローカーなどの危険な業者には、目立つ「警告マーク」が表示され、被害を未然に防ぐことができます。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-title">🗣️</div>
+                <div class="feature-title">リアルな口コミと被害報告</div>
+                <p class="feature-desc">世界中のトレーダーから寄せられる「出金遅延」や「約定操作」などの生々しいトラブル報告・口コミを事前にチェックできます。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <div class="feature-title">現地オフィスの実地調査</div>
+                <p class="feature-desc">WikiFXの調査チームが、世界中のブローカーの登録住所へ実際に赴き、ペーパーカンパニーでないか（本当にオフィスがあるか）を調査・公開しています。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚖️</div>
+                <div class="feature-title">トラブル時の仲裁サポート</div>
+                <p class="feature-desc">万が一、出金拒否などのトラブルに巻き込まれた場合、WikiFXの「権利擁護センター」がブローカーとの間に入り、解決に向けたサポートを行います。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎁</div>
+                <div class="feature-title">無料VPSなどの豪華ツール</div>
+                <p class="feature-desc">口座開設の条件を満たすと、EA稼働に必須の「VPS（仮想サーバー）」が無料で使えるなど、トレーダー支援ツールも豊富に提供されています。</p>
+            </div>
+        </div>
+
+        <div class="score-box">
+            <h3>💡 一目で安全性がわかる「WikiFXスコア」</h3>
+            <p>WikiFXでは、独自のアルゴリズムを用いてブローカーを10点満点で採点しています。口座開設前に、このスコアを見るだけで安全性の目安がつきます。</p>
+            <div class="score-meters">
+                <div class="meter-item">
+                    <div class="meter-val" style="color: #27ae60;">8.0 〜 10.0</div>
+                    <div class="meter-label">非常に安全（トップクラスの信頼性）</div>
+                </div>
+                <div class="meter-item">
+                    <div class="meter-val" style="color: #f39c12;">5.0 〜 7.9</div>
+                    <div class="meter-label">普通（ライセンスや実績を確認）</div>
+                </div>
+                <div class="meter-item">
+                    <div class="meter-val" style="color: #e74c3c;">0.0 〜 4.9</div>
+                    <div class="meter-label">危険（詐欺や出金トラブルのリスク大）</div>
+                </div>
+            </div>
+            <p style="margin-top:15px; font-size:12px; color:#777;">※スコアはライセンス指数、ビジネス指数、リスク管理指数、ソフトウェア指数、規制指数の5つの次元から算出されます。</p>
+        </div>
+
+    </div> <div class="bottom-cta">
+        <p>口座へ入金する前に、必ず「検索」する習慣を。<br>たった1分の確認が、あなたの大切なトレード資金を詐欺から守ります。</p>
+        <a href="https://www.wikifx.com/ja/" target="_blank" class="cta-btn">WikiFXでブローカーを検索する</a>
+        
+        <div style="margin-top: 25px;">
+            <a href="wikifx_vps.html" style="color: #1976d2; font-size: 14px; text-decoration: underline; font-weight: bold;">➔ 【裏ワザ】WikiFXを使って完全無料でVPSを構築する方法はこちら</a>
+        </div>
+    </div>
+
+    <div class="footer-copy">
+        Copyright 2026 Pure Green All Rights Reserved.<br>
+        ※WikiFXのスコアは参考情報であり、取引の安全性を100%保証するものではありません。
+    </div>
+
+</div>
+
+</body>
+</html>

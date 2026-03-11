@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 マーケットレポート アーカイブ - Pure Green</title>
+<style>
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+
+    /* ヘッダー部分 */
+    .header {
+        text-align: center;
+        margin-bottom: 40px;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 20px;
+    }
+    .header h1 {
+        color: #2c3e50;
+        margin: 0 0 10px 0;
+        font-size: 28px;
+        letter-spacing: 2px;
+    }
+    .header p {
+        color: #7f8c8d;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    /* アーカイブリスト（カード形式） */
+    .archive-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .report-card {
+        display: flex;
+        align-items: center;
+        background-color: #fcfcfc;
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: #333;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* ホバー時のアクション */
+    .report-card:hover {
+        background-color: #ffffff;
+        border-color: #3498db;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(52, 152, 219, 0.15);
+    }
+    
+    /* カード左側の青いライン */
+    .report-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 5px;
+        background-color: #3498db;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .report-card:hover::before {
+        opacity: 1;
+    }
+
+    /* 日付バッジ */
+    .date-badge {
+        background-color: #2c3e50;
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 20px;
+        min-width: 80px;
+        text-align: center;
+    }
+
+    /* レポートタイトル＆サマリー */
+    .report-info {
+        flex-grow: 1;
+    }
+    .report-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #2980b9;
+        margin-bottom: 5px;
+    }
+    .report-summary {
+        font-size: 13px;
+        color: #7f8c8d;
+        margin: 0;
+    }
+
+    /* 矢印アイコン */
+    .arrow-icon {
+        color: #bdc3c7;
+        font-size: 20px;
+        transition: color 0.3s ease;
+    }
+    .report-card:hover .arrow-icon {
+        color: #3498db;
+    }
+
+    /* 月別見出し */
+    .month-header {
+        font-size: 18px;
+        color: #2c3e50;
+        margin: 30px 0 15px 0;
+        padding-left: 10px;
+        border-left: 4px solid #e67e22;
+    }
+
+    /* フッター */
+    .footer {
+        margin-top: 40px;
+        border-top: 1px solid #bdc3c7;
+        padding-top: 20px;
+        text-align: center;
+        color: #7f8c8d;
+        font-size: 12px;
+    }
+
+    /* スマホ向け調整 */
+    @media (max-width: 600px) {
+        .report-card {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px;
+        }
+        .date-badge {
+            margin-bottom: 10px;
+            font-size: 12px;
+            padding: 6px 10px;
+        }
+        .arrow-icon {
+            display: none; /* スマホでは矢印を隠してスッキリさせる */
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📊 マーケットレポート アーカイブ</h1>
+        <p>日々の市場動向、大口注文情報、テクニカル分析の記録</p>
+    </div>
+
+    <h3 class="month-header">2026年 3月</h3>
+    <div class="archive-list">
+        
+        <a href="Report_0311.html" class="report-card">
+            <div class="date-badge">3月11日</div>
+            <div class="report-info">
+                <div class="report-title">米CPI上振れによるドル高・円安の進行</div>
+                <p class="report-summary">日米金利差拡大観測。ドル円は159円の巨大オプション攻防。日本株は自律反発。</p>
+            </div>
+            <div class="arrow-icon">➔</div>
+        </a>
+
+        <a href="Report_0310.html" class="report-card">
+            <div class="date-badge">3月10日</div>
+            <div class="report-info">
+                <div class="report-title">米CPI発表を控えた様子見相場</div>
+                <p class="report-summary">インフレ指標待ちで主要通貨はレンジ内推移。ビットコインは70,000ドル回復トライ。</p>
+            </div>
+            <div class="arrow-icon">➔</div>
+        </a>
+
+        <a href="Report_0309.html" class="report-card">
+            <div class="date-badge">3月9日</div>
+            <div class="report-info">
+                <div class="report-title">週明けの窓開けと地政学リスクの織り込み</div>
+                <p class="report-summary">中東情勢の緊迫化による原油高。安全資産への逃避でゴールドが急騰。</p>
+            </div>
+            <div class="arrow-icon">➔</div>
+        </a>
+
+    </div>
+
+    <div class="footer">
+        Copyright 2026 Pure Green All Rights Reserved.
+    </div>
+</div>
+
+</body>
+</html>

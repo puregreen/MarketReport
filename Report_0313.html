@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=850, user-scalable=yes">
+<title>📊 マーケットレポート - 2026年3月13日</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 20px 0;
+    }
+    
+    .report-wrapper { width: 800px; margin: 0 auto; }
+
+    /* ナビゲーション・ツールバー */
+    .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .back-link { font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+    
+    .btn-save {
+        background-color: #2c3e50; color: #fff; border: none; padding: 12px 24px;
+        font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background 0.3s;
+    }
+    .btn-save:hover { background-color: #34495e; }
+    .btn-save-subtext { font-size: 10px; font-weight: normal; display: block; margin-top: 4px; }
+
+    /* 🔗 リンクカード */
+    .link-section {
+        display: flex; justify-content: space-between; gap: 15px; margin-bottom: 20px; box-sizing: border-box;
+    }
+    .link-card {
+        background-color: #ffffff; border: 1px solid #dcdde1; border-radius: 8px; padding: 12px;
+        flex: 1; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column;
+    }
+    .link-btn {
+        display: inline-block; color: #ffffff; text-decoration: none; padding: 10px 0; width: 100%;
+        border-radius: 5px; font-weight: bold; font-size: 15px; margin-bottom: 8px; transition: background-color 0.3s;
+    }
+    .link-btn.exness { background-color: #f39c12; }
+    .link-btn.exness:hover { background-color: #e67e22; }
+    .link-btn.xs { background-color: #2ecc71; }
+    .link-btn.xs:hover { background-color: #27ae60; }
+    .link-btn.bitwallet { background-color: #34495e; }
+    .link-btn.bitwallet:hover { background-color: #2c3e50; }
+    .link-desc { font-size: 11px; color: #7f8c8d; line-height: 1.4; text-align: left; flex-grow: 1; }
+
+    /* レポート本体 */
+    .a4-container {
+        width: 100%; padding: 40px; background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2); box-sizing: border-box;
+    }
+
+    h1 { text-align: center; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 15px; margin-top: 0; font-size: 26px; }
+    h2 { color: #2980b9; margin-top: 30px; margin-bottom: 15px; border-left: 5px solid #3498db; padding-left: 12px; font-size: 18px; background: #f8f9fa; padding-top: 8px; padding-bottom: 8px; }
+    p { line-height: 1.7; font-size: 13.5px; margin-bottom: 15px; }
+    ul { font-size: 13.5px; line-height: 1.7; margin-bottom: 15px; }
+
+    /* テーブル共通スタイル */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 12.5px; table-layout: fixed; }
+    th, td { border: 1px solid #bdc3c7; padding: 10px 8px; text-align: center; vertical-align: middle; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    th { background-color: #ecf0f1; font-weight: bold; color: #2c3e50; }
+    tr:nth-child(even) { background-color: #fcfcfc; }
+    .calendar-table td { white-space: normal; } 
+    .calendar-table td:nth-child(3) { text-align: left; padding-left: 10px; }
+
+    /* 🌟 見通しのカラー設定 🌟 */
+    .view-bullish { color: #3498db; font-weight: bold; } /* 青 */
+    .view-neutral { color: #2ecc71; font-weight: bold; } /* 緑 */
+    .view-bearish { color: #e74c3c; font-weight: bold; } /* 赤 */
+    
+    .val-pos { color: #3498db; font-weight: bold; }
+    .val-neg { color: #e74c3c; font-weight: bold; }
+
+    /* 🌟 API強弱メーター用スタイル 🌟 */
+    .strength-meter-box {
+        border: 1px solid #ecf0f1; background-color: #f9fbfd; padding: 20px; margin-bottom: 25px; border-radius: 5px;
+    }
+    .strength-header {
+        display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px;
+    }
+    .strength-title { font-weight: bold; color: #2c3e50; font-size: 15px; }
+    .update-btn { background-color: #3498db; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 11px; transition: background 0.2s; }
+    .update-btn:hover { background-color: #2980b9; }
+    .update-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+    .status-text { font-size: 11px; color: #7f8c8d; text-align: right; margin-bottom: 15px; height: 14px; }
+    
+    .asset-row { display: flex; align-items: center; margin-bottom: 10px; }
+    .asset-name { width: 50px; font-weight: bold; font-size: 13.5px; color: #34495e; }
+    .bar-area { flex-grow: 1; display: flex; align-items: center; position: relative; height: 20px; background-color: #fff; border-radius: 4px; border: 1px solid #eaeaea; margin: 0 15px; }
+    .zero-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background-color: #bdc3c7; z-index: 10; }
+    .bar-half { width: 50%; height: 100%; display: flex; }
+    .bar-left { justify-content: flex-end; } 
+    .bar-right { justify-content: flex-start; } 
+    .bar-fill { height: 100%; width: 0%; transition: width 1s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .fill-positive { background-color: #2ecc71; border-radius: 0 4px 4px 0; }
+    .fill-negative { background-color: #e74c3c; border-radius: 4px 0 0 4px; }
+    .asset-value { width: 65px; text-align: right; font-size: 13px; font-weight: bold; }
+    .val-zero { color: #7f8c8d; }
+
+    /* 詳細分析リスト */
+    .analysis-list { list-style: none; padding: 0; }
+    .analysis-list li { margin-bottom: 40px; border-bottom: 2px dashed #ecf0f1; padding-bottom: 25px; }
+    .symbol-title { font-weight: bold; color: #34495e; font-size: 17px; margin-bottom: 10px; border-left: 4px solid #e67e22; padding-left: 10px; display: block; }
+    
+    /* 🌟 ミニサマリー 🌟 */
+    .mini-summary { background-color: #f9fbfd; border: 1px solid #dcdde1; padding: 10px 15px; border-radius: 4px; margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 15px; font-size: 12.5px; }
+
+    .chart-container { width: 100%; height: 350px; margin-top: 15px; margin-bottom: 10px; border: 1px solid #ecf0f1; }
+    
+    /* 🌟 本日の戦略ボックス 🌟 */
+    .strategy-box { background-color: #fff4e6; border-left: 4px solid #e67e22; padding: 12px 15px; margin-top: 15px; margin-bottom: 10px; font-size: 13.5px; font-weight: bold; color: #d35400; line-height: 1.5; }
+
+    /* 大口注文情報 */
+    .order-box { background-color: #fff9e6; border: 1px solid #f1c40f; padding: 18px; margin-top: 10px; border-radius: 4px; font-size: 14px; }
+    .order-item { margin-bottom: 12px; line-height: 1.5; }
+    .order-price-label { font-weight: bold; color: #d35400; display: inline-block; width: 85px; }
+
+    /* 🎯 ドル円オーダーブック */
+    .ob-time { font-size: 12px; color: #7f8c8d; margin-bottom: 8px; text-align: left; }
+    .ob-table { width: 100%; border-collapse: collapse; border: 1px solid #bdc3c7; table-layout: auto; }
+    .ob-table td { padding: 10px 12px; border: 1px solid #bdc3c7; font-size: 13.5px; white-space: normal; text-align: left;}
+    .ob-table .ob-price { font-weight: bold; width: 110px; text-align: center; color: #2c3e50; white-space: nowrap; }
+    .ob-sell { background-color: #eaf4fc; }
+    .ob-buy { background-color: #fcece8; }
+    .ob-current { background-color: #ffffff; font-weight: bold; border: 2.5px solid #3498db; }
+
+    /* コメント＆フッター */
+    .comment-box { background-color: #eafaf1; border-left: 5px solid #2ecc71; padding: 18px; margin-top: 30px; border-radius: 4px; font-size: 14px; line-height: 1.7; }
+    .footer { margin-top: 40px; border-top: 1px solid #bdc3c7; padding-top: 20px; text-align: center; color: #7f8c8d; font-size: 11px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div class="report-wrapper">
+    
+    <div class="top-nav">
+        <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
+        <button class="btn-save" onclick="saveAsImage()">
+            📷 レポートを画像として保存
+            <span class="btn-save-subtext">※外部チャートは標準のスクショ機能を推奨します</span>
+        </button>
+    </div>
+
+    <div class="link-section">
+        <div class="link-card">
+            <a href="exness_intro.html" class="link-btn exness">Exness</a>
+            <div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる世界最高峰の極狭スプレッド口座。</div>
+        </div>
+        <div class="link-card">
+            <a href="xs_intro.html" class="link-btn xs">XS</a>
+            <div class="link-desc">機関投資家レベルの最高水準環境。多種多様な銘柄を誇る次世代マルチアセットブローカー。</div>
+        </div>
+        <div class="link-card">
+            <a href="bitwallet_intro.html" class="link-btn bitwallet">bitwallet</a>
+            <div class="link-desc">海外FXの入出金を最速・安価に。安全かつスムーズな資金管理を実現する必須ツール。</div>
+        </div>
+    </div>
+
+    <div class="a4-container" id="report-content">
+        <div style="text-align: right; font-size: 12px; color: #7f8c8d;">発行日: 2026年3月13日 (金) 7:00現在</div>
+        <h1>📊 マーケットレポート</h1>
+
+        <h2>【📌 市場概況まとめ】</h2>
+        <p>
+            2026年3月13日、市場は中東情勢の急激な緊迫化（ホルムズ海峡の通航懸念など）を受けた「原油高ショック」に見舞われています。WTI原油価格は前日から10%以上暴騰し、一気に96ドル台へ到達。この強烈なエネルギー価格の上昇がインフレ再燃懸念を呼び起こし、FRBの利下げ期待がさらに後退しました。<br>
+            これにより米長期金利が上昇、DXY（ドルインデックス）は99.60まで続伸し「ドル全面高」の様相を呈しています。米国株はスタグフレーションへの警戒からリスクオフの売りが先行し、S&P500は-1.52%、NYダウも約600ドルの大幅下落となりました。<br>
+            日経平均株価も米国株安の波及を受け、前日の反発から一転して-767円（54,257円）の大幅反落。一方、ドル円は日米金利差拡大の思惑とドルの強さに牽引され159.35円まで上昇し、政府・日銀の介入警戒ラインである160円の大台に再び肉薄しています。
+        </p>
+
+        <h2>【📈 主要銘柄の見通し（サマリー）】</h2>
+        <table>
+            <colgroup>
+                <col style="width: 14%;"><col style="width: 16%;"><col style="width: 14%;"><col style="width: 14%;"><col style="width: 12%;"><col style="width: 15%;"><col style="width: 15%;">
+            </colgroup>
+            <thead>
+                <tr><th>銘柄</th><th>見通し</th><th>前日の終値</th><th>現在値</th><th>前日比</th><th>サポート①/②</th><th>レジスタンス①/②</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>🇺🇸 DXY</td><td class="view-bullish">🔵⬆️ 強気</td><td>99.21</td><td>99.60</td><td class="val-pos">+0.39</td><td>99.20 / 98.80</td><td>100.00 / 100.50</td></tr>
+                <tr><td>🇺🇸 US500</td><td class="view-bearish">🔴⬇️ 弱気</td><td>6,775.80</td><td>6,672.32</td><td class="val-neg">-103.48</td><td>6,650 / 6,600</td><td>6,720 / 6,770</td></tr>
+                <tr><td>🇺🇸 US30</td><td class="view-bearish">🔴⬇️ 弱気</td><td>47,417.00</td><td>46,798.00</td><td class="val-neg">-619.00</td><td>46,500 / 46,000</td><td>47,200 / 47,500</td></tr>
+                <tr><td>💻 USTEC</td><td class="view-bearish">🔴⬇️ 弱気</td><td>24,965.00</td><td>24,597.00</td><td class="val-neg">-368.00</td><td>24,400 / 24,000</td><td>24,800 / 25,000</td></tr>
+                <tr><td>🇯🇵 JP225</td><td class="view-bearish">🔴⬇️ 弱気</td><td>55,025.37</td><td>54,257.51</td><td class="val-neg">-767.86</td><td>54,000 / 53,500</td><td>54,500 / 55,000</td></tr>
+                <tr><td>🥇 XAUUSD</td><td class="view-neutral">🟢➡️ 中立</td><td>5,175.86</td><td>5,130.00</td><td class="val-neg">-45.86</td><td>5,100 / 5,050</td><td>5,160 / 5,200</td></tr>
+                <tr><td>🛢️ USOIL</td><td class="view-bullish">🔵⬆️ 強気</td><td>87.25</td><td>96.18</td><td class="val-pos">+8.93</td><td>93.00 / 90.00</td><td>98.00 / 100.00</td></tr>
+                <tr><td>🇪🇺 EURUSD</td><td class="view-bearish">🔴⬇️ 弱気</td><td>1.1542</td><td>1.1514</td><td class="val-neg">-0.0028</td><td>1.1480 / 1.1450</td><td>1.1550 / 1.1600</td></tr>
+                <tr><td>🇬🇧 GBPUSD</td><td class="view-bearish">🔴⬇️ 弱気</td><td>1.3407</td><td>1.3360</td><td class="val-neg">-0.0047</td><td>1.3300 / 1.3250</td><td>1.3400 / 1.3450</td></tr>
+                <tr><td>🇯🇵 USDJPY</td><td class="view-bullish">🔵⬆️ 強気</td><td>158.93</td><td>159.35</td><td class="val-pos">+0.42</td><td>158.80 / 158.00</td><td>159.80 / 160.00</td></tr>
+                <tr><td>🇦🇺 AUDUSD</td><td class="view-bearish">🔴⬇️ 弱気</td><td>0.7145</td><td>0.7090</td><td class="val-neg">-0.0055</td><td>0.7050 / 0.7000</td><td>0.7130 / 0.7180</td></tr>
+                <tr><td>🅑 BTCUSD</td><td class="view-neutral">🟢➡️ 中立</td><td>70,202.62</td><td>70,225.62</td><td class="val-pos">+23.00</td><td>69,000 / 68,000</td><td>71,500 / 73,000</td></tr>
+            </tbody>
+        </table>
+
+        <h2>【🔥 通貨・銘柄 24時間強弱メーター (対USD)】</h2>
+        <div class="strength-meter-box">
+            <div class="strength-header">
+                <div class="strength-title">主要8通貨 ＋ XAU ＋ BTC</div>
+                <button id="updateBtn" class="update-btn" onclick="fetchAndRenderData()">🔄 最新データ取得</button>
+            </div>
+            <div id="statusText" class="status-text">データを取得待機中...</div>
+            <div id="api-chart-container"></div>
+        </div>
+
+        <h2>【💪 法定通貨 強弱（ヒートマップ）】</h2>
+        <div class="tradingview-widget-container" style="height:400px; border: 1px solid #ecf0f1; margin-bottom: 20px;">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+            { "width": "100%", "height": 400, "currencies": ["USD","JPY","EUR","GBP","AUD","CAD","CHF","NZD"], "isTransparent": false, "colorTheme": "light", "locale": "ja" }
+            </script>
+        </div>
+
+        <h2>【🪙 暗号資産 強弱（ヒートマップ）】</h2>
+        <div class="tradingview-widget-container" style="height:400px; border: 1px solid #ecf0f1; margin-bottom: 20px;">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js" async>
+            { "dataSource": "Crypto", "blockSize": "market_cap_calc", "blockColor": "change", "locale": "ja", "colorTheme": "light", "hasTopBar": false, "isDataSetEnabled": false, "isZoomEnabled": true, "width": "100%", "height": 400 }
+            </script>
+        </div>
+
+        <h2>【📊 コモディティ＆重要銘柄 動向】</h2>
+        <div class="tradingview-widget-container" style="border: 1px solid #ecf0f1; margin-bottom: 20px;">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+            { "colorTheme": "light", "dateRange": "1D", "showChart": true, "locale": "ja", "width": "100%", "height": 400, "tabs": [
+                { "title": "コモディティ", "symbols": [ { "s": "OANDA:XAUUSD", "d": "Gold" }, { "s": "OANDA:WTICOUSD", "d": "WTI Oil" } ] },
+                { "title": "暗号資産・指数", "symbols": [ { "s": "BITSTAMP:BTCUSD", "d": "Bitcoin" }, { "s": "OANDA:SPX500USD", "d": "S&P 500" } ] }
+            ]}
+            </script>
+        </div>
+
+        <h2>【🔔 市場イベントハイライト】</h2>
+        <ul>
+            <li><strong>WTI原油が96ドル台へ10%超の暴騰劇：</strong> 中東の地政学リスク（イラン情勢・ホルムズ海峡問題）が極度に高まり、供給懸念から原油価格が急騰。エネルギーインフレ再燃の懸念が市場を覆っています。</li>
+            <li><strong>米国株はスタグフレーション警戒で全面安：</strong> 原油高による物価上昇と成長鈍化の同時進行（スタグフレーション）が意識され、S&P500は-1.5%を超える大幅下落。ハイテク株も金利上昇を嫌気し大きく売られました。</li>
+            <li><strong>ドル全面高、ドル円は159.35円へ上昇：</strong> リスクオフのドル買いとインフレ懸念による米長期金利の上昇が重なり、DXYは99.60へ上昇。ドル円は日経平均の大幅下落にもかかわらず、159円台半ばまで底堅く推移しています。</li>
+        </ul>
+
+        <h2>【📅 経済指標カレンダー - 前日】</h2>
+        <table class="calendar-table">
+            <colgroup><col style="width:12%"><col style="width:8%"><col style="width:50%"><col style="width:10%"><col style="width:10%"><col style="width:10%"></colgroup>
+            <thead>
+                <tr><th>時刻</th><th>国</th><th>指標名</th><th>結果</th><th>予想</th><th>前回</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>21:30</td><td>🇺🇸</td><td>新規失業保険申請件数</td><td>21.3万件</td><td>21.4万件</td><td>21.4万件</td></tr>
+            </tbody>
+        </table>
+
+        <h2>【📅 経済指標カレンダー - 本⽇】</h2>
+        <table class="calendar-table">
+            <colgroup><col style="width:12%"><col style="width:8%"><col style="width:50%"><col style="width:10%"><col style="width:10%"><col style="width:10%"></colgroup>
+            <thead>
+                <tr><th>時刻</th><th>国</th><th>指標名</th><th>前回変動幅</th><th>予想</th><th>前回</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>23:00</td><td>🇺🇸</td><td>3月 ミシガン大学消費者態度指数（速報値）</td><td>15.4pips</td><td>56.6</td><td>55.9</td></tr>
+            </tbody>
+        </table>
+
+        <h2>【📝 各銘柄の詳細分析（ファンダメンタル＆テクニカル）】</h2>
+        <ul class="analysis-list">
+            <li>
+                <span class="symbol-title">🇺🇸 DXY (ドルインデックス)</span>
+                <div class="mini-summary">
+                    <span><strong>見通し:</strong> 🔵⬆️ <span class="view-bullish">強気</span></span>
+                    <span><strong>現在値:</strong> 99.60</span>
+                    <span><strong>前日比:</strong> <span class="val-pos">+0.39</span></span>
+                </div>
+                <p>中東情勢の悪化による「有事のドル買い」と、原油高に伴う「インフレヘッジのドル買い」が重なり、非常に強い上昇トレンドを形成しています。心理的節目の100.00到達が現実味を帯びてきました。</p>
+                <div class="chart-container" id="tv_dxy"></div>
+                <div class="strategy-box">📝 本日の戦略：上昇トレンド継続。100.00の大台を試す展開を想定し、99.20付近のサポートへの押し目を待ってのロングが基本戦略。ショートは厳禁。</div>
+            </li>
+            
+            <li>
+                <span class="symbol-title">🇺🇸 US500 (S&P500) / US30 (NYダウ)</span>
+                <div class="mini-summary">
+                    <span><strong>US500 見通し:</strong> 🔴⬇️ <span class="view-bearish">弱気</span> (現在値: 6,672.32 / 前日比: <span class="val-neg">-103.48</span>)</span>
+                    <span><strong>US30 見通し:</strong> 🔴⬇️ <span class="view-bearish">弱気</span> (現在値: 46,798.00 / 前日比: <span class="val-neg">-619.00</span>)</span>
+                </div>
+                <p>原油高（WTI 96ドル台）による企業収益の圧迫懸念が直撃し、主要指数は全面安。NYダウは47,000ドルを割り込み、S&P500も6,700ポイントの節目を明確に下抜ける弱いテクニカル形状です。</p>
+                <div style="display:flex; gap:10px;">
+                    <div class="chart-container" id="tv_us500"></div>
+                    <div class="chart-container" id="tv_us30"></div>
+                </div>
+                <div class="strategy-box">📝 本日の戦略：スタグフレーション懸念からの戻り売り優勢。S&Pは6,720付近、ダウは47,200付近のレジスタンスに引きつけてのショート目線。</div>
+            </li>
+
+            <li>
+                <span class="symbol-title">💻 USTEC (ナスダック100)</span>
+                <div class="mini-summary">
+                    <span><strong>見通し:</strong> 🔴⬇️ <span class="view-bearish">弱気</span></span>
+                    <span><strong>現在値:</strong> 24,597.00</span>
+                    <span><strong>前日比:</strong> <span class="val-neg">-368.00</span></span>
+                </div>
+                <p>インフレ高止まり観測による米長期金利の上昇が、バリュエーションの高いハイテク株の強烈な逆風となっています。25,000の大台を割り込み、下値不安が広がっています。</p>
+                <div class="chart-container" id="tv_ustec"></div>
+                <div class="strategy-box">📝 本日の戦略：金利上昇を嫌気した下落トレンド入り。24,800のレジスタンスでの戻り売りを狙いつつ、下値24,400のサポートブレイクに注意。</div>
+            </li>
+
+            <li>
+                <span class="symbol-title">🇯🇵 JP225 (日経225)</span>
+                <div class="mini-summary">
+                    <span><strong>見通し:</strong> 🔴⬇️ <span class="view-bearish">弱気</span></span>
+                    <span><strong>現在値:</strong> 54,257.51</span>
+                    <span><strong>前日比:</strong> <span class="val-neg">-767.86</span></span>
+                </div>
+                <p>円安進行というポジティブ要因を、米国株急落というネガティブ要因が大きく上回り、-767円の大幅反落となりました。グローバルなリスクオフ相場の波及が懸念されます。</p>
+                <div class="chart-container" id="tv_jp225"></div>
+                <div class="strategy-box">📝 本日の戦略：米国株安に引きずられる弱い展開。円安が一定の下支えとなるものの、54,000円割れを警戒した戻り売り（ショート）目線が安全。</div>
+            </li>
+
+            <li>
+                <span class="symbol-title">🥇 XAUUSD (ゴールド)</span>
+                <div class="mini-summary">
+                    <span><strong>見通し:</strong> 🟢➡️ <span class="view-neutral">中立</span></span>
+                    <span><strong>現在値:</strong> 5,130.00</span>
+                    <span><strong>前日比:</strong> <span class="val-neg">-45.86</span></span>
+                </div>
+                <p>ドル高と米長期金利の上昇は本来ゴールドにとって強烈な売り材料ですが、中東の地政学リスク（有事の金買い）が相殺しており、5,130ドル付近で激しい綱引き状態となっています。</p>
+                <div class="chart-container" id="tv_xauusd"></div>
+                <div class="strategy-box">📝 本日の戦略：方向感を探る展開。下値5,100ドルの堅いサポートラインでの反発を確認してからのレンジ逆張り（ロング）が有効。</div>
+            </li>
+
+            <li>
+                <span class="symbol-title">🛢️ USOIL (WTI原油)</span>
+                <div class="mini-summary">
+                    <span><strong>見通し:</strong> 🔵⬆️ <span class="view-bullish">強気</span></span>
+                    <span><strong>現在値:</strong> 96.18</span>
+                    <span><strong>前日比:</strong> <span class="val-pos">+8.93</span></span>
+                </div>
+                <p>ホルムズ海峡の通航懸念など中東情勢の緊迫化を背景に、1日で+10%超の歴史的な暴騰を記録。96ドル台へと乗せ、100ドルの大台が現実的なターゲットとして視界に入りました。</p>
+                <div class="chart-container" id="tv_usoil"></div>
+                <div class="strategy-box">📝 本日の戦略：圧倒的な上昇トレンドのためショートは厳禁。93.00ドル水準への押し目を待ってのロング、または高値ブレイクアウトでの順張り。</div>
+            </li>
+
+            <li>
+                <span class="symbol-title">🇪🇺 EURUSD (ユーロドル) / 🇬🇧 GBPUSD (ポンドドル)</span>
+                <div class="mini-summary">
+                    <span><strong>EURUSD 見通し:</strong> 🔴⬇️ <span class="view-bearish">弱気</span> (現在値: 1.1514 / 前日比: <span class="val-neg">-0.0028</span>)</span>
+                    <span><strong>GBPUSD 見通し:</strong> 🔴⬇️ <span class="view-bearish">弱気</span> (現在値: 1.3360 / 前日比: <span class="val-neg">-0.0047</span>)</span>
+                </div>
+                <p>強烈なドル高圧力に晒され、欧州通貨は全面安の展開。EURUSDは1.15前半まで押し込まれ、GBPUSDも1.33台半ばへ下落し、共に明確な下落トレンドラインの下で推移しています。</p>
+                <div style="display:flex; gap:10px;">
+                    <div class="chart-container" id="tv_eurusd"></div>
+                    <div class="chart-container" id="tv_gbpusd"></div>
+                </div>
+                <div class="strategy-box">📝 本日の戦略：ドル一強相場に逆らわず「戻り売り」。EURは1.1550、GBPは1.3400のレジスタンスに引きつけてのショートが基本シナリオ。</div>
+            </li>
+
+            <li>
+                <span class="symbol-title">🇯🇵 USDJPY (ドル円)</span>
+                <div class="mini-summary">
+                    <span><strong>見通し:</strong> 🔵⬆️ <span class="view-bullish">強気</span></span>
+                    <span><strong>現在値:</strong> 159.35</span>
+                    <span><strong>前日比:</strong> <span class="val-pos">+0.42</span></span>
+                </div>
+                <p>日経平均が急落するリスクオフ環境下でも、インフレ懸念を背景とした米長期金利の上昇がドル円を強力に下支えし、159.35円へと続伸。市場は160円の防衛ラインに神経を尖らせています。</p>
+                <div class="chart-container" id="tv_usdjpy"></div>
+                <div class="strategy-box">📝 本日の戦略：160.00円には巨額の防戦売りと介入警戒感あり。高値掴みは避け、158.80円〜159.00円への短期的な押し目を待って拾うのが安全。</div>
+            </li>
+
+            <li>
+                <span class="symbol-title">🇦🇺 AUDUSD (豪ドル米ドル)</span>
+                <div class="mini-summary">
+                    <span><strong>見通し:</strong> 🔴⬇️ <span class="view-bearish">弱気</span></span>
+                    <span><strong>現在値:</strong> 0.7090</span>
+                    <span><strong>前日比:</strong> <span class="val-neg">-0.0055</span></span>
+                </div>
+                <p>資源国通貨として原油高の恩恵を受ける側面はあるものの、それ以上にグローバルな株安（リスクオフ）と強烈なドル高の波に飲まれ、0.7090付近へと軟調な推移となっています。</p>
+                <div class="chart-container" id="tv_audusd"></div>
+                <div class="strategy-box">📝 本日の戦略：リスクオフとドル高の圧力により上値は重い。0.7130を背にした戻り売り戦略。下値は0.7050がターゲット。</div>
+            </li>
+
+            <li>
+                <span class="symbol-title">🅑 BTCUSD (ビットコイン)</span>
+                <div class="mini-summary">
+                    <span><strong>見通し:</strong> 🟢➡️ <span class="view-neutral">中立</span></span>
+                    <span><strong>現在値:</strong> 70,225.62</span>
+                    <span><strong>前日比:</strong> <span class="val-pos">+23.00</span></span>
+                </div>
+                <p>米国株が総崩れとなる中でも、ビットコインは70,000ドルの大台を死守しており、株式市場とは切り離された「デジタルゴールド」としての底堅さを発揮しています。</p>
+                <div class="chart-container" id="tv_btcusd"></div>
+                <div class="strategy-box">📝 本日の戦略：株安環境下でも底堅い推移。70,000ドル割れの69,000ドル付近までの押し目を狙ったロングが有効。上値は71,500ドルを意識。</div>
+            </li>
+        </ul>
+
+        <h2>【🐋 大口注文情報 (オプション・機関投資家動向)】</h2>
+        <div class="order-box">
+            <div class="order-item"><span class="order-price-label">USDJPY:</span> 160.00円に介入を警戒した本邦輸出企業や機関投資家の巨大な防戦売り。ここを抜けるとストップロス買いを巻き込むリスク。</div>
+            <div class="order-item"><span class="order-price-label">EURUSD:</span> 1.1500に巨大なオプションバリアが存在し、下値の防波堤として機能中。</div>
+            <div class="order-item"><span class="order-price-label">XAUUSD:</span> 5,100ドル付近に実需筋・アジア系中央銀行の現物買いオーダーが厚く待機。</div>
+            <div class="order-item"><span class="order-price-label">USOIL:</span> 100ドルを見据えたCTA(商品投資顧問)によるモメンタムフォローの無差別な買いが継続中。</div>
+        </div>
+
+        <h2>【🎯 ドル円 大口注文ピックアップ】</h2>
+        <div class="ob-time">情報取得：2026/03/13 最新取得（Traders Web FX / オーダーブック等より）</div>
+        <table class="ob-table">
+            <tbody>
+                <tr class="ob-sell"><td class="ob-price">160.00円</td><td>売り厚め・超えるとストップロス買い、防戦売り観測</td></tr>
+                <tr class="ob-sell"><td class="ob-price">159.80円</td><td>売りやや小さめ</td></tr>
+                <tr class="ob-sell"><td class="ob-price">159.50円</td><td>売り</td></tr>
+                <tr class="ob-current"><td class="ob-price">159.35円</td><td>発表時点基準現在値</td></tr>
+                <tr class="ob-buy"><td class="ob-price">159.00円</td><td>買い・割り込むとストップロス売り</td></tr>
+                <tr class="ob-buy"><td class="ob-price">158.80円</td><td>買い</td></tr>
+                <tr class="ob-buy"><td class="ob-price">158.50円</td><td>買い厚め、OPNYカット</td></tr>
+                <tr class="ob-buy"><td class="ob-price">158.00円</td><td>買い、割り込むとストップロス売り大きめ</td></tr>
+            </tbody>
+        </table>
+
+        <div class="comment-box">
+            <strong>【💡 Pure Greenからの総括コメント】</strong><br>
+            本日は「原油価格の暴騰ショック」がマーケットの全てを支配しています。WTI原油が96ドル台へ一気に急騰したことで、「インフレ再燃 → 米利下げ延期 → ドル高・株安」という昨年の悪夢のようなシナリオがフラッシュバックしています。<br>
+            特に注目すべきはドル円の動きです。日経平均が大きく崩れるリスクオフ相場にもかかわらず、ドル全面高に引っ張られて159.35円まで上昇しています。オーダー状況を見ると、いよいよ「160.00円の絶対防衛ライン（介入警戒）」が強烈に意識されるフェーズに入りました。160円手前でのロングは「火中の栗を拾う」行為に等しく、下値（158円台後半）に引きつけての押し目買い、もしくは突発的なヘッドライン（中東関連ニュース）での急落に備えた資金管理（ゼロカット口座の活用など）が極めて重要になる1日です。
+        </div>
+
+        <div class="footer">
+            ※本資料に掲載されている情報は、情報提供のみを目的としたものであり、投資アドバイスや金融商品取引の勧誘を目的としたものではありません。<br>
+            Copyright 2026 Pure Green All Rights Reserved.
+        </div>
+    </div> <div class="link-section" style="margin-top: 20px;">
+        <div class="link-card">
+            <a href="exness_intro.html" class="link-btn exness">Exness</a>
+            <div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる世界最高峰の極狭スプレッド口座。</div>
+        </div>
+        <div class="link-card">
+            <a href="xs_intro.html" class="link-btn xs">XS</a>
+            <div class="link-desc">機関投資家レベルの最高水準環境。多種多様な銘柄を誇る次世代マルチアセットブローカー。</div>
+        </div>
+        <div class="link-card">
+            <a href="bitwallet_intro.html" class="link-btn bitwallet">bitwallet</a>
+            <div class="link-desc">海外FXの入出金を最速・安価に。安全かつスムーズな資金管理を実現する必須ツール。</div>
+        </div>
+    </div>
+
+</div> <script>
+    // 1. TradingViewチャートの設定
+    const charts = [
+        { id: "tv_dxy", symbol: "CAPITALCOM:DXY", interval: "60" },
+        { id: "tv_us500", symbol: "OANDA:SPX500USD", interval: "60" },   
+        { id: "tv_us30", symbol: "OANDA:US30USD", interval: "60" },      
+        { id: "tv_ustec", symbol: "OANDA:NAS100USD", interval: "60" },   
+        { id: "tv_jp225", symbol: "OANDA:JP225YJPY", interval: "60" },
+        { id: "tv_xauusd", symbol: "OANDA:XAUUSD", interval: "60" }, 
+        { id: "tv_usoil", symbol: "OANDA:WTICOUSD", interval: "60" },
+        { id: "tv_eurusd", symbol: "OANDA:EURUSD", interval: "60" },
+        { id: "tv_gbpusd", symbol: "OANDA:GBPUSD", interval: "60" },
+        { id: "tv_usdjpy", symbol: "OANDA:USDJPY", interval: "60" },
+        { id: "tv_audusd", symbol: "OANDA:AUDUSD", interval: "60" },
+        { id: "tv_btcusd", symbol: "BITSTAMP:BTCUSD", interval: "60" }
+    ];
+
+    window.onload = function() {
+        charts.forEach(chart => {
+            if(document.getElementById(chart.id)) {
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": chart.symbol,
+                    "interval": chart.interval,
+                    "timezone": "Asia/Tokyo",
+                    "theme": "light",
+                    "style": "1",
+                    "locale": "ja",
+                    "enable_publishing": false,
+                    "hide_top_toolbar": true,
+                    "hide_legend": true,
+                    "save_image": false,
+                    "container_id": chart.id
+                });
+            }
+        });
+
+        // カスタム強弱メーター（API自動取得）の呼び出し
+        fetchAndRenderData();
+    };
+
+    // 2. API連携 強弱メーターの処理ロジック
+    async function fetchAndRenderData() {
+        const btn = document.getElementById('updateBtn');
+        const status = document.getElementById('statusText');
+        const container = document.getElementById('api-chart-container');
+        
+        btn.disabled = true;
+        btn.textContent = '取得中...';
+        status.textContent = 'APIから最新データをダウンロード中...';
+        container.innerHTML = '';
+
+        const results = [];
+
+        try {
+            // CoinGecko API: BTC と ゴールド(PAXG)
+            const cgRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,pax-gold&vs_currencies=usd&include_24hr_change=true');
+            const cgData = await cgRes.json();
+
+            if (cgData.bitcoin && cgData.bitcoin.usd_24h_change !== undefined) {
+                results.push({ symbol: 'BTC', changePercent: cgData.bitcoin.usd_24h_change });
+            }
+            if (cgData['pax-gold'] && cgData['pax-gold'].usd_24h_change !== undefined) {
+                results.push({ symbol: 'XAU', changePercent: cgData['pax-gold'].usd_24h_change });
+            }
+
+            // Frankfurter API: 法定通貨(EUR, JPY, GBP, AUD, CHF, CAD, NZD)
+            const d = new Date();
+            d.setDate(d.getDate() - 7);
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            const pastDate = `${yyyy}-${mm}-${dd}`;
+
+            const fRes = await fetch(`https://api.frankfurter.app/${pastDate}..?from=USD&to=EUR,JPY,GBP,AUD,CHF,CAD,NZD`);
+            const fData = await fRes.json();
+
+            const dates = Object.keys(fData.rates).sort();
+            
+            if (dates.length >= 2) {
+                const latestDate = dates[dates.length - 1];
+                const prevDate = dates[dates.length - 2];
+
+                const latestRates = fData.rates[latestDate];
+                const prevRates = fData.rates[prevDate];
+
+                const fiatSymbols = ['EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD'];
+                
+                fiatSymbols.forEach(sym => {
+                    if (latestRates[sym] && prevRates[sym]) {
+                        const currentRate = latestRates[sym];
+                        const prevRate = prevRates[sym];
+                        
+                        // 変動率の計算: (過去レート / 現在レート) - 1
+                        const changeDecimal = (prevRate / currentRate) - 1;
+                        const changePercent = changeDecimal * 100;
+                        
+                        results.push({ symbol: sym, changePercent: changePercent });
+                    }
+                });
+                
+                // USD基準(0%)
+                results.push({ symbol: 'USD', changePercent: 0.00 });
+            }
+
+            // 変動率が高い順にソート
+            results.sort((a, b) => b.changePercent - a.changePercent);
+            renderChart(results);
+
+            const now = new Date();
+            status.textContent = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+        } catch (error) {
+            console.error('API取得エラー:', error);
+            status.textContent = 'データの取得に失敗しました。';
+            container.innerHTML = '<p style="color:#e74c3c; font-size:13px; text-align:center;">通信エラーが発生しました。</p>';
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '🔄 最新データ取得';
+        }
+    }
+
+    function renderChart(data) {
+        const container = document.getElementById('api-chart-container');
+        const maxAbsChange = Math.max(...data.map(item => Math.abs(item.changePercent)));
+        const scaleFactor = maxAbsChange === 0 ? 1 : 100 / maxAbsChange; 
+
+        data.forEach(item => {
+            const change = parseFloat(item.changePercent).toFixed(2);
+            const isPositive = change > 0;
+            const isZero = change == 0.00;
+            const barWidth = Math.abs(change) * scaleFactor; 
+
+            const row = document.createElement('div');
+            row.className = 'asset-row';
+
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'asset-name';
+            nameDiv.textContent = item.symbol;
+
+            const barArea = document.createElement('div');
+            barArea.className = 'bar-area';
+
+            const zeroLine = document.createElement('div');
+            zeroLine.className = 'zero-line';
+
+            const barLeft = document.createElement('div');
+            barLeft.className = 'bar-half bar-left';
+            
+            const barRight = document.createElement('div');
+            barRight.className = 'bar-half bar-right';
+
+            const fill = document.createElement('div');
+            fill.className = 'bar-fill ' + (isPositive ? 'fill-positive' : 'fill-negative');
+            
+            setTimeout(() => { fill.style.width = `${barWidth}%`; }, 50);
+
+            if (isPositive) {
+                barRight.appendChild(fill);
+            } else if (!isZero) {
+                barLeft.appendChild(fill);
+            }
+
+            barArea.appendChild(barLeft);
+            barArea.appendChild(zeroLine);
+            barArea.appendChild(barRight);
+
+            const valueDiv = document.createElement('div');
+            let colorClass = isZero ? 'val-zero' : (isPositive ? 'val-pos' : 'val-neg');
+            valueDiv.className = `asset-value ${colorClass}`;
+            valueDiv.textContent = (isPositive ? '+' : '') + change + '%';
+
+            row.appendChild(nameDiv);
+            row.appendChild(barArea);
+            row.appendChild(valueDiv);
+            container.appendChild(row);
+        });
+    }
+
+    // 3. 画像保存機能
+    function saveAsImage() {
+        const reportElement = document.getElementById('report-content');
+        html2canvas(reportElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'MarketReport_20260313.png';
+            link.click();
+        });
+    }
+</script>
+
+</body>
+</html>
+

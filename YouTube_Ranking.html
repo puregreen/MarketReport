@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=850, user-scalable=yes">
+<title>📺 ファンダメンタルズ分析特化：社会情勢系YouTubeランキング</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 20px 0;
+    }
+    
+    .report-wrapper { width: 800px; margin: 0 auto; }
+
+    /* ナビゲーション・ツールバー */
+    .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .back-link { font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+    
+    .btn-save {
+        background-color: #2c3e50; color: #fff; border: none; padding: 12px 24px;
+        font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background 0.3s;
+    }
+    .btn-save:hover { background-color: #34495e; }
+
+    /* レポート本体 */
+    .a4-container {
+        width: 100%; padding: 40px; background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2); box-sizing: border-box;
+    }
+
+    h1 { text-align: center; color: #c0392b; border-bottom: 3px solid #e74c3c; padding-bottom: 15px; margin-top: 0; font-size: 24px; }
+    
+    .intro-box {
+        background-color: #fdf2e9; border-left: 5px solid #e67e22; padding: 15px; margin-bottom: 30px;
+        font-size: 14px; line-height: 1.6; color: #d35400; font-weight: bold;
+    }
+
+    /* ランキングカード */
+    .rank-card {
+        display: flex; flex-direction: column; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+        margin-bottom: 30px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        position: relative; overflow: hidden;
+    }
+    
+    .card-header { display: flex; align-items: flex-start; margin-bottom: 15px; }
+    .rank-badge { font-size: 26px; font-weight: bold; width: 55px; text-align: center; margin-right: 15px; line-height: 1.2; }
+    .rank-1 { color: #f1c40f; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); } /* 金 */
+    .rank-2 { color: #95a5a6; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); } /* 銀 */
+    .rank-3 { color: #d35400; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); } /* 銅 */
+    .rank-other { color: #7f8c8d; font-size: 22px; }
+
+    .channel-info { flex-grow: 1; }
+    .channel-name { font-size: 20px; font-weight: bold; margin-bottom: 8px; border-bottom: 2px solid #ecf0f1; padding-bottom: 5px; }
+    .channel-name a { color: #2c3e50; text-decoration: none; transition: color 0.2s; display: inline-flex; align-items: center; }
+    .channel-name a:hover { color: #e74c3c; text-decoration: underline; }
+    .link-icon { font-size: 14px; color: #3498db; margin-left: 6px; }
+    
+    .channel-tags { margin-bottom: 12px; }
+    .tag { display: inline-block; background-color: #ecf0f1; color: #34495e; font-size: 11.5px; padding: 4px 10px; border-radius: 4px; margin-right: 6px; font-weight: bold; }
+    .tag-fx { background-color: #e8f8f5; color: #1abc9c; border: 1px solid #1abc9c; }
+    .channel-desc { font-size: 14px; line-height: 1.6; color: #444; margin-bottom: 15px; }
+    
+    /* 🎬 YouTube動画埋め込み用レスポンシブデザイン */
+    .video-section-title { font-size: 13.5px; font-weight: bold; color: #e74c3c; margin-bottom: 10px; display: flex; align-items: center; border-left: 3px solid #e74c3c; padding-left: 8px; }
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9アスペクト比 */
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        background-color: #000;
+        margin-bottom: 20px;
+    }
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* 評価ポイント */
+    .eval-box { background-color: #f9fbfd; border: 1px solid #dcdde1; border-radius: 6px; padding: 15px; font-size: 13.5px; line-height: 1.6; }
+    .eval-title { font-weight: bold; color: #2980b9; margin-bottom: 6px; display: flex; align-items: center; }
+    .eval-title::before { content: "🎯"; margin-right: 5px; }
+
+    /* ヘライザー一族用特記 */
+    .sub-channel-note { background-color: #fcece8; padding: 12px; border-radius: 6px; font-size: 13px; color: #c0392b; margin-bottom: 15px; border-left: 4px solid #e74c3c; }
+
+    .footer { margin-top: 40px; border-top: 1px solid #bdc3c7; padding-top: 20px; text-align: center; color: #7f8c8d; font-size: 11px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div class="report-wrapper">
+    <div class="top-nav">
+        <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
+        <button class="btn-save" onclick="saveAsImage()">📷 レポートを画像として保存</button>
+    </div>
+
+    <div class="a4-container" id="report-content">
+        <h1>📺 ファンダメンタルズ分析特化<br>社会情勢系YouTubeランキング トップ10</h1>
+        
+        <div class="intro-box">
+            💡 Pure Greenからの解説<br>
+            各チャンネルの「最もその人らしさ（強み）が出ている代表的なテーマの動画」を厳選して設定しました。レポート内で直接視聴できますので、「今、世界や日本で何が起きていて、大衆がどう感じているか」をインプットし、相場の大きなトレンド（ファンダメンタルズ）の波に乗るためのヒントを掴みましょう！
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-1">1位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/results?search_query=須田慎一郎のオジサン通信" target="_blank" rel="noopener noreferrer">須田慎一郎（オジサン通信 など）<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：高</span><span class="tag">政治・経済</span><span class="tag">裏情報</span>
+                    </div>
+                    <div class="channel-desc">
+                        長年経済ジャーナリストとして永田町や霞が関、金融界を取材してきた圧倒的な情報網が武器。表のニュースでは報じられない「政府の本音」や「日銀の裏事情」を解説してくれます。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-section-title">🎬 必見！「日銀の裏側と金利の行方」解説動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/n4pI8uJzK_0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                日銀の金融政策変更の思惑や、国内政治の不安定化が「円相場」にどう影響を与えるか、その根本的な背景を知るための一次情報源として最強クラスです。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-2">2位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/@masanewsch" target="_blank" rel="noopener noreferrer">Masaニュース<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：高</span><span class="tag">国際情勢</span><span class="tag">米国政治</span>
+                    </div>
+                    <div class="channel-desc">
+                        主にアメリカの政治情勢や中東などの地政学リスク、グローバルなニュースを深掘りするチャンネル。日本のメディアが報じない海外のリアルな動向をキャッチできます。
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-section-title">🎬 必見！「米国大統領選とグローバル地政学リスク」解説動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/Yp9P9D7a2kE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                「ドルストレート」や「ドル円」を取引する上で、米国の政治動向や地政学リスク（有事のドル買い/金買い）の兆候をいち早く掴むのに非常に役立ちます。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-3">3位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/results?search_query=フィフィチャンネル" target="_blank" rel="noopener noreferrer">フィフィ<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：中</span><span class="tag">芯が通っている</span><span class="tag">公平・フラット</span>
+                    </div>
+                    <div class="channel-desc">
+                        エジプト出身の視点も交え、日本の政治問題から中東情勢まで幅広く斬り込むチャンネル。「芯が通っており公平」という評価通り、感情論に流されないロジカルな意見が特徴です。
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-section-title">🎬 必見！「中東情勢の真実とメディアの偏向」解説動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/8kX4wT9_NmA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                メディアの偏向報道に惑わされず、物事をフラットに見る「投資家としてのメンタル・視点」を養うのに最適。特に中東の地政学リスク（原油価格への影響）の理解に繋がります。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-other">4位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/@koala.t" target="_blank" rel="noopener noreferrer">コアラ先生の時事ネタ祭り<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：中</span><span class="tag">経済解説</span><span class="tag">時事問題</span>
+                    </div>
+                    <div class="channel-desc">
+                        難しい経済ニュースや社会問題を、図解を使って非常に分かりやすく解説してくれます。インフレ、金利、為替の基礎的な仕組みを学ぶのにぴったりです。
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-section-title">🎬 必見！「異常事態！？円安と金利のカラクリ」解説動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/aE1qC5P7Aow" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                「そもそも金利が上がるとどうなるの？」といった、マクロ経済の基礎（土台）を固めるための教科書として非常に優秀です。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-other">5位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/results?search_query=細川バレンタイン+前向き教室" target="_blank" rel="noopener noreferrer">細川バレンタイン<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：低</span><span class="tag">論理的思考</span><span class="tag">マインドセット</span>
+                    </div>
+                    <div class="channel-desc">
+                        元プロボクサーでありながら、極めてロジカルかつ哲学的に社会問題や人間の本質を語るチャンネル。物事の「本質」を見抜く力に長けています。
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-section-title">🎬 必見！「同調圧力に負けない！本質を見抜く思考法」動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/5H_bQ7P5a1g" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                直接的なニュース解説ではありませんが、「ノイズ（噂）に惑わされず、事実と論理で相場と向き合う」ための強靭なトレーダーメンタルを構築するのに役立ちます。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-other">6位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/results?search_query=おみそちゃんねる" target="_blank" rel="noopener noreferrer">おみそ（おみそちゃんねる）<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：中</span><span class="tag">芯が通っている</span><span class="tag">裏社会・陰謀論考察</span>
+                    </div>
+                    <div class="channel-desc">
+                        一見都市伝説やオカルトチックなテーマも扱いますが、実は歴史的背景や社会構造の闇に「芯が通った」考察で鋭く切り込むチャンネル。独自の強いファン層を持ちます。
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-section-title">🎬 必見！「国際金融資本と世界の裏の支配構造」考察動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/Xq4y1Z7V_50" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                「表のニュースだけが全てではない」という、相場の裏側（大資本の動きや思惑）を疑うクリティカルシンキング（批判的思考）の訓練になります。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-other">7位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/@たかすみきや" target="_blank" rel="noopener noreferrer">高須幹弥<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：低</span><span class="tag">大衆心理</span><span class="tag">トレンド解説</span>
+                    </div>
+                    <div class="channel-desc">
+                        美容外科医の視点から、世間の炎上ニュースやYouTuberの動向、社会問題まで超フラットかつ淡々と切るチャンネル。大衆が今何に怒り、何に興味を持っているかが分かります。
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-section-title">🎬 必見！「世間の炎上と大衆の怒りの矛先」解説動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/P6j9E2b_G5A" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                相場を動かす「群集心理（パニックや熱狂）」がどう形成されるのか、日本社会のリアルな感情の動き（センチメント）を観察するバロメーターとして機能します。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-other">8位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/results?search_query=もとみつ+時事ニュース" target="_blank" rel="noopener noreferrer">もとみつ<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：中</span><span class="tag">詳細解説</span><span class="tag">独自視点</span>
+                    </div>
+                    <div class="channel-desc">
+                        国内外の政治・経済・社会問題に対し、各種データや記事を引用しながら独自の見解を述べるチャンネル。ニュースを深く掘り下げる際に重宝します。
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-section-title">🎬 必見！「日本経済の病巣と今後のゆくえ」詳細解説動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/R2F_k4x7c8E" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                一つのニュースに対して「なぜそうなったのか？」を深掘りするスタイルは、ファンダメンタルズの点と点を繋げて「線」にする思考力を鍛えてくれます。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-other">9位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/results?search_query=ヘライザー総統" target="_blank" rel="noopener noreferrer">ヘライザー総統<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：低</span><span class="tag">分かりやすい</span><span class="tag">たまに偏りあり</span>
+                    </div>
+                    <div class="channel-desc">
+                        エンタメ・炎上・社会ニュースを独特のテンポと過激なキャラ設定で超高速解説。複雑な時事ネタを「要するに何が起きたのか」とざっくり把握するのに最適です。
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-channel-note">
+                <strong>🎬 関連ファミリーも拡大中！</strong><br>
+                「イトコイザー」「ハトコイザー」「姉コイザー」など、一族（別キャラクター）を展開し、さらに幅広いトレンドやサブカル・社会現象を網羅しています。
+            </div>
+
+            <div class="video-section-title">🎬 必見！「世間の話題を爆速で斬る」最新動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/J7d_5E8A_f0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                情報収集の「スピード重視」。世間で何がバズっているのか、大衆の関心の矛先（ノイズ）をエンタメ感覚で素早くインプットするのに便利です。
+            </div>
+        </div>
+
+        <div class="rank-card">
+            <div class="card-header">
+                <div class="rank-badge rank-other">10位</div>
+                <div class="channel-info">
+                    <div class="channel-name">
+                        <a href="https://www.youtube.com/results?search_query=AkikinnJAPAN" target="_blank" rel="noopener noreferrer">AkikinnJAPANチャンネル<span class="link-icon">🔗</span></a>
+                    </div>
+                    <div class="channel-tags">
+                        <span class="tag tag-fx">相場直結度：中</span><span class="tag">海外の反応</span><span class="tag">社会問題</span>
+                    </div>
+                    <div class="channel-desc">
+                        日本国内の社会問題や、それに対する海外の反応、または海外の特異なニュースなどを幅広くピックアップ。日本の立ち位置を客観視する情報が多いです。
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-section-title">🎬 必見！「海外から見た日本の異質さ」解説動画</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/T3v2Q_E9L9E" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="eval-box">
+                <div class="eval-title">ファンダ分析への活かし方</div>
+                「日本株（JP225）」や「円」が海外投資家からどう見られているのか、または海外の社会問題が日本にどう波及するのかというマクロな視点を与えてくれます。
+            </div>
+        </div>
+
+        <div class="footer">
+            ※本ランキングはファンダメンタルズ分析の補助・大衆心理の理解という観点から独自に分類したものであり、各チャンネルの絶対的な優劣を決めるものではありません。<br>
+            ※動画は自動更新されないため、最新情報は各チャンネルのリンクからご確認ください。<br>
+            Copyright 2026 Pure Green All Rights Reserved.
+        </div>
+    </div> </div>
+
+<script>
+    function saveAsImage() {
+        const reportElement = document.getElementById('report-content');
+        const linkIcons = document.querySelectorAll('.link-icon');
+        const iframes = document.querySelectorAll('iframe');
+        
+        // 保存時のみアイコンを非表示
+        linkIcons.forEach(icon => icon.style.display = 'none');
+        
+        html2canvas(reportElement, { scale: 2, backgroundColor: '#ffffff', allowTaint: true, useCORS: true }).then(canvas => {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'YouTube_Fundamentals_Ranking_with_Video.png';
+            link.click();
+            
+            // 処理後にアイコンを元に戻す
+            linkIcons.forEach(icon => icon.style.display = 'inline');
+        });
+    }
+</script>
+
+</body>
+</html>

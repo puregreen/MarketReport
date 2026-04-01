@@ -270,6 +270,52 @@
             min-width: 130px;
         }
     }
+
+    /* 🌟 折りたたみ（アコーディオン）用の追加CSS 🌟 */
+    .archive-accordion {
+        margin: 30px 0 15px 0;
+    }
+    .archive-accordion summary {
+        font-size: 18px;
+        color: #2c3e50;
+        padding: 12px 15px;
+        border-left: 4px solid #e67e22;
+        background-color: #fcfcfc;
+        border-radius: 5px;
+        cursor: pointer;
+        list-style: none; /* デフォルトの矢印を消去 */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .archive-accordion summary::-webkit-details-marker {
+        display: none; /* Safari向けの矢印消去 */
+    }
+    .archive-accordion summary:hover {
+        background-color: #f1f4f8;
+    }
+    .toggle-icon {
+        color: #3498db;
+        font-size: 20px;
+        font-weight: bold;
+        transition: transform 0.3s ease; /* 回転アニメーション */
+    }
+    /* 開いた時のアニメーション設定 */
+    .archive-accordion[open] .toggle-icon {
+        transform: rotate(45deg); /* ＋を×に回転させる */
+        color: #e74c3c; /* 開いている時は赤色に */
+    }
+    .archive-accordion[open] .archive-list {
+        animation: fadeIn 0.4s ease-in-out;
+        margin-top: 15px;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 </style>
 </head>
 <body>
@@ -332,8 +378,10 @@
             
     </div>
             
-
-    <h3 class="section-title" style="border-left: 4px solid #e67e22;">2026年 3月</h3>
+    <details class="archive-accordion">
+        <summary>
+            2026年 3月 <span class="toggle-icon">＋</span>
+        </summary>
         <div class="archive-list">
             
         <a href="Report_0331.html" class="report-card">
@@ -525,8 +573,8 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-    </div>
-
+        </div>
+    </details>
     <div class="footer">
         <div class="copyright">Copyright 2026 Pure Green All Rights Reserved.</div>
         

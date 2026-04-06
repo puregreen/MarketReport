@@ -43,33 +43,81 @@
         const status = document.getElementById('statusText');
         const container = document.getElementById('chart-container');
         btn.disabled = true; status.textContent = 'データ取得中...'; container.innerHTML = '';
-        const results = [];
+        
+        let results = [];
+        let hasError = false;
+
         try {
+            // 暗号資産の取得
             const cgRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,pax-gold&vs_currencies=usd&include_24hr_change=true');
+            if (!cgRes.ok) throw new Error('CoinGecko Error');
             const cgData = await cgRes.json();
             if (cgData.bitcoin) results.push({ symbol: 'BTC', changePercent: cgData.bitcoin.usd_24h_change });
             if (cgData['pax-gold']) results.push({ symbol: 'XAU', changePercent: cgData['pax-gold'].usd_24h_change });
 
-            const d = new Date(); d.setDate(d.getDate() - 7);
-            const pastDate = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-            const fRes = await fetch(`https://api.frankfurter.app/${pastDate}..?from=USD&to=EUR,JPY,GBP,AUD,CHF,CAD,NZD`);
-            const fData = await fRes.json();
-            const dates = Object.keys(fData.rates).sort();
+            // 法定通貨の取得 (より安全な最新の取得方法に変更)
+            const latestRes = await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR,JPY,GBP,AUD,CHF,CAD,NZD');
+            if (!latestRes.ok) throw new Error('Frankfurter Error');
+            const latestData = await latestRes.json();
+            const latestDateStr = latestData.date;
             
+            const twoWeeksAgo = new Date();
+            twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+            const yyyy = twoWeeksAgo.getFullYear();
+            const mm = String(twoWeeksAgo.getMonth() + 1).padStart(2, '0');
+            const dd = String(twoWeeksAgo.getDate()).padStart(2, '0');
+            
+            const tsRes = await fetch(`https://api.frankfurter.app/${yyyy}-${mm}-${dd}..${latestDateStr}?from=USD&to=EUR,JPY,GBP,AUD,CHF,CAD,NZD`);
+            if (!tsRes.ok) throw new Error('Frankfurter TS Error');
+            const tsData = await tsRes.json();
+
+            const dates = Object.keys(tsData.rates).sort();
             if (dates.length >= 2) {
-                const latestRates = fData.rates[dates[dates.length - 1]];
-                const prevRates = fData.rates[dates[dates.length - 2]];
+                const latestRates = tsData.rates[dates[dates.length - 1]];
+                const prevRates = tsData.rates[dates[dates.length - 2]];
+                
                 ['EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD'].forEach(sym => {
-                    if (latestRates[sym]) results.push({ symbol: sym, changePercent: ((prevRates[sym] / latestRates[sym]) - 1) * 100 });
+                    if (latestRates[sym] && prevRates[sym]) {
+                        results.push({ symbol: sym, changePercent: ((prevRates[sym] / latestRates[sym]) - 1) * 100 });
+                    }
                 });
                 results.push({ symbol: 'USD', changePercent: 0 });
+            } else {
+                throw new Error('Not enough data');
             }
+
+            // 成功時の処理
             results.sort((a, b) => b.changePercent - a.changePercent);
             renderChart(results);
-            const now = new Date(); status.textContent = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
-        } catch (e) { status.textContent = 'エラーが発生しました'; }
-        finally { btn.disabled = false; }
+            const now = new Date(); 
+            status.textContent = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+
+        } catch (e) { 
+            hasError = true;
+            console.warn('API制限エラー。デモデータを表示します:', e);
+            status.innerHTML = '<span style="color:#e67e22;">【プレビュー用】通信制限によりサンプルデータを表示中</span>';
+            
+            // エラー時のフォールバック用ダミーデータ（レイアウト確認用）
+            const dummyData = [
+                { symbol: 'USD', changePercent: 0.00 },
+                { symbol: 'BTC', changePercent: 0.77 },
+                { symbol: 'XAU', changePercent: 1.19 },
+                { symbol: 'JPY', changePercent: -0.11 },
+                { symbol: 'EUR', changePercent: 0.32 },
+                { symbol: 'GBP', changePercent: 0.42 },
+                { symbol: 'AUD', changePercent: 0.54 },
+                { symbol: 'CHF', changePercent: -0.20 },
+                { symbol: 'CAD', changePercent: 0.15 },
+                { symbol: 'NZD', changePercent: 0.35 }
+            ];
+            dummyData.sort((a, b) => b.changePercent - a.changePercent);
+            renderChart(dummyData);
+        } finally { 
+            btn.disabled = false; 
+            btn.textContent = '🔄 更新';
+        }
     }
+
     function renderChart(data) {
         const container = document.getElementById('chart-container');
         const maxAbs = Math.max(...data.map(i => Math.abs(i.changePercent)));
@@ -78,6 +126,7 @@
             const chg = parseFloat(item.changePercent).toFixed(2);
             const isPos = chg > 0; const isZero = chg == 0;
             const w = Math.abs(chg) * scale; 
+            
             const row = document.createElement('div'); row.className = 'asset-row';
             row.innerHTML = `
                 <div class="asset-name">${item.symbol}</div>
@@ -88,11 +137,16 @@
                 </div>
                 <div class="asset-value ${isZero ? 'val-zero' : (isPos ? 'val-pos' : 'val-neg')}">${isPos ? '+' : ''}${chg}%</div>
             `;
+            
             const fill = document.createElement('div');
             fill.className = 'bar-fill ' + (isPos ? 'fill-positive' : 'fill-negative');
             setTimeout(() => fill.style.width = w + '%', 50);
-            if (isPos) row.querySelector('.bar-right').appendChild(fill);
-            else if (!isZero) row.querySelector('.bar-left').appendChild(fill);
+            
+            if (isPos) {
+                row.querySelector('.bar-right').appendChild(fill);
+            } else if (!isZero) {
+                row.querySelector('.bar-left').appendChild(fill);
+            }
             container.appendChild(row);
         });
     }

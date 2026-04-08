@@ -50,68 +50,100 @@
         
         let results = [];
 
-        // 1. 暗号資産（Binance APIを採用：ブロックされにくく超高速）
+        // ==========================================
+        // 1. 暗号資産（Binance API）
+        // ==========================================
         try {
             const btcRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
             if (btcRes.ok) {
                 const btcData = await btcRes.json();
                 results.push({ symbol: 'BTC', changePercent: parseFloat(btcData.priceChangePercent) });
             }
-        } catch (e) { console.warn('BTC取得エラー'); }
+        } catch (e) { console.warn('BTCエラー'); }
 
         try {
-            // XAU/USDに近い代替としてPAXGを使用（Binance）
             const xauRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT');
             if (xauRes.ok) {
                 const xauData = await xauRes.json();
                 results.push({ symbol: 'XAU', changePercent: parseFloat(xauData.priceChangePercent) });
             }
-        } catch (e) { console.warn('XAU取得エラー'); }
+        } catch (e) { console.warn('XAUエラー'); }
 
-        // 2. 法定通貨（未来日付エラーを回避するロジック）
+        // ==========================================
+        // 2. 法定通貨（jsDelivr CDN API 採用：土日スキップ機能付き）
+        // ==========================================
         try {
-            // まず「APIが持っている一番新しい現実の日付」を聞き出す
-            const latestRes = await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR,JPY,GBP,AUD,CHF,CAD,NZD');
-            if (!latestRes.ok) throw new Error('Frankfurter Latest Error');
+            // 最新のデータを取得
+            const latestRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+            if (!latestRes.ok) throw new Error('CDN Latest Error');
             const latestData = await latestRes.json();
-            const realLatestDateStr = latestData.date; // 2026年ではなく、現実の最新日付を取得
-            
-            // 現実の最新日付から14日前を計算
-            const realDate = new Date(realLatestDateStr);
-            realDate.setDate(realDate.getDate() - 14);
-            const yyyy = realDate.getFullYear();
-            const mm = String(realDate.getMonth() + 1).padStart(2, '0');
-            const dd = String(realDate.getDate()).padStart(2, '0');
-            
-            // 安全な期間でデータを一括取得
-            const tsRes = await fetch(`https://api.frankfurter.app/${yyyy}-${mm}-${dd}..${realLatestDateStr}?from=USD&to=EUR,JPY,GBP,AUD,CHF,CAD,NZD`);
-            if (!tsRes.ok) throw new Error('Frankfurter TS Error');
-            const tsData = await tsRes.json();
+            const usdLatest = latestData.usd;
 
-            const dates = Object.keys(tsData.rates).sort();
-            if (dates.length >= 2) {
-                const latestRates = tsData.rates[dates[dates.length - 1]];
-                const prevRates = tsData.rates[dates[dates.length - 2]];
+            // 過去のデータを取得（土日・祝日による同値＝0.00% を回避するため、最大10日前まで遡る）
+            let pastData = null;
+            for (let i = 1; i <= 10; i++) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const yyyy = d.getFullYear();
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                const dateStr = `${yyyy}-${mm}-${dd}`;
                 
-                ['EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD'].forEach(sym => {
-                    if (latestRates[sym] && prevRates[sym]) {
-                        results.push({ symbol: sym, changePercent: ((prevRates[sym] / latestRates[sym]) - 1) * 100 });
+                try {
+                    const pastRes = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${dateStr}/v1/currencies/usd.json`);
+                    if (pastRes.ok) {
+                        const pastJson = await pastRes.json();
+                        // 🌟 ここが重要：値が完全に同じ場合は「休場日」とみなして更に前日へ遡る
+                        if (pastJson.usd && pastJson.usd.jpy !== usdLatest.jpy) {
+                            pastData = pastJson.usd;
+                            break; // 違う値（営業日のデータ）が見つかったらループ終了
+                        }
+                    }
+                } catch (e) {
+                    // エラーの場合は次の日(過去)を試す
+                }
+            }
+
+            if (usdLatest && pastData) {
+                const fiatSymbols = ['eur', 'jpy', 'gbp', 'aud', 'chf', 'cad', 'nzd'];
+                fiatSymbols.forEach(sym => {
+                    if (usdLatest[sym] && pastData[sym]) {
+                        const currentRate = usdLatest[sym];
+                        const prevRate = pastData[sym];
+                        // 算出式: (前日レート / 現在レート) - 1
+                        const changePercent = ((prevRate / currentRate) - 1) * 100;
+                        results.push({ symbol: sym.toUpperCase(), changePercent: changePercent });
                     }
                 });
                 results.push({ symbol: 'USD', changePercent: 0 });
             }
         } catch (e) {
-            console.warn('法定通貨取得エラー:', e);
+            console.warn('法定通貨CDN取得エラー:', e);
         }
 
+        // ==========================================
         // 3. 描画処理
-        if (results.length > 0) {
+        // ==========================================
+        // BTCやXAUだけでなく、法定通貨もきちんと取得できているか確認（3つ以上データがあるか）
+        if (results.length > 2) {
             results.sort((a, b) => b.changePercent - a.changePercent);
             renderChart(results);
+            
             const now = new Date(); 
             status.innerHTML = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+            
         } else {
-            status.innerHTML = '<span style="color:#e74c3c; font-weight:bold;">すべての通信がブロックされました。ブラウザの設定をご確認ください。</span>';
+            // APIが全滅、または法定通貨が取得できなかった場合のダミーデータ表示
+            status.innerHTML = '<span style="color:#e67e22;">通信制限のためサンプルデータを表示中</span>';
+            const dummyData = [
+                { symbol: 'USD', changePercent: 0.00 }, { symbol: 'BTC', changePercent: 0.77 },
+                { symbol: 'XAU', changePercent: 1.19 }, { symbol: 'JPY', changePercent: -0.11 },
+                { symbol: 'EUR', changePercent: 0.32 }, { symbol: 'GBP', changePercent: 0.42 },
+                { symbol: 'AUD', changePercent: 0.54 }, { symbol: 'CHF', changePercent: -0.20 },
+                { symbol: 'CAD', changePercent: 0.15 }, { symbol: 'NZD', changePercent: 0.35 }
+            ];
+            dummyData.sort((a, b) => b.changePercent - a.changePercent);
+            renderChart(dummyData);
         }
 
         btn.disabled = false; 

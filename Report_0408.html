@@ -614,7 +614,7 @@
         <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
     </div>
 
-</div> <script>
+</div><script>
     const charts = [
         { id: "tv_dxy", symbol: "CAPITALCOM:DXY", interval: "60" },
         { id: "tv_us500", symbol: "OANDA:SPX500USD", interval: "60" },
@@ -668,59 +668,86 @@
         container.innerHTML = '';
 
         let results = [];
-        let errors = [];
+        let apiFailed = false;
+        let fiatSuccess = false;
 
-        // 1. APIからの取得を試みる
+        // ==========================================
+        // 1. 暗号資産・コモディティ（Binance API）
+        // ==========================================
         try {
-            const cgRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,pax-gold&vs_currencies=usd&include_24hr_change=true');
-            if (!cgRes.ok) throw new Error('CoinGecko Error');
-            const cgData = await cgRes.json();
-            if (cgData.bitcoin) results.push({ symbol: 'BTC', changePercent: cgData.bitcoin.usd_24h_change });
-            if (cgData['pax-gold']) results.push({ symbol: 'XAU', changePercent: cgData['pax-gold'].usd_24h_change });
-        } catch (e) {
-            errors.push('暗号資産');
-        }
+            const btcRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
+            if (btcRes.ok) {
+                const btcData = await btcRes.json();
+                results.push({ symbol: 'BTC', changePercent: parseFloat(btcData.priceChangePercent) });
+            } else { apiFailed = true; }
+        } catch (e) { apiFailed = true; }
 
         try {
-            const latestRes = await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR,JPY,GBP,AUD');
-            if (!latestRes.ok) throw new Error('Frankfurter Error');
+            const xauRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT');
+            if (xauRes.ok) {
+                const xauData = await xauRes.json();
+                results.push({ symbol: 'XAU', changePercent: parseFloat(xauData.priceChangePercent) });
+            } else { apiFailed = true; }
+        } catch (e) { apiFailed = true; }
+
+        // ==========================================
+        // 2. 法定通貨（jsDelivr CDN API 採用：土日スキップ）
+        // ==========================================
+        try {
+            const latestRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+            if (!latestRes.ok) throw new Error('CDN Latest Error');
             const latestData = await latestRes.json();
-            const latestDateStr = latestData.date;
-            
-            const twoWeeksAgo = new Date();
-            twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
-            const yyyy = twoWeeksAgo.getFullYear();
-            const mm = String(twoWeeksAgo.getMonth() + 1).padStart(2, '0');
-            const dd = String(twoWeeksAgo.getDate()).padStart(2, '0');
-            
-            const tsRes = await fetch(`https://api.frankfurter.app/${yyyy}-${mm}-${dd}..${latestDateStr}?from=USD&to=EUR,JPY,GBP,AUD`);
-            if (!tsRes.ok) throw new Error('Frankfurter TS Error');
-            const tsData = await tsRes.json();
+            const usdLatest = latestData.usd;
 
-            const dates = Object.keys(tsData.rates).sort();
-            if (dates.length >= 2) {
-                const latestRates = tsData.rates[dates[dates.length - 1]];
-                const prevRates = tsData.rates[dates[dates.length - 2]];
+            let pastData = null;
+            for (let i = 1; i <= 10; i++) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const yyyy = d.getFullYear();
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                const dateStr = `${yyyy}-${mm}-${dd}`;
                 
-                ['EUR', 'JPY', 'GBP', 'AUD'].forEach(sym => {
-                    if (latestRates[sym] && prevRates[sym]) {
-                        const changePercent = ((prevRates[sym] / latestRates[sym]) - 1) * 100;
-                        results.push({ symbol: sym, changePercent: changePercent });
+                try {
+                    const pastRes = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${dateStr}/v1/currencies/usd.json`);
+                    if (pastRes.ok) {
+                        const pastJson = await pastRes.json();
+                        // 値が完全に同じ場合は休場日と見なして過去へ遡る
+                        if (pastJson.usd && pastJson.usd.jpy !== usdLatest.jpy) {
+                            pastData = pastJson.usd;
+                            break; 
+                        }
+                    }
+                } catch (e) { }
+            }
+
+            if (usdLatest && pastData) {
+                const fiatSymbols = ['eur', 'jpy', 'gbp', 'aud', 'chf', 'cad', 'nzd'];
+                fiatSymbols.forEach(sym => {
+                    if (usdLatest[sym] && pastData[sym]) {
+                        const currentRate = usdLatest[sym];
+                        const prevRate = pastData[sym];
+                        const changePercent = ((prevRate / currentRate) - 1) * 100;
+                        results.push({ symbol: sym.toUpperCase(), changePercent: changePercent });
                     }
                 });
-            } else {
-                throw new Error('Not enough data');
+                results.push({ symbol: 'USD', changePercent: 0 });
+                fiatSuccess = true;
             }
         } catch (e) {
-            errors.push('法定通貨');
+            console.warn('法定通貨CDNAPIエラー:', e);
+            apiFailed = true;
         }
 
-        // 2. エラー時の最強フォールバック（表からデータ抽出）
-        if (errors.length > 0) {
-            console.warn('API通信のブロックを検知。レポート内の表からデータを抽出してグラフ化します。');
+        // ==========================================
+        // 3. エラー時の「最強フォールバック（最終手段：表から抽出）」
+        // ==========================================
+        // 法定通貨の取得に失敗、または何らかの理由でデータが欠損した場合にのみ発動
+        if (!fiatSuccess || results.length < 5) {
+            console.warn('API通信のブロックを検知。最終手段として表のデータを抽出します。');
             status.innerHTML = '<span style="color:#e67e22; font-weight:bold;">通信制限のため、表のデータを基にグラフを生成しました</span>';
             
-            results = []; 
+            results = []; // 中途半端なデータをリセット
             
             const rows = document.querySelectorAll('.summary-detail-table tbody tr');
             rows.forEach(row => {
@@ -738,21 +765,22 @@
                 if (symbolText.includes('AUDUSD')) results.push({ symbol: 'AUD', changePercent: changeVal });
                 if (symbolText.includes('BTCUSD')) results.push({ symbol: 'BTC', changePercent: changeVal });
                 if (symbolText.includes('XAUUSD')) results.push({ symbol: 'XAU', changePercent: changeVal });
-                
-                // USDJPYがマイナスの場合、円(JPY)の価値はプラスになるため符号を反転
-                if (symbolText.includes('USDJPY')) results.push({ symbol: 'JPY', changePercent: -changeVal });
+                if (symbolText.includes('USDJPY')) results.push({ symbol: 'JPY', changePercent: -changeVal }); // 円は反転
             });
             
             results.push({ symbol: 'USD', changePercent: 0.00 });
             
         } else {
-            results.push({ symbol: 'USD', changePercent: 0.00 });
+            // APIが成功した場合
             const now = new Date();
-            const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-            status.innerHTML = `最終更新: ${timeStr}`;
+            let timeStr = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+            if (apiFailed) timeStr += ' <span style="color:#e67e22;">(※一部代替データ)</span>';
+            status.innerHTML = timeStr;
         }
 
-        // 3. 結果のソートと描画
+        // ==========================================
+        // 4. 結果のソートと描画
+        // ==========================================
         if (results.length > 0) {
             results.sort((a, b) => b.changePercent - a.changePercent);
             renderChart(results);
@@ -831,6 +859,7 @@
         });
     }
 </script>
+
 
 </body>
 </html>

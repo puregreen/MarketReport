@@ -608,7 +608,9 @@
         <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
     </div>
 
-</div> <script>
+</div> 
+    
+<script>
     const charts = [
         { id: "tv_dxy", symbol: "CAPITALCOM:DXY", interval: "60" },
         { id: "tv_us500", symbol: "OANDA:SPX500USD", interval: "60" },
@@ -664,6 +666,7 @@
         let results = [];
         let apiFailed = false;
         let fiatSuccess = false;
+        let isMarketClosed = false;
 
         // 1. 暗号資産・コモディティ（Binance API）
         try {
@@ -682,16 +685,20 @@
             } else { apiFailed = true; }
         } catch (e) { apiFailed = true; }
 
-        // 2. 法定通貨（jsDelivr CDN API 採用：土日スキップ）
+        // 2. 法定通貨（jsDelivr CDN API：究極のキャッシュ対策版）
         try {
             const latestRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
             if (!latestRes.ok) throw new Error('CDN Latest Error');
             const latestData = await latestRes.json();
             const usdLatest = latestData.usd;
 
+            // サーバーの現在日付を起点にする
+            const baseDateStr = latestData.date; 
+            const baseDate = new Date(baseDateStr);
+
             let pastData = null;
             for (let i = 1; i <= 10; i++) {
-                const d = new Date();
+                const d = new Date(baseDate);
                 d.setDate(d.getDate() - i);
                 const yyyy = d.getFullYear();
                 const mm = String(d.getMonth() + 1).padStart(2, '0');
@@ -711,26 +718,34 @@
             }
 
             if (usdLatest && pastData) {
+                let totalFiatChange = 0;
                 const fiatSymbols = ['eur', 'jpy', 'gbp', 'aud', 'chf', 'cad', 'nzd'];
+                
                 fiatSymbols.forEach(sym => {
                     if (usdLatest[sym] && pastData[sym]) {
                         const currentRate = usdLatest[sym];
                         const prevRate = pastData[sym];
                         const changePercent = ((prevRate / currentRate) - 1) * 100;
                         results.push({ symbol: sym.toUpperCase(), changePercent: changePercent });
+                        totalFiatChange += Math.abs(changePercent);
                     }
                 });
                 results.push({ symbol: 'USD', changePercent: 0 });
                 fiatSuccess = true;
+                
+                // 休場判定 (レポート版用)
+                if (totalFiatChange < 0.20) {
+                    isMarketClosed = true;
+                }
             }
         } catch (e) {
             console.warn('法定通貨CDNAPIエラー:', e);
             apiFailed = true;
         }
 
-        // 3. エラー時の最強フォールバック（表からデータ抽出）
+        // 3. エラー時の「最強フォールバック（最終手段：表から抽出）」
         if (!fiatSuccess || results.length < 5) {
-            console.warn('API通信のブロックを検知。表のデータを抽出してグラフ化します。');
+            console.warn('API通信のブロックを検知。最終手段として表のデータを抽出します。');
             status.innerHTML = '<span style="color:#e67e22; font-weight:bold;">通信制限のため、表のデータを基にグラフを生成しました</span>';
             
             results = []; 
@@ -757,9 +772,14 @@
             results.push({ symbol: 'USD', changePercent: 0.00 });
             
         } else {
+            // APIが成功した場合
             const now = new Date();
             let timeStr = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-            if (apiFailed) timeStr += ' <span style="color:#e67e22;">(※一部代替データ)</span>';
+            if (apiFailed) {
+                timeStr += ' <span style="color:#e67e22;">(※一部代替データ)</span>';
+            } else if (isMarketClosed) {
+                timeStr += ' <span style="color:#f39c12; font-weight:bold;">(※週明け・市場オープン前)</span>';
+            }
             status.innerHTML = timeStr;
         }
 
@@ -837,11 +857,12 @@
         html2canvas(reportElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
-            link.download = 'MarketReport_20260413_Final.png';
+            link.download = 'MarketReport_Final.png';
             link.click();
         });
     }
 </script>
+
 
 </body>
 </html>

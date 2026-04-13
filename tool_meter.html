@@ -49,6 +49,7 @@
         container.innerHTML = '';
         
         let results = [];
+        let hasError = false;
 
         // ==========================================
         // 1. 暗号資産（Binance API）
@@ -59,7 +60,7 @@
                 const btcData = await btcRes.json();
                 results.push({ symbol: 'BTC', changePercent: parseFloat(btcData.priceChangePercent) });
             }
-        } catch (e) { console.warn('BTCエラー'); }
+        } catch (e) { console.warn('BTCエラー'); hasError = true; }
 
         try {
             const xauRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT');
@@ -67,22 +68,25 @@
                 const xauData = await xauRes.json();
                 results.push({ symbol: 'XAU', changePercent: parseFloat(xauData.priceChangePercent) });
             }
-        } catch (e) { console.warn('XAUエラー'); }
+        } catch (e) { console.warn('XAUエラー'); hasError = true; }
 
         // ==========================================
-        // 2. 法定通貨（jsDelivr CDN API 採用：土日スキップ機能付き）
+        // 2. 法定通貨（jsDelivr CDN API）
         // ==========================================
         try {
-            // 最新のデータを取得
             const latestRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
             if (!latestRes.ok) throw new Error('CDN Latest Error');
             const latestData = await latestRes.json();
             const usdLatest = latestData.usd;
 
-            // 過去のデータを取得（土日・祝日による同値＝0.00% を回避するため、最大10日前まで遡る）
+            // 🌟【究極の修正】CDNが返してきた「日付」を起点にして遡る！
+            // これにより、CDNのキャッシュルーレットによる乱高下を完全にシャットアウトします。
+            const baseDateStr = latestData.date; 
+            const baseDate = new Date(baseDateStr);
+
             let pastData = null;
             for (let i = 1; i <= 10; i++) {
-                const d = new Date();
+                const d = new Date(baseDate); 
                 d.setDate(d.getDate() - i);
                 const yyyy = d.getFullYear();
                 const mm = String(d.getMonth() + 1).padStart(2, '0');
@@ -93,15 +97,13 @@
                     const pastRes = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${dateStr}/v1/currencies/usd.json`);
                     if (pastRes.ok) {
                         const pastJson = await pastRes.json();
-                        // 🌟 ここが重要：値が完全に同じ場合は「休場日」とみなして更に前日へ遡る
+                        // 休場日スキップ判定
                         if (pastJson.usd && pastJson.usd.jpy !== usdLatest.jpy) {
                             pastData = pastJson.usd;
-                            break; // 違う値（営業日のデータ）が見つかったらループ終了
+                            break; 
                         }
                     }
-                } catch (e) {
-                    // エラーの場合は次の日(過去)を試す
-                }
+                } catch (e) { }
             }
 
             if (usdLatest && pastData) {
@@ -110,30 +112,47 @@
                     if (usdLatest[sym] && pastData[sym]) {
                         const currentRate = usdLatest[sym];
                         const prevRate = pastData[sym];
-                        // 算出式: (前日レート / 現在レート) - 1
                         const changePercent = ((prevRate / currentRate) - 1) * 100;
                         results.push({ symbol: sym.toUpperCase(), changePercent: changePercent });
                     }
                 });
                 results.push({ symbol: 'USD', changePercent: 0 });
+            } else {
+                throw new Error('Past data not found');
             }
         } catch (e) {
             console.warn('法定通貨CDN取得エラー:', e);
+            hasError = true;
         }
 
         // ==========================================
-        // 3. 描画処理
+        // 3. 描画処理と「休場判定」ロジック
         // ==========================================
-        // BTCやXAUだけでなく、法定通貨もきちんと取得できているか確認（3つ以上データがあるか）
         if (results.length > 2) {
             results.sort((a, b) => b.changePercent - a.changePercent);
             renderChart(results);
             
+            // 法定通貨の合計変動幅を計算
+            let totalFiatChange = 0;
+            results.forEach(r => {
+                if(r.symbol !== 'BTC' && r.symbol !== 'XAU' && r.symbol !== 'USD') {
+                    totalFiatChange += Math.abs(r.changePercent);
+                }
+            });
+
             const now = new Date(); 
-            status.innerHTML = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+            let timeStr = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+            
+            // 休場メッセージの確実な表示
+            if (hasError) {
+                timeStr += ' <span style="color:#e74c3c;">(一部通信制限あり)</span>';
+            } else if (totalFiatChange < 0.20) { 
+                timeStr += ' <span style="color:#f39c12; font-weight:bold;">(※週明け・市場オープン前)</span>';
+            }
+            
+            status.innerHTML = timeStr;
             
         } else {
-            // APIが全滅、または法定通貨が取得できなかった場合のダミーデータ表示
             status.innerHTML = '<span style="color:#e67e22;">通信制限のためサンプルデータを表示中</span>';
             const dummyData = [
                 { symbol: 'USD', changePercent: 0.00 }, { symbol: 'BTC', changePercent: 0.77 },

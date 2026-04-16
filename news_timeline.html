@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📰 リアルタイム・マーケットニュース - Pure Green</title>
+<style>
+    body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px 0; }
+    .container { max-width: 800px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius: 10px; padding: 30px; box-sizing: border-box; }
+    .top-nav { margin-bottom: 20px; }
+    .back-link { font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+    .header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid #3498db; padding-bottom: 15px; }
+    .header h1 { color: #2c3e50; margin: 0 0 10px 0; font-size: 22px; }
+    .header p { color: #7f8c8d; font-size: 14px; margin: 0 0 10px 0; }
+    .translate-tip { display: inline-block; background-color: #eaf4fc; border: 1px solid #3498db; color: #2980b9; padding: 8px 15px; border-radius: 5px; font-size: 13px; font-weight: bold; }
+    .widget-container { border: 1px solid #ecf0f1; border-radius: 8px; overflow: hidden; height: 800px; }
+    @media (max-width: 650px) { .container { padding: 15px; } .header h1 { font-size: 18px; } .widget-container { height: 600px; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-nav">
+        <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    </div>
+
+    <div class="header">
+        <h1>📰 リアルタイム・マーケットニュース</h1>
+        <p>世界中の要人発言や経済速報を24時間自動で取得・更新しています。</p>
+        <div class="translate-tip">
+            💡 英語のニュースは、ブラウザの機能（右クリック ＞ 日本語に翻訳 など）をご利用いただくと便利です。
+        </div>
+    </div>
+
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+            {
+            "feedMode": "all_symbols",
+            "isTransparent": true,
+            "displayMode": "regular",
+            "width": "100%",
+            "height": "100%",
+            "colorTheme": "light",
+            "locale": "ja"
+            }
+            </script>
+        </div>
+        </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    </div>
+</div>
+
+</body>
+</html>

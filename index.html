@@ -55,7 +55,8 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+        padding: 10px 0;
     }
     .tool-card {
         background-color: #f9fbfd;
@@ -77,7 +78,7 @@
         box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
     }
 
-    /* 🌟 新設：LP誘導バナー 🌟 */
+    /* LP誘導バナー */
     .lp-banner {
         display: block;
         background: linear-gradient(135deg, #2c3e50 0%, #1a2a3a 100%);
@@ -326,31 +327,33 @@
         <p>日々の市場動向、大口注文情報、ファンダメンタルズ分析、テクニカル分析の記録</p>
     </div>
 
-    <h3 class="section-title" style="border-left: 4px solid #2ecc71;">🛠 リアルタイム分析ツール</h3>
-    <div class="tool-grid">
-        <a href="tool_meter.html" class="tool-card">🔥 通貨・銘柄 24時間強弱メーター</a>
-        <a href="tool_forex_heat.html" class="tool-card">💪 法定通貨 強弱ヒートマップ</a>
-        <a href="tool_crypto_heat.html" class="tool-card">🪙 暗号資産 強弱ヒートマップ</a>
-        <a href="tool_overview.html" class="tool-card">📊 コモディティ＆重要銘柄 動向</a>
-                <a href="news_timeline.html" class="report-card" style="border-left: 4px solid #3498db;">
-            <div class="date-badge" style="background-color: #3498db;">24H自動更新</div>
-            <div class="report-info">
-                <div class="report-title">📰 リアルタイム・マーケットニュース</div>
-                <p class="report-summary">世界の要人発言、速報、マーケットダイジェストを24時間体制で自動取得。トレード中の突発的な値動きの理由を瞬時に確認できます。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
+    <details class="archive-accordion">
+        <summary style="border-left: 4px solid #2ecc71;">
+            🛠 リアルタイム分析ツール <span class="toggle-icon">＋</span>
+        </summary>
+        <div class="tool-grid">
+            <a href="tool_meter.html" class="tool-card">🔥 通貨・銘柄 24時間強弱メーター</a>
+            <a href="tool_forex_heat.html" class="tool-card">💪 法定通貨 強弱ヒートマップ</a>
+            <a href="tool_crypto_heat.html" class="tool-card">🪙 暗号資産 強弱ヒートマップ</a>
+            <a href="tool_overview.html" class="tool-card">📊 コモディティ＆重要銘柄 動向</a>
+            
+            <a href="news_timeline.html" class="report-card" style="border-left: 4px solid #3498db;">
+                <div class="date-badge" style="background-color: #3498db;">24H自動更新</div>
+                <div class="report-info">
+                    <div class="report-title">📰 リアルタイム・マーケットニュース</div>
+                    <p class="report-summary">世界の要人発言、速報、マーケットダイジェストを24時間体制で自動取得。トレード中の突発的な値動きの理由を瞬時に確認できます。</p>
+                </div>
+            </a>
 
-        <a href="economic_calendar.html" class="report-card" style="border-left: 4px solid #e67e22;">
-            <div class="date-badge" style="background-color: #e67e22;">24H自動更新</div>
-            <div class="report-info">
-                <div class="report-title">📅 リアルタイム経済指標カレンダー</div>
-                <p class="report-summary">当日の重要イベントスケジュールと、発表直後の「予想・結果」の数値を自動更新。指標トレードやポジション管理の必須ツールです。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-    </div>
+            <a href="economic_calendar.html" class="report-card" style="border-left: 4px solid #e67e22;">
+                <div class="date-badge" style="background-color: #e67e22;">24H自動更新</div>
+                <div class="report-info">
+                    <div class="report-title">📅 リアルタイム経済指標カレンダー</div>
+                    <p class="report-summary">当日の重要イベントスケジュールと、発表直後の「予想・結果」の数値を自動更新。指標トレードやポジション管理の必須ツールです。</p>
+                </div>
+            </a>
+        </div>
+    </details>
 
     <h3 class="section-title" style="border-left: 4px solid #e74c3c;">🔥 トレードの勝率を劇的に上げる最強ツール</h3>
     <a href="tool_ikoku.html" class="lp-banner" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); border-left: 5px solid #f1c40f;">
@@ -358,43 +361,38 @@
         <p style="color: #fdfdfd;">最強通貨と最弱通貨を一瞬で見抜き、圧倒的なトレンドに乗る極意とシステムを紹介 ➔</p>
     </a>
     
-
     <h3 class="section-title" style="border-left: 4px solid #f39c12;">🌟 おすすめの取引環境</h3>
     <a href="exness_intro.html" class="lp-banner">
         <h4>プロトレーダーが行き着く究極の口座「Exness」</h4>
         <p>無制限レバレッジ・極狭スプレッド・即時入出金の詳細を見る ➔</p>
     </a>
-
     
-    <a href="exness_register.html" class="report-card" style="border-left: 4px solid #f39c12;">
-    <div class="date-badge" style="background-color: #f39c12;">マニュアル</div>
-    <div class="report-info">
-        <div class="report-title">📱 Exness（エクスネス）口座開設ガイド</div>
-        <p class="report-summary">スマホからの登録手順から、使いやすい日本語設定（ダッシュボードの日本語化）までの流れを画像付きで分かりやすく解説しています。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
+    <a href="exness_register.html" class="report-card" style="border-left: 4px solid #f39c12; margin-bottom: 20px;">
+        <div class="date-badge" style="background-color: #f39c12;">マニュアル</div>
+        <div class="report-info">
+            <div class="report-title">📱 Exness（エクスネス）口座開設ガイド</div>
+            <p class="report-summary">スマホからの登録手順から、使いやすい日本語設定（ダッシュボードの日本語化）までの流れを画像付きで分かりやすく解説しています。</p>
+        </div>
+        <div class="arrow-icon">➔</div>
     </a>   
 
-<br>
-    
     <div class="ext-link-card">
-    <a href="bitwallet_intro.html" class="ext-link-btn" style="background-color: #1976d2;">bitwallet</a>
-    <div class="ext-link-desc">海外FXトレーダーの「必須インフラ」安全かつスムーズな資金管理を実現する必須ツール。</div>
+        <a href="bitwallet_intro.html" class="ext-link-btn" style="background-color: #1976d2;">bitwallet</a>
+        <div class="ext-link-desc">海外FXトレーダーの「必須インフラ」安全かつスムーズな資金管理を実現する必須ツール。</div>
     </div>
 
     <div class="ext-link-card">
-    <a href="wikifx_intro.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX</a>
-    <div class="ext-link-desc">業者に入金する前に必ずチェック。世界最大のFX安全性評価ツール。</div>
+        <a href="wikifx_intro.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX</a>
+        <div class="ext-link-desc">業者に入金する前に必ずチェック。世界最大のFX安全性評価ツール。</div>
     </div>
 
     <div class="ext-link-card">
-    <a href="wikifx_vps.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX 無料VPS</a>
-    <div class="ext-link-desc">EA運用に必須のVPS（仮想サーバー）を完全無料で構築する裏ワザを解説。</div>
+        <a href="wikifx_vps.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX 無料VPS</a>
+        <div class="ext-link-desc">EA運用に必須のVPS（仮想サーバー）を完全無料で構築する裏ワザを解説。</div>
     </div>
 
     <h3 class="section-title" style="border-left: 4px solid #e67e22;">2026年 4月</h3>
-        <div class="archive-list">
-
+    <div class="archive-list">
         <a href="Report_0417.html" class="report-card">
             <div class="date-badge">4月17日</div>
             <div class="report-info">
@@ -404,7 +402,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0416.html" class="report-card">
             <div class="date-badge">4月16日</div>
             <div class="report-info">
@@ -414,7 +411,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0415.html" class="report-card">
             <div class="date-badge">4月15日</div>
             <div class="report-info">
@@ -424,7 +420,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0414.html" class="report-card">
             <div class="date-badge">4月14日</div>
             <div class="report-info">
@@ -434,7 +429,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0413.html" class="report-card">
             <div class="date-badge">4月13日</div>
             <div class="report-info">
@@ -443,7 +437,6 @@
             </div>
             <div class="arrow-icon">➔</div>
         </a>
-
 
         <a href="cpi_strategy_0410.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
             <div class="date-badge" style="background-color: #c0392b;">緊急特設</div>
@@ -454,7 +447,6 @@
             <div class="arrow-icon" style="color: #e74c3c;">➔</div>
         </a>
 
-            
         <a href="Report_0410.html" class="report-card">
             <div class="date-badge">4月10日</div>
             <div class="report-info">
@@ -464,7 +456,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0409.html" class="report-card">
             <div class="date-badge">4月9日</div>
             <div class="report-info">
@@ -474,7 +465,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0408.html" class="report-card">
             <div class="date-badge">4月8日</div>
             <div class="report-info">
@@ -484,7 +474,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0407.html" class="report-card">
             <div class="date-badge">4月7日</div>
             <div class="report-info">
@@ -494,7 +483,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0406.html" class="report-card">
             <div class="date-badge">4月6日</div>
             <div class="report-info">
@@ -504,7 +492,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0403.html" class="report-card">
             <div class="date-badge">4月3日</div>
             <div class="report-info">
@@ -514,7 +501,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0402.html" class="report-card">
             <div class="date-badge">4月2日</div>
             <div class="report-info">
@@ -532,7 +518,6 @@
             </div>
             <div class="arrow-icon">➔</div>
         </a>
-            
     </div>
             
     <details class="archive-accordion">
@@ -550,7 +535,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
          <a href="Report_0330.html" class="report-card">
             <div class="date-badge">3月30日</div>
             <div class="report-info">
@@ -569,7 +553,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0326.html" class="report-card">
             <div class="date-badge">3月26日</div>
             <div class="report-info">
@@ -579,7 +562,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
        <a href="Report_0325.html" class="report-card">
             <div class="date-badge">3月25日</div>
             <div class="report-info">
@@ -598,7 +580,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-            
         <a href="Report_0323.html" class="report-card">
             <div class="date-badge">3月23日</div>
             <div class="report-info">
@@ -608,8 +589,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-
-            
         <a href="Report_0320.html" class="report-card">
             <div class="date-badge">3月20日</div>
             <div class="report-info">
@@ -637,7 +616,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-
         <a href="Report_0317.html" class="report-card">
             <div class="date-badge">3月17日</div>
             <div class="report-info">
@@ -646,7 +624,6 @@
             </div>
             <div class="arrow-icon">➔</div>
         </a>
-
 
         <a href="Report_0316.html" class="report-card">
             <div class="date-badge">3月16日</div>
@@ -675,7 +652,6 @@
             <div class="arrow-icon">➔</div>
         </a>
 
-        
         <a href="Report_0311.html" class="report-card">
             <div class="date-badge">3月11日</div>
             <div class="report-info">
@@ -732,6 +708,19 @@
 
         </div>
     </details>
+
+    <h3 class="section-title" style="border-left: 4px solid #9b59b6;">🔄 更新履歴</h3>
+    <div class="archive-list">
+        <a href="cnh_krw_benefits.html" class="report-card" style="border-left: 4px solid #9b59b6;">
+            <div class="date-badge" style="background-color: #9b59b6;">追加解説</div>
+            <div class="report-info">
+                <div class="report-title">💡 【解説】CNH（人民元）とKRW（ウォン）を把握するメリット</div>
+                <p class="report-summary">強弱メーターに追加された新通貨の活用術。アジア時間のボラティリティとリスクオン/オフの先行指標としての重要性を徹底解説しています。</p>
+            </div>
+            <div class="arrow-icon" style="color: #9b59b6;">➔</div>
+        </a>
+    </div>
+
     <div class="footer">
         <div class="copyright">Copyright 2026 Pure Green All Rights Reserved.</div>
         

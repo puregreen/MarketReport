@@ -592,7 +592,9 @@
         <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
     </div>
 
-</div> <script>
+</div> 
+    
+<script>
     const charts = [
         { id: "tv_dxy", symbol: "CAPITALCOM:DXY", interval: "60" },
         { id: "tv_us500", symbol: "OANDA:SPX500USD", interval: "60" },
@@ -667,14 +669,13 @@
             } else { apiFailed = true; }
         } catch (e) { apiFailed = true; }
 
-        // 2. 法定通貨（jsDelivr CDN API：究極のキャッシュ対策版）
+        // 2. 法定通貨（jsDelivr CDN API）
         try {
             const latestRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
             if (!latestRes.ok) throw new Error('CDN Latest Error');
             const latestData = await latestRes.json();
             const usdLatest = latestData.usd;
 
-            // サーバーの現在日付を起点にする
             const baseDateStr = latestData.date; 
             const baseDate = new Date(baseDateStr);
 
@@ -701,21 +702,28 @@
 
             if (usdLatest && pastData) {
                 let totalFiatChange = 0;
-                const fiatSymbols = ['eur', 'jpy', 'gbp', 'aud', 'chf', 'cad', 'nzd'];
                 
+                // 🌟 ここに cny と krw を追加しています 🌟
+                const fiatSymbols = ['eur', 'jpy', 'gbp', 'aud', 'chf', 'cad', 'nzd', 'cny', 'krw'];
+                
+                // 表示名変換用オブジェクト
+                const displayNames = {
+                    'eur': 'EUR', 'jpy': 'JPY', 'gbp': 'GBP', 'aud': 'AUD',
+                    'chf': 'CHF', 'cad': 'CAD', 'nzd': 'NZD', 'cny': 'CNH', 'krw': 'KRW'
+                };
+
                 fiatSymbols.forEach(sym => {
                     if (usdLatest[sym] && pastData[sym]) {
                         const currentRate = usdLatest[sym];
                         const prevRate = pastData[sym];
                         const changePercent = ((prevRate / currentRate) - 1) * 100;
-                        results.push({ symbol: sym.toUpperCase(), changePercent: changePercent });
+                        results.push({ symbol: displayNames[sym], changePercent: changePercent });
                         totalFiatChange += Math.abs(changePercent);
                     }
                 });
                 results.push({ symbol: 'USD', changePercent: 0 });
                 fiatSuccess = true;
                 
-                // 休場判定 (レポート版用)
                 if (totalFiatChange < 0.20) {
                     isMarketClosed = true;
                 }
@@ -725,7 +733,7 @@
             apiFailed = true;
         }
 
-        // 3. エラー時の「最強フォールバック（最終手段：表から抽出）」
+        // 3. エラー時のフォールバック（最終手段：表から抽出）
         if (!fiatSuccess || results.length < 5) {
             console.warn('API通信のブロックを検知。最終手段として表のデータを抽出します。');
             status.innerHTML = '<span style="color:#e67e22; font-weight:bold;">通信制限のため、表のデータを基にグラフを生成しました</span>';
@@ -748,13 +756,12 @@
                 if (symbolText.includes('AUDUSD')) results.push({ symbol: 'AUD', changePercent: changeVal });
                 if (symbolText.includes('BTCUSD')) results.push({ symbol: 'BTC', changePercent: changeVal });
                 if (symbolText.includes('XAUUSD')) results.push({ symbol: 'XAU', changePercent: changeVal });
-                if (symbolText.includes('USDJPY')) results.push({ symbol: 'JPY', changePercent: -changeVal }); // 円は反転
+                if (symbolText.includes('USDJPY')) results.push({ symbol: 'JPY', changePercent: -changeVal }); 
             });
             
             results.push({ symbol: 'USD', changePercent: 0.00 });
             
         } else {
-            // APIが成功した場合
             const now = new Date();
             let timeStr = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
             if (apiFailed) {
@@ -839,11 +846,12 @@
         html2canvas(reportElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
-            link.download = 'MarketReport_0417_Final.png';
+            link.download = 'MarketReport_Final.png';
             link.click();
         });
     }
 </script>
+
 
 </body>
 </html>

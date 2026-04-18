@@ -86,7 +86,7 @@
         text-decoration: none;
         padding: 20px 25px;
         border-radius: 8px;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border-left: 5px solid #f39c12;
@@ -280,11 +280,11 @@
         font-size: 18px;
         color: #2c3e50;
         padding: 12px 15px;
-        border-left: 4px solid #e67e22;
+        border-left: 4px solid #2ecc71;
         background-color: #fcfcfc;
         border-radius: 5px;
         cursor: pointer;
-        list-style: none; /* デフォルトの矢印を消去 */
+        list-style: none;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -293,7 +293,7 @@
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     .archive-accordion summary::-webkit-details-marker {
-        display: none; /* Safari向けの矢印消去 */
+        display: none;
     }
     .archive-accordion summary:hover {
         background-color: #f1f4f8;
@@ -302,20 +302,103 @@
         color: #3498db;
         font-size: 20px;
         font-weight: bold;
-        transition: transform 0.3s ease; /* 回転アニメーション */
+        transition: transform 0.3s ease;
     }
-    /* 開いた時のアニメーション設定 */
     .archive-accordion[open] .toggle-icon {
-        transform: rotate(45deg); /* ＋を×に回転させる */
-        color: #e74c3c; /* 開いている時は赤色に */
+        transform: rotate(45deg);
+        color: #e74c3c;
     }
     .archive-accordion[open] .archive-list {
         animation: fadeIn 0.4s ease-in-out;
         margin-top: 15px;
     }
+
+    /* 🌟 新設：もっと見るボタン用のCSS 🌟 */
+    .show-more-accordion {
+        margin: 10px 0 30px 0;
+    }
+    .show-more-accordion summary {
+        display: block;
+        text-align: center;
+        background-color: #f8f9fa;
+        color: #3498db;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        list-style: none;
+        transition: all 0.3s ease;
+        border: 2px dashed #bdc3c7;
+    }
+    .show-more-accordion summary::-webkit-details-marker {
+        display: none;
+    }
+    .show-more-accordion summary:hover {
+        background-color: #eaf2f8;
+        border-color: #3498db;
+    }
+    .show-more-accordion[open] summary {
+        margin-bottom: 15px;
+        background-color: #ffffff;
+        border-style: solid;
+        color: #2c3e50;
+    }
+    .show-more-accordion .toggle-icon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        margin-left: 5px;
+    }
+    .show-more-accordion[open] .toggle-icon {
+        transform: rotate(45deg);
+        color: #e74c3c;
+    }
+    .show-more-content {
+        animation: fadeIn 0.4s ease-in-out;
+    }
+    
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(-10px); }
         to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 🌟 タブメニュー用のCSS 🌟 */
+    .tab-menu {
+        display: flex;
+        border-bottom: 2px solid #ecf0f1;
+        margin: 40px 0 20px 0;
+        background-color: #fdfdfd;
+        border-radius: 8px 8px 0 0;
+        overflow: hidden;
+    }
+    .tab-btn {
+        flex: 1;
+        background: none;
+        border: none;
+        padding: 15px 10px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #7f8c8d;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+        outline: none;
+    }
+    .tab-btn:hover {
+        color: #3498db;
+        background-color: #f1f4f8;
+    }
+    .tab-btn.active {
+        color: #2c3e50;
+        border-bottom: 3px solid #3498db;
+        background-color: #ffffff;
+    }
+    .tab-content {
+        display: none;
+        animation: fadeIn 0.4s ease;
+    }
+    .tab-content.active {
+        display: block;
     }
 </style>
 </head>
@@ -357,23 +440,31 @@
 
     <h3 class="section-title" style="border-left: 4px solid #e74c3c;">🔥 トレードの勝率を劇的に上げる</h3>
 
-<a href="fx_firststep.html" class="report-card" style="border-left: 4px solid #2ecc71;">
-    <div class="date-badge" style="background-color: #2ecc71;">基礎知識</div>
-    <div class="report-info">
-        <div class="report-title">🔰 FX超入門 - はじめの一歩（PureFXサロン提供）</div>
-        <p class="report-summary">FXをギャンブルにしないための「マインドセット」、チャートの読み方、そして生き残るための「25%ルール・シェルター口座」などの絶対的な資金管理術をまとめた必読マニュアルです。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
-    <br>
+    <a href="fx_firststep.html" class="report-card" style="border-left: 4px solid #2ecc71; margin-bottom: 15px;">
+        <div class="date-badge" style="background-color: #2ecc71;">基礎知識</div>
+        <div class="report-info">
+            <div class="report-title">🔰 FX超入門 - はじめの一歩（PureFXサロン提供）</div>
+            <p class="report-summary">FXをギャンブルにしないための「マインドセット」、チャートの読み方、そして生き残るための「25%ルール・シェルター口座」などの絶対的な資金管理術をまとめた必読マニュアルです。</p>
+        </div>
+        <div class="arrow-icon">➔</div>
+    </a>
     
-    <a href="tool_ikoku.html" class="lp-banner" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); border-left: 5px solid #f1c40f;">
+    <a href="tool_ikoku.html" class="lp-banner" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); border-left: 5px solid #f1c40f; margin-bottom: 15px;">
         <h4 style="color: #fff;">【必読】相場の答えは「通貨強弱」にある</h4>
         <p style="color: #fdfdfd;">最強通貨と最弱通貨を一瞬で見抜き、圧倒的なトレンドに乗る極意とシステムを紹介 ➔</p>
     </a>
+
+    <a href="report_guide.html" class="report-card" style="border-left: 4px solid #9b59b6;">
+        <div class="date-badge" style="background-color: #9b59b6;">必読ガイド</div>
+        <div class="report-info">
+            <div class="report-title">📖 【初心者必見】マーケットレポートの「トリセツ」と活かし方</div>
+            <p class="report-summary">レポートの各項目が「何を意味しているか」「今日のトレードにどう直結するのか」を分かりやすく解説。勝率を上げるためのカンニングペーパーとしてお使いください。</p>
+        </div>
+        <div class="arrow-icon" style="color: #9b59b6;">➔</div>
+    </a>
     
     <h3 class="section-title" style="border-left: 4px solid #f39c12;">🌟 おすすめの取引環境</h3>
-    <a href="exness_intro.html" class="lp-banner">
+    <a href="exness_intro.html" class="lp-banner" style="margin-bottom: 20px;">
         <h4>プロトレーダーが行き着く究極の口座「Exness」</h4>
         <p>無制限レバレッジ・極狭スプレッド・即時入出金の詳細を見る ➔</p>
     </a>
@@ -387,364 +478,379 @@
         <div class="arrow-icon">➔</div>
     </a>   
 
-    <div class="ext-link-card">
-        <a href="bitwallet_intro.html" class="ext-link-btn" style="background-color: #1976d2;">bitwallet</a>
-        <div class="ext-link-desc">海外FXトレーダーの「必須インフラ」安全かつスムーズな資金管理を実現する必須ツール。</div>
-    </div>
+    <details class="show-more-accordion">
+        <summary>その他のおすすめツールを見る <span class="toggle-icon">＋</span></summary>
+        <div class="show-more-content">
+            <div class="ext-link-card">
+                <a href="bitwallet_intro.html" class="ext-link-btn" style="background-color: #1976d2;">bitwallet</a>
+                <div class="ext-link-desc">海外FXトレーダーの「必須インフラ」安全かつスムーズな資金管理を実現する必須ツール。</div>
+            </div>
 
-    <div class="ext-link-card">
-        <a href="wikifx_intro.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX</a>
-        <div class="ext-link-desc">業者に入金する前に必ずチェック。世界最大のFX安全性評価ツール。</div>
-    </div>
+            <div class="ext-link-card">
+                <a href="wikifx_intro.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX</a>
+                <div class="ext-link-desc">業者に入金する前に必ずチェック。世界最大のFX安全性評価ツール。</div>
+            </div>
 
-    <div class="ext-link-card">
-        <a href="wikifx_vps.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX 無料VPS</a>
-        <div class="ext-link-desc">EA運用に必須のVPS（仮想サーバー）を完全無料で構築する裏ワザを解説。</div>
-    </div>
-
-    <h3 class="section-title" style="border-left: 4px solid #e67e22;">2026年 4月</h3>
-    <div class="archive-list">
-        <a href="Report_0417.html" class="report-card">
-            <div class="date-badge">4月17日</div>
-            <div class="report-info">
-                <div class="report-title">S&P500が7,050ドル到達、日経平均は59,300円台へ！ドル円は牽制を無視して159.20円台へ上昇</div>
-                <p class="report-summary">中国の第1四半期GDP（5.0%）や米フィラデルフィア連銀指数（26.7）の大幅な上振れを受け、世界的なリスクオン相場が加速しています。S&P500やビットコインが歴史的最高値を更新し、日経平均も59,320円台へ急騰。一方でドル円は、植田総裁のハト派寄りの発言を盾に159.21円まで上昇。片山財務相が強い言葉で牽制する中、160円の介入防衛線に向けた極限のチキンレースが続いています。</p>
+            <div class="ext-link-card">
+                <a href="wikifx_vps.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX 無料VPS</a>
+                <div class="ext-link-desc">EA運用に必須のVPS（仮想サーバー）を完全無料で構築する裏ワザを解説。</div>
             </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0416.html" class="report-card">
-            <div class="date-badge">4月16日</div>
-            <div class="report-info">
-                <div class="report-title">S&P500が歴史的7,000ドル突破！適温相場で株高が加速する中、本日は中国の巨大指標ラッシュ</div>
-                <p class="report-summary">NY連銀指数のポジティブサプライズを受け、ナスダックが+1.40%急騰し、S&P500がついに7,000ドルの大台を突破しました。完全な「リスクオン（株高）」が継続しています。ドル円は158.900円付近で膠着していますが、本日はアジア時間に中国の実質GDPなど巨大指標が控えており、ボラティリティ急増に警戒が必要です。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0415.html" class="report-card">
-            <div class="date-badge">4月15日</div>
-            <div class="report-info">
-                <div class="report-title">米PPI下振れで適温相場へ回帰！日経平均は58,500円台へ急騰し、ドル円は介入リスクから解放</div>
-                <p class="report-summary">米PPIが予想を下回ったことでインフレ再燃の恐怖が完全に払拭され、市場は強烈なリスクオンへ回帰。日本の機械受注の絶好調も重なり日経平均は58,500円台へ急騰しました。ドル円は米金利低下に伴い158.80円台へ下落し、160円の介入リスクから一旦遠ざかり安定したレンジを形成しています。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0414.html" class="report-card">
-            <div class="date-badge">4月14日</div>
-            <div class="report-info">
-                <div class="report-title">原油急落で日米株が「V字全戻し」！ドル円は160円危機を脱するも今夜の米PPIに警戒</div>
-                <p class="report-summary">スタグフレーションの恐怖が剥落し、日米の株式市場が猛烈なV字回復（全戻し）を達成しました。パニック的なドル買いが巻き戻されたことでドル円は159.20円台へ下落。しかし、160円の介入防衛線は依然として残っており、今夜の米PPI（生産者物価指数）の結果次第で再び急騰するリスクを孕んでいます。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0413.html" class="report-card">
-            <div class="date-badge">4月13日</div>
-            <div class="report-info">
-                <div class="report-title">米イラン交渉決裂。原油暴騰でスタグフレーションの恐怖！日米株大暴落の中、ドル円はついに160円介入のレッドゾーンへ</div>
-                <p class="report-summary">週末の地政学リスクで原油が+7.7%の異常急騰。インフレ高止まりと景気不安が重なり、日経平均は-2.21%の大暴落。株式、ゴールド、BTCから現金（ドル）への逃避が加速し、ドル円はついに159.80円へと到達。いつ介入が起きてもおかしくない極限の相場です。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="cpi_strategy_0410.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
-            <div class="date-badge" style="background-color: #c0392b;">緊急特設</div>
-            <div class="report-info">
-                <div class="report-title" style="color: #c0392b;">🚨 【特設】今夜21:30 米CPI発表！ドル円160円攻防・介入警戒の立ち回り方</div>
-                <p class="report-summary">今夜の米CPIは「160円突破による日銀介入」か「失望のドル急落」を引き起こす最大のトリガーとなります。発表前後の「魔の時間」を回避し、最も勝率の高い「戻り売り」を狙うためのプロの監視術とアクションプランを公開中。</p>
-            </div>
-            <div class="arrow-icon" style="color: #e74c3c;">➔</div>
-        </a>
-
-        <a href="Report_0410.html" class="report-card">
-            <div class="date-badge">4月10日</div>
-            <div class="report-info">
-                <div class="report-title">米CPI直前でナスダック25,000ドル突破！ドル円は159円台へ再浮上し「160円攻防」の最終局面へ</div>
-                <p class="report-summary">PCEを無難に通過し、米国株はハイテク主導で一段高へ。ゴールドやBTCにも押し目買いが入る中、ドル円はドル安環境に反して159円台へと再浮上。今夜発表の米CPI（消費者物価指数）が160円突破と日銀介入の引き金となるか、市場の緊張が極限に達しています。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0409.html" class="report-card">
-            <div class="date-badge">4月9日</div>
-            <div class="report-info">
-                <div class="report-title">日経56,700円突破の歴史的ラリー！ゴールドは急落し資金ローテーション。今夜の米PCEでドル円に審判</div>
-                <p class="report-summary">米国株高と円安を好感し日経平均が+1.09%の急騰を見せる一方、ゴールドは-2.50%と強烈な利益確定売りに見舞われています。ドル円は158.5円付近の巨大オプションに挟まれ膠着状態。今夜発表される米PCE価格指数が、160円介入か反落かの大きなトリガーとなります。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0408.html" class="report-card">
-            <div class="date-badge">4月8日</div>
-            <div class="report-info">
-                <div class="report-title">イラン攻撃回避。「2週間の停戦」電撃合意！原油が89ドル台へ大暴落！インフレ懸念消滅で日経56,000円迫る「エブリシング・ラリー」到来</div>
-                <p class="report-summary">USOILが105ドル台から89ドル台へと暴落し、スタグフレーションの恐怖が完全消滅。安心した資金がリスク資産に殺到し、日経平均、ゴールド、BTCが歴史的高値を更新。ドル円はドル安の波及で158.5円台へと下落し、介入警戒感が後退しています。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0407.html" class="report-card">
-            <div class="date-badge">4月7日</div>
-            <div class="report-info">
-                <div class="report-title">ISM下振れと原油反落でリスクオン再燃！日米株が全面高も、ドル円は160円の壁で極限の膠着</div>
-                <p class="report-summary">米国のISM非製造業景気指数の下振れを好感し、インフレ懸念が後退。日経平均は54,000円の大台回復を目前に急反発しました。一方でドル円は、ドル安環境にもかかわらず160円の介入警戒ゾーンで売り買いが激突し、不気味な膠着状態が続いています。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0406.html" class="report-card">
-            <div class="date-badge">4月6日</div>
-            <div class="report-info">
-                <div class="report-title">米雇用統計の強烈な上振れでドル高・金利高懸念。ドル円は介入警戒の160円目前でチキンレース</div>
-                <p class="report-summary">前週末の強い米雇用統計（17.8万人増）と原油105ドルの高止まりを受け、市場はインフレ再燃リスクを警戒し様子見姿勢。ドル買い圧力が勝る中、ドル円は159.58円とレッドゾーン手前で極限の膠着状態となっています。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0403.html" class="report-card">
-            <div class="date-badge">4月3日</div>
-            <div class="report-info">
-                <div class="report-title">米軍のイラン攻撃で原油が歴史的暴騰！スタグフレーション恐怖で日経急落、ドル円は有事のドル買いで159.5円へ急伸</div>
-                <p class="report-summary">トランプ大統領の軍事行動宣言を受け、USOILが+10.71%とパニック買いの暴騰。インフレ再燃と金利高懸念から株・ゴールドが全面安となる中、資金逃避によりドル全面高となり、ドル円は介入警戒の160円目前へ迫っています。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0402.html" class="report-card">
-            <div class="date-badge">4月2日</div>
-            <div class="report-info">
-                <div class="report-title">原油安と強い米経済が呼ぶ「ゴルディロックス相場」。日経平均は54,000円を突破！</div>
-                <p class="report-summary">USOILの続落でインフレ懸念が後退し、強い米指標を好感して日米株が続伸。ドル円は158.6円台で膠着状態となり、ゴールドは4,756ドルへと異次元の急騰を演じています。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-            
-        <a href="Report_0401.html" class="report-card">            
-            <div class="date-badge">4月1日</div>
-            <div class="report-info">
-                <div class="report-title">原油急落でインフレ恐怖が後退。日米株が歴史的爆上げの「超リスクオン相場」へ</div>
-                <p class="report-summary">USOILが-5%超の大暴落となり、スタグフレーション懸念が一気に剥落。株・ゴールドが全面高となる一方、ドル円は介入警戒とドル全面安の直撃を受け158円台へ急反落しました。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-    </div>
-            
-    <details class="archive-accordion">
-        <summary>
-            2026年 3月 <span class="toggle-icon">＋</span>
-        </summary>
-        <div class="archive-list">
-            
-        <a href="Report_0331.html" class="report-card">
-            <div class="date-badge">3月31日</div>
-            <div class="report-info">
-                <div class="report-title">原油100ドル突破でインフレ懸念継続。ドル円は160.46円から介入警戒で急反落</div>
-                <p class="report-summary">USOILがついに100ドルの大台を突破。ドル円は160.46円到達後に強烈な利益確定売りに押され159円台へ反落し、極めて神経質な月末相場に。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-         <a href="Report_0330.html" class="report-card">
-            <div class="date-badge">3月30日</div>
-            <div class="report-info">
-                <div class="report-title">原油爆上げでスタグフレーション恐怖。株価大暴落の中、ドル円はついに「160円」を突破！</div>
-                <p class="report-summary">USOILが+7.28%の歴史的急騰となり日米株が全面クラッシュ。ドル円は日銀の介入警戒ラインである「160円」のレッドゾーンをついに突破し、極限の緊迫相場へ。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>           
-
-        <a href="Report_0327.html" class="report-card">
-            <div class="date-badge">3月27日</div>
-            <div class="report-info">
-                <div class="report-title">原油反発でインフレ懸念再燃。株安・ドル高の中、ドル円は介入警戒の160円目前へ</div>
-                <p class="report-summary">インフレ警戒によるリスクオフで日米株やBTCが全面安。ドル全面高の波に乗りドル円は159.74円まで上昇し、週末の介入リスクが極まる緊迫の攻防戦。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0326.html" class="report-card">
-            <div class="date-badge">3月26日</div>
-            <div class="report-info">
-                <div class="report-title">米インフレ再燃でドル全面高。ドル円は160円の最終防衛線へ再接近</div>
-                <p class="report-summary">米輸入・輸出物価指数の上振れと原油反発により、利下げ期待が後退しDXYが急伸。ドル円は日米会談の実需買いも重なり159円台へ再浮上。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-       <a href="Report_0325.html" class="report-card">
-            <div class="date-badge">3月25日</div>
-            <div class="report-info">
-                <div class="report-title">市場は方向感探るレンジ相場。ドル円は158.00円の巨大な防衛壁を背に揉み合い</div>
-                <p class="report-summary">激動相場から一服し、日経・ゴールドは小幅反発、原油は続落。ドル円は直下に特大の買いオーダーとOPを控え、下値の固い膠着状態に。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-            
-        <a href="Report_0324.html" class="report-card">
-            <div class="date-badge">3月24日</div>
-            <div class="report-info">
-                <div class="report-title">米軍攻撃延期で原油が歴史的暴落！ドル全面安でユーロ・ポンドが上昇。インフレ懸念後退で株・BTCが爆上げの超リスクオン相場へ</div>
-                <p class="report-summary">USOILが-9%超の大暴落。これにより投資家心理が一気に好転し、日経平均は+3.73%の急伸、BTCも7万ドルを回復。ドル円は158円台で揉み合い。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0323.html" class="report-card">
-            <div class="date-badge">3月23日</div>
-            <div class="report-info">
-                <div class="report-title">ドル円は介入警戒の160円目前で揉み合い。大型イベント通過で方向感を探る展開</div>
-                <p class="report-summary">日米首脳会談の「11.5兆円対米投資」を受けた円売り圧力と、160円の介入警戒感が激しく交錯。市場全体は先週の激動から一服し、次の材料を待つレンジ相場へ。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0320.html" class="report-card">
-            <div class="date-badge">3月20日</div>
-            <div class="report-info">
-                <div class="report-title">原油100ドル突破でインフレ懸念再燃。ドル円は157下落からの再び160円の大台を試す。</div>
-                <p class="report-summary">日銀・ECB通過後、ドル一強トレンドが加速。USOILが急騰する中、BTC・日経平均は大幅下落。USDJPYは再び介入警戒まで上昇する見込み。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-            
-        <a href="Report_0319.html" class="report-card">
-            <div class="date-badge">3月19日</div>
-            <div class="report-info">
-                <div class="report-title">【スーパーサーズデー到来】米PPIショックで株安・ドル高急進。各国の政策金利発表に厳重警戒</div>
-                <p class="report-summary">米PPIの強烈な上振れでインフレ再燃懸念が高まり、米国株とゴールド、BTCが急落。本日は日銀・英中銀・ECBの発表が重なる極めてボラティリティの高い1日に。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-            
-        <a href="Report_0318.html" class="report-card">
-            <div class="date-badge">3月18日</div>
-            <div class="report-info">
-                <div class="report-title">原油安でインフレ懸念後退、ドル安進行もUSDJPYはオプションの壁で膠着</div>
-                <p class="report-summary">中東緊張緩和で株高・ドル安基調が継続。EURUSDなどが買われる中、USDJPYは159円付近の巨大なNYカットに挟まれレンジ相場に。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0317.html" class="report-card">
-            <div class="date-badge">3月17日</div>
-            <div class="report-info">
-                <div class="report-title">原油急落でリスクオン鮮明、ドル円は159円台のオプション密集地帯で膠着</div>
-                <p class="report-summary">USOILが-3.48%と急落し株価は全面高。ドル円は上値に大量の売りとNYカットが控え、レンジ相場の様相を強める。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0316.html" class="report-card">
-            <div class="date-badge">3月16日</div>
-            <div class="report-info">
-                <div class="report-title">原油高一服で調整先行も、ドル円は介入警戒で158円台へ反落</div>
-                <p class="report-summary">週末の外交交渉報道でWTI原油がやや反落。ドル円は160円を目前にした介入警戒感から利益確定売りが優勢に。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0313.html" class="report-card">
-            <div class="date-badge">3月13日</div>
-            <div class="report-info">
-                <div class="report-title">原油急騰ショックで米国株急落・ドル円159円台へ</div>
-                <p class="report-summary">中東情勢の緊迫化でWTI原油が96ドル台へ暴騰。インフレ再燃懸念から株安・ドル高が進行。日経平均も大幅反落。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0312.html" class="report-card">
-            <div class="date-badge">3月12日</div>
-            <div class="report-info">
-                <div class="report-title">米CPI通過でドル底堅く推移・原油急騰ショック</div>
-                <p class="report-summary">インフレ粘着性確認で早期利下げ観測後退。原油高で米株は軟調も、円安を好感した日経平均は急反発。ドル円は159円〜160円の防戦売り警戒。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0311.html" class="report-card">
-            <div class="date-badge">3月11日</div>
-            <div class="report-info">
-                <div class="report-title">米CPI上振れによるドル高・円安の進行</div>
-                <p class="report-summary">日米金利差拡大観測。ドル円は159円の巨大オプション攻防。日本株は自律反発。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0310.html" class="report-card">
-            <div class="date-badge">3月10日</div>
-            <div class="report-info">
-                <div class="report-title">米CPI発表を控えた様子見相場</div>
-                <p class="report-summary">インフレ指標待ちで主要通貨はレンジ内推移。ビットコインは70,000ドル回復トライ。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0309.html" class="report-card">
-            <div class="date-badge">3月9日</div>
-            <div class="report-info">
-                <div class="report-title">週明けの窓開けと地政学リスクの織り込み</div>
-                <p class="report-summary">中東情勢の緊迫化による原油高。安全資産への逃避でゴールドが急騰。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0306.pdf" class="report-card">
-            <div class="date-badge">3月6日</div>
-            <div class="report-info">
-                <div class="report-title">中東情勢緊迫化とインフレ懸念再燃によるリスクオフ相場</div>
-                <p class="report-summary">原油高を嫌気し米ダウは続落。日経平均は一時パニック売りも後場は押し目買いで続伸。米雇用統計を前に神経質な展開。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0305.pdf" class="report-card">
-            <div class="date-badge">3月5日</div>
-            <div class="report-info">
-                <div class="report-title">日経平均、1,000円超の大幅反発で55,000円台回復</div>
-                <p class="report-summary">前日の米株高や中東情勢の過度な懸念後退を受け買い戻し優勢。ドル円は157円台前半で円高推移。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
-        <a href="Report_0304.pdf" class="report-card">
-            <div class="date-badge">3月4日</div>
-            <div class="report-info">
-                <div class="report-title">日経平均が一時2,600円超の急落、中東リスクと原油高を警戒</div>
-                <p class="report-summary">地政学リスクの高まりによる原油急騰が経済を圧迫するとの見方から売りが加速。日経平均は大幅に3日続落。</p>
-            </div>
-            <div class="arrow-icon">➔</div>
-        </a>
-
         </div>
     </details>
 
-    <h3 class="section-title" style="border-left: 4px solid #9b59b6;">🔄 更新履歴・解説</h3>
-    
-    <div class="archive-list">
-
-    <a href="report_guide.html" class="report-card" style="border-left: 4px solid #9b59b6; margin-bottom: 30px;">
-        <div class="date-badge" style="background-color: #9b59b6;">必読ガイド</div>
-        <div class="report-info">
-            <div class="report-title">📖 【初心者必見】マーケットレポートの「トリセツ」と活かし方</div>
-            <p class="report-summary">レポートの各項目が「何を意味しているか」「今日のトレードにどう直結するのか」を分かりやすく解説。勝率を上げるためのカンニングペーパーとしてお使いください。</p>
-        </div>
-        <div class="arrow-icon" style="color: #9b59b6;">➔</div>
-    </a>
-
-        
-        <a href="cnh_krw_benefits.html" class="report-card" style="border-left: 4px solid #9b59b6;">
-            <div class="date-badge" style="background-color: #9b59b6;">追加解説</div>
-            <div class="report-info">
-                <div class="report-title">💡 【解説】CNH（人民元）とKRW（ウォン）を把握するメリット</div>
-                <p class="report-summary">強弱メーターに追加された新通貨の活用術。アジア時間のボラティリティとリスクオン/オフの先行指標としての重要性を徹底解説しています。</p>
-            </div>
-            <div class="arrow-icon" style="color: #9b59b6;">➔</div>
-        </a>
-
-        
+    <div class="tab-menu">
+        <button class="tab-btn active" onclick="switchTab('tab-apr')">2026年 4月</button>
+        <button class="tab-btn" onclick="switchTab('tab-mar')">2026年 3月</button>
+        <button class="tab-btn" onclick="switchTab('tab-history')">更新履歴・解説</button>
     </div>
+
+    <div id="tab-apr" class="tab-content active">
+        <div class="archive-list">
+            <a href="Report_0417.html" class="report-card">
+                <div class="date-badge">4月17日</div>
+                <div class="report-info">
+                    <div class="report-title">S&P500が7,050ドル到達、日経平均は59,300円台へ！ドル円は牽制を無視して159.20円台へ上昇</div>
+                    <p class="report-summary">中国の第1四半期GDP（5.0%）や米フィラデルフィア連銀指数（26.7）の大幅な上振れを受け、世界的なリスクオン相場が加速しています。S&P500やビットコインが歴史的最高値を更新し、日経平均も59,320円台へ急騰。一方でドル円は、植田総裁のハト派寄りの発言を盾に159.21円まで上昇。片山財務相が強い言葉で牽制する中、160円の介入防衛線に向けた極限のチキンレースが続いています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0416.html" class="report-card">
+                <div class="date-badge">4月16日</div>
+                <div class="report-info">
+                    <div class="report-title">S&P500が歴史的7,000ドル突破！適温相場で株高が加速する中、本日は中国の巨大指標ラッシュ</div>
+                    <p class="report-summary">NY連銀指数のポジティブサプライズを受け、ナスダックが+1.40%急騰し、S&P500がついに7,000ドルの大台を突破しました。完全な「リスクオン（株高）」が継続しています。ドル円は158.900円付近で膠着していますが、本日はアジア時間に中国の実質GDPなど巨大指標が控えており、ボラティリティ急増に警戒が必要です。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0415.html" class="report-card">
+                <div class="date-badge">4月15日</div>
+                <div class="report-info">
+                    <div class="report-title">米PPI下振れで適温相場へ回帰！日経平均は58,500円台へ急騰し、ドル円は介入リスクから解放</div>
+                    <p class="report-summary">米PPIが予想を下回ったことでインフレ再燃の恐怖が完全に払拭され、市場は強烈なリスクオンへ回帰。日本の機械受注の絶好調も重なり日経平均は58,500円台へ急騰しました。ドル円は米金利低下に伴い158.80円台へ下落し、160円の介入リスクから一旦遠ざかり安定したレンジを形成しています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0414.html" class="report-card">
+                <div class="date-badge">4月14日</div>
+                <div class="report-info">
+                    <div class="report-title">原油急落で日米株が「V字全戻し」！ドル円は160円危機を脱するも今夜の米PPIに警戒</div>
+                    <p class="report-summary">スタグフレーションの恐怖が剥落し、日米の株式市場が猛烈なV字回復（全戻し）を達成しました。パニック的なドル買いが巻き戻されたことでドル円は159.20円台へ下落。しかし、160円の介入防衛線は依然として残っており、今夜の米PPI（生産者物価指数）の結果次第で再び急騰するリスクを孕んでいます。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0413.html" class="report-card">
+                <div class="date-badge">4月13日</div>
+                <div class="report-info">
+                    <div class="report-title">米イラン交渉決裂。原油暴騰でスタグフレーションの恐怖！日米株大暴落の中、ドル円はついに160円介入のレッドゾーンへ</div>
+                    <p class="report-summary">週末の地政学リスクで原油が+7.7%の異常急騰。インフレ高止まりと景気不安が重なり、日経平均は-2.21%の大暴落。株式、ゴールド、BTCから現金（ドル）への逃避が加速し、ドル円はついに159.80円へと到達。いつ介入が起きてもおかしくない極限の相場です。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="cpi_strategy_0410.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">緊急特設</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b;">🚨 【特設】今夜21:30 米CPI発表！ドル円160円攻防・介入警戒の立ち回り方</div>
+                    <p class="report-summary">今夜の米CPIは「160円突破による日銀介入」か「失望のドル急落」を引き起こす最大のトリガーとなります。発表前後の「魔の時間」を回避し、最も勝率の高い「戻り売り」を狙うためのプロの監視術とアクションプランを公開中。</p>
+                </div>
+                <div class="arrow-icon" style="color: #e74c3c;">➔</div>
+            </a>
+
+            <a href="Report_0410.html" class="report-card">
+                <div class="date-badge">4月10日</div>
+                <div class="report-info">
+                    <div class="report-title">米CPI直前でナスダック25,000ドル突破！ドル円は159円台へ再浮上し「160円攻防」の最終局面へ</div>
+                    <p class="report-summary">PCEを無難に通過し、米国株はハイテク主導で一段高へ。ゴールドやBTCにも押し目買いが入る中、ドル円はドル安環境に反して159円台へと再浮上。今夜発表の米CPI（消費者物価指数）が160円突破と日銀介入の引き金となるか、市場の緊張が極限に達しています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0409.html" class="report-card">
+                <div class="date-badge">4月9日</div>
+                <div class="report-info">
+                    <div class="report-title">日経56,700円突破の歴史的ラリー！ゴールドは急落し資金ローテーション。今夜の米PCEでドル円に審判</div>
+                    <p class="report-summary">米国株高と円安を好感し日経平均が+1.09%の急騰を見せる一方、ゴールドは-2.50%と強烈な利益確定売りに見舞われています。ドル円は158.5円付近の巨大オプションに挟まれ膠着状態。今夜発表される米PCE価格指数が、160円介入か反落かの大きなトリガーとなります。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0408.html" class="report-card">
+                <div class="date-badge">4月8日</div>
+                <div class="report-info">
+                    <div class="report-title">イラン攻撃回避。「2週間の停戦」電撃合意！原油が89ドル台へ大暴落！インフレ懸念消滅で日経56,000円迫る「エブリシング・ラリー」到来</div>
+                    <p class="report-summary">USOILが105ドル台から89ドル台へと暴落し、スタグフレーションの恐怖が完全消滅。安心した資金がリスク資産に殺到し、日経平均、ゴールド、BTCが歴史的高値を更新。ドル円はドル安の波及で158.5円台へと下落し、介入警戒感が後退しています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0407.html" class="report-card">
+                <div class="date-badge">4月7日</div>
+                <div class="report-info">
+                    <div class="report-title">ISM下振れと原油反落でリスクオン再燃！日米株が全面高も、ドル円は160円の壁で極限の膠着</div>
+                    <p class="report-summary">米国のISM非製造業景気指数の下振れを好感し、インフレ懸念が後退。日経平均は54,000円の大台回復を目前に急反発しました。一方でドル円は、ドル安環境にもかかわらず160円の介入警戒ゾーンで売り買いが激突し、不気味な膠着状態が続いています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0406.html" class="report-card">
+                <div class="date-badge">4月6日</div>
+                <div class="report-info">
+                    <div class="report-title">米雇用統計の強烈な上振れでドル高・金利高懸念。ドル円は介入警戒の160円目前でチキンレース</div>
+                    <p class="report-summary">前週末の強い米雇用統計（17.8万人増）と原油105ドルの高止まりを受け、市場はインフレ再燃リスクを警戒し様子見姿勢。ドル買い圧力が勝る中、ドル円は159.58円とレッドゾーン手前で極限の膠着状態となっています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0403.html" class="report-card">
+                <div class="date-badge">4月3日</div>
+                <div class="report-info">
+                    <div class="report-title">米軍のイラン攻撃で原油が歴史的暴騰！スタグフレーション恐怖で日経急落、ドル円は有事のドル買いで159.5円へ急伸</div>
+                    <p class="report-summary">トランプ大統領の軍事行動宣言を受け、USOILが+10.71%とパニック買いの暴騰。インフレ再燃と金利高懸念から株・ゴールドが全面安となる中、資金逃避によりドル全面高となり、ドル円は介入警戒の160円目前へ迫っています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0402.html" class="report-card">
+                <div class="date-badge">4月2日</div>
+                <div class="report-info">
+                    <div class="report-title">原油安と強い米経済が呼ぶ「ゴルディロックス相場」。日経平均は54,000円を突破！</div>
+                    <p class="report-summary">USOILの続落でインフレ懸念が後退し、強い米指標を好感して日米株が続伸。ドル円は158.6円台で膠着状態となり、ゴールドは4,756ドルへと異次元の急騰を演じています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+                
+            <a href="Report_0401.html" class="report-card">            
+                <div class="date-badge">4月1日</div>
+                <div class="report-info">
+                    <div class="report-title">原油急落でインフレ恐怖が後退。日米株が歴史的爆上げの「超リスクオン相場」へ</div>
+                    <p class="report-summary">USOILが-5%超の大暴落となり、スタグフレーション懸念が一気に剥落。株・ゴールドが全面高となる一方、ドル円は介入警戒とドル全面安の直撃を受け158円台へ急反落しました。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+        </div>
+    </div>
+            
+    <div id="tab-mar" class="tab-content">
+        <div class="archive-list">
+            <a href="Report_0331.html" class="report-card">
+                <div class="date-badge">3月31日</div>
+                <div class="report-info">
+                    <div class="report-title">原油100ドル突破でインフレ懸念継続。ドル円は160.46円から介入警戒で急反落</div>
+                    <p class="report-summary">USOILがついに100ドルの大台を突破。ドル円は160.46円到達後に強烈な利益確定売りに押され159円台へ反落し、極めて神経質な月末相場に。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+             <a href="Report_0330.html" class="report-card">
+                <div class="date-badge">3月30日</div>
+                <div class="report-info">
+                    <div class="report-title">原油爆上げでスタグフレーション恐怖。株価大暴落の中、ドル円はついに「160円」を突破！</div>
+                    <p class="report-summary">USOILが+7.28%の歴史的急騰となり日米株が全面クラッシュ。ドル円は日銀の介入警戒ラインである「160円」のレッドゾーンをついに突破し、極限の緊迫相場へ。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>           
+
+            <a href="Report_0327.html" class="report-card">
+                <div class="date-badge">3月27日</div>
+                <div class="report-info">
+                    <div class="report-title">原油反発でインフレ懸念再燃。株安・ドル高の中、ドル円は介入警戒の160円目前へ</div>
+                    <p class="report-summary">インフレ警戒によるリスクオフで日米株やBTCが全面安。ドル全面高の波に乗りドル円は159.74円まで上昇し、週末の介入リスクが極まる緊迫の攻防戦。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0326.html" class="report-card">
+                <div class="date-badge">3月26日</div>
+                <div class="report-info">
+                    <div class="report-title">米インフレ再燃でドル全面高。ドル円は160円の最終防衛線へ再接近</div>
+                    <p class="report-summary">米輸入・輸出物価指数の上振れと原油反発により、利下げ期待が後退しDXYが急伸。ドル円は日米会談の実需買いも重なり159円台へ再浮上。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+           <a href="Report_0325.html" class="report-card">
+                <div class="date-badge">3月25日</div>
+                <div class="report-info">
+                    <div class="report-title">市場は方向感探るレンジ相場。ドル円は158.00円の巨大な防衛壁を背に揉み合い</div>
+                    <p class="report-summary">激क्रोश相場から一服し、日経・ゴールドは小幅反発、原油は続落。ドル円は直下に特大の買いオーダーとOPを控え、下値の固い膠着状態に。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+                
+            <a href="Report_0324.html" class="report-card">
+                <div class="date-badge">3月24日</div>
+                <div class="report-info">
+                    <div class="report-title">米軍攻撃延期で原油が歴史的暴落！ドル全面安でユーロ・ポンドが上昇。インフレ懸念後退で株・BTCが爆上げの超リスクオン相場へ</div>
+                    <p class="report-summary">USOILが-9%超の大暴落。これにより投資家心理が一気に好転し、日経平均は+3.73%の急伸、BTCも7万ドルを回復。ドル円は158円台で揉み合い。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0323.html" class="report-card">
+                <div class="date-badge">3月23日</div>
+                <div class="report-info">
+                    <div class="report-title">ドル円は介入警戒の160円目前で揉み合い。大型イベント通過で方向感を探る展開</div>
+                    <p class="report-summary">日米首脳会談の「11.5兆円対米投資」を受けた円売り圧力と、160円の介入警戒感が激しく交錯。市場全体は先週の激動から一服し、次の材料を待つレンジ相場へ。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0320.html" class="report-card">
+                <div class="date-badge">3月20日</div>
+                <div class="report-info">
+                    <div class="report-title">原油100ドル突破でインフレ懸念再燃。ドル円は157下落からの再び160円の大台を試す。</div>
+                    <p class="report-summary">日銀・ECB通過後、ドル一強トレンドが加速。USOILが急騰する中、BTC・日経平均は大幅下落。USDJPYは再び介入警戒まで上昇する見込み。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+                
+            <a href="Report_0319.html" class="report-card">
+                <div class="date-badge">3月19日</div>
+                <div class="report-info">
+                    <div class="report-title">【スーパーサーズデー到来】米PPIショックで株安・ドル高急進。各国の政策金利発表に厳重警戒</div>
+                    <p class="report-summary">米PPIの強烈な上振れでインフレ再燃懸念が高まり、米国株とゴールド、BTCが急落。本日は日銀・英中銀・ECBの発表が重なる極めてボラティリティの高い1日に。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+                
+            <a href="Report_0318.html" class="report-card">
+                <div class="date-badge">3月18日</div>
+                <div class="report-info">
+                    <div class="report-title">原油安でインフレ懸念後退、ドル安進行もUSDJPYはオプションの壁で膠着</div>
+                    <p class="report-summary">中東緊張緩和で株高・ドル安基調が継続。EURUSDなどが買われる中、USDJPYは159円付近の巨大なNYカットに挟まれレンジ相場に。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0317.html" class="report-card">
+                <div class="date-badge">3月17日</div>
+                <div class="report-info">
+                    <div class="report-title">原油急落でリスクオン鮮明、ドル円は159円台のオプション密集地帯で膠着</div>
+                    <p class="report-summary">USOILが-3.48%と急落し株価は全面高。ドル円は上値に大量の売りとNYカットが控え、レンジ相場の様相を強める。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0316.html" class="report-card">
+                <div class="date-badge">3月16日</div>
+                <div class="report-info">
+                    <div class="report-title">原油高一服で調整先行も、ドル円は介入警戒で158円台へ反落</div>
+                    <p class="report-summary">週末の外交交渉報道でWTI原油がやや反落。ドル円は160円を目前にした介入警戒感から利益確定売りが優勢に。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0313.html" class="report-card">
+                <div class="date-badge">3月13日</div>
+                <div class="report-info">
+                    <div class="report-title">原油急騰ショックで米国株急落・ドル円159円台へ</div>
+                    <p class="report-summary">中東情勢の緊迫化でWTI原油が96ドル台へ暴騰。インフレ再燃懸念から株安・ドル高が進行。日経平均も大幅反落。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0312.html" class="report-card">
+                <div class="date-badge">3月12日</div>
+                <div class="report-info">
+                    <div class="report-title">米CPI通過でドル底堅く推移・原油急騰ショック</div>
+                    <p class="report-summary">インフレ粘着性確認で早期利下げ観測後退。原油高で米株は軟調も、円安を好感した日経平均は急反発。ドル円は159円〜160円の防戦売り警戒。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+            
+            <a href="Report_0311.html" class="report-card">
+                <div class="date-badge">3月11日</div>
+                <div class="report-info">
+                    <div class="report-title">米CPI上振れによるドル高・円安の進行</div>
+                    <p class="report-summary">日米金利差拡大観測。ドル円は159円の巨大オプション攻防。日本株は自律反発。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0310.html" class="report-card">
+                <div class="date-badge">3月10日</div>
+                <div class="report-info">
+                    <div class="report-title">米CPI発表を控えた様子見相場</div>
+                    <p class="report-summary">インフレ指標待ちで主要通貨はレンジ内推移。ビットコインは70,000ドル回復トライ。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0309.html" class="report-card">
+                <div class="date-badge">3月9日</div>
+                <div class="report-info">
+                    <div class="report-title">週明けの窓開けと地政学リスクの織り込み</div>
+                    <p class="report-summary">中東情勢の緊迫化による原油高。安全資産への逃避でゴールドが急騰。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0306.pdf" class="report-card">
+                <div class="date-badge">3月6日</div>
+                <div class="report-info">
+                    <div class="report-title">中東情勢緊迫化とインフレ懸念再燃によるリスクオフ相場</div>
+                    <p class="report-summary">原油高を嫌気し米ダウは続落。日経平均は一時パニック売りも後場は押し目買いで続伸。米雇用統計を前に神経質な展開。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0305.pdf" class="report-card">
+                <div class="date-badge">3月5日</div>
+                <div class="report-info">
+                    <div class="report-title">日経平均、1,000円超の大幅反発で55,000円台回復</div>
+                    <p class="report-summary">前日の米株高や中東情勢の過度な懸念後退を受け買い戻し優勢。ドル円は157円台前半で円高推移。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+
+            <a href="Report_0304.pdf" class="report-card">
+                <div class="date-badge">3月4日</div>
+                <div class="report-info">
+                    <div class="report-title">日経平均が一時2,600円超の急落、中東リスクと原油高を警戒</div>
+                    <p class="report-summary">地政学リスクの高まりによる原油急騰が経済を圧迫するとの見方から売りが加速。日経平均は大幅に3日続落。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+        </div>
+    </div>
+
+    <div id="tab-history" class="tab-content">
+        <div class="archive-list">
+            <a href="report_guide.html" class="report-card" style="border-left: 4px solid #9b59b6;">
+                <div class="date-badge" style="background-color: #9b59b6;">必読ガイド</div>
+                <div class="report-info">
+                    <div class="report-title">📖 【初心者必見】マーケットレポートの「トリセツ」と活かし方</div>
+                    <p class="report-summary">レポートの各項目が「何を意味しているか」「今日のトレードにどう直結するのか」を分かりやすく解説。勝率を上げるためのカンニングペーパーとしてお使いください。</p>
+                </div>
+                <div class="arrow-icon" style="color: #9b59b6;">➔</div>
+            </a>
+            
+            <a href="cnh_krw_benefits.html" class="report-card" style="border-left: 4px solid #9b59b6;">
+                <div class="date-badge" style="background-color: #9b59b6;">追加解説</div>
+                <div class="report-info">
+                    <div class="report-title">💡 【解説】CNH（人民元）とKRW（ウォン）を把握するメリット</div>
+                    <p class="report-summary">強弱メーターに追加された新通貨の活用術。アジア時間のボラティリティとリスクオン/オフの先行指標としての重要性を徹底解説しています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #9b59b6;">➔</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // すべてのボタンとコンテンツから active クラスを外す
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // 押されたボタンと対象のコンテンツに active クラスを付ける
+            document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
 
     <div class="footer">
         <div class="copyright">Copyright 2026 Pure Green All Rights Reserved.</div>

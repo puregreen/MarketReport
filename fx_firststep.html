@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX超入門 はじめの一歩 - Pure Green</title>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 20px 0;
+        line-height: 1.7;
+    }
+    .container {
+        max-width: 850px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    /* ナビゲーション */
+    .top-nav { margin-bottom: 30px; }
+    .back-link { font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ヘッダー */
+    .header { text-align: center; margin-bottom: 40px; border-bottom: 4px solid #2ecc71; padding-bottom: 20px; }
+    .header h1 { color: #2c3e50; margin: 0 0 15px 0; font-size: 28px; letter-spacing: 1px; }
+    .header p { color: #7f8c8d; font-size: 15px; margin: 0; font-weight: bold; }
+
+    /* 見出し */
+    h2 { color: #ffffff; background-color: #2c3e50; padding: 12px 20px; border-radius: 5px; font-size: 20px; margin-top: 50px; margin-bottom: 20px; }
+    h3 { color: #2980b9; font-size: 18px; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #ecf0f1; padding-bottom: 5px; border-left: 5px solid #3498db; padding-left: 10px; }
+
+    /* ボックス装飾 */
+    .box { background-color: #fdfdfd; border: 1px solid #ecf0f1; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+    .box-danger { background-color: #fff0f0; border-left: 5px solid #e74c3c; padding: 15px 20px; margin-bottom: 20px; }
+    .box-warning { background-color: #fff9e6; border-left: 5px solid #f39c12; padding: 15px 20px; margin-bottom: 20px; }
+    .box-success { background-color: #eafaf1; border-left: 5px solid #2ecc71; padding: 15px 20px; margin-bottom: 20px; }
+    
+    .box-title { font-weight: bold; margin-bottom: 10px; display: block; font-size: 16px; }
+    .text-danger { color: #c0392b; font-weight: bold; }
+    .text-primary { color: #2980b9; font-weight: bold; }
+
+    /* リスト */
+    ul, ol { margin-bottom: 20px; padding-left: 25px; }
+    li { margin-bottom: 8px; }
+
+    /* スライド画像用スタイル */
+    .slide-image-wrapper { text-align: center; margin: 25px 0; }
+    .slide-image { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #dcdde1; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+
+    /* CTAボタン */
+    .btn { display: block; width: 100%; max-width: 400px; margin: 30px auto 10px auto; text-align: center; padding: 16px; font-size: 18px; font-weight: bold; text-decoration: none; border-radius: 50px; transition: 0.3s; }
+    .btn-exness { background-color: #ffc900; color: #1a1a1a; box-shadow: 0 4px 10px rgba(255,201,0,0.4); }
+    .btn-exness:hover { background-color: #ffe04d; transform: translateY(-2px); }
+    .btn-bitwallet { background-color: #34495e; color: #ffffff; box-shadow: 0 4px 10px rgba(52,73,94,0.4); }
+    .btn-bitwallet:hover { background-color: #2c3e50; transform: translateY(-2px); }
+    .btn-subtext { text-align: center; font-size: 12px; color: #7f8c8d; margin-bottom: 30px; }
+
+    @media (max-width: 650px) {
+        .container { padding: 20px; }
+        .header h1 { font-size: 22px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-nav">
+        <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    </div>
+
+    <div class="header">
+        <h1>🔰 FX超入門 - はじめの一歩</h1>
+        <p>PureFXサロン提供 / Pure Green</p>
+    </div>
+
+    <h2>1. はじめに ＆ 勝つためのマインドセット</h2>
+    
+    <div class="box-success">
+        <span class="box-title">💡 FXは投資です。ギャンブルではありません。</span>
+        PureFXサロンで学び、実力を伸ばし、資金を増やしていきましょう！<br>
+        わからない単語が出てきたら、一つ一つ調べて自分オリジナルの「FX単語帳」を作ってみてください。それがあなたの宝物になります。
+    </div>
+
+    <h3>⚠️ 負ける人から学ぼう</h3>
+    <p>FXは9割の人が負けると言われています。「人の振り見て我が振り直せ」です。負ける人の共通点を把握しましょう。</p>
+    <ol>
+        <li>勉強していない、または不十分</li>
+        <li>冷静に取引できない（希望的観測を捨てきれない、熱くなってしまう）</li>
+        <li><span class="text-danger">損切できない</span></li>
+        <li>自分ルールを決めていない</li>
+        <li><span class="text-danger">資金管理をしていない</span></li>
+    </ol>
+
+    <h3>🏥 負ける人は「FXの病気」に罹っている</h3>
+    <div class="box">
+        <ul>
+            <li style="margin-bottom:15px;"><strong>🐔 チキン利食病</strong><br>含み益が出たら直ぐに決済してしまう。ハイリスク・ローリターンになっている。<br>
+            <span class="text-primary">⇒ 処方箋：</span> 利確、損切を設定しましょう。含み益が出てきたら損切ラインを建値などに調整します。</li>
+            
+            <li style="margin-bottom:15px;"><strong>📱 ポジポジ病</strong><br>常にポジションを持っていないと落ち着かず、チャンスでない時に無理やりポジションを取ってしまう。<br>
+            <span class="text-primary">⇒ 処方箋：</span> 常に勝てる訳ではありません。チャンスを待ちましょう。</li>
+            
+            <li><strong>🎰 ギャンブル病</strong><br>損した分を取り返そうと、無理やりポジションを取ってしまう。<br>
+            <span class="text-primary">⇒ 処方箋：</span> 自分ルールを設定し、徹底しましょう（例：○○円勝ったら辞める、負けたら辞める等）。</li>
+        </ul>
+    </div>
+
+    <h3>🛡️ 負けを減らすための心構え</h3>
+    <div class="box-warning">
+        <ol>
+            <li><strong>負けないこととは「資金を減らさないこと」</strong>です。</li>
+            <li>取引に一喜一憂せず、熱くならず、冷静に。心の余裕が大切。</li>
+            <li>自分ルールを作り徹底する。</li>
+            <li>取引口座を複数もち、取引毎に管理する。</li>
+            <li>取引口座は利益が出た状態で、ポジション保有したまま、資金管理口座へ資金移動をおこなう。</li>
+            <li><strong>ポジションには必ず損切りを設定する。</strong>利益が出たら損切を建値に置く。</li>
+            <li>いつでも勝とうとせず、チャンスを待つ。相場が合わない時は明日の分析にあてる。</li>
+            <li>EAの設定は毎日見直す。</li>
+            <li>勝てる投資家に学ぶ。</li>
+            <li>仲間を作る。<br><span style="font-size:12px; color:#7f8c8d;">※PureFXサロンの皆さんは既に素敵な環境を持っています！</span></li>
+        </ol>
+    </div>
+
+    <h2>2. チャートと友達になろう</h2>
+    
+    <h3>🕯️ ローソク足の基本と分析</h3>
+    <p>FXのチャートは値動きをグラフにしたものです。ラインやバーもありますが、情報量が多く相場の強弱が把握できる<strong>「ローソク足」</strong>をおススメします。</p>
+    
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_01_candle.jpg" alt="ローソク足の見方" class="slide-image">
+    </div>
+
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_02_candle_analysis.jpg" alt="ローソク足の分析" class="slide-image">
+    </div>
+
+    <h3>📊 トレンドの把握と分析方法</h3>
+    <p>相場の方向性（上昇・下降・レンジ）を把握するために、以下のインジケーターを活用します。</p>
+    
+    <p><strong>① 単純移動平均線（MA）</strong><br>
+    デフォルトセットインジケータのMA短期は色でトレンドが表現されます。</p>
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_03_trend_ma.jpg" alt="トレンド把握 MA" class="slide-image">
+    </div>
+
+    <p><strong>② ジグザグ線</strong><br>
+    デフォルトセットインジケータのジグザグ線も色でトレンドが表現され、波形が分かりやすくなります。</p>
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_04_trend_zigzag.jpg" alt="トレンド把握 ジグザグ" class="slide-image">
+    </div>
+
+    <p><strong>③ 抵抗帯（サポート/レジスタンス）</strong><br>
+    価格が一旦伸び悩みを見せる抵抗帯です。強い売買意欲を持って突破されると、大きな相場変動に発展する傾向があります。</p>
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_05_resistance.jpg" alt="抵抗帯の確認" class="slide-image">
+    </div>
+
+    <h3>⏳ 時間足の特徴と選び方</h3>
+    <p>テクニカル分析（チャート分析）とファンダメンタルズ分析（経済指標など）を組み合わせ、自分のスタイルに合った時間足を見つけましょう。</p>
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_06_timeframe.jpg" alt="時間足の比較" class="slide-image">
+    </div>
+
+    <h3>💪 通貨強弱を確認しよう</h3>
+    <p>通貨強弱を確認することで、その日どの通貨が買われ、どの通貨が売られているのか（取引しやすいペア）が一目で見えてきます。</p>
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_07_currency.jpg" alt="通貨強弱の確認" class="slide-image">
+    </div>
+
+
+    <h2>3. 取引してみよう ＆ 絶対の資金管理</h2>
+
+    <h3>📏 取引の基礎単位</h3>
+    <p>FX特有の言葉である「ロット」「ピップス」「レバレッジ」について理解しましょう。</p>
+    
+    <p><strong>■ ロットってなに？</strong><br>
+    ロットとはFXの取引単位です。1ロット1千通貨の口座で、基準レートが137円の場合の証拠金計算は以下のようになります。</p>
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_08_lot.jpg" alt="ロットの計算" class="slide-image">
+    </div>
+
+    <p><strong>■ ピップス（Pips）ってなに？</strong><br>
+    ピップスとはFXで使う通貨の共通単位です。クロス円の場合、1pips＝0.01円（1銭）となります。1千通貨で1ピップス動くと10円の変動になります。</p>
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_09_pips.jpg" alt="ピップスの解説" class="slide-image">
+    </div>
+
+    <p><strong>■ レバレッジってなに？</strong><br>
+    「テコの原理」のことです。レバレッジを利用すると、証拠金の何倍もの取引が可能になり、少額からでも有利に取引ができます。（国内は最大25倍、海外は無制限なども可能）</p>
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_10_leverage.jpg" alt="レバレッジの解説" class="slide-image">
+    </div>
+
+    <div class="box">
+        <ul>
+            <li><strong>ロスカット：</strong> 証拠金維持率を下回ると強制決済される仕組み。</li>
+            <li><strong>ゼロカット：</strong> ロスカットが間に合わず口座残高がマイナスになっても、損失分を業者が負担し<span class="text-danger">「追証（借金）が発生しない」</span>最強の防御システムです。</li>
+        </ul>
+    </div>
+    
+    <div class="box-warning">
+        <span class="box-title">【ロット数の目安】</span>
+        取引スタート時点の目安として、口座残高10万円で「合計0.1ロット（1万通貨）」以下に抑えると良いでしょう。（残高1万円なら0.01ロット）
+    </div>
+
+    <h3>🏦 複数口座と「シェルター」による管理</h3>
+    <p>目論見が外れた時に生き残る術、それが「資金管理」です。取引しない<strong>シェルター（資金管理用）口座</strong>を作り、銘柄・手法ごとに口座を分けて運用します。</p>
+
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_11_shelter.jpg" alt="シェルターと複数口座" class="slide-image">
+    </div>
+
+    <h3>🛡️ 資金管理を徹底する絶対ルール</h3>
+    <div class="box-danger">
+        <span class="box-title">■ 25%ルール（1取引・1口座）</span>
+        <p>10,000円でポジションを取った場合、損切の目安は25%（-2,500円）。<br>
+        逆に<strong>25%の含み益が出たら、損切を建値に変更</strong>します（これで負けがなくなります）。<br>
+        さらに利益が出たら、ポジションを保有したまま残高を「シェルター口座」へ資金移動し、取引口座の残高を0（ゼロカット活用ならマイナス）にします。これで「口座の勝ちは確定」です。</p>
+        
+        <span class="box-title" style="margin-top:15px;">■ 4%ルール（全体資金）</span>
+        <p>1つの口座（銘柄・取引種別毎）を細かく分け、1つの取引に投じる資金は「全体の4%」を目安にします。1つの口座がゼロカットされても、全体資金への影響を極小化し資産を守ります。</p>
+    </div>
+
+    <h2>4. FX業者の選び方とおすすめ環境</h2>
+    
+    <p>詐欺にあわないよう、ライセンスの有無や評判を「<a href="https://www.wikifx.com/ja/" target="_blank" >WikiFX（https://www.wikifx.com/ja/）</a>」などで調べることも一つの防衛策です。<br>
+    そして、PureFXサロンで仲間にお勧めしている最強の環境が<strong>「Exness（エクスネス）」</strong>です。</p>
+
+    <div class="box">
+        <span class="box-title">✨ なぜ Exness を選ぶのか？</span>
+        <ul>
+            <li>1アカウントで複数の口座を持てて、<strong>資金管理（シェルター運用）が極めて容易</strong>。</li>
+            <li>ロスカット基準が「0%」で、ゼロカットシステム採用のため追証（借金）なし。</li>
+            <li>スタート時点からレバレッジ2000倍〜無制限が可能。</li>
+            <li>スプレッドが極端に狭く、取引手数料が無料の口座もある。</li>
+            <li>ポジションを持ったままの<strong>資金移動（内部振替）が手数料無料</strong>で即時反映。</li>
+            <li>24時間、日本語スタッフのチャットサポートあり。</li>
+        </ul>
+    </div>
+
+    <a href="https://one.exness.link/a/tgmn3e45hc" target="_blank" rel="noopener" class="btn btn-exness">
+        👉 Exnessで口座を開設する
+    </a>
+    <div class="btn-subtext">※安全な公式サイトの登録画面へ移動します。</div>
+
+    <h3>👛 資金のハブとなる「bitwallet」</h3>
+    <p>海外FX業者間の資金移動や、銀行からの入出金手数料を劇的に安く・速くするための必須ツールです。Exnessとの入出金も手数料無料で即時反映されます。</p>
+
+    <div class="slide-image-wrapper">
+        <img src="./fx_firststep_img/img_12_bitwallet.jpg" alt="bitwalletと資金の流れ" class="slide-image" style="max-width: 80%;">
+    </div>
+
+    <a href="https://bitwallet.com/ja/" target="_blank" rel="noopener" class="btn btn-bitwallet">
+        👉 bitwallet公式サイトへ
+    </a>
+    <div class="btn-subtext" style="margin-bottom:10px;">※シェルター口座として非常に優秀です。</div>
+
+    <div class="box-success" style="margin-top:40px; text-align:center;">
+        <strong>運の宝くじより実力のFX</strong><br>
+        FXは投資です。ギャンブルではありません。<br>
+        PureFXサロンで共に学び、実力を伸ばし、資金を増やしていきましょう！<br>
+        <span style="font-size:11px; color:#7f8c8d;">※投資はあくまで自己責任。余剰資金での投資をおススメします。</span>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ecf0f1; padding-top: 20px;">
+        <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    </div>
+</div>
+
+</body>
+</html>

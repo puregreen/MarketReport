@@ -30,7 +30,7 @@
     .danger-box { background-color: #fff0f0; border: 1px solid #ffcccc; border-radius: 8px; padding: 20px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(231,76,60,0.1); }
     .danger-title { font-weight: bold; color: #c0392b; font-size: 16px; display: block; margin-bottom: 10px; border-bottom: 1px solid #ffcccc; padding-bottom: 5px; }
     
-    .investigate-box { background-color: #f0f8ff; border: 1px solid #cce5ff; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
+    .investigate-box { background-color: #f0f8ff; border: 1px solid #cce5ff; border-radius: 8px; padding: 20px; margin-bottom: 10px; }
     .investigate-title { font-weight: bold; color: #2980b9; font-size: 16px; display: block; margin-bottom: 10px; border-bottom: 1px solid #cce5ff; padding-bottom: 5px; }
 
     .action-box { background-color: #eafaf1; border-left: 5px solid #2ecc71; padding: 18px 20px; margin-top: 15px; border-radius: 0 8px 8px 0; }
@@ -48,6 +48,24 @@
     p { font-size: 15px; color: #444; margin-bottom: 15px; }
     
     .highlight { font-weight: bold; color: #e74c3c; background: linear-gradient(transparent 70%, #ffcccc 70%); }
+
+    /* 🌟 更に詳しくアコーディオン 🌟 */
+    .deep-dive-accordion { margin: 15px 0 30px 0; }
+    .deep-dive-accordion summary { display: block; text-align: center; background-color: #f8f9fa; color: #2980b9; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; border: 2px dashed #3498db; list-style: none; }
+    .deep-dive-accordion summary::-webkit-details-marker { display: none; }
+    .deep-dive-accordion summary:hover { background-color: #eaf2f8; }
+    .deep-dive-accordion[open] summary { margin-bottom: 15px; background-color: #3498db; color: #fff; border-style: solid; }
+    .deep-dive-accordion .toggle-icon { display: inline-block; transition: transform 0.3s ease; margin-left: 5px; }
+    .deep-dive-accordion[open] .toggle-icon { transform: rotate(45deg); color: #fff; }
+    .deep-dive-content { animation: fadeIn 0.4s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* リンク用カード */
+    .investigate-link-card { background-color: #ffffff; border: 1px solid #dcdde1; border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 4px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .investigate-link-title { font-weight: bold; color: #2c3e50; font-size: 16px; margin-bottom: 5px; display: inline-block; text-decoration: none; }
+    .investigate-link-title:hover { color: #3498db; text-decoration: underline; }
+    .investigate-link-desc { font-size: 13.5px; color: #555; margin-bottom: 0; line-height: 1.6; }
+    .external-icon { font-size: 12px; margin-left: 3px; color: #7f8c8d; }
 
     /* ボタン */
     .btn-link { display: inline-block; background-color: #3498db; color: #fff; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; text-align: center; transition: background 0.3s; margin-top: 10px; }
@@ -92,16 +110,48 @@
         <p>大切なお金を預ける先が、本物の金融機関なのか、ただの詐欺グループのダミー会社なのか。ご自身で必ず以下の調査（デューデリジェンス）を行ってください。</p>
 
         <div class="investigate-box">
-            <span class="investigate-title">🔍 プロが行う3つのチェックポイント</span>
+            <span class="investigate-title">🔍 基本のチェックポイント</span>
             <ul class="check-list">
                 <li><strong>WikiFXでスコアを調べる：</strong><br>
-                世界最大のFX業者調査アプリ「WikiFX」で業者名を検索してください。評価スコアが低く、「ライセンスなし」「疑わしいライセンス」と警告が出ている業者は、その時点で絶対に手を出してはいけません。</li>
+                世界最大のFX業者調査アプリ「WikiFX」で検索。評価スコアが低く、「疑わしいライセンス」と警告が出ている業者は絶対に手を出してはいけません。</li>
                 <li><strong>振込先が「無関係な国内口座」ではないか：</strong><br>
-                海外のFX業者に入金するはずなのに、振込先が日本の「〇〇合同会社」「〇〇商事」といった無関係な法人名義や、個人名義になっていませんか？これは詐欺グループが使う「ダミー口座（飛ばし口座）」の決定的な証拠です。</li>
+                海外業者への入金なのに、振込先が日本の「〇〇合同会社」「〇〇商事」や個人名義になっていませんか？これは詐欺グループが使う「飛ばし口座」の決定的な証拠です。</li>
                 <li><strong>「出金条件」が後出しされないか：</strong><br>
-                利益を出金しようとした際、「税金として利益の〇％を先に振り込め」「保証金が必要だ」などと理由をつけて<strong>追加の入金</strong>を求めてくるのは、100%詐欺（ポンジ・スキームの末期）です。</li>
+                出金時に「税金を先に振り込め」「保証金が必要だ」と<strong>追加の入金</strong>を求めてくるのは、100%詐欺です。</li>
             </ul>
         </div>
+
+        <details class="deep-dive-accordion">
+            <summary>更に詳しく：プロが使う裏付け調査サイト ＋</summary>
+            <div class="deep-dive-content">
+                <p style="font-size: 14px; color: #555;">WikiFXの評価を操作する巧妙な詐欺を防ぐため、以下のサイトで「クロスチェック（裏付け）」を行うのがプロの鉄則です。</p>
+
+                <div class="investigate-link-card">
+                    <a href="https://www.forexpeacearmy.com/" target="_blank" class="investigate-link-title">Forex Peace Army (FPA) <span class="external-icon">🔗</span></a>
+                    <p class="investigate-link-desc">世界中のトレーダーが集まる最大の告発掲示板。「SCAM（詐欺）」のスタンプや、「出金拒否」に関する生々しい口コミが集まります。</p>
+                </div>
+
+                <div class="investigate-link-card">
+                    <a href="https://jp.trustpilot.com/" target="_blank" class="investigate-link-title">Trustpilot（トラストパイロット） <span class="external-icon">🔗</span></a>
+                    <p class="investigate-link-desc">世界最大級のレビューサイト。業者が用意した星5のサクラ評価は無視し、「星1（最低評価）」で直近の出金トラブルが頻発していないかを確認します。</p>
+                </div>
+
+                <div class="investigate-link-card">
+                    <a href="https://www.brokersview.com/" target="_blank" class="investigate-link-title">BrokersView（ブローカーズビュー） <span class="external-icon">🔗</span></a>
+                    <p class="investigate-link-desc">WikiFXと並ぶ業者データベース。WikiFXの評価と見比べて、情報に矛盾（偽造ライセンスの疑いなど）がないかを確認するセカンドオピニオンとして使います。</p>
+                </div>
+
+                <div class="investigate-link-card" style="border-left-color: #9b59b6;">
+                    <span class="investigate-link-title" style="color: #8e44ad; pointer-events: none;">【最強の裏付け】各国の金融当局の公式レジスター</span>
+                    <p class="investigate-link-desc">業者が主張するライセンス番号を、発行国の政府機関サイトで直接検索します。登録されている「公式URL」と、今見ている業者のURLが1文字でも違えば、それは完全な偽物（クローン業者）です。</p>
+                    <ul style="font-size: 13px; margin-top: 8px; padding-left: 20px;">
+                        <li><a href="https://register.fca.org.uk/" target="_blank" style="color: #3498db;">FCA (イギリス金融行動監視機構) 検索ページ <span class="external-icon">🔗</span></a></li>
+                        <li><a href="https://asic.gov.au/" target="_blank" style="color: #3498db;">ASIC (オーストラリア証券投資委員会) 検索ページ <span class="external-icon">🔗</span></a></li>
+                        <li><a href="https://www.cysec.gov.cy/" target="_blank" style="color: #3498db;">CySEC (キプロス証券取引委員会) 検索ページ <span class="external-icon">🔗</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </details>
 
         <h2>3. どうしても運用したい場合の「絶対的な資金管理術」</h2>
         <p>私たちがどれだけ警告しても、「どうしてもこのコピートレードを試してみたい」という方がいらっしゃいます。もし挑戦するのであれば、<strong>「全損しても人生が終わらないための防衛線（リスクヘッジ）」</strong>を必ず張ってください。</p>

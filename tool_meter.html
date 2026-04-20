@@ -3,58 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔥 24時間 通貨強弱メーター - Pure Green</title>
+<title>🔥 24時間 通貨・銘柄 強弱メーター</title>
 <style>
-    /* 全体設定 */
-    body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px 0; }
-    .container { max-width: 800px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius: 10px; padding: 30px; box-sizing: border-box; }
+    body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', Meiryo, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+    .container { max-width: 800px; margin: 0 auto; }
     
-    /* ナビゲーション・ヘッダー */
-    .top-nav { margin-bottom: 20px; }
-    .back-link { font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold; }
+    .back-link { font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold; margin-bottom: 20px; display: inline-block; }
     .back-link:hover { text-decoration: underline; }
-    .header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid #e74c3c; padding-bottom: 15px; }
-    .header h1 { color: #2c3e50; margin: 0 0 10px 0; font-size: 22px; }
-    .header p { color: #7f8c8d; font-size: 14px; margin: 0; }
-
-    /* メーター用スタイル */
-    .strength-meter-box { border: 1px solid #ecf0f1; background-color: #f9fbfd; padding: 20px; border-radius: 8px; }
-    .strength-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #ecf0f1; padding-bottom: 15px; }
+    
+    h1 { text-align: center; color: #2c3e50; font-size: 22px; margin-top: 10px; margin-bottom: 10px; }
+    p.desc { text-align: center; color: #7f8c8d; font-size: 13px; margin-bottom: 30px; border-bottom: 2px solid #e74c3c; padding-bottom: 20px; }
+    
+    .strength-meter-box { background-color: #ffffff; border: 1px solid #ecf0f1; border-radius: 8px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .strength-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #ecf0f1; padding-bottom: 15px; }
     .strength-title { font-weight: bold; color: #2c3e50; font-size: 16px; }
-    .update-btn { background-color: #3498db; color: #fff; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; transition: background 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .update-btn:hover { background-color: #2980b9; transform: translateY(-1px); }
-    .update-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; transform: none; box-shadow: none; }
-    .status-text { font-size: 12px; color: #7f8c8d; text-align: right; margin-bottom: 20px; height: 15px; }
+    
+    .update-btn { background-color: #3498db; color: #fff; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; transition: background 0.2s; }
+    .update-btn:hover { background-color: #2980b9; }
+    .update-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+    
+    .status-text { font-size: 11.5px; color: #7f8c8d; text-align: right; margin-bottom: 20px; height: 16px; }
     
     .asset-row { display: flex; align-items: center; margin-bottom: 12px; }
-    .asset-name { width: 55px; font-weight: bold; font-size: 14px; color: #34495e; }
-    .bar-area { flex-grow: 1; display: flex; align-items: center; position: relative; height: 24px; background-color: #fff; border-radius: 4px; border: 1px solid #eaeaea; margin: 0 15px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); }
+    .asset-name { width: 50px; font-weight: bold; font-size: 14px; color: #34495e; }
+    
+    .bar-area { flex-grow: 1; display: flex; align-items: center; position: relative; height: 22px; background-color: #fcfcfc; border-radius: 4px; border: 1px solid #eaeaea; margin: 0 15px; }
     .zero-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background-color: #bdc3c7; z-index: 10; }
     .bar-half { width: 50%; height: 100%; display: flex; }
     .bar-left { justify-content: flex-end; } 
     .bar-right { justify-content: flex-start; } 
     .bar-fill { height: 100%; width: 0%; transition: width 1s cubic-bezier(0.25, 0.8, 0.25, 1); }
-    .fill-positive { background-color: #2ecc71; border-radius: 0 4px 4px 0; }
+    
+    /* 買い（プラス）は青、売り（マイナス）は赤 */
+    .fill-positive { background-color: #3498db; border-radius: 0 4px 4px 0; }
     .fill-negative { background-color: #e74c3c; border-radius: 4px 0 0 4px; }
-    .asset-value { width: 70px; text-align: right; font-size: 14px; font-weight: bold; }
+    
+    .asset-value { width: 70px; text-align: right; font-size: 13.5px; font-weight: bold; }
     .val-pos { color: #3498db; }
     .val-neg { color: #e74c3c; }
     .val-zero { color: #7f8c8d; }
-
-    @media (max-width: 650px) { .container { padding: 15px; } .header h1 { font-size: 18px; } }
+    
+    .footer-link { text-align: center; margin-top: 30px; }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="top-nav">
-        <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
-    </div>
-
-    <div class="header">
-        <h1>🔥 24時間 通貨・銘柄 強弱メーター</h1>
-        <p>対USDでの過去24時間の変動率をAPIで自動取得し、可視化します。</p>
-    </div>
+    <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    
+    <h1>🔥 24時間 通貨・銘柄 強弱メーター</h1>
+    <p class="desc">対USDでの過去24時間の変動率をAPIで自動取得し、可視化します。</p>
 
     <div class="strength-meter-box">
         <div class="strength-header">
@@ -64,8 +62,8 @@
         <div id="statusText" class="status-text">データを取得待機中...</div>
         <div id="api-chart-container"></div>
     </div>
-
-    <div style="text-align: center; margin-top: 30px;">
+    
+    <div class="footer-link">
         <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
     </div>
 </div>
@@ -116,6 +114,7 @@
             const baseDate = new Date(baseDateStr);
 
             let pastData = null;
+            // 🌟 修正ポイント：土日のノイズを回避し、確実に変動があった日（0.05%以上）を探す 🌟
             for (let i = 1; i <= 10; i++) {
                 const d = new Date(baseDate);
                 d.setDate(d.getDate() - i);
@@ -128,19 +127,21 @@
                     const pastRes = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${dateStr}/v1/currencies/usd.json`);
                     if (pastRes.ok) {
                         const pastJson = await pastRes.json();
-                        if (pastJson.usd && pastJson.usd.jpy !== usdLatest.jpy) {
-                            pastData = pastJson.usd;
-                            break; 
+                        if (pastJson.usd && pastJson.usd.jpy) {
+                            // JPYの変動率を計算し、0.05%以上の変動があれば前営業日とみなす
+                            const jpyChangePercent = Math.abs(((usdLatest.jpy / pastJson.usd.jpy) - 1) * 100);
+                            if (jpyChangePercent > 0.05) {
+                                pastData = pastJson.usd;
+                                break; 
+                            }
                         }
                     }
                 } catch (e) { }
             }
 
             if (usdLatest && pastData) {
-                // 🌟 ここに cny と krw を追加しています 🌟
+                // 画像に合わせて10通貨を定義
                 const fiatSymbols = ['eur', 'jpy', 'gbp', 'aud', 'chf', 'cad', 'nzd', 'cny', 'krw'];
-                
-                // 表示名変換用オブジェクト（cny を CNH に変換して表示）
                 const displayNames = {
                     'eur': 'EUR', 'jpy': 'JPY', 'gbp': 'GBP', 'aud': 'AUD',
                     'chf': 'CHF', 'cad': 'CAD', 'nzd': 'NZD', 'cny': 'CNH', 'krw': 'KRW'
@@ -150,6 +151,7 @@
                     if (usdLatest[sym] && pastData[sym]) {
                         const currentRate = usdLatest[sym];
                         const prevRate = pastData[sym];
+                        // 変動率の計算 (USDがベースなので、対USDの変動率にするための計算)
                         const changePercent = ((prevRate / currentRate) - 1) * 100;
                         results.push({ symbol: displayNames[sym], changePercent: changePercent });
                     }
@@ -159,7 +161,6 @@
                 apiFailed = true;
             }
         } catch (e) {
-            console.warn('法定通貨APIエラー:', e);
             apiFailed = true;
         }
 
@@ -168,10 +169,11 @@
             const now = new Date();
             let timeStr = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
             if (apiFailed) {
-                timeStr += ' <span style="color:#e67e22;">(※一部データ取得失敗)</span>';
+                timeStr += ' <span style="color:#e67e22;">(※一部データ取得エラー)</span>';
             }
             status.innerHTML = timeStr;
 
+            // 変動率の高い順にソート
             results.sort((a, b) => b.changePercent - a.changePercent);
             renderChart(results);
         } else {
@@ -184,6 +186,7 @@
 
     function renderChart(data) {
         const container = document.getElementById('api-chart-container');
+        // 最大変動率を取得してスケールを決定
         const maxAbsChange = Math.max(...data.map(item => Math.abs(item.changePercent)));
         const scaleFactor = maxAbsChange === 0 ? 1 : 100 / maxAbsChange; 
 
@@ -215,6 +218,7 @@
             const fill = document.createElement('div');
             fill.className = 'bar-fill ' + (isPositive ? 'fill-positive' : 'fill-negative');
             
+            // アニメーションのために少し遅らせて幅を設定
             setTimeout(() => { fill.style.width = `${barWidth}%`; }, 50);
 
             if (isPositive) {

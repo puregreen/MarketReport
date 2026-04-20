@@ -614,6 +614,7 @@
 </div> 
 
 <script>
+    // チャート表示設定
     const charts = [
         { id: "tv_dxy", symbol: "CAPITALCOM:DXY", interval: "60" },
         { id: "tv_us500", symbol: "OANDA:SPX500USD", interval: "60" },
@@ -645,10 +646,7 @@
                     "hide_legend": true,
                     "save_image": false,
                     "container_id": chart.id,
-                    "studies": [
-                        "MASimple@tv-basicstudies", 
-                        "RSI@tv-basicstudies"       
-                    ]
+                    "studies": ["MASimple@tv-basicstudies", "RSI@tv-basicstudies"]
                 });
             }
         });
@@ -662,89 +660,81 @@
         
         btn.disabled = true;
         btn.textContent = '取得中...';
-        status.innerHTML = '最新データを取得中...';
+        status.innerHTML = '最新データを分析中...';
         container.innerHTML = '';
 
         let results = [];
         let apiFailed = false;
         let fiatSuccess = false;
+        let isMarketClosed = false;
 
+        // 1. BTC/XAU（Binance API）
         try {
             const btcRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
             if (btcRes.ok) {
                 const btcData = await btcRes.json();
                 results.push({ symbol: 'BTC', changePercent: parseFloat(btcData.priceChangePercent) });
-            } else { apiFailed = true; }
-        } catch (e) { apiFailed = true; }
+            }
+        } catch (e) {}
 
         try {
             const xauRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT');
             if (xauRes.ok) {
                 const xauData = await xauRes.json();
                 results.push({ symbol: 'XAU', changePercent: parseFloat(xauData.priceChangePercent) });
+            }
+        } catch (e) {}
+
+        // 2. 法定通貨（遡りロジック付きAPI）
+        try {
+            const latestRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+            if (latestRes.ok) {
+                const latestData = await latestRes.json();
+                const usdLatest = latestData.usd;
+                const baseDate = new Date(latestData.date);
+
+                let pastData = null;
+                for (let i = 1; i <= 10; i++) {
+                    const d = new Date(baseDate);
+                    d.setDate(d.getDate() - i);
+                    const dateStr = d.toISOString().split('T')[0];
+                    try {
+                        const pastRes = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${dateStr}/v1/currencies/usd.json`);
+                        if (pastRes.ok) {
+                            const pastJson = await pastRes.json();
+                            if (pastJson.usd && Math.abs(((usdLatest.jpy / pastJson.usd.jpy) - 1) * 100) > 0.05) {
+                                pastData = pastJson.usd;
+                                break;
+                            }
+                        }
+                    } catch (e) {}
+                }
+
+                if (usdLatest && pastData) {
+                    const fiatSymbols = ['eur', 'jpy', 'gbp', 'aud', 'chf', 'cad', 'nzd', 'cny', 'krw'];
+                    const displayNames = {'eur':'EUR','jpy':'JPY','gbp':'GBP','aud':'AUD','chf':'CHF','cad':'CAD','nzd':'NZD','cny':'CNH','krw':'KRW'};
+                    fiatSymbols.forEach(sym => {
+                        if (usdLatest[sym] && pastData[sym]) {
+                            const change = ((pastData[sym] / usdLatest[sym]) - 1) * 100;
+                            results.push({ symbol: displayNames[sym], changePercent: change });
+                        }
+                    });
+                    results.push({ symbol: 'USD', changePercent: 0 });
+                    fiatSuccess = true;
+                } else { isMarketClosed = true; }
             } else { apiFailed = true; }
         } catch (e) { apiFailed = true; }
 
-        try {
-            const latestRes = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
-            if (!latestRes.ok) throw new Error('CDN Latest Error');
-            const latestData = await latestRes.json();
-            const usdLatest = latestData.usd;
-
-            const baseDateStr = latestData.date; 
-            const baseDate = new Date(baseDateStr);
-
-            let pastData = null;
-            for (let i = 1; i <= 10; i++) {
-                const d = new Date(baseDate);
-                d.setDate(d.getDate() - i);
-                const yyyy = d.getFullYear();
-                const mm = String(d.getMonth() + 1).padStart(2, '0');
-                const dd = String(d.getDate()).padStart(2, '0');
-                const dateStr = `${yyyy}-${mm}-${dd}`;
-                
-                try {
-                    const pastRes = await fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${dateStr}/v1/currencies/usd.json`);
-                    if (pastRes.ok) {
-                        const pastJson = await pastRes.json();
-                        if (pastJson.usd && pastJson.usd.jpy !== usdLatest.jpy) {
-                            pastData = pastJson.usd;
-                            break; 
-                        }
-                    }
-                } catch (e) { }
-            }
-
-            if (usdLatest && pastData) {
-                const fiatSymbols = ['eur', 'jpy', 'gbp', 'aud', 'chf', 'cad', 'nzd', 'cny', 'krw'];
-                const displayNames = {
-                    'eur': 'EUR', 'jpy': 'JPY', 'gbp': 'GBP', 'aud': 'AUD',
-                    'chf': 'CHF', 'cad': 'CAD', 'nzd': 'NZD', 'cny': 'CNH', 'krw': 'KRW'
-                };
-
-                fiatSymbols.forEach(sym => {
-                    if (usdLatest[sym] && pastData[sym]) {
-                        const currentRate = usdLatest[sym];
-                        const prevRate = pastData[sym];
-                        const changePercent = ((prevRate / currentRate) - 1) * 100;
-                        results.push({ symbol: displayNames[sym], changePercent: changePercent });
-                    }
-                });
-                results.push({ symbol: 'USD', changePercent: 0 });
-                fiatSuccess = true;
-            }
-        } catch (e) { apiFailed = true; }
-
-        if (!fiatSuccess || results.length < 5) {
-            status.innerHTML = '<span style="color:#e67e22; font-weight:bold;">通信制限のため、表のデータを基にグラフを生成しました</span>';
+        // 3. 【最終手段】APIがダメなら表からスクレイピング
+        if (!fiatSuccess || results.length < 5 || isMarketClosed) {
+            status.innerHTML = '<span style="color:#e67e22; font-weight:bold;">※API更新前のため、サマリー表の数値からグラフを生成しました</span>';
             results = []; 
             const rows = document.querySelectorAll('.summary-detail-table tbody tr');
             rows.forEach(row => {
                 const cells = row.querySelectorAll('td');
                 if(cells.length < 5) return;
                 const symbolText = cells[0].textContent;
-                const changeText = cells[4].textContent;
-                const changeVal = parseFloat(changeText.replace('%', '').replace('+', ''));
+                const changeVal = parseFloat(cells[4].textContent.replace('%', '').replace('+', ''));
                 if (isNaN(changeVal)) return;
 
                 if (symbolText.includes('EURUSD')) results.push({ symbol: 'EUR', changePercent: changeVal });
@@ -757,16 +747,14 @@
             results.push({ symbol: 'USD', changePercent: 0.00 });
         } else {
             const now = new Date();
-            let timeStr = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-            if (apiFailed) timeStr += ' <span style="color:#e67e22;">(※一部代替データ)</span>';
-            status.innerHTML = timeStr;
+            status.innerHTML = `最終更新: ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
         }
 
         if (results.length > 0) {
             results.sort((a, b) => b.changePercent - a.changePercent);
             renderChart(results);
         } else {
-            status.innerHTML = '<span style="color:#e74c3c;">データの生成に失敗しました。</span>';
+            status.innerHTML = '<span style="color:#e74c3c;">データ生成失敗</span>';
         }
         btn.disabled = false;
         btn.textContent = '🔄 最新データ取得';
@@ -785,7 +773,6 @@
 
             const row = document.createElement('div');
             row.className = 'asset-row';
-
             const nameDiv = document.createElement('div');
             nameDiv.className = 'asset-name';
             nameDiv.textContent = item.symbol;
@@ -802,7 +789,6 @@
             fill.className = 'bar-fill ' + (isPositive ? 'fill-positive' : 'fill-negative');
             
             setTimeout(() => { fill.style.width = `${barWidth}%`; }, 50);
-
             if (isPositive) barRight.appendChild(fill);
             else if (!isZero) barLeft.appendChild(fill);
 
@@ -811,8 +797,7 @@
             barArea.appendChild(barRight);
 
             const valueDiv = document.createElement('div');
-            let colorClass = isZero ? 'val-zero' : (isPositive ? 'val-pos' : 'val-neg');
-            valueDiv.className = `asset-value ${colorClass}`;
+            valueDiv.className = `asset-value ${isZero ? 'val-zero' : (isPositive ? 'val-pos' : 'val-neg')}`;
             valueDiv.textContent = (isPositive ? '+' : '') + change + '%';
 
             row.appendChild(nameDiv);
@@ -823,15 +808,16 @@
     }
 
     function saveAsImage() {
-        const reportElement = document.getElementById('report-content');
-        html2canvas(reportElement, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
+        html2canvas(document.getElementById('report-content'), { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
-            link.download = 'MarketReport_Final.png';
+            link.download = 'MarketReport.png';
             link.click();
         });
     }
 </script>
+
+
 
 </body>
 </html>

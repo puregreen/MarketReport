@@ -126,45 +126,31 @@
     .order-item { margin-bottom: 12px; line-height: 1.5; }
     .order-price-label { font-weight: bold; color: #d35400; display: inline-block; width: 85px; }
     .ob-time { font-size: 12px; color: #7f8c8d; margin-bottom: 8px; text-align: left; }
+    
+    /* 🌟 オーダーブックのテーブル色設定（復活） 🌟 */
     .ob-table { width: 100%; border-collapse: collapse; border: 1px solid #bdc3c7; table-layout: auto; }
     .ob-table td { padding: 10px 12px; border: 1px solid #bdc3c7; font-size: 13.5px; white-space: normal; text-align: left;}
     .ob-table .ob-price { font-weight: bold; width: 110px; text-align: center; color: #2c3e50; white-space: nowrap; }
-    .ob-sell { background-color: #eaf4fc; }
-    .ob-buy { background-color: #fcece8; }
-    .ob-current { background-color: #ffffff; font-weight: bold; border: 2.5px solid #3498db; }
+    .ob-sell { background-color: #eaf4fc; } /* 売り：薄い青 */
+    .ob-buy { background-color: #fcece8; }  /* 買い：薄い赤 */
+    .ob-current { background-color: #ffffff; font-weight: bold; border: 2.5px solid #3498db; } /* 現在値：白背景＋青枠 */
     
     .comment-box { background-color: #eafaf1; border-left: 5px solid #2ecc71; padding: 18px; margin-top: 30px; border-radius: 4px; font-size: 14px; line-height: 1.7; }
     .footer { margin-top: 40px; border-top: 1px solid #bdc3c7; padding-top: 20px; text-align: center; color: #7f8c8d; font-size: 11px; line-height: 1.5; }
 </style>
 </head>
+
 <body>
 
 <div class="report-wrapper">
-    
     <div class="top-nav">
         <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
-        <button class="btn-save" onclick="saveAsImage()">
-            📷 レポートを画像として保存
-        </button>
+        <button class="btn-save" onclick="saveAsImage()">📷 レポートを画像として保存</button>
     </div>
 
     <div class="link-section">
-        <div class="link-card">
-            <a href="exness_intro.html" class="link-btn exness">Exness</a>
-            <div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる世界最高峰の極狭スプレッド口座。</div>
-        </div>
-        <div class="link-card">
-            <a href="xs_intro.html" class="link-btn xs">XS</a>
-            <div class="link-desc">機関投資家レベルの最高水準環境。多種多様な銘柄を誇る次世代マルチアセットブローカー。</div>
-        </div>
-        <div class="link-card">
-            <a href="xmtrading_intro.html" class="link-btn xm">XMTrading</a>
-            <div class="link-desc">日本人シェアNo.1。豪華な100%入金ボーナスと追証なしの安心環境で、初心者に最もおすすめ。</div>
-        </div>
-        <div class="link-card">
-            <a href="bitwallet_intro.html" class="link-btn bitwallet">bitwallet</a>
-            <div class="link-desc">海外FXの入出金を最速・安価に。安全かつスムーズな資金管理を実現する必須ツール。</div>
-        </div>
+        <div class="link-card"><a href="exness_intro.html" class="link-btn exness">Exness</a><div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる極狭スプレッド。</div></div>
+        <div class="link-card"><a href="xs_intro.html" class="link-btn xs">XS</a><div class="link-desc">機関投資家レベルの環境。多種多様な銘柄を誇る次世代ブローカー。</div></div>
     </div>
 
     <div class="tradingview-widget-container" style="margin-bottom: 25px;">
@@ -184,12 +170,8 @@
         { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" }
       ],
       "showSymbolLogo": true,
-      "colorTheme": "light",
-      "isTransparent": false,
-      "displayMode": "adaptive",
-      "locale": "ja"
-    }
-      </script>
+      "colorTheme": "light", "isTransparent": false, "displayMode": "adaptive", "locale": "ja"
+    }</script>
     </div>
 
     <div class="a4-container" id="report-content">
@@ -197,18 +179,17 @@
         <h1>📊 マーケットレポート (緊急版)</h1>
 
         <div class="emergency-box">
-            <div class="emergency-title">【緊急特報】イランがホルムズ海峡を「再封鎖」。有事のドル買いで159円台へ急騰</div>
+            <div class="emergency-title">【特報】ホルムズ海峡「再封鎖」と船舶への発砲。米国からの新提案にイラン回答待ち</div>
             <p style="margin: 0; font-size: 14px; font-weight: bold;">
-                週末に報じられた「ホルムズ海峡の開放」は幻となりました。米国によるイラン港湾の海上封鎖継続を理由に、イラン革命防衛隊（IRGC）がホルムズ海峡の「再封鎖」を宣言。実際に船舶への発砲事件も発生し、中東情勢は一気に緊迫化しています。<br><br>
-                この事態を受け、エネルギー供給遮断の恐怖からUSOIL（原油）が暴騰。市場は完全な「リスクオフ（株安）」に傾き、パニック的な「有事のドル買い」が発生。週明けの東京為替市場ではドル円（USDJPY）が159.02円まで急騰する事態となっています。
+                週末の「海峡開放」報道による原油14%急落は、イラン革命防衛隊による「再封鎖」と船舶への発砲事件により、強烈な買い戻しへと塗り替えられました。現在、パキスタンを仲介役とした米国の「新提案」をイランが検討中。回答一つで相場が上下に数十ドル飛ぶ「極限の待機状態」に突入しています。
             </p>
         </div>
+
         <h2>【📌 市場概況まとめ】</h2>
         <p>
             週末にかけてトランプ米大統領やイランのアラグチ外相から「レバノンでの恒久的な停戦へ」「ホルムズ海峡の完全開放」といった地政学リスク緩和のニュースが伝わりました。しかし、ホルムズ海峡再封鎖の報道により「インフレ再燃」に警戒を強めており、USOIL（原油）は前日比<span style="font-weight:bold; color:#e74c3c;">+5.51%の急騰（87ドル台）</span>を見せています。<br>
             この原油高の直撃を受け、世界的なリスクオフ（株安）が進行。日経平均（JP225）は-1.45%の大幅調整となり、米国株やビットコインも先週末の熱狂から一転して下落基調に転じています。一方、為替市場では資金が安全資産のドルに回帰しており、ドル円（USDJPY）は再び<span style="font-weight:bold; color:#3498db;">159.00円の大台へ浮上</span>。片山財務相が「投機的な動き」と極めて強い牽制を行う中、本日よりFRBのブラックアウト期間（要人発言自粛）に入るため、純粋な需給とテクニカル（160円のオプション）を巡る攻防に注目が集まっています。
         </p>
-
         <h2>【📈 主要銘柄の見通し（サマリー）】</h2>
         <div style="text-align: right; font-size: 11px; color: #7f8c8d; margin-bottom: 5px;">※2026年4月20日 07:30現在（行をタップで詳細へジャンプ）</div>
         <table class="summary-detail-table">
@@ -224,8 +205,8 @@
                 <tr onclick="location.href='#detail-us30'"><td>🇺🇸 US30</td><td class="view-bearish">🔴⬇️ 弱気</td><td>49,509.0</td><td>49,023.9</td><td class="val-neg">-0.98%</td><td>48,800 / 48,500</td><td>49,200 / 49,500</td></tr>
                 <tr onclick="location.href='#detail-ustec'"><td>💻 USTEC</td><td class="view-bearish">🔴⬇️ 弱気</td><td>26,711.70</td><td>26,503.34</td><td class="val-neg">-0.78%</td><td>26,200 / 26,000</td><td>26,800 / 27,000</td></tr>
                 <tr onclick="location.href='#detail-jp225'"><td>🇯🇵 JP225</td><td class="view-bearish">🔴⬇️ 弱気</td><td>59,720.0</td><td>58,852.9</td><td class="val-neg">-1.45%</td><td>58,500 / 58,000</td><td>59,200 / 59,500</td></tr>
-                <tr onclick="location.href='#detail-xauusd'"><td>🥇 XAUUSD</td><td class="view-bullish">🔵⬆️ 強気</td><td>4,833.200</td><td>4,786.866</td><td class="val-neg">-0.96%</td><td>4,750 / 4,700</td><td>4,850 / 4,900</td></tr>
-                <tr onclick="location.href='#detail-usoil'"><td>🛢️ USOIL</td><td class="view-bullish">🔵⬆️ 強気</td><td>83.360</td><td>87.960</td><td class="val-pos">+5.51%</td><td>86.00 / 84.00</td><td>90.00 / 95.00</td></tr>
+                <tr onclick="location.href='#detail-xauusd'"><td>🥇 XAUUSD</td><td class="view-bullish">🔵⬆️ 有事</td><td>4,833.200</td><td>4,786.866</td><td class="val-neg">-0.96%</td><td>4,750 / 4,700</td><td>4,850 / 4,900</td></tr>
+                <tr onclick="location.href='#detail-usoil'"><td>🛢️ USOIL</td><td class="view-bullish">🔵⬆️ パニック</td><td>83.360</td><td>87.960</td><td class="val-pos">+5.51%</td><td>86.00 / 84.00</td><td>90.00 / 95.00</td></tr>
                 <tr onclick="location.href='#detail-eurusd'"><td>🇪🇺 EURUSD</td><td class="view-bearish">🔴⬇️ 弱気</td><td>1.17646</td><td>1.17329</td><td class="val-neg">-0.27%</td><td>1.1700 / 1.1650</td><td>1.1780 / 1.1820</td></tr>
                 <tr onclick="location.href='#detail-gbpusd'"><td>🇬🇧 GBPUSD</td><td class="view-bearish">🔴⬇️ 弱気</td><td>1.35185</td><td>1.34820</td><td class="val-neg">-0.27%</td><td>1.3450 / 1.3400</td><td>1.3550 / 1.3600</td></tr>
                 <tr onclick="location.href='#detail-usdjpy'"><td>🇯🇵 USDJPY</td><td class="view-bullish">🔵⬆️ 強気（警戒）</td><td>158.620</td><td>159.020</td><td class="val-pos">+0.25%</td><td>158.50 / 158.00</td><td>159.60 / 160.00</td></tr>
@@ -277,19 +258,31 @@
         <h2>【🗣️ 本日の要人発言・ニュースハイライト】</h2>
         <div class="box-warning" style="background-color: #fff9e6; border-left: 5px solid #e74c3c; padding: 15px; margin-bottom: 20px; font-size: 13.5px; line-height: 1.6;">
             <ul style="margin: 0; padding-left: 20px;">
-                <li><span style="font-weight:bold; color:#e74c3c;">イラン革命防衛隊（IRGC）：</span> 「ホルムズ海峡への接近は敵との協力と見なし、違反した船舶は標的にする」と警告、実際に発砲。</li>
-                <li><span style="font-weight:bold; color:#e74c3c;">アメリカ政府：</span> イランの港湾に対する海上封鎖を解除しない方針。中東以外の水域でもイラン関連船舶の取り締まり準備か。</li>
-                <li><span style="font-weight:bold; color:#3498db;">市場反応：</span> 「米国がイラン港湾を封鎖、イランがホルムズ海峡の再封鎖を宣言」の報道で<span style="font-weight:bold;">有事のドル買い</span>が急拡大。</li>
-                <li><span style="font-weight:bold; color:#d35400;">片山財務相：</span> 「為替相場は投機的な動きがかなりを占めている」と円安を牽制。</li>
+                <li><span style="font-weight:bold; color:#d35400;">イラン最高安全保障委員会：</span> 「仲介国パキスタンから米国側の新たな提案を受け取った。提案を検討中でまだ回答はしていない。」</li>
+                <li><span style="font-weight:bold; color:#e74c3c;">イラン革命防衛隊（IRGC）：</span> 米国が港湾封鎖を解除しないことに反発し、ホルムズ海峡の「再封鎖」を宣言。違反した船舶は標的にすると警告し、実際に発砲。</li>
+                <li><span style="font-weight:bold; color:#d35400;">片山財務相：</span> 「為替相場は投機的な動きがかなりを占めている」と円安を強く牽制。</li>
+                <li><span style="font-weight:bold; color:#34495e;">米国FRB：</span> 本日よりFOMCに向けた「ブラックアウト期間」入り（～30日まで）。金融政策に関する発言は一切自粛へ。</li>
             </ul>
         </div>
 
         <h2>【🔔 市場イベントハイライト】</h2>
         <ul>
-            <li><span style="font-weight:bold; color:#e74c3c;">パニック再来。ホルムズ海峡「再封鎖」で原油暴騰：</span> 先週の一時的な開放は罠でした。米国の海上封鎖に対抗し、イランが海運の要衝を再封鎖、船舶への発砲事件まで発生しました。エネルギーの動脈が断たれる恐怖から、USOIL（WTI原油）が前日比+5.51%と急激に吹き上がっています。</li>
+            <li><span style="font-weight:bold; color:#e74c3c;">パニック再来。一時14%暴落からの原油暴騰：</span> 先週末の「海峡開放」報道でUSOILは一時14%も暴落（ショートカバー）しましたが、それは罠でした。米国の海上封鎖継続に対抗し、イランが海運の要衝を再封鎖。船舶への発砲事件まで発生したことで、前日比+5.51%と急激な全戻し（買い戻しパニック）を演じています。現在は米国の新提案に対する「イランの回答待ち」という極限状態です。</li>
             <li><span style="font-weight:bold; color:#3498db;">日米株価指数・暗号資産が全面安のクラッシュ展開：</span> 第3次オイルショックとも言えるスタグフレーション（物価高と景気後退の同時進行）の恐怖から、リスク資産がパニック売りに見舞われています。日経平均は-1.45%の大幅下落、S&P500やビットコインも先週末の史上最高値圏から真っ逆さまに調整しています。</li>
             <li><span style="font-weight:bold; color:#e74c3c;">有事のドル買いでUSDJPYは159.02円へ急騰：</span> 危機時の資金逃避先として最強の米ドルに買いが殺到。円も安全資産ですが、有事のドル買い圧力のほうが圧倒的に強く、朝方の為替市場でドル円は159.00円台へ急騰。政府・日銀の防衛ラインである「160円」のレッドゾーンへ突入しました。</li>
         </ul>
+
+        <h2>【📅 経済指標カレンダー - 前営業日（4月17日）】</h2>
+        <table class="calendar-table">
+            <colgroup><col style="width:12%"><col style="width:8%"><col style="width:50%"><col style="width:10%"><col style="width:10%"><col style="width:10%"></colgroup>
+            <thead>
+                <tr><th>時刻</th><th>国</th><th>指標名</th><th>結果</th><th>予想</th><th>前回</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>21:15</td><td>🇨🇦</td><td><span style="color: #d4ac0d; font-weight: bold;">★</span> <span>3月 カナダ・住宅着工件数</span></td><td><span style="font-weight:bold; color:#e74c3c;">23.59万</span></td><td>25.00万</td><td>25.09万</td></tr>
+                <tr><td>21:30</td><td>🇨🇦</td><td><span style="color: #d4ac0d; font-weight: bold;">★</span> <span>2月 カナダ・国際証券取扱高</span></td><td><span style="font-weight:bold; color:#e74c3c;">62億</span></td><td>---</td><td>467億</td></tr>
+            </tbody>
+        </table>
 
         <h2>【📅 経済指標カレンダー - 本⽇（4月20日）】</h2>
         <table class="calendar-table">
@@ -299,90 +292,46 @@
             </thead>
             <tbody>
                 <tr><td>07:45</td><td>🇳🇿</td><td><span style="color: #e67e22; font-weight: bold;">★★</span> <span>3月 NZ・貿易収支</span></td><td>-0.1pips</td><td>---</td><td>-2.57億</td></tr>
+                <tr><td>08:01</td><td>🇬🇧</td><td><span style="color: #e67e22; font-weight: bold;">★★</span> <span>4月 英国・ライトムーブ住宅価格 (前月/前年)</span></td><td>+0.5pips</td><td>---</td><td>0.8% / -0.2%</td></tr>
                 <tr><td>10:00</td><td>🇨🇳</td><td><span style="color: #e67e22; font-weight: bold;">★★</span> <span>4月 中国・最優遇貸出金利 (LPR 1年/5年)</span></td><td>-3.6pips</td><td>3.00% / 3.50%</td><td>3.00% / 3.50%</td></tr>
                 <tr><td>13:30</td><td>🇯🇵</td><td><span style="color: #e67e22; font-weight: bold;">★★</span> <span>2月 日本・第3次産業活動指数</span></td><td>-2.4pips</td><td>---</td><td>1.7%</td></tr>
                 <tr><td>15:00</td><td>🇩🇪</td><td><span style="color: #e67e22; font-weight: bold;">★★</span> <span>3月 ドイツ・生産者物価指数 (前月/前年)</span></td><td>-7.0pips</td><td>---</td><td>-0.5% / -3.3%</td></tr>
+                <tr><td>18:00</td><td>🇪🇺</td><td><span style="color: #e67e22; font-weight: bold;">★★</span> <span>2月 ユーロ・建設業生産高 (前月/前年)</span></td><td>-0.6pips</td><td>---</td><td>-0.1% / -1.9%</td></tr>
                 <tr><td>21:30</td><td>🇨🇦</td><td><span style="color: #e74c3c; font-weight: bold;">★★★</span> <span>3月 カナダ・消費者物価指数(CPI) (前月/前年)</span></td><td>-3.8pips</td><td>1.1% / 2.5%</td><td>0.5% / 1.8%</td></tr>
             </tbody>
         </table>
-        
+
+        <h2>【🎙️ 要人発言・イベント - 本日（4月20日）】</h2>
+        <table class="calendar-table">
+            <colgroup><col style="width:15%"><col style="width:85%"></colgroup>
+            <thead>
+                <tr><th>時刻</th><th>内容 / イベント名</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>13:30</td><td>🇯🇵 日銀「生活意識に関するアンケート調査」</td></tr>
+                <tr><td>本日より</td><td>🇺🇸 <span style="color: #e74c3c; font-weight: bold;">FRBブラックアウト期間</span>（金融政策に関する発言自粛 / 〜30日）</td></tr>
+            </tbody>
+        </table>
         <h2>【📝 各銘柄の詳細分析（ファンダメンタル＆テクニカル）】</h2>
         <ul class="analysis-list">
             
-            <li id="detail-usdjpy">
-                <span class="symbol-title">🇯🇵 USDJPY (ドル円)</span>
+            <li id="detail-dxy">
+                <span class="symbol-title">🇺🇸 DXY (ドルインデックス)</span>
                 <table class="summary-detail-table">
-                    <tr><th>見通し</th><td>🔵⬆️ <span class="view-bullish">強気（警戒）</span></td><th>前日比</th><td class="val-pos">+0.25%</td><th>現在値※</th><td>159.020</td></tr>
-                    <tr><th>前日の終値</th><td>158.620</td><th>サポート①/②</th><td>158.50 / 158.00</td><th>レジスタンス①/②</th><td>159.60 / 160.00</td></tr>
+                    <tr><th>見通し</th><td>🔵⬆️ <span class="view-bullish">強気</span></td><th>前日比</th><td class="val-pos">+0.26%</td><th>現在値※</th><td>98.481</td></tr>
+                    <tr><th>前日の終値</th><td>98.225</td><th>サポート①/②</th><td>98.00 / 97.80</td><th>レジスタンス①/②</th><td>98.80 / 99.00</td></tr>
                 </table>
                 <div class="asset-dashboard">
                     <div class="asset-info-col">
-                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:USDJPY", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
-                        <p class="asset-description">「有事のドル買い」が爆発し、朝方の為替市場で<span style="font-weight:bold; color:#e74c3c;">159.02円まで急騰</span>。ホルムズ海峡封鎖によるパニックが、円買い（リスクオフ）よりも圧倒的なドル需要を生んでいます。片山財務相の強い牽制と160円の最終防衛線に向けた極限のチキンレースです。</p>
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "CAPITALCOM:DXY", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">中東パニックの再燃により、究極の安全資産であるドルに猛烈な買いが集まっています。FRBブラックアウト期間中で金利引き下げ観測も牽制されないため、リスクオフの受け皿として青天井で買われやすい環境です。</p>
                     </div>
                     <div class="asset-meter-col">
-                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:USDJPY", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "TVC:DXY", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
                     </div>
                 </div>
-                <div class="chart-container" id="tv_usdjpy"></div>
-                <div class="strategy-box">📝 本日の戦略：パニックドル買いへの順張り。ただし160円突破での数百pipsの垂直落下（介入）リスクがあるため、常に浅いストップロスを置くこと。</div>
-            </li>
-
-            <li id="detail-xauusd">
-                <span class="symbol-title">🥇 XAUUSD (ゴールド)</span>
-                <table class="summary-detail-table">
-                    <tr><th>見通し</th><td>🔵⬆️ <span class="view-bullish">強気</span></td><th>前日比</th><td class="val-neg">-0.96%</td><th>現在値※</th><td>4,786.866</td></tr>
-                    <tr><th>前日の終値</th><td>4,833.200</td><th>サポート①/②</th><td>4,750 / 4,700</td><th>レジスタンス①/②</th><td>4,850 / 4,900</td></tr>
-                </table>
-                <div class="asset-dashboard">
-                    <div class="asset-info-col">
-                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:XAUUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
-                        <p class="asset-description">先週末は「停戦期待」で売られましたが、本日の「船舶発砲・海峡再封鎖」のニュースを受け、再び究極の安全資産としての存在感が高まっています。ドル高の重石はありますが、地政学パニックが買いを強力に下支えします。</p>
-                    </div>
-                    <div class="asset-meter-col">
-                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:XAUUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
-                    </div>
-                </div>
-                <div class="chart-container" id="tv_xauusd"></div>
-                <div class="strategy-box">📝 本日の戦略：有事の金買い再開。4,750ドル水準を背にした強気のロング戦略。</div>
-            </li>
-
-            <li id="detail-usoil">
-                <span class="symbol-title">🛢️ USOIL (WTI原油)</span>
-                <table class="summary-detail-table">
-                    <tr><th>見通し</th><td>🔵⬆️ <span class="view-bullish">強気</span></td><th>前日比</th><td class="val-pos">+5.51%</td><th>現在値※</th><td>87.960</td></tr>
-                    <tr><th>前日の終値</th><td>83.360</td><th>サポート①/②</th><td>86.00 / 84.00</td><th>レジスタンス①/②</th><td>90.00 / 95.00</td></tr>
-                </table>
-                <div class="asset-dashboard">
-                    <div class="asset-info-col">
-                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:WTICOUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
-                        <p class="asset-description">世界の原油の要衝であるホルムズ海峡の「再封鎖宣言」により、供給不安から<span style="font-weight:bold; color:#3498db;">前日比+5.51%の暴騰</span>を演じています。中東戦争再燃の懸念から、90ドルの壁を容易に突破するエネルギーを秘めています。</p>
-                    </div>
-                    <div class="asset-meter-col">
-                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "NSE:OIL", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
-                    </div>
-                </div>
-                <div class="chart-container" id="tv_usoil"></div>
-                <div class="strategy-box">📝 本日の戦略：パニック的な上昇相場。ショートは絶対厳禁。いかなる押し目も買い場となります。</div>
-            </li>
-
-            <li id="detail-jp225">
-                <span class="symbol-title">🇯🇵 JP225 (日経225)</span>
-                <table class="summary-detail-table">
-                    <tr><th>見通し</th><td>🔴⬇️ <span class="view-bearish">弱気</span></td><th>前日比</th><td class="val-neg">-1.45%</td><th>現在値※</th><td>58,852.9</td></tr>
-                    <tr><th>前日の終値</th><td>59,720.0</td><th>サポート①/②</th><td>58,500 / 58,000</td><th>レジスタンス①/②</th><td>59,200 / 59,500</td></tr>
-                </table>
-                <div class="asset-dashboard">
-                    <div class="asset-info-col">
-                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:JP225YJPY", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
-                        <p class="asset-description">中東の戦争懸念と原油価格暴騰によるスタグフレーション（インフレ+不況）懸念が直撃し、<span style="font-weight:bold; color:#e74c3c;">-1.45%のクラッシュ</span>。円安の恩恵すらも打ち消すほどの強烈なリスクオフ相場です。</p>
-                    </div>
-                    <div class="asset-meter-col">
-                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OSE:NK2251!", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
-                    </div>
-                </div>
-                <div class="chart-container" id="tv_jp225"></div>
-                <div class="strategy-box">📝 本日の戦略：リスクオフのパニック売り。58,500円のサポートを割り込めば58,000円までストレートに落ちる危険性大。戻り売り徹底。</div>
+                <div class="chart-container" id="tv_dxy"></div>
+                <div class="strategy-box">📝 本日の戦略：有事のドル買い。押し目を待たずに98.00を背にしたストロングロング。</div>
             </li>
 
             <li id="detail-us500">
@@ -394,45 +343,243 @@
                 <div class="asset-dashboard">
                     <div class="asset-info-col">
                         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:SPX500USD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
-                        <p class="asset-description">先週の熱狂的な7,000ドル突破から一転、中東の戦火拡大の恐怖が市場を覆い、逃避の売りが殺到しています。FRBがブラックアウト期間に入ったことで、当局からの火消し発言も期待できず、テクニカルな下落が加速しやすい環境です。</p>
+                        <p class="asset-description">原油暴騰によるインフレ再燃の恐怖が直撃。先週末の7,000ドル突破の熱狂から一転、パニック的な逃避売りが起きています。イランの「回答待ち」による不透明感も重なり、テクニカル的にも下落余地が大きく残されています。</p>
                     </div>
                     <div class="asset-meter-col">
                         <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "SP:SPX", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
                     </div>
                 </div>
                 <div class="chart-container" id="tv_us500"></div>
-                <div class="strategy-box">📝 本日の戦略：地政学リスクによる調整入り。7,100ドル付近での戻り売りで7,000ドルの攻防を見極める。</div>
+                <div class="strategy-box">📝 本日の戦略：リスクオフのクラッシュ相場。7,100ドルを背にした戻り売りで、7,000ドルの攻防を見極める展開。</div>
             </li>
-            
-            </ul>
+
+            <li id="detail-us30">
+                <span class="symbol-title">🇺🇸 US30 (NYダウ)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔴⬇️ <span class="view-bearish">弱気</span></td><th>前日比</th><td class="val-neg">-0.98%</td><th>現在値※</th><td>49,023.9</td></tr>
+                    <tr><th>前日の終値</th><td>49,509.0</td><th>サポート①/②</th><td>48,800 / 48,500</td><th>レジスタンス①/②</th><td>49,200 / 49,500</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:US30USD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">スタグフレーション（景気後退と物価高）懸念により、景気敏感株を中心に幅広く売り込まれています。49,000ドルの大台防衛が危うい状況です。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:US30USD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_us30"></div>
+                <div class="strategy-box">📝 本日の戦略：下落モメンタム強。いかなる反発も売り場と見なし、48,800のサポートブレイクを狙う。</div>
+            </li>
+
+            <li id="detail-ustec">
+                <span class="symbol-title">💻 USTEC (ナスダック100)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔴⬇️ <span class="view-bearish">弱気</span></td><th>前日比</th><td class="val-neg">-0.78%</td><th>現在値※</th><td>26,503.34</td></tr>
+                    <tr><th>前日の終値</th><td>26,711.70</td><th>サポート①/②</th><td>26,200 / 26,000</td><th>レジスタンス①/②</th><td>26,800 / 27,000</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:NAS100USD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">エネルギー価格急騰による金利高止まりの恐怖が、高PERのハイテク銘柄を直撃。逃避資金が抜け、26,500ドル水準まで急落しています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "MEXC:NAS100USDT.P", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_ustec"></div>
+                <div class="strategy-box">📝 本日の戦略：リスクオフへの順張り。26,800を背にしたショート一択。</div>
+            </li>
+
+            <li id="detail-jp225">
+                <span class="symbol-title">🇯🇵 JP225 (日経225)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔴⬇️ <span class="view-bearish">弱気</span></td><th>前日比</th><td class="val-neg">-1.45%</td><th>現在値※</th><td>58,852.9</td></tr>
+                    <tr><th>前日の終値</th><td>59,720.0</td><th>サポート①/②</th><td>58,500 / 58,000</td><th>レジスタンス①/②</th><td>59,200 / 59,500</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:JP225YJPY", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">中東戦火の拡大と原油暴騰による日本経済へのダメージ懸念から、先週末に買い上げた海外勢が一斉に売り逃げています。<span style="font-weight:bold; color:#e74c3c;">-1.45%のクラッシュ</span>となり、円安の恩恵を完全に打ち消す強烈なパニック相場です。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OSE:NK2251!", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_jp225"></div>
+                <div class="strategy-box">📝 本日の戦略：パニック売り継続。58,500円のサポートを割り込めば58,000円までストレートに落ちる危険性大。戻り売り徹底。</div>
+            </li>
+
+            <li id="detail-xauusd">
+                <span class="symbol-title">🥇 XAUUSD (ゴールド)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔵⬆️ <span class="view-bullish">有事</span></td><th>前日比</th><td class="val-neg">-0.96%</td><th>現在値※</th><td>4,786.866</td></tr>
+                    <tr><th>前日の終値</th><td>4,833.200</td><th>サポート①/②</th><td>4,750 / 4,700</td><th>レジスタンス①/②</th><td>4,850 / 4,900</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:XAUUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">先週末は「停戦期待」で売られましたが、本日の「船舶発砲・海峡再封鎖」のニュースを受け、再び究極の安全資産としての存在感が高まっています。ドル高の重石はあり数字上はマイナスですが、下値から強烈に買い戻される有事の相場です。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:XAUUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_xauusd"></div>
+                <div class="strategy-box">📝 本日の戦略：有事の金買い再開。イランの「拒否」回答を見越した、4,750ドル水準での強気のロング戦略。</div>
+            </li>
+
+            <li id="detail-usoil">
+                <span class="symbol-title">🛢️ USOIL (WTI原油)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔵⬆️ <span class="view-bullish">パニック</span></td><th>前日比</th><td class="val-pos">+5.51%</td><th>現在値※</th><td>87.960</td></tr>
+                    <tr><th>前日の終値</th><td>83.360</td><th>サポート①/②</th><td>86.00 / 84.00</td><th>レジスタンス①/②</th><td>90.00 / 95.00</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:WTICOUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">先週末の開放報道で一時14%の暴落を見せたものの、それは「罠」でした。イランによる再封鎖と船舶発砲で、ショートポジションの強烈な買い戻しが発生し全戻し以上の急反発。現在は米国の新提案に対する「イランの回答待ち」という丁半博打相場。受諾なら暴落、拒否なら100ドルへの暴騰という極端なシナリオを内包しています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "NSE:OIL", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_usoil"></div>
+                <div class="strategy-box">📝 本日の戦略：予測不能。回答が出るまで手出し無用（または極小ロットのみ）。</div>
+            </li>
+
+            <li id="detail-eurusd">
+                <span class="symbol-title">🇪🇺 EURUSD (ユーロドル)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔴⬇️ <span class="view-bearish">弱気</span></td><th>前日比</th><td class="val-neg">-0.27%</td><th>現在値※</th><td>1.17329</td></tr>
+                    <tr><th>前日の終値</th><td>1.17646</td><th>サポート①/②</th><td>1.1700 / 1.1650</td><th>レジスタンス①/②</th><td>1.1780 / 1.1820</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:EURUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">有事のドル買いの直撃を受け、ユーロは1.17台前半へ下落しています。欧州は中東のエネルギー依存度が高いため、有事の際にはユーロ売り圧力がかかりやすい構造にあります。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:EURUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_eurusd"></div>
+                <div class="strategy-box">📝 本日の戦略：ドル一強相場への順張り。1.1780付近での戻り売りで1.1700割れを狙う。</div>
+            </li>
+
+            <li id="detail-gbpusd">
+                <span class="symbol-title">🇬🇧 GBPUSD (ポンドドル)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔴⬇️ <span class="view-bearish">弱気</span></td><th>前日比</th><td class="val-neg">-0.27%</td><th>現在値※</th><td>1.34820</td></tr>
+                    <tr><th>前日の終値</th><td>1.35185</td><th>サポート①/②</th><td>1.3450 / 1.3400</td><th>レジスタンス①/②</th><td>1.3550 / 1.3600</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:GBPUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">ドル高の圧力に抗えず1.35の大台を完全に割り込みました。リスクオフの地合いでは、投機的な動きの強いポンドは真っ先に売られやすい傾向にあります。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:GBPUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_gbpusd"></div>
+                <div class="strategy-box">📝 本日の戦略：1.3500をレジスタンスに転換。戻り売り優勢。</div>
+            </li>
+
+            <li id="detail-usdjpy">
+                <span class="symbol-title">🇯🇵 USDJPY (ドル円)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔵⬆️ <span class="view-bullish">強気（警戒）</span></td><th>前日比</th><td class="val-pos">+0.25%</td><th>現在値※</th><td>159.020</td></tr>
+                    <tr><th>前日の終値</th><td>158.620</td><th>サポート①/②</th><td>158.50 / 158.00</td><th>レジスタンス①/②</th><td>159.60 / 160.00</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:USDJPY", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">中東の再封鎖報道を受け、有事のドル買いが加速。朝方の為替市場で<span style="font-weight:bold; color:#e74c3c;">159.02円まで急騰</span>し大台を奪還しました。介入ラインの160円まで残り1円。片山財務相の牽制が入る中、米国の提案に対するイランの回答待ちで極めてボラティリティが高い状態です。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:USDJPY", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_usdjpy"></div>
+                <div class="strategy-box">📝 本日の戦略：ジリ高も介入リスク最大。159.80以上は細かな利確を。浅いストップロス必須。</div>
+            </li>
+
+            <li id="detail-audusd">
+                <span class="symbol-title">🇦🇺 AUDUSD (豪ドル米ドル)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔴⬇️ <span class="view-bearish">弱気</span></td><th>前日比</th><td class="val-neg">-0.46%</td><th>現在値※</th><td>0.71377</td></tr>
+                    <tr><th>前日の終値</th><td>0.71706</td><th>サポート①/②</th><td>0.7100 / 0.7050</td><th>レジスタンス①/②</th><td>0.7180 / 0.7200</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:AUDUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">株安・リスクオフの直撃を最も受けやすい「リスク通貨」として真っ先に売られています。ドル全面高の影響も重なり、0.71台前半へと水準を大きく切り下げました。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:AUDUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_audusd"></div>
+                <div class="strategy-box">📝 本日の戦略：パニックリスクオフへの順張り。0.7180付近での戻り売り。</div>
+            </li>
+
+            <li id="detail-btcusd">
+                <span class="symbol-title">🅑 BTCUSD (ビットコイン)</span>
+                <table class="summary-detail-table">
+                    <tr><th>見通し</th><td>🔴⬇️ <span class="view-bearish">弱気</span></td><th>前日比</th><td class="val-neg">-2.32%</td><th>現在値※</th><td>73,986.38</td></tr>
+                    <tr><th>前日の終値</th><td>75,742.00</td><th>サポート①/②</th><td>73,000 / 72,000</td><th>レジスタンス①/②</th><td>75,000 / 76,000</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "BITSTAMP:BTCUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">先週末の75,000ドル突破の熱狂はどこへやら。中東の地政学リスクを最も嫌気する「究極のリスク資産」として、真っ先に現金（ドル）へと逃避の売りに晒されており、<span style="font-weight:bold; color:#e74c3c;">-2.32%の大幅調整</span>となっています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "1h", "width": "100%", "isTransparent": false, "height": "280", "symbol": "BITSTAMP:BTCUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_btcusd"></div>
+                <div class="strategy-box">📝 本日の戦略：現金化のパニック売りが先行。73,000ドルでのサポート機能を見極めるフェーズ。</div>
+            </li>
+        </ul>
 
         <h2>【🐋 大口注文情報 (オプション・機関投資家動向)】</h2>
         <div class="order-box">
-            <div class="order-item"><span class="order-price-label" style="font-weight:bold; color:#d35400;">USOIL / XAU:</span> イランによる海峡再封鎖と船舶への発砲報道を受け、機関投資家はパニック的に原油（USOIL）とゴールド（XAU）のロング（買い）を積み増しています。</div>
+            <div class="order-item"><span class="order-price-label" style="font-weight:bold; color:#d35400;">USOIL / XAU:</span> イランによる海峡再封鎖と船舶への発砲報道を受け、アルゴリズムが14%下落時のショートポジションを慌てて買い戻すパニックが発生。現在はイランの回答待ちで注文が手控えられています。</div>
             <div class="order-item"><span class="order-price-label" style="font-weight:bold; color:#d35400;">JP225 / US500:</span> 週末にショートカバーで買い上げた海外ヘッジファンドが、有事の報道で一斉にリスクオフの「売り」にドテン（ポジションをひっくり返す）しており、強烈な株安を引き起こしています。</div>
             <div class="order-item"><span class="order-price-label" style="font-weight:bold; color:#d35400;">USDJPY:</span> 有事のドル買いの猛威により159.00円を突破。上値159.60〜160.00円には介入防衛のための巨大な売りオーダーとNYカットが控えており、投機筋の買いと政府の売りが正面衝突する「魔のゾーン」に突入しました。</div>
         </div>
 
         <h2>【🎯 ドル円 大口注文ピックアップ】</h2>
-        <div class="ob-time">情報取得：2026/04/20 07:11 更新</div>
+        <div class="ob-time">情報取得：2026/04/20 06:23 更新（Traders Web FX より）</div>
         <table class="ob-table">
             <tbody>
+                <tr class="ob-sell"><td class="ob-price">161.75円</td><td>OP22日NYカットやや小さめ</td></tr>
+                <tr class="ob-sell"><td class="ob-price">161.50円</td><td>売り小さめ</td></tr>
                 <tr class="ob-sell"><td class="ob-price">161.00円</td><td>売り小さめ・超えるとストップロス買い小さめ、OP23日NYカット</td></tr>
-                <tr class="ob-sell"><td class="ob-price">160.00円</td><td>巨大な防衛的売り、OP22日NYカット</td></tr>
-                <tr class="ob-sell"><td class="ob-price">159.70-160.00円</td><td>売り断続</td></tr>
+                <tr class="ob-sell"><td class="ob-price">160.50円</td><td>売りやや小さめ</td></tr>
+                <tr class="ob-sell"><td class="ob-price">160.20円</td><td>売りやや小さめ</td></tr>
+                <tr class="ob-sell"><td class="ob-price">159.70-160.00円</td><td>売り (160.00円 OP22日NYカット)</td></tr>
                 <tr class="ob-sell"><td class="ob-price">159.60円</td><td>売り・超えるとストップロス買い小さめ</td></tr>
-                <tr class="ob-current"><td class="ob-price">159.02円</td><td>4/20 07:11現在 ※中東情勢パニックで急騰</td></tr>
-                <tr class="ob-buy"><td class="ob-price">158.50円</td><td>買い</td></tr>
-                <tr class="ob-buy"><td class="ob-price">158.00円</td><td>買い大きめ</td></tr>
+                <tr class="ob-current"><td class="ob-price">158.80円</td><td>4/20 6:21現在 (高値158.84円 - 安値158.46円) ※レポート現在値は159.02円</td></tr>
+                <tr class="ob-buy"><td class="ob-price">157.50円</td><td>買い小さめ</td></tr>
                 <tr class="ob-buy"><td class="ob-price">157.00円</td><td>買い小さめ、OP24日NYカット大きめ</td></tr>
+                <tr class="ob-buy"><td class="ob-price">156.80円</td><td>OP23日NYカット</td></tr>
+                <tr class="ob-buy"><td class="ob-price">156.50円</td><td>買い小さめ、OP24日NYカット</td></tr>
+                <tr class="ob-buy"><td class="ob-price">156.40円</td><td>買い小さめ</td></tr>
+                <tr class="ob-buy"><td class="ob-price">156.00円</td><td>買いやや小さめ・割り込むとストップロス売り小さめ</td></tr>
+                <tr class="ob-buy"><td class="ob-price">155.50円</td><td>OP22日NYカット</td></tr>
+                <tr class="ob-buy"><td class="ob-price">155.00円</td><td>買いやや小さめ、OP24日NYカット大きめ</td></tr>
             </tbody>
         </table>
 
+
         <div class="comment-box">
             <span style="font-weight:bold; color:#e74c3c;">【🚨 Pure Greenからの緊急総括コメント】</span><br>
-            先週末に市場を駆け巡った「レバノン停戦・ホルムズ海峡開放」のニュースは完全にひっくり返されました。<br><br>
-            アメリカのイラン港湾封鎖に対抗し、イラン革命防衛隊がホルムズ海峡の「再封鎖」を宣言。違反船舶への発砲事件まで起き、中東の火薬庫は再び爆発寸前です。これを受け、世界のエネルギー供給網が断たれる恐怖からUSOIL（原油）が暴騰し、完全なスタグフレーション（インフレ+不況）パニックが市場を支配しています。日経平均やS&P500は、先週の熱狂から真っ逆さまに突き落とされるクラッシュ展開です。<br><br>
-            そして、為替市場ではパニック的な「有事のドル買い」が殺到し、ドル円は朝方から159.00円の大台を突破しました。160円の最終防衛線に向け、投機筋の買いと政府の介入警戒感が激突する極限のレッドゾーンです。本日からはFRBのブラックアウト期間に入るため、要人発言での火消しは期待できません。純粋なパニック需給とテクニカルが相場を支配する、極めて危険な1日となります。厳格な資金管理とストップロスの設定を絶対に怠らないでください。
+            先週末の「期待」が今朝の「パニック」へと完全に塗り替えられました。現在のマーケットはファンダメンタルズでもテクニカルでもなく、米国の新提案に対するイランの「回答待ち」という丁半博打にすべてが委ねられています。<br><br>
+            特にUSOILは14%の急落後に全戻しという異常な動きをしており、これはショートポジションのパニック的な買い戻しを意味します。実需が伴わない「ニュース頼みのギャンブル相場」です。受諾なら暴落、拒否なら100ドルへの暴騰という極端なシナリオを内包しているため、エネルギー関連銘柄へのフルレバレッジは絶対に避けてください。<br><br>
+            そして為替市場ではパニック的な「有事のドル買い」が殺到し、ドル円は朝方から159.00円の大台を突破しました。160円の最終防衛線に向け、投機筋の買いと政府の介入警戒感が激突する極限のレッドゾーンです。本日からはFRBのブラックアウト期間に入るため、要人発言での火消しは期待できません。純粋なパニック需給とテクニカルが相場を支配する、極めて危険な1日となります。厳格な資金管理とストップロスの設定を絶対に怠らないでください。
         </div>
 
         <div class="footer">
@@ -440,6 +587,25 @@
             Copyright 2026 Pure Green All Rights Reserved.
         </div>
     </div> 
+    
+    <div class="link-section" style="margin-top: 20px;">
+        <div class="link-card">
+            <a href="exness_intro.html" class="link-btn exness">Exness</a>
+            <div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる世界最高峰の極狭スプレッド口座。</div>
+        </div>
+        <div class="link-card">
+            <a href="xs_intro.html" class="link-btn xs">XS</a>
+            <div class="link-desc">機関投資家レベルの最高水準環境。多種多様な銘柄を誇る次世代マルチアセットブローカー。</div>
+        </div>
+        <div class="link-card">
+            <a href="xmtrading_intro.html" class="link-btn xm">XMTrading</a>
+            <div class="link-desc">日本人シェアNo.1。豪華な100%入金ボーナスと追証なしの安心環境で、初心者に最もおすすめ。</div>
+        </div>
+        <div class="link-card">
+            <a href="bitwallet_intro.html" class="link-btn bitwallet">bitwallet</a>
+            <div class="link-desc">海外FXの入出金を最速・安価に。安全かつスムーズな資金管理を実現する必須ツール。</div>
+        </div>
+    </div>
     
     <div style="text-align: center; margin-top: 20px;">
         <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
@@ -451,10 +617,16 @@
     const charts = [
         { id: "tv_dxy", symbol: "CAPITALCOM:DXY", interval: "60" },
         { id: "tv_us500", symbol: "OANDA:SPX500USD", interval: "60" },
+        { id: "tv_us30", symbol: "OANDA:US30USD", interval: "60" },
+        { id: "tv_ustec", symbol: "OANDA:NAS100USD", interval: "60" },
         { id: "tv_jp225", symbol: "OANDA:JP225YJPY", interval: "60" },
         { id: "tv_xauusd", symbol: "OANDA:XAUUSD", interval: "60" },
         { id: "tv_usoil", symbol: "OANDA:WTICOUSD", interval: "60" },
-        { id: "tv_usdjpy", symbol: "OANDA:USDJPY", interval: "60" }
+        { id: "tv_eurusd", symbol: "OANDA:EURUSD", interval: "60" },
+        { id: "tv_gbpusd", symbol: "OANDA:GBPUSD", interval: "60" },
+        { id: "tv_usdjpy", symbol: "OANDA:USDJPY", interval: "60" },
+        { id: "tv_audusd", symbol: "OANDA:AUDUSD", interval: "60" },
+        { id: "tv_btcusd", symbol: "BITSTAMP:BTCUSD", interval: "60" }
     ];
 
     window.onload = function() {
@@ -484,7 +656,6 @@
     };
 
     async function fetchAndRenderData() {
-        // 先ほどのスクリプトと同一
         const btn = document.getElementById('updateBtn');
         const status = document.getElementById('statusText');
         const container = document.getElementById('api-chart-container');

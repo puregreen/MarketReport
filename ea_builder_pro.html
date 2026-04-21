@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>本格派 ノーコードEAジェネレーター(PRO) - Pure Green</title>
+<style>
+    body { font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', Meiryo, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 15px; }
+    .container { max-width: 900px; margin: 0 auto; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; }
+    .top-nav { max-width: 900px; margin: 0 auto 15px auto; }
+    .back-link { font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+    .header-bar { background-color: #2c3e50; color: #fff; padding: 15px; font-weight: bold; font-size: 18px; border-bottom: 4px solid #f39c12; text-align: center; }
+    
+    .block { margin: 20px; border: 2px solid #ecf0f1; border-radius: 6px; background-color: #fdfdfd; padding: 15px; }
+    .block-title { font-size: 16px; font-weight: bold; color: #2980b9; margin-bottom: 15px; border-bottom: 2px solid #ecf0f1; padding-bottom: 5px; }
+    
+    .form-row { display: flex; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+    .form-label { width: 170px; font-size: 14px; font-weight: bold; color: #34495e; }
+    .form-input { padding: 8px; font-size: 14px; border: 1px solid #bdc3c7; border-radius: 4px; width: 120px; box-sizing: border-box; }
+    select.form-input { width: 180px; }
+    
+    .condition-card { background-color: #fff; border: 1px solid #dcdde1; padding: 15px; margin-bottom: 15px; border-radius: 4px; position: relative; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    .condition-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: bold; font-size: 15px; color: #2c3e50; border-bottom: 1px dashed #ecf0f1; padding-bottom: 8px;}
+    .btn-delete { background-color: #e74c3c; color: #fff; border: none; padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer; }
+    .btn-delete:hover { background-color: #c0392b; }
+    .logic-desc { font-size: 12px; color: #7f8c8d; margin-top: 8px; }
+
+    .add-condition-area { display: flex; gap: 10px; align-items: center; background-color: #fcf3cf; padding: 15px; border-radius: 6px; border: 1px dashed #f39c12; margin-bottom: 10px; }
+    .btn-add { background-color: #f39c12; color: #fff; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+    .btn-add:hover { background-color: #e67e22; }
+
+    .btn-generate { display: block; width: 100%; background-color: #2ecc71; color: #fff; border: none; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 20px; transition: background 0.3s; box-shadow: 0 4px 6px rgba(46, 204, 113, 0.3); }
+    .btn-generate:hover { background-color: #27ae60; }
+    
+    .output-area { margin: 20px; }
+    .code-box { width: 100%; height: 400px; font-family: 'Courier New', Courier, monospace; font-size: 13px; padding: 15px; background-color: #1e1e1e; color: #d4d4d4; border-radius: 6px; border: none; box-sizing: border-box; resize: vertical; }
+    .btn-copy { background-color: #3498db; color: #fff; border: none; padding: 8px 15px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-bottom: 10px; }
+
+    @media (max-width: 600px) { .form-label { width: 100%; margin-bottom: 5px; } .form-input, select.form-input { width: 100%; } .add-condition-area { flex-direction: column; } .btn-add { width: 100%; } }
+</style>
+</head>
+<body>
+
+<div class="top-nav"><a href="index.html" class="back-link">← インデックス(目次)に戻る</a></div>
+
+<div class="container">
+    <div class="header-bar">🛠 本格派 ノーコードEAジェネレーター (PRO版)</div>
+
+    <div class="block">
+        <div class="block-title">1. 基本・取引設定</div>
+        <div class="form-row">
+            <div class="form-label">プラットフォーム</div>
+            <select id="platform" class="form-input"><option value="mt4">MT4 (MQL4)</option><option value="mt5">MT5 (MQL5)</option></select>
+        </div>
+        <div class="form-row"><div class="form-label">ロット数 (Lot)</div><input type="number" id="inpLot" class="form-input" value="0.1" step="0.01"></div>
+        <div class="form-row"><div class="form-label">利確幅 (Take Profit)</div><input type="number" id="inpTP" class="form-input" value="200"> <span class="logic-desc">※ポイント(10pips=100)</span></div>
+        
+        <div class="form-row" style="background-color: #fcf3cf; padding: 10px; border-radius: 4px; border: 1px dashed #f39c12; margin-top:15px;">
+            <div class="form-label" style="color: #d35400;">損切モード (SL)</div>
+            <select id="slMode" class="form-input" style="width:160px; font-weight:bold; color: #d35400;" onchange="toggleSlMode()">
+                <option value="fixed">固定幅 (Points)</option>
+                <option value="atr">ATR連動 (Dynamic)</option>
+            </select>
+        </div>
+        
+        <div id="sl_fixed_area">
+            <div class="form-row"><div class="form-label">損切幅 (固定Points)</div><input type="number" id="inpSL" class="form-input" value="200"></div>
+        </div>
+        
+        <div id="sl_atr_area" style="display:none; background-color: #fef9e7; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+            <div class="form-row"><div class="form-label">ATR 期間</div><input type="number" id="slAtrPeriod" class="form-input" value="14"></div>
+            <div class="form-row"><div class="form-label">ATR 乗数 (倍率)</div><input type="number" id="slAtrMult" class="form-input" value="2.0" step="0.1"></div>
+            <div class="logic-desc" style="margin-left:170px;">※ 直近のボラティリティ(ATR) × 乗数 で損切幅を自動算出します。</div>
+        </div>
+        <div class="form-row"><div class="form-label">マジックナンバー</div><input type="number" id="inpMagic" class="form-input" value="20260421"></div>
+    </div>
+
+
+    <div class="block">
+        <div class="block-title">2. エントリー条件 (複数追加でAND条件になります)</div>
+        <div id="conditions-container"></div>
+
+        <div class="add-condition-area">
+            <select id="condition-selector" class="form-input" style="flex-grow: 1;">
+                <optgroup label="トレンド系">
+                    <option value="ma">📉 移動平均線 (MA) クロス</option>
+                    <option value="ichimoku">☁️ 一目均衡表 (転換・基準線クロス)</option>
+                    <option value="sar">🔵 パラボリック SAR</option>
+                    <option value="env">〰️ エンベロープ 反発</option>
+                    <option value="bb">🌀 ボリンジャーバンド 反発</option>
+                </optgroup>
+                <optgroup label="オシレーター系">
+                    <option value="rsi">📊 RSI 反発</option>
+                    <option value="macd">📈 MACD クロス</option>
+                    <option value="stoch">📉 ストキャスティクス クロス</option>
+                    <option value="dmi">📐 DMI (ADX) クロス</option>
+                    <option value="wpr">📉 Williams %R 反発</option>
+                    <option value="cci">📈 CCI ブレイク</option>
+                    <option value="mom">⚡ モメンタム ブレイク</option>
+                </optgroup>
+                <optgroup label="プライスアクション">
+                    <option value="hl">💥 直近高値・安値 ブレイクアウト</option>
+                </optgroup>
+
+                <optgroup label="ボラティリティ系">
+                    <option value="atr">📏 ATR (勢いフィルター)</option>
+                </optgroup>
+
+
+            </select>
+            <button class="btn-add" onclick="addCondition()">➕ 条件を追加する</button>
+        </div>
+    </div>
+
+    <div style="padding: 0 20px;"><button class="btn-generate" onclick="generateCode()">⚡ ソースコードを生成する</button></div>
+
+    <div class="output-area">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="block-title" style="border:none; margin:0;">3. 生成されたソースコード</div>
+            <button class="btn-copy" onclick="copyCode()">📋 コピーしてMT4/MT5に貼る</button>
+        </div>
+        <textarea id="outputCode" class="code-box" readonly placeholder="ここにEAのソースコードが生成されます..."></textarea>
+    </div>
+
+    <div class="block" style="border-color: #f39c12; background-color: #fffdf7; margin-top: 30px;">
+        <div class="block-title" style="color: #d35400; border-bottom-color: #fdebd0;">
+            💡 自分だけのロジックでEAを作るメリットと注意事項
+        </div>
+        
+        <div style="font-size: 14px; line-height: 1.7; color: #34495e;">
+            <p><span style="font-weight: bold; color: #2980b9;">✔️ なぜ「自作EA」が良いのか？</span><br>
+            世の中に出回っている「勝率90%！」「月利〇%！」と謳う配布EAの多くは、中身のロジックが分からない「ブラックボックス」です。こうしたEAは、相場が急変した際に突然資金を全損させるリスク（詐欺的ロジック）を孕んでいます。<br>
+            自分でロジックを組み立てたEAなら、<span style="background: linear-gradient(transparent 60%, #f1c40f 60%); font-weight: bold;">「なぜここでエントリーしたのか」「なぜ損切りになったのか」が100%理解できる</span>ため、不調な時期（ドローダウン）でも冷静に稼働を管理し、大切なお金を守ることができます。</p>
+
+            <p><span style="font-weight: bold; color: #e74c3c;">⚠️ 免責事項・注意事項（必ずお読みください）</span><br>
+            ・本ツールで生成されたソースコードおよびEAの利用は<strong style="color: #c0392b; border-bottom: 2px solid #c0392b;">【完全自己責任】</strong>となります。<br>
+            ・いかなるロジックであっても「相場に100%」はありません。本EAを使用したことによるいかなる損失についても、当コミュニティは一切の責任を負いかねます。<br>
+            ・実運用（リアル口座）へ投入する前に、<strong style="color: #e74c3c;">必ずデモ口座またはストラテジーテスターにて、十分な動作確認とバックテスト</strong>を行ってください。</p>
+
+            <p style="background-color: #eaf2f8; padding: 15px; border-radius: 6px; border: 1px dashed #3498db; margin-top: 20px;">
+                <span style="font-weight: bold; color: #3498db;">💬 不具合報告・ご要望はコミュニティへ！</span><br>
+                「メタエディターでコンパイルエラーが出た」「設定した条件通りにエントリーされない」といった不具合や、「このインジケーターも追加してほしい！」といったご要望がありましたら、<strong style="color: #2980b9;">ぜひコミュニティのチャットへご報告ください。</strong><br>
+                皆様からのフィードバックをもとに、このツールをさらに強力な「最強のEA生成ツール」へとアップデートしていきます！一緒に投資スキルを磨いていきましょう。
+            </p>
+        </div>
+    </div>
+
+
+
+</div>
+
+<script>
+    let conditionIdCounter = 0;
+    const conditionsContainer = document.getElementById('conditions-container');
+
+    // 損切モードの表示切替
+    function toggleSlMode() {
+        const mode = document.getElementById('slMode').value;
+        if(mode === 'atr') {
+            document.getElementById('sl_fixed_area').style.display = 'none';
+            document.getElementById('sl_atr_area').style.display = 'block';
+        } else {
+            document.getElementById('sl_fixed_area').style.display = 'block';
+            document.getElementById('sl_atr_area').style.display = 'none';
+        }
+    }
+
+    const templates = {
+        'ma': { title: '移動平均線 (MA) クロス', color: '#e67e22', html: (id) => `<div class="form-row"><div class="form-label">短期MA</div><input type="number" id="maFast_${id}" class="form-input" value="14"><div class="form-label" style="width:auto; margin-left:10px;">長期MA</div><input type="number" id="maSlow_${id}" class="form-input" value="50"></div><div class="logic-desc">※短期が長期を上に抜けたら「買」、下に抜けたら「売」</div>` },
+        'ichimoku': { title: '一目均衡表 (転換線・基準線クロス)', color: '#8e44ad', html: (id) => `<div class="form-row"><div class="form-label">転換線</div><input type="number" id="ichiTenkan_${id}" class="form-input" value="9"><div class="form-label" style="width:auto; margin-left:10px;">基準線</div><input type="number" id="ichiKijun_${id}" class="form-input" value="26"></div><div class="logic-desc">※転換線が基準線を上に抜けたら「買」、下に抜けたら「売」</div>` },
+        'sar': { title: 'パラボリック SAR', color: '#2980b9', html: (id) => `<div class="form-row"><div class="form-label">ステップ</div><input type="number" id="sarStep_${id}" class="form-input" value="0.02" step="0.01"><div class="form-label" style="width:auto; margin-left:10px;">上限</div><input type="number" id="sarMax_${id}" class="form-input" value="0.2" step="0.1"></div><div class="logic-desc">※価格がSARを上回ったら「買」、下回ったら「売」</div>` },
+        'env': { title: 'エンベロープ 反発', color: '#16a085', html: (id) => `<div class="form-row"><div class="form-label">期間</div><input type="number" id="envPeriod_${id}" class="form-input" value="14"><div class="form-label" style="width:auto; margin-left:10px;">偏差(%)</div><input type="number" id="envDev_${id}" class="form-input" value="0.1" step="0.01"></div><div class="logic-desc">※価格が下限にタッチで「買」（逆張り）、上限にタッチで「売」</div>` },
+        'bb': { title: 'ボリンジャーバンド 反発', color: '#c0392b', html: (id) => `<div class="form-row"><div class="form-label">期間</div><input type="number" id="bbPeriod_${id}" class="form-input" value="20"><div class="form-label" style="width:auto; margin-left:10px;">偏差(σ)</div><input type="number" id="bbDev_${id}" class="form-input" value="2" step="0.1"></div><div class="logic-desc">※価格が下限(-σ)にタッチで「買」、上限(+σ)にタッチで「売」</div>` },
+        'rsi': { title: 'RSI 反発', color: '#d35400', html: (id) => `<div class="form-row"><div class="form-label">期間</div><input type="number" id="rsiPeriod_${id}" class="form-input" value="14"><div class="form-label" style="width:auto; margin-left:10px;">上限/下限</div><input type="number" id="rsiUpper_${id}" class="form-input" style="width:60px;" value="70"> / <input type="number" id="rsiLower_${id}" class="form-input" style="width:60px;" value="30"></div><div class="logic-desc">※下限を下回ったら「買」、上限を上回ったら「売」</div>` },
+        'macd': { title: 'MACD クロス', color: '#27ae60', html: (id) => `<div class="form-row"><div class="form-label">短期/長期/シグナル</div><input type="number" id="macdFast_${id}" class="form-input" style="width:60px;" value="12"><input type="number" id="macdSlow_${id}" class="form-input" style="width:60px;" value="26"><input type="number" id="macdSignal_${id}" class="form-input" style="width:60px;" value="9"></div><div class="logic-desc">※メイン線がシグナル線を上に抜けたら「買」、下に抜けたら「売」</div>` },
+        'stoch': { title: 'ストキャスティクス クロス', color: '#f39c12', html: (id) => `<div class="form-row"><div class="form-label">%K / %D / Slow</div><input type="number" id="stochK_${id}" class="form-input" style="width:50px;" value="5"><input type="number" id="stochD_${id}" class="form-input" style="width:50px;" value="3"><input type="number" id="stochS_${id}" class="form-input" style="width:50px;" value="3"></div><div class="logic-desc">※20以下で%Kが%Dを上に抜けたら「買」、80以上で下に抜けたら「売」</div>` },
+        'dmi': { title: 'DMI (ADX) クロス', color: '#8e44ad', html: (id) => `<div class="form-row"><div class="form-label">期間</div><input type="number" id="dmiPeriod_${id}" class="form-input" value="14"></div><div class="logic-desc">※+DIが-DIを上に抜けたら「買」、下に抜けたら「売」</div>` },
+        'wpr': { title: 'Williams %R 反発', color: '#c0392b', html: (id) => `<div class="form-row"><div class="form-label">期間</div><input type="number" id="wprPeriod_${id}" class="form-input" value="14"></div><div class="logic-desc">※-80を下から上に抜けたら「買」、-20を上から下に抜けたら「売」</div>` },
+        'cci': { title: 'CCI ブレイク', color: '#16a085', html: (id) => `<div class="form-row"><div class="form-label">期間</div><input type="number" id="cciPeriod_${id}" class="form-input" value="14"></div><div class="logic-desc">※-100を下から上に抜けたら「買」、100を上から下に抜けたら「売」</div>` },
+        'mom': { title: 'モメンタム ブレイク', color: '#2980b9', html: (id) => `<div class="form-row"><div class="form-label">期間</div><input type="number" id="momPeriod_${id}" class="form-input" value="14"></div><div class="logic-desc">※100ラインを下から上に抜けたら「買」、上から下に抜けたら「売」</div>` },
+        'hl': { title: '直近高値・安値 ブレイク', color: '#f1c40f', html: (id) => `<div class="form-row"><div class="form-label">参照ローソク足本数</div><input type="number" id="hlPeriod_${id}" class="form-input" value="20"></div><div class="logic-desc">※過去N本の最高値をブレイクで「買」、最安値ブレイクで「売」</div>` },
+        'atr': { title: 'ATR (ボラティリティ・フィルター)', color: '#34495e', html: (id) => `<div class="form-row"><div class="form-label">期間</div><input type="number" id="atrPeriod_${id}" class="form-input" value="14"><div class="form-label" style="width:auto; margin-left:10px;">基準値</div><input type="number" id="atrLevel_${id}" class="form-input" value="0.002" step="0.001"></div><div class="logic-desc">※ATRが基準値以上の時のみ（相場に勢いがある時だけ）「買」「売」を許可するフィルターとして機能します。</div>` }
+    };
+
+    function addCondition() {
+        const type = document.getElementById('condition-selector').value;
+        const template = templates[type];
+        const id = `cond_${conditionIdCounter++}`;
+        const card = document.createElement('div');
+        card.className = 'condition-card';
+        card.id = `card_${id}`;
+        card.style.borderLeftColor = template.color;
+        card.dataset.type = type;
+        card.dataset.id = id;
+        card.innerHTML = `<div class="condition-header"><span>${template.title}</span><button class="btn-delete" onclick="document.getElementById('card_${id}').remove()">✖ 削除</button></div>${template.html(id)}`;
+        conditionsContainer.appendChild(card);
+    }
+    
+    // 初回起動時のセットアップ
+    window.onload = () => { addCondition(); toggleSlMode(); };
+
+    function generateCode() {
+        const platform = document.getElementById('platform').value;
+        const lot = document.getElementById('inpLot').value;
+        const tp = document.getElementById('inpTP').value;
+        const magic = document.getElementById('inpMagic').value;
+        
+        // Dynamic SL の取得
+        const slMode = document.getElementById('slMode').value;
+        const slFixed = document.getElementById('inpSL').value;
+        const slAtrPeriod = document.getElementById('slAtrPeriod').value;
+        const slAtrMult = document.getElementById('slAtrMult').value;
+
+        const cards = document.querySelectorAll('.condition-card');
+        if(cards.length === 0) return alert("条件を1つ以上追加してください。");
+
+        let code = "//+------------------------------------------------------------------+\n";
+        code += "//|                                      Pure Green EA Generator PRO |\n";
+        code += `//|                                      Platform: ${platform.toUpperCase()}                      |\n`;
+        code += "//+------------------------------------------------------------------+\n\n";
+
+        // ==========================
+        // MQL4 エンジン
+        // ==========================
+        if (platform === 'mt4') {
+            code += `extern double InpLot = ${lot};\nextern int InpTakeProfit = ${tp};\nextern int InpMagic = ${magic};\n`;
+            if (slMode === 'fixed') {
+                code += `extern int InpStopLoss = ${slFixed};\n\n`;
+            } else {
+                code += `extern int InpSLAtrPeriod = ${slAtrPeriod};\nextern double InpSLAtrMult = ${slAtrMult};\n\n`;
+            }
+
+            let initVars = ""; let logicBody = "";
+            cards.forEach((card, index) => {
+                const type = card.dataset.type; const id = card.dataset.id; const i = index + 1;
+                if (type === 'ma') {
+                    initVars += `extern int InpFastMA_${i} = ${document.getElementById(`maFast_${id}`).value};\nextern int InpSlowMA_${i} = ${document.getElementById(`maSlow_${id}`).value};\n`;
+                    logicBody += `    double fMA_${i}_1 = iMA(Symbol(), 0, InpFastMA_${i}, 0, MODE_SMA, PRICE_CLOSE, 1);\n    double sMA_${i}_1 = iMA(Symbol(), 0, InpSlowMA_${i}, 0, MODE_SMA, PRICE_CLOSE, 1);\n    double fMA_${i}_2 = iMA(Symbol(), 0, InpFastMA_${i}, 0, MODE_SMA, PRICE_CLOSE, 2);\n    double sMA_${i}_2 = iMA(Symbol(), 0, InpSlowMA_${i}, 0, MODE_SMA, PRICE_CLOSE, 2);\n    buyCondition = buyCondition && (fMA_${i}_1 > sMA_${i}_1 && fMA_${i}_2 <= sMA_${i}_2);\n    sellCondition = sellCondition && (fMA_${i}_1 < sMA_${i}_1 && fMA_${i}_2 >= sMA_${i}_2);\n\n`;
+                } else if (type === 'ichimoku') {
+                    initVars += `extern int InpIchiTenkan_${i} = ${document.getElementById(`ichiTenkan_${id}`).value};\nextern int InpIchiKijun_${i} = ${document.getElementById(`ichiKijun_${id}`).value};\n`;
+                    logicBody += `    double tenkan_${i}_1 = iIchimoku(Symbol(), 0, InpIchiTenkan_${i}, InpIchiKijun_${i}, 52, MODE_TENKANSEN, 1);\n    double kijun_${i}_1 = iIchimoku(Symbol(), 0, InpIchiTenkan_${i}, InpIchiKijun_${i}, 52, MODE_KIJUNSEN, 1);\n    double tenkan_${i}_2 = iIchimoku(Symbol(), 0, InpIchiTenkan_${i}, InpIchiKijun_${i}, 52, MODE_TENKANSEN, 2);\n    double kijun_${i}_2 = iIchimoku(Symbol(), 0, InpIchiTenkan_${i}, InpIchiKijun_${i}, 52, MODE_KIJUNSEN, 2);\n    buyCondition = buyCondition && (tenkan_${i}_1 > kijun_${i}_1 && tenkan_${i}_2 <= kijun_${i}_2);\n    sellCondition = sellCondition && (tenkan_${i}_1 < kijun_${i}_1 && tenkan_${i}_2 >= kijun_${i}_2);\n\n`;
+                } else if (type === 'sar') {
+                    initVars += `extern double InpSarStep_${i} = ${document.getElementById(`sarStep_${id}`).value};\nextern double InpSarMax_${i} = ${document.getElementById(`sarMax_${id}`).value};\n`;
+                    logicBody += `    double sar_${i}_1 = iSAR(Symbol(), 0, InpSarStep_${i}, InpSarMax_${i}, 1);\n    double sar_${i}_2 = iSAR(Symbol(), 0, InpSarStep_${i}, InpSarMax_${i}, 2);\n    buyCondition = buyCondition && (Close[1] > sar_${i}_1 && Close[2] <= sar_${i}_2);\n    sellCondition = sellCondition && (Close[1] < sar_${i}_1 && Close[2] >= sar_${i}_2);\n\n`;
+                } else if (type === 'env') {
+                    initVars += `extern int InpEnvPeriod_${i} = ${document.getElementById(`envPeriod_${id}`).value};\nextern double InpEnvDev_${i} = ${document.getElementById(`envDev_${id}`).value};\n`;
+                    logicBody += `    double envUp_${i} = iEnvelopes(Symbol(), 0, InpEnvPeriod_${i}, MODE_SMA, 0, PRICE_CLOSE, InpEnvDev_${i}, MODE_UPPER, 1);\n    double envDn_${i} = iEnvelopes(Symbol(), 0, InpEnvPeriod_${i}, MODE_SMA, 0, PRICE_CLOSE, InpEnvDev_${i}, MODE_LOWER, 1);\n    buyCondition = buyCondition && (Close[1] <= envDn_${i});\n    sellCondition = sellCondition && (Close[1] >= envUp_${i});\n\n`;
+                } else if (type === 'rsi') {
+                    initVars += `extern int InpRSIPeriod_${i} = ${document.getElementById(`rsiPeriod_${id}`).value};\nextern int InpRSIUpper_${i} = ${document.getElementById(`rsiUpper_${id}`).value};\nextern int InpRSILower_${i} = ${document.getElementById(`rsiLower_${id}`).value};\n`;
+                    logicBody += `    double rsi_${i} = iRSI(Symbol(), 0, InpRSIPeriod_${i}, PRICE_CLOSE, 1);\n    buyCondition = buyCondition && (rsi_${i} < InpRSILower_${i});\n    sellCondition = sellCondition && (rsi_${i} > InpRSIUpper_${i});\n\n`;
+                } else if (type === 'macd') {
+                    initVars += `extern int InpMACDFast_${i} = ${document.getElementById(`macdFast_${id}`).value};\nextern int InpMACDSlow_${i} = ${document.getElementById(`macdSlow_${id}`).value};\nextern int InpMACDSig_${i} = ${document.getElementById(`macdSignal_${id}`).value};\n`;
+                    logicBody += `    double mMain_${i}_1 = iMACD(Symbol(), 0, InpMACDFast_${i}, InpMACDSlow_${i}, InpMACDSig_${i}, PRICE_CLOSE, MODE_MAIN, 1);\n    double mSig_${i}_1 = iMACD(Symbol(), 0, InpMACDFast_${i}, InpMACDSlow_${i}, InpMACDSig_${i}, PRICE_CLOSE, MODE_SIGNAL, 1);\n    double mMain_${i}_2 = iMACD(Symbol(), 0, InpMACDFast_${i}, InpMACDSlow_${i}, InpMACDSig_${i}, PRICE_CLOSE, MODE_MAIN, 2);\n    double mSig_${i}_2 = iMACD(Symbol(), 0, InpMACDFast_${i}, InpMACDSlow_${i}, InpMACDSig_${i}, PRICE_CLOSE, MODE_SIGNAL, 2);\n    buyCondition = buyCondition && (mMain_${i}_1 > mSig_${i}_1 && mMain_${i}_2 <= mSig_${i}_2);\n    sellCondition = sellCondition && (mMain_${i}_1 < mSig_${i}_1 && mMain_${i}_2 >= mSig_${i}_2);\n\n`;
+                } else if (type === 'bb') {
+                    initVars += `extern int InpBBPeriod_${i} = ${document.getElementById(`bbPeriod_${id}`).value};\nextern double InpBBDev_${i} = ${document.getElementById(`bbDev_${id}`).value};\n`;
+                    logicBody += `    double bbUp_${i} = iBands(Symbol(), 0, InpBBPeriod_${i}, InpBBDev_${i}, 0, PRICE_CLOSE, MODE_UPPER, 1);\n    double bbDn_${i} = iBands(Symbol(), 0, InpBBPeriod_${i}, InpBBDev_${i}, 0, PRICE_CLOSE, MODE_LOWER, 1);\n    buyCondition = buyCondition && (Close[1] <= bbDn_${i});\n    sellCondition = sellCondition && (Close[1] >= bbUp_${i});\n\n`;
+                } else if (type === 'stoch') {
+                    initVars += `extern int InpStK_${i} = ${document.getElementById(`stochK_${id}`).value};\nextern int InpStD_${i} = ${document.getElementById(`stochD_${id}`).value};\nextern int InpStS_${i} = ${document.getElementById(`stochS_${id}`).value};\n`;
+                    logicBody += `    double stK_${i}_1 = iStochastic(Symbol(), 0, InpStK_${i}, InpStD_${i}, InpStS_${i}, MODE_SMA, 0, MODE_MAIN, 1);\n    double stD_${i}_1 = iStochastic(Symbol(), 0, InpStK_${i}, InpStD_${i}, InpStS_${i}, MODE_SMA, 0, MODE_SIGNAL, 1);\n    double stK_${i}_2 = iStochastic(Symbol(), 0, InpStK_${i}, InpStD_${i}, InpStS_${i}, MODE_SMA, 0, MODE_MAIN, 2);\n    double stD_${i}_2 = iStochastic(Symbol(), 0, InpStK_${i}, InpStD_${i}, InpStS_${i}, MODE_SMA, 0, MODE_SIGNAL, 2);\n    buyCondition = buyCondition && (stK_${i}_1 > stD_${i}_1 && stK_${i}_2 <= stD_${i}_2 && stK_${i}_1 < 20);\n    sellCondition = sellCondition && (stK_${i}_1 < stD_${i}_1 && stK_${i}_2 >= stD_${i}_2 && stK_${i}_1 > 80);\n\n`;
+                } else if (type === 'dmi') {
+                    initVars += `extern int InpDMIPeriod_${i} = ${document.getElementById(`dmiPeriod_${id}`).value};\n`;
+                    logicBody += `    double pDI_${i}_1 = iADX(Symbol(), 0, InpDMIPeriod_${i}, PRICE_CLOSE, MODE_PLUSDI, 1);\n    double mDI_${i}_1 = iADX(Symbol(), 0, InpDMIPeriod_${i}, PRICE_CLOSE, MODE_MINUSDI, 1);\n    double pDI_${i}_2 = iADX(Symbol(), 0, InpDMIPeriod_${i}, PRICE_CLOSE, MODE_PLUSDI, 2);\n    double mDI_${i}_2 = iADX(Symbol(), 0, InpDMIPeriod_${i}, PRICE_CLOSE, MODE_MINUSDI, 2);\n    buyCondition = buyCondition && (pDI_${i}_1 > mDI_${i}_1 && pDI_${i}_2 <= mDI_${i}_2);\n    sellCondition = sellCondition && (pDI_${i}_1 < mDI_${i}_1 && pDI_${i}_2 >= mDI_${i}_2);\n\n`;
+                } else if (type === 'wpr') {
+                    initVars += `extern int InpWPRPeriod_${i} = ${document.getElementById(`wprPeriod_${id}`).value};\n`;
+                    logicBody += `    double wpr_${i}_1 = iWPR(Symbol(), 0, InpWPRPeriod_${i}, 1);\n    double wpr_${i}_2 = iWPR(Symbol(), 0, InpWPRPeriod_${i}, 2);\n    buyCondition = buyCondition && (wpr_${i}_1 > -80 && wpr_${i}_2 <= -80);\n    sellCondition = sellCondition && (wpr_${i}_1 < -20 && wpr_${i}_2 >= -20);\n\n`;
+                } else if (type === 'cci') {
+                    initVars += `extern int InpCCIPeriod_${i} = ${document.getElementById(`cciPeriod_${id}`).value};\n`;
+                    logicBody += `    double cci_${i}_1 = iCCI(Symbol(), 0, InpCCIPeriod_${i}, PRICE_TYPICAL, 1);\n    double cci_${i}_2 = iCCI(Symbol(), 0, InpCCIPeriod_${i}, PRICE_TYPICAL, 2);\n    buyCondition = buyCondition && (cci_${i}_1 > -100 && cci_${i}_2 <= -100);\n    sellCondition = sellCondition && (cci_${i}_1 < 100 && cci_${i}_2 >= 100);\n\n`;
+                } else if (type === 'mom') {
+                    initVars += `extern int InpMomPeriod_${i} = ${document.getElementById(`momPeriod_${id}`).value};\n`;
+                    logicBody += `    double mom_${i}_1 = iMomentum(Symbol(), 0, InpMomPeriod_${i}, PRICE_CLOSE, 1);\n    double mom_${i}_2 = iMomentum(Symbol(), 0, InpMomPeriod_${i}, PRICE_CLOSE, 2);\n    buyCondition = buyCondition && (mom_${i}_1 > 100 && mom_${i}_2 <= 100);\n    sellCondition = sellCondition && (mom_${i}_1 < 100 && mom_${i}_2 >= 100);\n\n`;
+                } else if (type === 'hl') {
+                    initVars += `extern int InpHLPeriod_${i} = ${document.getElementById(`hlPeriod_${id}`).value};\n`;
+                    logicBody += `    double highest_${i} = High[iHighest(Symbol(), 0, MODE_HIGH, InpHLPeriod_${i}, 2)];\n    double lowest_${i} = Low[iLowest(Symbol(), 0, MODE_LOW, InpHLPeriod_${i}, 2)];\n    buyCondition = buyCondition && (Close[1] > highest_${i});\n    sellCondition = sellCondition && (Close[1] < lowest_${i});\n\n`;
+                } else if (type === 'atr') {
+                    initVars += `extern int InpATRPeriod_${i} = ${document.getElementById(`atrPeriod_${id}`).value};\nextern double InpATRLevel_${i} = ${document.getElementById(`atrLevel_${id}`).value};\n`;
+                    logicBody += `    double atr_${i} = iATR(Symbol(), 0, InpATRPeriod_${i}, 1);\n    buyCondition = buyCondition && (atr_${i} > InpATRLevel_${i});\n    sellCondition = sellCondition && (atr_${i} > InpATRLevel_${i});\n\n`;
+                }
+            });
+
+            code += initVars + "\nvoid OnTick()\n{\n    if(OrdersTotal() > 0) return;\n    bool buyCondition = true; bool sellCondition = true;\n\n" + logicBody;
+            
+            // MQL4 損切幅の決定 (Fixed or ATR)
+            if (slMode === 'fixed') {
+                code += "    double sl_dist = InpStopLoss * Point;\n";
+            } else {
+                code += "    double atr_sl_val = iATR(Symbol(), 0, InpSLAtrPeriod, 1);\n";
+                code += "    double sl_dist = atr_sl_val * InpSLAtrMult;\n";
+            }
+
+            code += "    if(buyCondition) OrderSend(Symbol(), OP_BUY, InpLot, Ask, 3, Ask - sl_dist, Ask + InpTakeProfit*Point, \"PureGreen EA\", InpMagic, 0, Blue);\n";
+            code += "    else if(sellCondition) OrderSend(Symbol(), OP_SELL, InpLot, Bid, 3, Bid + sl_dist, Bid - InpTakeProfit*Point, \"PureGreen EA\", InpMagic, 0, Red);\n}\n";
+        } 
+        // ==========================
+        // MQL5 エンジン
+        // ==========================
+        else if (platform === 'mt5') {
+            code += "#include <Trade\\Trade.mqh>\nCTrade trade;\n\n";
+            code += `input double InpLot = ${lot};\ninput int InpTakeProfit = ${tp};\ninput int InpMagic = ${magic};\n`;
+            if (slMode === 'fixed') {
+                code += `input int InpStopLoss = ${slFixed};\n\n`;
+            } else {
+                code += `input int InpSLAtrPeriod = ${slAtrPeriod};\ninput double InpSLAtrMult = ${slAtrMult};\nint hATR_SL;\n\n`;
+            }
+
+            let initVars = ""; let onInitHandles = ""; let logicBody = "";
+            
+            if (slMode === 'atr') {
+                onInitHandles += `    hATR_SL = iATR(_Symbol, PERIOD_CURRENT, InpSLAtrPeriod);\n`;
+            }
+
+            cards.forEach((card, index) => {
+                const type = card.dataset.type; const id = card.dataset.id; const i = index + 1;
+                if (type === 'ma') {
+                    initVars += `input int InpFastMA_${i} = ${document.getElementById(`maFast_${id}`).value};\ninput int InpSlowMA_${i} = ${document.getElementById(`maSlow_${id}`).value};\nint hFastMA_${i}, hSlowMA_${i};\n`;
+                    onInitHandles += `    hFastMA_${i} = iMA(_Symbol, PERIOD_CURRENT, InpFastMA_${i}, 0, MODE_SMA, PRICE_CLOSE);\n    hSlowMA_${i} = iMA(_Symbol, PERIOD_CURRENT, InpSlowMA_${i}, 0, MODE_SMA, PRICE_CLOSE);\n`;
+                    logicBody += `    double fMA_${i}[], sMA_${i}[]; CopyBuffer(hFastMA_${i}, 0, 1, 2, fMA_${i}); CopyBuffer(hSlowMA_${i}, 0, 1, 2, sMA_${i}); ArraySetAsSeries(fMA_${i}, true); ArraySetAsSeries(sMA_${i}, true);\n    buyCondition = buyCondition && (fMA_${i}[0] > sMA_${i}[0] && fMA_${i}[1] <= sMA_${i}[1]);\n    sellCondition = sellCondition && (fMA_${i}[0] < sMA_${i}[0] && fMA_${i}[1] >= sMA_${i}[1]);\n\n`;
+                } else if (type === 'ichimoku') {
+                    initVars += `input int InpIchiTenkan_${i} = ${document.getElementById(`ichiTenkan_${id}`).value};\ninput int InpIchiKijun_${i} = ${document.getElementById(`ichiKijun_${id}`).value};\nint hIchi_${i};\n`;
+                    onInitHandles += `    hIchi_${i} = iIchimoku(_Symbol, PERIOD_CURRENT, InpIchiTenkan_${i}, InpIchiKijun_${i}, 52);\n`;
+                    logicBody += `    double tenkan_${i}[], kijun_${i}[]; CopyBuffer(hIchi_${i}, 0, 1, 2, tenkan_${i}); CopyBuffer(hIchi_${i}, 1, 1, 2, kijun_${i}); ArraySetAsSeries(tenkan_${i}, true); ArraySetAsSeries(kijun_${i}, true);\n    buyCondition = buyCondition && (tenkan_${i}[0] > kijun_${i}[0] && tenkan_${i}[1] <= kijun_${i}[1]);\n    sellCondition = sellCondition && (tenkan_${i}[0] < kijun_${i}[0] && tenkan_${i}[1] >= kijun_${i}[1]);\n\n`;
+                } else if (type === 'sar') {
+                    initVars += `input double InpSarStep_${i} = ${document.getElementById(`sarStep_${id}`).value};\ninput double InpSarMax_${i} = ${document.getElementById(`sarMax_${id}`).value};\nint hSar_${i};\n`;
+                    onInitHandles += `    hSar_${i} = iSAR(_Symbol, PERIOD_CURRENT, InpSarStep_${i}, InpSarMax_${i});\n`;
+                    logicBody += `    double sar_${i}[], cl_${i}[]; CopyBuffer(hSar_${i}, 0, 1, 2, sar_${i}); CopyClose(_Symbol, PERIOD_CURRENT, 1, 2, cl_${i}); ArraySetAsSeries(sar_${i}, true); ArraySetAsSeries(cl_${i}, true);\n    buyCondition = buyCondition && (cl_${i}[0] > sar_${i}[0] && cl_${i}[1] <= sar_${i}[1]);\n    sellCondition = sellCondition && (cl_${i}[0] < sar_${i}[0] && cl_${i}[1] >= sar_${i}[1]);\n\n`;
+                } else if (type === 'env') {
+                    initVars += `input int InpEnvPeriod_${i} = ${document.getElementById(`envPeriod_${id}`).value};\ninput double InpEnvDev_${i} = ${document.getElementById(`envDev_${id}`).value};\nint hEnv_${i};\n`;
+                    onInitHandles += `    hEnv_${i} = iEnvelopes(_Symbol, PERIOD_CURRENT, InpEnvPeriod_${i}, 0, MODE_SMA, PRICE_CLOSE, InpEnvDev_${i});\n`;
+                    logicBody += `    double eUp_${i}[], eDn_${i}[], eCl_${i}[]; CopyBuffer(hEnv_${i}, 0, 1, 1, eUp_${i}); CopyBuffer(hEnv_${i}, 1, 1, 1, eDn_${i}); CopyClose(_Symbol, PERIOD_CURRENT, 1, 1, eCl_${i});\n    buyCondition = buyCondition && (eCl_${i}[0] <= eDn_${i}[0]);\n    sellCondition = sellCondition && (eCl_${i}[0] >= eUp_${i}[0]);\n\n`;
+                } else if (type === 'rsi') {
+                    initVars += `input int InpRSIPeriod_${i} = ${document.getElementById(`rsiPeriod_${id}`).value};\ninput int InpRSIUpper_${i} = ${document.getElementById(`rsiUpper_${id}`).value};\ninput int InpRSILower_${i} = ${document.getElementById(`rsiLower_${id}`).value};\nint hRSI_${i};\n`;
+                    onInitHandles += `    hRSI_${i} = iRSI(_Symbol, PERIOD_CURRENT, InpRSIPeriod_${i}, PRICE_CLOSE);\n`;
+                    logicBody += `    double rsi_${i}[]; CopyBuffer(hRSI_${i}, 0, 1, 1, rsi_${i});\n    buyCondition = buyCondition && (rsi_${i}[0] < InpRSILower_${i});\n    sellCondition = sellCondition && (rsi_${i}[0] > InpRSIUpper_${i});\n\n`;
+                } else if (type === 'macd') {
+                    initVars += `input int InpMACDFast_${i} = ${document.getElementById(`macdFast_${id}`).value};\ninput int InpMACDSlow_${i} = ${document.getElementById(`macdSlow_${id}`).value};\ninput int InpMACDSignal_${i} = ${document.getElementById(`macdSignal_${id}`).value};\nint hMACD_${i};\n`;
+                    onInitHandles += `    hMACD_${i} = iMACD(_Symbol, PERIOD_CURRENT, InpMACDFast_${i}, InpMACDSlow_${i}, InpMACDSignal_${i}, PRICE_CLOSE);\n`;
+                    logicBody += `    double mM_${i}[], mS_${i}[]; CopyBuffer(hMACD_${i}, 0, 1, 2, mM_${i}); CopyBuffer(hMACD_${i}, 1, 1, 2, mS_${i}); ArraySetAsSeries(mM_${i}, true); ArraySetAsSeries(mS_${i}, true);\n    buyCondition = buyCondition && (mM_${i}[0] > mS_${i}[0] && mM_${i}[1] <= mS_${i}[1]);\n    sellCondition = sellCondition && (mM_${i}[0] < mS_${i}[0] && mM_${i}[1] >= mS_${i}[1]);\n\n`;
+                } else if (type === 'bb') {
+                    initVars += `input int InpBBPeriod_${i} = ${document.getElementById(`bbPeriod_${id}`).value};\ninput double InpBBDev_${i} = ${document.getElementById(`bbDev_${id}`).value};\nint hBB_${i};\n`;
+                    onInitHandles += `    hBB_${i} = iBands(_Symbol, PERIOD_CURRENT, InpBBPeriod_${i}, 0, InpBBDev_${i}, PRICE_CLOSE);\n`;
+                    logicBody += `    double bbUp_${i}[], bbDn_${i}[], bCl_${i}[]; CopyBuffer(hBB_${i}, 1, 1, 1, bbUp_${i}); CopyBuffer(hBB_${i}, 2, 1, 1, bbDn_${i}); CopyClose(_Symbol, PERIOD_CURRENT, 1, 1, bCl_${i});\n    buyCondition = buyCondition && (bCl_${i}[0] <= bbDn_${i}[0]);\n    sellCondition = sellCondition && (bCl_${i}[0] >= bbUp_${i}[0]);\n\n`;
+                } else if (type === 'stoch') {
+                    initVars += `input int InpStochK_${i} = ${document.getElementById(`stochK_${id}`).value};\ninput int InpStochD_${i} = ${document.getElementById(`stochD_${id}`).value};\ninput int InpStochS_${i} = ${document.getElementById(`stochS_${id}`).value};\nint hStoch_${i};\n`;
+                    onInitHandles += `    hStoch_${i} = iStochastic(_Symbol, PERIOD_CURRENT, InpStochK_${i}, InpStochD_${i}, InpStochS_${i}, MODE_SMA, STO_LOWHIGH);\n`;
+                    logicBody += `    double stK_${i}[], stD_${i}[]; CopyBuffer(hStoch_${i}, 0, 1, 2, stK_${i}); CopyBuffer(hStoch_${i}, 1, 1, 2, stD_${i}); ArraySetAsSeries(stK_${i}, true); ArraySetAsSeries(stD_${i}, true);\n    buyCondition = buyCondition && (stK_${i}[0] > stD_${i}[0] && stK_${i}[1] <= stD_${i}[1] && stK_${i}[0] < 20);\n    sellCondition = sellCondition && (stK_${i}[0] < stD_${i}[0] && stK_${i}[1] >= stD_${i}[1] && stK_${i}[0] > 80);\n\n`;
+                } else if (type === 'dmi') {
+                    initVars += `input int InpDMIPeriod_${i} = ${document.getElementById(`dmiPeriod_${id}`).value};\nint hDMI_${i};\n`;
+                    onInitHandles += `    hDMI_${i} = iADX(_Symbol, PERIOD_CURRENT, InpDMIPeriod_${i});\n`;
+                    logicBody += `    double pDI_${i}[], mDI_${i}[]; CopyBuffer(hDMI_${i}, 1, 1, 2, pDI_${i}); CopyBuffer(hDMI_${i}, 2, 1, 2, mDI_${i}); ArraySetAsSeries(pDI_${i}, true); ArraySetAsSeries(mDI_${i}, true);\n    buyCondition = buyCondition && (pDI_${i}[0] > mDI_${i}[0] && pDI_${i}[1] <= mDI_${i}[1]);\n    sellCondition = sellCondition && (pDI_${i}[0] < mDI_${i}[0] && pDI_${i}[1] >= mDI_${i}[1]);\n\n`;
+                } else if (type === 'wpr') {
+                    initVars += `input int InpWPRPeriod_${i} = ${document.getElementById(`wprPeriod_${id}`).value};\nint hWPR_${i};\n`;
+                    onInitHandles += `    hWPR_${i} = iWPR(_Symbol, PERIOD_CURRENT, InpWPRPeriod_${i});\n`;
+                    logicBody += `    double wpr_${i}[]; CopyBuffer(hWPR_${i}, 0, 1, 2, wpr_${i}); ArraySetAsSeries(wpr_${i}, true);\n    buyCondition = buyCondition && (wpr_${i}[0] > -80 && wpr_${i}[1] <= -80);\n    sellCondition = sellCondition && (wpr_${i}[0] < -20 && wpr_${i}[1] >= -20);\n\n`;
+                } else if (type === 'cci') {
+                    initVars += `input int InpCCIPeriod_${i} = ${document.getElementById(`cciPeriod_${id}`).value};\nint hCCI_${i};\n`;
+                    onInitHandles += `    hCCI_${i} = iCCI(_Symbol, PERIOD_CURRENT, InpCCIPeriod_${i}, PRICE_TYPICAL);\n`;
+                    logicBody += `    double cci_${i}[]; CopyBuffer(hCCI_${i}, 0, 1, 2, cci_${i}); ArraySetAsSeries(cci_${i}, true);\n    buyCondition = buyCondition && (cci_${i}[0] > -100 && cci_${i}[1] <= -100);\n    sellCondition = sellCondition && (cci_${i}[0] < 100 && cci_${i}[1] >= 100);\n\n`;
+                } else if (type === 'mom') {
+                    initVars += `input int InpMomPeriod_${i} = ${document.getElementById(`momPeriod_${id}`).value};\nint hMom_${i};\n`;
+                    onInitHandles += `    hMom_${i} = iMomentum(_Symbol, PERIOD_CURRENT, InpMomPeriod_${i}, PRICE_CLOSE);\n`;
+                    logicBody += `    double mom_${i}[]; CopyBuffer(hMom_${i}, 0, 1, 2, mom_${i}); ArraySetAsSeries(mom_${i}, true);\n    buyCondition = buyCondition && (mom_${i}[0] > 100 && mom_${i}[1] <= 100);\n    sellCondition = sellCondition && (mom_${i}[0] < 100 && mom_${i}[1] >= 100);\n\n`;
+                } else if (type === 'hl') {
+                    initVars += `input int InpHLPeriod_${i} = ${document.getElementById(`hlPeriod_${id}`).value};\n`;
+                    logicBody += `    double hiArr_${i}[], loArr_${i}[], clHL_${i}[]; CopyHigh(_Symbol, PERIOD_CURRENT, 2, InpHLPeriod_${i}, hiArr_${i}); CopyLow(_Symbol, PERIOD_CURRENT, 2, InpHLPeriod_${i}, loArr_${i}); CopyClose(_Symbol, PERIOD_CURRENT, 1, 1, clHL_${i});\n    double highest_${i} = hiArr_${i}[ArrayMaximum(hiArr_${i})]; double lowest_${i} = loArr_${i}[ArrayMinimum(loArr_${i})];\n    buyCondition = buyCondition && (clHL_${i}[0] > highest_${i});\n    sellCondition = sellCondition && (clHL_${i}[0] < lowest_${i});\n\n`;
+                } else if (type === 'atr') {
+                    initVars += `input int InpATRPeriod_${i} = ${document.getElementById(`atrPeriod_${id}`).value};\ninput double InpATRLevel_${i} = ${document.getElementById(`atrLevel_${id}`).value};\nint hATR_${i};\n`;
+                    onInitHandles += `    hATR_${i} = iATR(_Symbol, PERIOD_CURRENT, InpATRPeriod_${i});\n`;
+                    logicBody += `    double atr_${i}[]; CopyBuffer(hATR_${i}, 0, 1, 1, atr_${i});\n    buyCondition = buyCondition && (atr_${i}[0] > InpATRLevel_${i});\n    sellCondition = sellCondition && (atr_${i}[0] > InpATRLevel_${i});\n\n`;
+                }
+            });
+
+            code += initVars + "\nint OnInit()\n{\n    trade.SetExpertMagicNumber(InpMagic);\n" + onInitHandles + "    return(INIT_SUCCEEDED);\n}\n\n";
+            code += "void OnTick()\n{\n    if(PositionsTotal() > 0) return;\n    bool buyCondition = true; bool sellCondition = true;\n\n" + logicBody;
+            code += "    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK), bid = SymbolInfoDouble(_Symbol, SYMBOL_BID), pt = SymbolInfoDouble(_Symbol, SYMBOL_POINT);\n";
+
+            // MQL5 損切幅の決定 (Fixed or ATR)
+            if (slMode === 'fixed') {
+                code += "    double sl_dist = InpStopLoss * pt;\n";
+            } else {
+                code += "    double atr_sl_arr[]; CopyBuffer(hATR_SL, 0, 1, 1, atr_sl_arr);\n";
+                code += "    double sl_dist = atr_sl_arr[0] * InpSLAtrMult;\n";
+            }
+
+            code += "    if(buyCondition) trade.Buy(InpLot, _Symbol, ask, ask - sl_dist, ask + InpTakeProfit * pt, \"PureGreen EA\");\n";
+            code += "    else if(sellCondition) trade.Sell(InpLot, _Symbol, bid, bid + sl_dist, bid - InpTakeProfit * pt, \"PureGreen EA\");\n}\n";
+        }
+        document.getElementById('outputCode').value = code;
+    }
+
+    function copyCode() {
+        const output = document.getElementById('outputCode');
+        if(output.value === "") return alert("ソースコードを生成してください。");
+        output.select(); document.execCommand("copy");
+        alert("コピー完了！メタエディターに貼り付けてコンパイルしてください。");
+    }
+</script>
+
+
+</body>
+</html>

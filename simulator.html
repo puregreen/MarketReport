@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>資金管理・損失管理シミュレーター</title>
+<style>
+    /* 全体の基本設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 15px;
+    }
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    /* 戻るリンク */
+    .top-nav, .bottom-nav {
+        max-width: 900px;
+        margin: 0 auto 15px auto;
+    }
+    .bottom-nav {
+        margin: 20px auto 0 auto;
+        text-align: center;
+    }
+    .back-link {
+        font-size: 14px;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ヘッダーとフッター（スプレッドシートの色味を再現） */
+    .header-bar {
+        background-color: #ffeb3b; /* イエロー */
+        padding: 15px;
+        font-weight: bold;
+        font-size: 18px;
+        border-bottom: 2px solid #e0c300;
+        text-align: center;
+    }
+    .footer-bar {
+        background-color: #1a365d; /* ダークブルー */
+        height: 40px;
+        margin-top: 20px;
+    }
+
+    /* 各ブロックの枠組み */
+    .block {
+        margin: 15px;
+        border: 2px solid #2c3e50;
+        border-radius: 4px;
+        background-color: #fdfdfd;
+        overflow: hidden;
+    }
+    .block-title {
+        background-color: #aed581; /* グリーン */
+        text-align: center;
+        padding: 6px;
+        font-size: 13px;
+        font-weight: bold;
+        border-bottom: 1px solid #2c3e50;
+        color: #1a365d;
+    }
+
+    /* テーブルレイアウト */
+    .data-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0;
+    }
+    .data-cell {
+        border-right: 1px solid #dcdde1;
+        border-bottom: 1px solid #dcdde1;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+    }
+    .data-cell:last-child {
+        border-right: none;
+    }
+    .cell-label {
+        background-color: #e8f5e9; /* 薄いグリーン */
+        font-size: 11.5px;
+        font-weight: bold;
+        text-align: center;
+        padding: 8px 4px;
+        border-bottom: 1px solid #dcdde1;
+        color: #2c3e50;
+    }
+    
+    /* 入力・出力エリア */
+    .cell-input {
+        padding: 12px 8px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    input[type="number"], select {
+        width: 95%;
+        padding: 8px;
+        font-size: 15px;
+        text-align: center;
+        border: 1px solid #bdc3c7;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: #fff;
+    }
+    input[type="number"]:focus, select:focus {
+        border-color: #3498db;
+        outline: none;
+        background-color: #f0f8ff;
+    }
+    
+    /* 計算結果の表示（出力用） */
+    .calc-result {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-height: 45px;
+        word-break: break-all;
+    }
+    .highlight-red { color: #e74c3c; font-size: 20px; }
+    .highlight-blue { color: #2980b9; font-size: 20px; }
+
+    /* レバレッジ用のハイブリッド入力 */
+    .hybrid-input-group {
+        display: flex;
+        gap: 5px;
+        width: 100%;
+    }
+    .hybrid-input-group select {
+        flex: 1;
+        padding: 6px;
+        font-size: 14px;
+    }
+    .hybrid-input-group input {
+        flex: 1;
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    /* スマホ向け調整 */
+    @media (max-width: 600px) {
+        .data-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+    <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
+</div>
+
+<div class="container">
+    <div class="header-bar">
+        📊 資金管理・損失管理表
+    </div>
+
+    <div class="block">
+        <div class="block-title">基本情報</div>
+        <div class="data-grid">
+            <div class="data-cell">
+                <div class="cell-label">全体投資資金</div>
+                <div class="cell-input"><input type="number" id="totalFund" value="500000" oninput="calculate()"></div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">1口座分配率 (%)</div>
+                <div class="cell-input"><input type="number" id="allocationRate" value="25" oninput="calculate()"></div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">取引口座数</div>
+                <div class="cell-input"><input type="number" id="accountCount" value="4" oninput="calculate()"></div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">損切判定</div>
+                <div class="cell-input">
+                    <select id="slType" onchange="calculate()">
+                        <option value="auto">自動判定</option>
+                        <option value="manual">手動入力固定</option>
+                    </select>
+                </div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">損切手動固定 (pips)</div>
+                <div class="cell-input"><input type="number" id="manualSlPips" value="15" oninput="calculate()"></div>
+            </div>
+            <div class="data-cell" style="background-color: #fff9e6;">
+                <div class="cell-label" style="background-color: #fcf3cf;">推奨ロット数</div>
+                <div class="calc-result highlight-blue" id="resLot">0.00</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="block-title">1取引口座</div>
+        <div class="data-grid">
+            <div class="data-cell">
+                <div class="cell-label">資金</div>
+                <div class="calc-result" id="resFund">0</div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">確保目安 (%)</div>
+                <div class="cell-input"><input type="number" id="secureRate" value="80" oninput="calculate()"></div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">許容リスク (%)</div>
+                <div class="cell-input"><input type="number" id="riskRate" value="4" oninput="calculate()"></div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">通貨量</div>
+                <div class="cell-input">
+                    <select id="volumePerLot" onchange="calculate()">
+                        <option value="1000">1,000通貨</option>
+                        <option value="10000">10,000通貨</option>
+                        <option value="100000" selected>100,000通貨</option>
+                    </select>
+                </div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">レバレッジ</div>
+                <div class="cell-input">
+                    <div class="hybrid-input-group">
+                        <select id="levSelect" onchange="syncLev(true)">
+                            <option value="2">2</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="400">400</option>
+                            <option value="500">500</option>
+                            <option value="600">600</option>
+                            <option value="800">800</option>
+                            <option value="888">888</option>
+                            <option value="1000">1000</option>
+                            <option value="2000" selected>2000</option>
+                            <option value="2100000000">∞</option>
+                            <option value="custom" style="display:none;">カスタム</option>
+                        </select>
+                        <input type="number" id="leverage" value="2000" oninput="syncLev(false)">
+                    </div>
+                </div>
+            </div>
+            <div class="data-cell" style="background-color: #f9ebea;">
+                <div class="cell-label" style="background-color: #f5b7b1;">許容損失額(証拠金)</div>
+                <div class="calc-result highlight-red" id="resAcceptableLoss">0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="block-title">エントリー</div>
+        <div class="data-grid">
+            <div class="data-cell">
+                <div class="cell-label">ポジション</div>
+                <div class="cell-input">
+                    <select id="positionType" onchange="calculate()">
+                        <option value="buy">買</option>
+                        <option value="sell">売</option>
+                    </select>
+                </div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">値 (エントリー)</div>
+                <div class="cell-input"><input type="number" id="entryPrice" value="158.802" step="0.001" oninput="calculate()"></div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">リスク許容係数</div>
+                <div class="cell-input"><input type="number" id="riskCoef" value="10" oninput="calculate()"></div>
+            </div>
+            <div class="data-cell" style="background-color: #f9ebea;">
+                <div class="cell-label" style="background-color: #f5b7b1;">損切ライン</div>
+                <div class="calc-result highlight-red" id="resSlLine">0.000</div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">1pipsの損益</div>
+                <div class="calc-result" id="resPipValue">0</div>
+            </div>
+            <div class="data-cell">
+                <div class="cell-label">損切pips</div>
+                <div class="calc-result" id="resSlPips">0.0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bar"></div>
+</div>
+
+<div class="bottom-nav">
+    <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
+</div>
+
+<script>
+    // 数値のカンマ区切りフォーマット
+    function fmt(num, decimals = 0) {
+        if (isNaN(num) || !isFinite(num)) return "0";
+        return Number(num).toLocaleString('ja-JP', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    }
+
+    // レバレッジの「選択肢」と「直接入力」を連動させる関数
+    function syncLev(fromSelect) {
+        const select = document.getElementById('levSelect');
+        const input = document.getElementById('leverage');
+        
+        if (fromSelect) {
+            // プルダウンを選んだら、入力ボックスの数字も書き換える
+            input.value = select.value;
+        } else {
+            // 入力ボックスに直接数字を打ち込んだら、プルダウンの選択肢も合わせる
+            const val = input.value;
+            let found = false;
+            for(let i=0; i<select.options.length; i++) {
+                if(select.options[i].value === val) {
+                    select.selectedIndex = i;
+                    found = true;
+                    break;
+                }
+            }
+            // リストにない数字が打ち込まれたら、隠しオプション「カスタム」を選択状態にする
+            if(!found) select.value = "custom";
+        }
+        calculate(); // 値が変わったので再計算
+    }
+
+    // メインの計算ロジック
+    function calculate() {
+        const totalFund = parseFloat(document.getElementById('totalFund').value) || 0;
+        const allocationRate = parseFloat(document.getElementById('allocationRate').value) || 0;
+        const slType = document.getElementById('slType').value;
+        const manualSlPips = parseFloat(document.getElementById('manualSlPips').value) || 0;
+        const secureRate = parseFloat(document.getElementById('secureRate').value) || 0;
+        const riskRate = parseFloat(document.getElementById('riskRate').value) || 0;
+        const volumePerLot = parseFloat(document.getElementById('volumePerLot').value) || 100000;
+        const leverage = parseFloat(document.getElementById('leverage').value) || 1;
+        const positionType = document.getElementById('positionType').value;
+        const entryPrice = parseFloat(document.getElementById('entryPrice').value) || 0;
+        const riskCoef = parseFloat(document.getElementById('riskCoef').value) || 0;
+
+        if (entryPrice <= 0) return;
+
+        // 資金計算
+        const fundPerAccount = totalFund * (allocationRate / 100);
+        const tradeableFund = fundPerAccount * (secureRate / 100);
+        const acceptableLoss = tradeableFund * (riskRate / 100);
+
+        // 推奨ロット計算: (許容損失額 * レバレッジ) / (エントリー値 * 通貨量)
+        let recommendedLots = (acceptableLoss * leverage) / (entryPrice * volumePerLot);
+        recommendedLots = Math.round(recommendedLots * 100) / 100;
+
+        // 損切幅 (pips) と距離 (JPY) 
+        let slPips = 0;
+        let slDistanceJpy = 0;
+
+        if (slType === 'auto') {
+            slDistanceJpy = (entryPrice / leverage) * riskCoef;
+            slPips = slDistanceJpy * 100;
+        } else {
+            slPips = manualSlPips;
+            slDistanceJpy = slPips / 100;
+        }
+
+        // 損切ライン計算
+        let slLine = 0;
+        if (positionType === 'buy') {
+            slLine = entryPrice - slDistanceJpy;
+        } else {
+            slLine = entryPrice + slDistanceJpy;
+        }
+
+        // 1pipsの損益計算
+        let profitPerPip = (recommendedLots * volumePerLot) / 1000;
+        profitPerPip = Math.round(profitPerPip);
+
+        // 出力
+        document.getElementById('resFund').innerText = fmt(fundPerAccount);
+        document.getElementById('resAcceptableLoss').innerText = fmt(acceptableLoss);
+        document.getElementById('resLot').innerText = fmt(recommendedLots, 2);
+        document.getElementById('resSlLine').innerText = fmt(slLine, 3);
+        document.getElementById('resPipValue').innerText = fmt(profitPerPip);
+        document.getElementById('resSlPips').innerText = fmt(slPips, 3);
+    }
+
+    // 初回読み込み時に実行
+    window.onload = calculate;
+</script>
+
+</body>
+</html>

@@ -5,87 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>本格派 ノーコードEAジェネレーター(PRO版)</title>
 <style>
+    /* ==========================================
+       共通デザイン定義
+       ========================================== */
     :root {
-        --primary: #2c3e50;    /* ダークネイビー */
-        --secondary: #2980b9;  /* ブルー（見出し用） */
-        --accent: #f39c12;     /* オレンジ（アクセント） */
-        --btn-gen: #2ecc71;    /* グリーン（生成ボタン） */
-        --bg-color: #f4f6f7;
-        --card-bg: #ffffff;
-        --border: #e0e0e0;
-        --text-main: #333333;
-        --text-muted: #7f8c8d;
-        --danger: #e74c3c;
+        --primary: #2c3e50; --secondary: #2980b9; --accent: #f39c12; --btn-gen: #2ecc71;
+        --bg-color: #f4f6f7; --card-bg: #ffffff; --border: #e0e0e0;
+        --text-main: #333333; --text-muted: #7f8c8d; --danger: #e74c3c;
     }
     body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 10px; line-height: 1.6; }
     .container { max-width: 800px; margin: 0 auto; background: var(--card-bg); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; padding-bottom: 20px; }
     
-    /* メインタイトル */
+    .nav-links { max-width: 800px; margin: 10px auto 5px auto; display: flex; justify-content: space-between; align-items: center; padding: 0 10px; box-sizing: border-box; }
+    .nav-links a { text-decoration: none; font-size: 14px; font-weight: bold; }
+    
     .main-title { background-color: var(--primary); color: #ffffff; text-align: center; padding: 20px 10px; font-size: 18px; font-weight: bold; border-bottom: 5px solid var(--accent); margin-bottom: 15px; }
     
-    /* タブUIのスタイリング */
     .tab-container { display: flex; border-bottom: 2px solid var(--border); margin: 0 10px 20px 10px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
-    .tab-button { padding: 12px 10px; text-align: center; background: transparent; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-size: 13px; font-weight: bold; color: var(--text-muted); transition: all 0.2s; outline: none; }
+    .tab-button { flex: 1; padding: 12px 10px; text-align: center; background: transparent; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-size: 13px; font-weight: bold; color: var(--text-muted); outline: none; }
     .tab-button.active { color: var(--secondary); border-bottom: 3px solid var(--secondary); }
     .tab-content { display: none; padding: 0 15px; animation: fadeIn 0.3s ease; }
     .tab-content.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* セクション見出し（青文字） */
-    .section-title { font-size: 15px; font-weight: bold; color: var(--secondary); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 15px; margin-top: 10px; }
+    .section-title { font-size: 15px; font-weight: bold; color: var(--secondary); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 15px; margin-top: 10px; display: flex; align-items: center; gap: 5px; }
     
-    /* フォーム要素 */
-    .form-group { margin-bottom: 20px; }
-    .form-label { font-size: 13px; font-weight: bold; margin-bottom: 5px; display: block; color: var(--text-main); }
+    .form-group { margin-bottom: 15px; }
+    .form-label { font-size: 13px; font-weight: bold; margin-bottom: 5px; display: block; }
     .form-input, .form-select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box; background-color: #fafafa; }
-    .form-select { cursor: pointer; }
-    .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; }
-    .checkbox-label { font-size: 13px; display: flex; align-items: center; cursor: pointer; }
-    
-    /* 注意書きのはみ出し修正 */
-    .logic-desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; word-wrap: break-word; }
-    @media (min-width: 600px) { .logic-desc { margin-left: 0; } }
+    .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; background: #f8f9fa; padding: 10px; border-radius: 4px; }
+    .checkbox-label { font-size: 13px; display: flex; align-items: center; cursor: pointer; gap: 4px; }
+    .logic-desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
 
-    /* 条件追加エリア（黄色い点線枠） */
+    /* エントリー追加エリアの復元 */
     .add-condition-box { background-color: #fef9e7; border: 2px dashed #f1c40f; border-radius: 8px; padding: 15px; margin-bottom: 20px; text-align: center; }
     .btn-add { background-color: var(--accent); color: white; border: none; padding: 12px 20px; font-size: 14px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; box-shadow: 0 2px 0 #d68910; }
     .btn-add:active { transform: translateY(2px); box-shadow: none; }
 
-    /* エントリー条件カード */
-    .condition-card { background: #fff; border: 1px solid var(--border); padding: 15px; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative; }
-    .condition-header { font-weight: bold; color: var(--text-main); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dotted #ccc; font-size: 14px; }
-    .btn-delete { position: absolute; top: 12px; right: 15px; background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; }
-    
-    /* ==========================================
-       抜け落ちていた「タブ4」のデザイン設定（復活！）
-       ========================================== */
+    .condition-card { background: #fff; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 5px solid var(--secondary); }
+    .condition-header { font-weight: bold; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 2px solid #f1f1f1; display: flex; justify-content: space-between; align-items: center; }
+    .btn-delete { background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; }
+
+    .highlight-box { background-color: #fff9e6; border: 1px dashed var(--accent); padding: 15px; border-radius: 6px; margin-bottom: 15px; }
+    .blue-box { background-color: #ebf5fb; border: 1px solid #3498db; padding: 15px; border-radius: 6px; margin-bottom: 15px; }
+
     .btn-generate { background-color: var(--btn-gen); color: white; border: none; padding: 15px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; box-shadow: 0 4px 0 #27ae60; transition: all 0.1s; margin-bottom: 20px; }
     .btn-generate:active { transform: translateY(4px); box-shadow: none; }
     .output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .btn-copy { background-color: var(--secondary); color: white; border: none; padding: 8px 15px; font-size: 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    #outputCode { width: 100%; height: 350px; font-family: 'Courier New', monospace; font-size: 12px; padding: 15px; border: none; border-radius: 6px; background-color: #1e1e1e; color: #d4d4d4; box-sizing: border-box; white-space: pre; overflow: auto; }
-
-    /* マニュアル・注意事項タブ用 */
-    .info-box { background-color: #fff; border: 2px solid #f5b041; border-radius: 6px; padding: 15px; margin-bottom: 15px; }
-    .info-box-title { color: #d35400; font-size: 15px; font-weight: bold; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #fad7a1; }
-    .info-box p, .info-box li { font-size: 13px; color: #444; line-height: 1.6; margin-bottom: 10px; }
-    .highlight-marker { background: linear-gradient(transparent 60%, #f1c40f 60%); font-weight: bold; }
-    .text-red { color: #c0392b; font-weight: bold; }
-    .blue-dashed-box { background-color: #ebf5fb; border: 2px dashed #3498db; border-radius: 6px; padding: 15px; margin-top: 15px; }
-    .blue-dashed-box h4 { color: #2980b9; margin-top: 0; margin-bottom: 10px; font-size: 14px; }
+    #outputCode { width: 100%; height: 350px; font-family: 'Courier New', monospace; font-size: 12px; padding: 15px; border: none; border-radius: 6px; background-color: #1e1e1e; color: #d4d4d4; box-sizing: border-box; }
 </style>
 </head>
 <body>
 
-<div style="max-width: 800px; margin: 10px auto 5px auto; display: flex; justify-content: space-between; align-items: center; padding: 0 10px; box-sizing: border-box;">
-    <a href="index.html" style="color: var(--secondary); text-decoration: none; font-size: 14px; font-weight: bold; padding: 5px 0;">← インデックス(目次)に戻る</a>
-    <a href="ea_builder_old.html" style="color: var(--text-muted); text-decoration: none; font-size: 13px;">🔄 簡易版(旧Ver)はこちら</a>
+<div class="nav-links">
+    <a href="index.html" style="color: var(--secondary);">← インデックス(目次)に戻る</a>
+    <a href="ea_builder_old.html" style="color: var(--text-muted);">🔄 簡易版(旧Ver)はこちら</a>
 </div>
 
 <div class="container">
-    <div class="main-title">
-        🛠️ 本格派 ノーコードEAジェネレーター<br><span style="font-size: 14px;">(PRO版)</span>
-    </div>
+    <div class="main-title">🛠️ 本格派 ノーコードEAジェネレーター<br><span style="font-size: 14px;">(PRO版)</span></div>
 
     <div class="tab-container">
         <button class="tab-button active" onclick="switchTab('tab-base')">1.基本・資金</button>
@@ -98,15 +77,10 @@
 
     <div id="tab-base" class="tab-content active">
         <div class="section-title">1. 基本・取引設定</div>
-        
         <div class="form-group">
             <label class="form-label">プラットフォーム</label>
-            <select id="platform" class="form-select">
-                <option value="mt4">MT4 (MQL4)</option>
-                <option value="mt5">MT5 (MQL5)</option>
-            </select>
+            <select id="platform" class="form-select"><option value="mt4">MT4 (MQL4)</option><option value="mt5">MT5 (MQL5)</option></select>
         </div>
-
         <div class="form-group">
             <label class="form-label">マジックナンバー</label>
             <input type="number" id="inpMagic" class="form-input" value="99999999">
@@ -114,33 +88,29 @@
         </div>
 
         <div class="section-title">💰 ロット・資金管理設定</div>
-        
         <div class="form-group">
             <label class="form-label">ロット計算方式</label>
-            <select id="lotMode" class="form-select" onchange="toggleLotMode()">
+            <select id="lotMode" class="form-select" onchange="toggleLotUI()">
                 <option value="fixed">固定ロット (Fixed)</option>
                 <option value="percent">口座残高に対する比率 (%)</option>
             </select>
         </div>
-        
-        <div class="form-group" id="lot_fixed_area">
+        <div class="form-group" id="ui_fixed">
             <label class="form-label">基本ロット数 (Lot)</label>
-            <input type="number" id="inpLotFixed" class="form-input" value="0.1" step="0.01">
+            <input type="number" id="inpLot" class="form-input" value="0.1" step="0.01">
         </div>
-        
-        <div class="form-group" id="lot_percent_area" style="display: none; background:#fcf3cf; padding:10px; border-radius:4px;">
+        <div class="form-group" id="ui_percent" style="display: none; background:#fcf3cf; padding:10px; border-radius:4px;">
             <label class="form-label">リスク許容率 (%)</label>
             <div style="display:flex; align-items:center;">
                 <input type="number" id="inpRiskPercent" class="form-input" value="2.0" step="0.1" style="width:100px; flex:none;">
                 <span style="font-size:12px; margin-left: 10px;">※残高のN%で自動計算</span>
             </div>
         </div>
-        
+
         <div class="form-group">
             <label class="form-label">最大ポジション数</label>
-            <input type="number" id="inpMaxPos" class="form-input" value="1" min="1" max="10">
+            <input type="number" id="inpMaxPos" class="form-input" value="1">
         </div>
-
         <div class="form-group">
             <label class="form-label">スリッページ許容</label>
             <div style="display:flex; align-items:center;">
@@ -150,33 +120,30 @@
         </div>
 
         <div class="section-title">⏱️ 取引曜日・時間帯制限</div>
-        
         <div class="form-group">
             <label class="form-label">稼働させる曜日</label>
             <div class="checkbox-group">
-                <label class="checkbox-label"><input type="checkbox" id="day_mon" checked> 月</label>
-                <label class="checkbox-label"><input type="checkbox" id="day_tue" checked> 火</label>
-                <label class="checkbox-label"><input type="checkbox" id="day_wed" checked> 水</label>
-                <label class="checkbox-label"><input type="checkbox" id="day_thu" checked> 木</label>
-                <label class="checkbox-label"><input type="checkbox" id="day_fri" checked> 金</label>
-                <label class="checkbox-label"><input type="checkbox" id="day_sat"> 土</label>
-                <label class="checkbox-label"><input type="checkbox" id="day_sun"> 日</label>
+                <label class="checkbox-label"><input type="checkbox" class="day-check" value="1" checked>月</label>
+                <label class="checkbox-label"><input type="checkbox" class="day-check" value="2" checked>火</label>
+                <label class="checkbox-label"><input type="checkbox" class="day-check" value="3" checked>水</label>
+                <label class="checkbox-label"><input type="checkbox" class="day-check" value="4" checked>木</label>
+                <label class="checkbox-label"><input type="checkbox" class="day-check" value="5" checked>金</label>
+                <label class="checkbox-label"><input type="checkbox" class="day-check" value="6">土</label>
+                <label class="checkbox-label"><input type="checkbox" class="day-check" value="0">日</label>
             </div>
             <div class="logic-desc">※チェックを外した曜日は新規エントリーを行いません。(BTC等の暗号資産以外は土日は相場が休みです)</div>
         </div>
-        
         <div class="form-group">
             <label class="form-label">稼働時間制限</label>
-            <select id="timeFilterMode" class="form-select" onchange="toggleTimeFilter()">
+            <select id="timeFilterMode" class="form-select" onchange="toggleTimeUI()">
                 <option value="none">制限なし (24時間)</option>
                 <option value="active">指定時間のみ稼働</option>
             </select>
         </div>
-        
-        <div id="time_filter_area" style="display: none; background:#e8f8f5; padding:10px; border-radius:4px; margin-bottom:15px;">
+        <div id="time_settings_area" style="display:none; background:#e8f8f5; padding:10px; border-radius:4px;">
             <div style="display:flex; gap:10px; align-items:center;">
-                <div><label class="form-label">開始(時)</label><input type="number" id="timeStart" class="form-input" value="1" min="0" max="23"></div>
-                <div><label class="form-label">終了(時)</label><input type="number" id="timeEnd" class="form-input" value="22" min="0" max="23"></div>
+                <div><label class="form-label">開始(時)</label><input type="number" id="tStart" class="form-input" value="9"></div>
+                <div><label class="form-label">終了(時)</label><input type="number" id="tEnd" class="form-input" value="23"></div>
             </div>
             <div class="logic-desc" style="color:#d35400; margin-top:5px;">※MT4/MT5の気配値表示のサーバー時間で指定してください。</div>
         </div>
@@ -186,12 +153,12 @@
         <div class="section-title">2. エントリーロジック</div>
         
         <div class="add-condition-box">
-            <select id="condition-selector" class="form-select" style="margin-bottom: 10px; font-weight: bold; color: var(--primary);">
+            <select id="modSelector" class="form-select" style="margin-bottom: 10px; font-weight: bold; color: var(--primary);">
                 <optgroup label="トレンド系">
                     <option value="ma">📉 移動平均線 (MA) クロス</option>
                     <option value="ichimoku">☁️ 一目均衡表 (転換線・基準線)</option>
                     <option value="sar">🔵 パラボリック SAR</option>
-                    <option value="bb">📊 ボリンジャーバンド 反発/ブレイク</option>
+                    <option value="bb">📊 ボリンジャーバンド反発/ブレイク</option>
                     <option value="env">🎢 エンベロープ 反発</option>
                 </optgroup>
                 <optgroup label="オシレーター系">
@@ -211,11 +178,10 @@
                     <option value="trend_filter">🚦 トレンド/レンジ判定 (ADX)</option>
                 </optgroup>
             </select>
-            <button class="btn-add" onclick="addCondition()">➕ 条件を追加する</button>
+            <button class="btn-add" onclick="addModule()">➕ 条件を追加する</button>
             <div class="logic-desc" style="text-align: left; margin-top: 10px;">※複数の条件を追加した場合、すべてを満たした時（AND条件）にエントリーします。</div>
         </div>
-
-        <div id="conditions-container"></div>
+        <div id="modContainer"></div>
     </div>
 
     <div id="tab-exit" class="tab-content">
@@ -229,14 +195,13 @@
             </div>
             <div class="logic-desc">※ポイント (10pips = 100)</div>
         </div>
-        
+
         <div class="form-group" style="background-color: #fffaf0; border: 1px dashed #f39c12; padding: 15px; border-radius: 6px;">
             <label class="form-label" style="color: #d35400;">損切モード (SL)</label>
             <select id="slMode" class="form-select" style="font-weight:bold; color: #d35400; margin-bottom: 10px;" onchange="toggleSlMode()">
                 <option value="fixed">固定幅 (Points)</option>
                 <option value="atr">ATR連動 (Dynamic SL)</option>
             </select>
-
             <div id="sl_fixed_area">
                 <label class="form-label">損切幅 (固定Points)</label>
                 <div style="display:flex; align-items:center;">
@@ -244,34 +209,30 @@
                     <span style="font-size:13px; margin-left:10px; width:60px;">ポイント</span>
                 </div>
             </div>
-            
             <div id="sl_atr_area" style="display:none;">
                 <div style="display:flex; gap:10px; margin-bottom: 5px;">
                     <div style="flex:1;"><label class="form-label">ATR 期間</label><input type="number" id="slAtrPeriod" class="form-input" value="14"></div>
                     <div style="flex:1;"><label class="form-label">ATR 乗数</label><input type="number" id="slAtrMult" class="form-input" value="2.0" step="0.1"></div>
                 </div>
-                <div class="logic-desc" style="color:#e67e22;">※ 直近のボラティリティ(ATR) × 乗数 で損切幅を自動で伸縮させます。</div>
+                <div class="logic-desc" style="color:#e67e22;">※直近のボラティリティ(ATR) × 乗数 で損切幅を自動で伸縮させます。</div>
             </div>
         </div>
 
         <div class="section-title">🛡️ 高度な防衛エグジット</div>
-        
         <div class="form-group">
             <label class="form-label">週末持ち越し制限</label>
-            <select id="weekendCarry" class="form-select">
-                <option value="true">持ち越しあり（制限なし）</option>
-                <option value="false">金曜の夜(23時)に全決済する</option>
+            <select id="weekendExit" class="form-select">
+                <option value="none">持ち越しあり (制限なし)</option>
+                <option value="exit">金曜の夜(23時)に全決済する</option>
             </select>
             <div class="logic-desc">※「金曜に全決済」を選ぶと、週末の突発的なヘッドラインリスク（窓開け）を回避できます。</div>
         </div>
-
         <div class="form-group">
             <label class="form-label">反対シグナルでの決済（ドテン）</label>
-            <select id="oppositeClose" class="form-select">
-                <option value="none">なし（TP/SLのみで決済）</option>
-                <option value="all">あり（損益に関係なく決済）</option>
-                <option value="profit_only">あり（プラス利益の時のみ決済）</option>
-                <option value="loss_only">あり（損失が出ている時のみ決済）</option>
+            <select id="oppositeExit" class="form-select">
+                <option value="none">なし (TP/SLのみで決済)</option>
+                <option value="all">あり (損益に関係なく決済)</option>
+                <option value="profit">あり (プラス利益の時のみ決済)</option>
             </select>
             <div class="logic-desc">※「買い」ポジション保有中に「売り」シグナルが出た場合の挙動を設定します。</div>
         </div>
@@ -280,61 +241,63 @@
     <div id="tab-gen" class="tab-content">
         <div class="section-title">4. EAソースコードの生成</div>
         <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px;">設定が完了したら、下のボタンを押してMQLコードを生成してください。</p>
-        
         <button class="btn-generate" onclick="generateCode()">⚡ ソースコードを生成する</button>
-        
         <div class="output-header">
             <span style="font-weight: bold; color: var(--secondary); font-size: 14px;">生成されたソースコード</span>
             <button class="btn-copy" onclick="copyCode()">📋 コピーしてMT4/MT5に貼る</button>
         </div>
-        
         <textarea id="outputCode" readonly placeholder="ここにEAのソースコードが生成されます..."></textarea>
     </div>
 
     <div id="tab-manual" class="tab-content">
         <div class="section-title">5. EA登録・稼働マニュアル</div>
-        <div class="info-box">
-            <div class="info-box-title">⚙️ MT4 / MT5への設定手順</div>
+        <div class="highlight-box" style="background-color: #fff; border: 2px solid #f5b041;">
+            <div style="color: #d35400; font-size: 15px; font-weight: bold; margin-bottom: 15px; border-bottom: 1px solid #fad7a1; padding-bottom: 5px;">⚙️ MT4 / MT5への設定手順</div>
+            
             <h4 style="margin:0 0 5px 0; color:#2c3e50; font-size:14px;">手順1：コードのコピー</h4>
-            <p>「4.生成」タブで緑色の「ソースコードを生成する」ボタンを押し、出力されたコードをコピーします。</p>
+            <p style="font-size:13px; color:#444; margin-bottom:10px;">「4.生成」タブで緑色の「ソースコードを生成する」ボタンを押し、出力されたコードをコピーします。</p>
+            
             <h4 style="margin:0 0 5px 0; color:#2c3e50; font-size:14px;">手順2：メタエディターの起動</h4>
-            <p>MT4またはMT5を開き、上部メニューの「ツール」＞「メタクオーツ言語エディタ（F4）」を開きます。</p>
+            <p style="font-size:13px; color:#444; margin-bottom:10px;">MT4またはMT5を開き、上部メニューの「ツール」＞「メタクオーツ言語エディタ（F4）」を開きます。</p>
+            
             <h4 style="margin:0 0 5px 0; color:#2c3e50; font-size:14px;">手順3：新規作成とコンパイル</h4>
-            <p>「新規作成」から「Expert Advisor」を選び、適当な名前を付けて作成します。最初から書かれているコードをすべて消し、コピーしたコードを貼り付けて上部の「コンパイル」ボタンを押します。</p>
+            <p style="font-size:13px; color:#444; margin-bottom:10px;">「新規作成」から「Expert Advisor」を選び、適当な名前を付けて作成します。最初から書かれているコードをすべて消し、コピーしたコードを貼り付けて上部の「コンパイル」ボタンを押します。</p>
+            
             <h4 style="margin:0 0 5px 0; color:#2c3e50; font-size:14px;">手順4：チャートへ適用</h4>
-            <p>ナビゲーターウィンドウの「エキスパートアドバイザ」内に作成したEAが表示されます。稼働させたいチャートにドラッグ＆ドロップし、「自動売買を許可する」にチェックを入れてください。</p>
+            <p style="font-size:13px; color:#444; margin-bottom:10px;">ナビゲーターウィンドウの「エキスパートアドバイザ」内に作成したEAが表示されます。稼働させたいチャートにドラッグ＆ドロップし、「自動売買を許可する」にチェックを入れてください。</p>
         </div>
     </div>
 
     <div id="tab-notice" class="tab-content">
         <div class="section-title">6. メリットと注意事項</div>
         
-        <div class="info-box" style="border-color: #f1c40f;">
-            <div class="info-box-title" style="color: #d35400;">💡 自分だけのロジックでEAを作るメリットと注意事項</div>
-            <h4 style="margin:0 0 5px 0; color:#2c3e50; font-size:14px;">✔️ なぜ「自作EA」が良いのか？</h4>
-            <p>世の中に出回っている「勝率90%！」「月利〇%！」と謳う配布EAの多くは、中身のロジックが分からない「ブラックボックス」です。こうしたEAは、相場が急変した際に突然資金を全損させるリスク（詐欺的ロジック）を孕んでいます。</p>
-            <p>自分でロジックを組み立てたEAなら、<span class="highlight-marker">「なぜここでエントリーしたのか」「なぜ損切りになったのか」が100%理解できる</span>ため、不調な時期（ドローダウン）でも冷静に稼働を管理し、大切なお金を守ることができます。</p>
+        <div class="highlight-box" style="background-color: #fff; border: 2px solid #f1c40f;">
+            <div style="color: #d35400; font-size: 15px; font-weight: bold; margin-bottom: 15px; border-bottom: 1px solid #fad7a1; padding-bottom: 10px;">💡 自分だけのロジックでEAを作るメリットと注意事項</div>
             
-            <h4 style="margin:15px 0 5px 0; color:#d35400; font-size:14px;">⚠️ 免責事項・注意事項 <span style="font-size:12px;">(必ずお読みください)</span></h4>
-            <ul style="padding-left: 20px;">
-                <li>本ツールで生成されたソースコードおよびEAの利用は<span class="text-red">【完全自己責任】</span>となります。</li>
-                <li>いかなるロジックであっても「相場に100%」はありません。本EAを使用したことによるいかなる損失についても、当コミュニティは一切の責任を負いかねます。</li>
-                <li>実運用（リアル口座）へ投入する前に、<span class="text-red">必ずデモ口座またはストラテジーテスターにて、十分な動作確認とバックテスト</span>を行ってください。</li>
+            <h4 style="margin:0 0 5px 0; color:#2980b9; font-size:14px;">✔️ なぜ「自作EA」が良いのか？</h4>
+            <p style="font-size:13px; color:#444; margin-bottom:10px;">世の中に出回っている「勝率90%！」「月利〇%！」と謳う配布EAの多くは、中身のロジックが分からない「ブラックボックス」です。こうしたEAは、相場が急変した際に突然資金を全損させるリスク（詐欺的ロジック）を孕んでいます。</p>
+            <p style="font-size:13px; color:#444; margin-bottom:15px;">自分でロジックを組み立てたEAなら、<span style="background: linear-gradient(transparent 60%, #f1c40f 60%); font-weight: bold;">「なぜここでエントリーしたのか」「なぜ損切りになったのか」が100%理解できる</span>ため、不調な時期（ドローダウン）でも冷静に稼働を管理し、大切なお金を守ることができます。</p>
+            
+            <h4 style="margin:15px 0 5px 0; color:#c0392b; font-size:14px;">⚠️ 免責事項・注意事項 <span style="font-size:12px;">(必ずお読みください)</span></h4>
+            <ul style="list-style: none; padding-left: 0; font-size:13px; color:#444; margin-bottom:0;">
+                <li style="margin-bottom: 8px;">・本ツールで生成されたソースコードおよびEAの利用は<span style="color:#c0392b; font-weight:bold; border-bottom: 2px solid #c0392b;">【完全自己責任】</span>となります。</li>
+                <li style="margin-bottom: 8px;">・いかなるロジックであっても「相場に100%」はありません。本EAを使用したことによるいかなる損失についても、当コミュニティは一切の責任を負いかねます。</li>
+                <li style="margin-bottom: 0;">・実運用（リアル口座）へ投入する前に、<span style="color:#c0392b; font-weight:bold;">必ずデモ口座またはストラテジーテスターにて、十分な動作確認とバックテスト</span>を行ってください。</li>
             </ul>
         </div>
 
-        <div class="blue-dashed-box">
-            <h4>💬 不具合報告・ご要望はコミュニティへ！</h4>
-            <p>「メタエディターでコンパイルエラーが出た」「設定した条件通りにエントリーされない」といった不具合や、「このインジケーターも追加してほしい！」といったご要望がありましたら、<strong style="color:#2980b9;">ぜひコミュニティのチャットへご報告ください。</strong></p>
-            <p style="margin-bottom:0;">皆様からのフィードバックをもとに、このツールをさらに強力な「最強のEA生成ツール」へとアップデートしていきます！一緒に投資スキルを磨いていきましょう。</p>
+        <div style="background-color: #ebf5fb; border: 2px dashed #3498db; padding: 15px; border-radius: 6px;">
+            <h4 style="color: #2980b9; margin-top: 0; margin-bottom: 10px; font-size: 14px;">💬 不具合報告・ご要望はコミュニティへ！</h4>
+            <p style="font-size:13px; color:#444; margin-bottom:10px;">「メタエディターでコンパイルエラーが出た」「設定した条件通りにエントリーされない」といった不具合や、「このインジケーターも追加してほしい！」といったご要望がありましたら、<strong style="color:#2980b9;">ぜひコミュニティのチャットへご報告ください。</strong></p>
+            <p style="font-size:13px; color:#444; margin-bottom:0;">皆様からのフィードバックをもとに、このツールをさらに強力な「最強のEA生成ツール」へとアップデートしていきます！一緒に投資スキルを磨いていきましょう。</p>
         </div>
     </div>
 
-</div> 
+</div>
 
 <script>
     // ==========================================
-    // 1. UI制御（タブ切替・表示/非表示）
+    // 1. UI制御
     // ==========================================
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -342,18 +305,15 @@
         document.getElementById(tabId).classList.add('active');
         event.currentTarget.classList.add('active');
     }
-
-    function toggleLotMode() {
+    function toggleLotUI() {
         const mode = document.getElementById('lotMode').value;
-        document.getElementById('lot_fixed_area').style.display = mode === 'fixed' ? 'block' : 'none';
-        document.getElementById('lot_percent_area').style.display = mode === 'percent' ? 'block' : 'none';
+        document.querySelectorAll('.lot-ui').forEach(el => el.style.display = 'none');
+        if(mode === 'fixed') document.getElementById('ui_fixed').style.display = 'block';
+        else if(mode === 'percent') document.getElementById('ui_percent').style.display = 'block';
     }
-
-    function toggleTimeFilter() {
-        const mode = document.getElementById('timeFilterMode').value;
-        document.getElementById('time_filter_area').style.display = mode === 'active' ? 'block' : 'none';
+    function toggleTimeUI() {
+        document.getElementById('time_settings_area').style.display = document.getElementById('timeFilterMode').value === 'active' ? 'block' : 'none';
     }
-
     function toggleSlMode() {
         const mode = document.getElementById('slMode').value;
         document.getElementById('sl_fixed_area').style.display = mode === 'fixed' ? 'block' : 'none';
@@ -361,341 +321,388 @@
     }
 
     // ==========================================
-    // 2. エントリー条件（インジケーター）追加機能
+    // 2. モジュール定義
     // ==========================================
     let conditionIdCounter = 0;
-    const conditionsContainer = document.getElementById('conditions-container');
+    const modContainer = document.getElementById('modContainer');
 
-    const templates = {
-        'ma': { title: '📉 移動平均線 (MA) クロス', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">短期MA期間</label><input type="number" id="maFast_${id}" class="form-input" value="14" style="margin-bottom:10px;"><label class="form-label">長期MA期間</label><input type="number" id="maSlow_${id}" class="form-input" value="50"><div class="logic-desc">※短期が長期を上に抜けたら買、下に抜けたら売</div></div>` },
-        'ichimoku': { title: '☁️ 一目均衡表 (転換線・基準線)', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">転換線</label><input type="number" id="ichiTenkan_${id}" class="form-input" value="9" style="margin-bottom:10px;"><label class="form-label">基準線</label><input type="number" id="ichiKijun_${id}" class="form-input" value="26"></div>` },
-        'sar': { title: '🔵 パラボリック SAR', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">ステップ</label><input type="number" id="sarStep_${id}" class="form-input" value="0.02" step="0.01" style="margin-bottom:10px;"><label class="form-label">上限</label><input type="number" id="sarMax_${id}" class="form-input" value="0.2" step="0.1"></div>` },
-        'bb': { title: '📊 ボリンジャーバンド 反発', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="bbPeriod_${id}" class="form-input" value="20" style="margin-bottom:10px;"><label class="form-label">偏差(σ)</label><input type="number" id="bbDev_${id}" class="form-input" value="2" step="0.1"></div>` },
-        'env': { title: '🎢 エンベロープ 反発', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="envPeriod_${id}" class="form-input" value="14" style="margin-bottom:10px;"><label class="form-label">偏差(%)</label><input type="number" id="envDev_${id}" class="form-input" value="0.1" step="0.01"></div>` },
-        'rsi': { title: '📈 RSI (過熱感・反発)', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="rsiPeriod_${id}" class="form-input" value="14" style="margin-bottom:10px;"><div style="display:flex; gap:10px;"><div style="flex:1;"><label class="form-label">上限(売)</label><input type="number" id="rsiUpper_${id}" class="form-input" value="70"></div><div style="flex:1;"><label class="form-label">下限(買)</label><input type="number" id="rsiLower_${id}" class="form-input" value="30"></div></div></div>` },
-        'macd': { title: '📊 MACD クロス', html: (id) => `<div class="form-group" style="margin-bottom:0;"><div style="display:flex; gap:5px;"><div style="flex:1;"><label class="form-label">短期</label><input type="number" id="macdFast_${id}" class="form-input" value="12"></div><div style="flex:1;"><label class="form-label">長期</label><input type="number" id="macdSlow_${id}" class="form-input" value="26"></div><div style="flex:1;"><label class="form-label">シグナル</label><input type="number" id="macdSignal_${id}" class="form-input" value="9"></div></div></div>` },
-        'stoch': { title: '📉 ストキャスティクス クロス', html: (id) => `<div class="form-group" style="margin-bottom:0;"><div style="display:flex; gap:5px;"><div style="flex:1;"><label class="form-label">%K</label><input type="number" id="stochK_${id}" class="form-input" value="5"></div><div style="flex:1;"><label class="form-label">%D</label><input type="number" id="stochD_${id}" class="form-input" value="3"></div><div style="flex:1;"><label class="form-label">Slow</label><input type="number" id="stochS_${id}" class="form-input" value="3"></div></div></div>` },
-        'rci': { title: '🌊 RCI 反発', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="rciPeriod_${id}" class="form-input" value="9"><div class="logic-desc">※+80,-80を基準に反発判定</div></div>` },
-        'awesome': { title: '🌟 オーサムオシレーター', html: (id) => `<div class="form-group" style="margin-bottom:0;"><div class="logic-desc" style="margin-left:0;">※ゼロラインのクロスで判定（設定不要）</div></div>` },
-        'atr': { title: '📏 ATR (ボラティリティ・フィルター)', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="atrPeriod_${id}" class="form-input" value="14" style="margin-bottom:10px;"><label class="form-label">基準値</label><input type="number" id="atrLevel_${id}" class="form-input" value="0.002" step="0.001"></div>` },
-        'trend_filter': { title: '🚦 トレンド/レンジ判定 (ADX)', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">ADX 期間</label><input type="number" id="adxFilterPeriod_${id}" class="form-input" value="14" style="margin-bottom:10px;"><label class="form-label">基準値(トレンド)</label><input type="number" id="adxLevel_${id}" class="form-input" value="25"><div class="logic-desc">※ADXが基準値以上でトレンド、未満でレンジ判定。</div></div>` },
-        'dmi': { title: '🔀 DMI (ADX) クロス', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="dmiPeriod_${id}" class="form-input" value="14"></div>` },
-        'wpr': { title: '⚡ Williams %R 反発', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="wprPeriod_${id}" class="form-input" value="14"></div>` },
-        'cci': { title: '🌀 CCI ブレイク', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="cciPeriod_${id}" class="form-input" value="14"></div>` },
-        'mom': { title: '🚀 モメンタム ブレイク', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">期間</label><input type="number" id="momPeriod_${id}" class="form-input" value="14"></div>` },
-        'hl': { title: '💥 直近高値・安値 ブレイク', html: (id) => `<div class="form-group" style="margin-bottom:0;"><label class="form-label">ローソク足本数</label><input type="number" id="hlPeriod_${id}" class="form-input" value="20"></div>` }
+    const tfOptions = `<option value="0">チャートと同じ</option><option value="1">1分足 (M1)</option><option value="5">5分足 (M5)</option><option value="15">15分足 (M15)</option><option value="60">1時間足 (H1)</option><option value="240">4時間足 (H4)</option><option value="1440">日足 (D1)</option>`;
+
+    const modules = {
+        'ma': {
+            title: '移動平均線 (MA)',
+            methods: [{ val: 'cross_trend', label: 'シグナル | 順張りクロス' }, { val: 'cross_anti', label: 'シグナル | 逆張りクロス' }, { val: 'perfect_order', label: 'フィルター | 3本MAパーフェクトオーダー' }],
+            renderParams: (id, method) => {
+                let h = `<div style="margin-bottom:10px;"><label class="form-label">MAタイプ</label><select id="maType_${id}" class="form-select"><option value="0">SMA (単純)</option><option value="1">EMA (指数)</option></select></div>`;
+                if(method === 'perfect_order') h += `<div style="display:flex; gap:5px;"><div style="flex:1"><label class="form-label">短期</label><input type="number" id="p1_${id}" class="form-input" value="20"></div><div style="flex:1"><label class="form-label">中期</label><input type="number" id="p2_${id}" class="form-input" value="50"></div><div style="flex:1"><label class="form-label">長期</label><input type="number" id="p3_${id}" class="form-input" value="100"></div></div>`;
+                else h += `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">短期MA</label><input type="number" id="p1_${id}" class="form-input" value="14"></div><div style="flex:1"><label class="form-label">長期MA</label><input type="number" id="p2_${id}" class="form-input" value="50"></div></div>`;
+                return h;
+            }
+        },
+        'ichimoku': {
+            title: '一目均衡表',
+            methods: [{ val: 'cross', label: 'シグナル | 転換線・基準線クロス' }],
+            renderParams: (id) => `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">転換線</label><input type="number" id="p1_${id}" class="form-input" value="9"></div><div style="flex:1"><label class="form-label">基準線</label><input type="number" id="p2_${id}" class="form-input" value="26"></div></div>`
+        },
+        'rsi': {
+            title: 'RSI',
+            methods: [{ val: 'sig_anti', label: '過熱ラインで逆張り' }, { val: 'sig_trend', label: '過熱ラインで順張り' }, { val: 'filt_range', label: '指定レベル範囲内(レンジ用)' }],
+            renderParams: (id) => `<div style="margin-bottom:10px;"><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="14"></div><div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">上限</label><input type="number" id="p2_${id}" class="form-input" value="70"></div><div style="flex:1"><label class="form-label">下限</label><input type="number" id="p3_${id}" class="form-input" value="30"></div></div>`
+        },
+        'bb': {
+            title: 'ボリンジャーバンド',
+            methods: [{ val: 'touch_anti', label: 'バンドタッチ反発 (逆張り)' }, { val: 'break_trend', label: 'バンドブレイク (順張り)' }],
+            renderParams: (id) => `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="20"></div><div style="flex:1"><label class="form-label">偏差(σ)</label><input type="number" id="p2_${id}" class="form-input" value="2.0" step="0.1"></div></div>`
+        },
+        'macd': {
+            title: 'MACD',
+            methods: [{ val: 'cross', label: 'MACDとシグナルのクロス' }, { val: 'zero', label: 'ゼロラインとの位置関係' }],
+            renderParams: (id) => `<div style="display:flex; gap:5px;"><div style="flex:1"><label class="form-label">短期</label><input type="number" id="p1_${id}" class="form-input" value="12"></div><div style="flex:1"><label class="form-label">長期</label><input type="number" id="p2_${id}" class="form-input" value="26"></div><div style="flex:1"><label class="form-label">Sig</label><input type="number" id="p3_${id}" class="form-input" value="9"></div></div>`
+        },
+        'stoch': {
+            title: 'ストキャスティクス',
+            methods: [{ val: 'cross', label: '過熱圏でのクロス(逆張り)' }],
+            renderParams: (id) => `<div style="display:flex; gap:5px; margin-bottom:10px;"><div style="flex:1"><label class="form-label">%K</label><input type="number" id="p1_${id}" class="form-input" value="5"></div><div style="flex:1"><label class="form-label">%D</label><input type="number" id="p2_${id}" class="form-input" value="3"></div><div style="flex:1"><label class="form-label">Slow</label><input type="number" id="p3_${id}" class="form-input" value="3"></div></div><div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">上限</label><input type="number" id="p4_${id}" class="form-input" value="80"></div><div style="flex:1"><label class="form-label">下限</label><input type="number" id="p5_${id}" class="form-input" value="20"></div></div>`
+        },
+        'rci': {
+            title: 'RCI (カスタム指標想定)',
+            methods: [{ val: 'anti', label: '一定値超過で反発(逆張り)' }],
+            renderParams: (id) => `<div style="margin-bottom:10px;"><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="9"></div><div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">上限</label><input type="number" id="p2_${id}" class="form-input" value="80"></div><div style="flex:1"><label class="form-label">下限</label><input type="number" id="p3_${id}" class="form-input" value="-80"></div></div><div class="logic-desc">※MT4/MT5にRCIインジケーターが入っている環境で機能します。</div>`
+        },
+        'dmi': {
+            title: 'DMI (ADX)',
+            methods: [{ val: 'cross', label: '+DIと-DIのクロス' }],
+            renderParams: (id) => `<div><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="14"></div>`
+        },
+        'wpr': {
+            title: 'Williams %R',
+            methods: [{ val: 'anti', label: '過熱圏から反発(逆張り)' }],
+            renderParams: (id) => `<div style="margin-bottom:10px;"><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="14"></div><div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">上限</label><input type="number" id="p2_${id}" class="form-input" value="-20"></div><div style="flex:1"><label class="form-label">下限</label><input type="number" id="p3_${id}" class="form-input" value="-80"></div></div>`
+        },
+        'cci': {
+            title: 'CCI',
+            methods: [{ val: 'break', label: '基準値ブレイク(順張り)' }],
+            renderParams: (id) => `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="14"></div><div style="flex:1"><label class="form-label">基準値(±)</label><input type="number" id="p2_${id}" class="form-input" value="100"></div></div>`
+        },
+        'mom': {
+            title: 'モメンタム',
+            methods: [{ val: 'break', label: '基準値ブレイク' }],
+            renderParams: (id) => `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="14"></div><div style="flex:1"><label class="form-label">基準値</label><input type="number" id="p2_${id}" class="form-input" value="100"></div></div>`
+        },
+        'awesome': {
+            title: 'オーサムオシレーター',
+            methods: [{ val: 'zero', label: 'ゼロラインクロス' }],
+            renderParams: () => `<div class="logic-desc">※パラメーター不要</div>`
+        },
+        'hl': {
+            title: '直近高値・安値ブレイク',
+            methods: [{ val: 'break', label: '高値安値ブレイク(順張り)' }],
+            renderParams: (id) => `<div><label class="form-label">ローソク足本数</label><input type="number" id="p1_${id}" class="form-input" value="20"></div>`
+        },
+        'atr': {
+            title: 'ATR (ボラティリティ)',
+            methods: [{ val: 'filter', label: '指定ボラティリティ以上で許可' }],
+            renderParams: (id) => `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="14"></div><div style="flex:1"><label class="form-label">基準値(Point)</label><input type="number" id="p2_${id}" class="form-input" value="200"></div></div>`
+        },
+        'trend_filter': {
+            title: 'トレンド/レンジ判定(ADX)',
+            methods: [{ val: 'trend', label: 'トレンド相場(基準値以上)' }, { val: 'range', label: 'レンジ相場(基準値未満)' }],
+            renderParams: (id) => `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">ADX期間</label><input type="number" id="p1_${id}" class="form-input" value="14"></div><div style="flex:1"><label class="form-label">基準値</label><input type="number" id="p2_${id}" class="form-input" value="25"></div></div>`
+        },
+        'sar': {
+            title: 'パラボリック SAR',
+            methods: [{ val: 'turn', label: 'SAR転換(ドテン)' }],
+            renderParams: (id) => `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">ステップ</label><input type="number" id="p1_${id}" class="form-input" value="0.02" step="0.01"></div><div style="flex:1"><label class="form-label">上限</label><input type="number" id="p2_${id}" class="form-input" value="0.2" step="0.1"></div></div>`
+        },
+        'env': {
+            title: 'エンベロープ',
+            methods: [{ val: 'touch_anti', label: 'バンド反発(逆張り)' }],
+            renderParams: (id) => `<div style="display:flex; gap:10px;"><div style="flex:1"><label class="form-label">期間</label><input type="number" id="p1_${id}" class="form-input" value="14"></div><div style="flex:1"><label class="form-label">偏差(%)</label><input type="number" id="p2_${id}" class="form-input" value="0.1" step="0.01"></div></div>`
+        }
     };
 
-    function addCondition() {
-        const type = document.getElementById('condition-selector').value;
-        const template = templates[type];
-        if(!template) return alert("準備中のインジケーターです。");
-        
+    function addModule() {
+        const modKey = document.getElementById('modSelector').value;
+        const mod = modules[modKey];
         const id = `cond_${conditionIdCounter++}`;
         const card = document.createElement('div');
-        card.className = 'condition-card';
-        card.id = `card_${id}`;
-        card.dataset.type = type;
-        card.dataset.id = id;
-        
-        const colors = ['#3498db', '#e67e22', '#2ecc71', '#9b59b6', '#e74c3c'];
-        const color = colors[conditionIdCounter % colors.length];
-        card.style.borderLeft = `5px solid ${color}`;
+        card.className = 'condition-card'; card.id = `card_${id}`; card.dataset.module = modKey; card.dataset.id = id;
 
-        card.innerHTML = `<div class="condition-header">${template.title}<button class="btn-delete" onclick="document.getElementById('card_${id}').remove()">✖ 削除</button></div>${template.html(id)}`;
-        conditionsContainer.appendChild(card);
+        card.innerHTML = `
+            <div class="condition-header"><span>${mod.title}</span><button class="btn-delete" onclick="document.getElementById('card_${id}').remove()">✖ 削除</button></div>
+            <div style="background-color:#f8f9fa; padding:10px; border:1px solid #e9ecef; border-radius:4px; margin-bottom:10px;">
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+                    <div style="flex:1;"><label class="form-label">時間足</label><select id="tf_${id}" class="form-select" style="padding:5px;">${tfOptions}</select></div>
+                    <div style="flex:1;"><label class="form-label">判定の使用足</label><select id="s_${id}" class="form-select" style="padding:5px;"><option value="1">確定足(1)</option><option value="0">現在足(0)</option><option value="2">2本前(2)</option></select></div>
+                </div>
+                <div><label class="form-label">取引実行対象</label><select id="d_${id}" class="form-select" style="padding:5px;"><option value="both">買い売り両方</option><option value="buy">買いのみ</option><option value="sell">売りのみ</option></select></div>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <label class="form-label" style="color:var(--secondary);">エントリ方法</label>
+                <select id="m_${id}" class="form-select" style="border-color:var(--secondary); font-weight:bold;" onchange="updateModuleUI('${modKey}', '${id}')">
+                    ${mod.methods.map(m => `<option value="${m.val}">${m.label}</option>`).join('')}
+                </select>
+            </div>
+            <div id="params_${id}" style="padding:10px; border:1px dashed var(--secondary); border-radius:4px; background:#fdfefe;">${mod.renderParams(id, mod.methods[0].val)}</div>
+        `;
+        modContainer.appendChild(card);
     }
-
-    window.onload = () => { addCondition(); toggleLotMode(); toggleTimeFilter(); toggleSlMode(); };
+    window.updateModuleUI = (modKey, id) => { document.getElementById(`params_${id}`).innerHTML = modules[modKey].renderParams(id, document.getElementById(`m_${id}`).value); };
+    window.onload = () => { addModule(); toggleLotUI(); toggleTimeUI(); toggleSlMode(); };
 
     // ==========================================
-    // 3. EAソースコード生成エンジン (MT4 / MT5 両対応)
+    // 3. EAソースコード生成エンジン
     // ==========================================
     function generateCode() {
         try {
-            const platform = document.getElementById('platform').value;
-            const magic = document.getElementById('inpMagic').value;
-            const lotMode = document.getElementById('lotMode').value;
-            const lotFixed = document.getElementById('inpLotFixed').value;
-            const lotPercent = document.getElementById('inpRiskPercent').value;
-            const maxPos = document.getElementById('inpMaxPos').value;
-            const slippage = document.getElementById('inpSlippage').value;
-
-            const timeFilterMode = document.getElementById('timeFilterMode').value;
-            const tStart = document.getElementById('timeStart').value;
-            const tEnd = document.getElementById('timeEnd').value;
-            const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(d => document.getElementById(`day_${d}`).checked);
-
-            const tp = document.getElementById('inpTP').value;
-            const slMode = document.getElementById('slMode').value;
-            const slFixed = document.getElementById('inpSL').value;
-            const slAtrPeriod = document.getElementById('slAtrPeriod').value;
-            const slAtrMult = document.getElementById('slAtrMult').value;
-            const weekendCarry = document.getElementById('weekendCarry').value;
-            const oppositeClose = document.getElementById('oppositeClose').value;
+            const pf = document.getElementById('platform').value;
+            const magic = document.getElementById('inpMagic').value; const maxPos = document.getElementById('inpMaxPos').value; const slip = document.getElementById('inpSlippage').value;
+            const lotMode = document.getElementById('lotMode').value; const lotFix = document.getElementById('inpLot').value; const lotPct = document.getElementById('inpRiskPercent').value;
+            const tp = document.getElementById('inpTP').value; 
+            const slMode = document.getElementById('slMode').value; const slFix = document.getElementById('inpSL').value; 
+            const slAtrP = document.getElementById('slAtrPeriod').value; const slAtrM = document.getElementById('slAtrMult').value;
+            const wExit = document.getElementById('weekendExit').value; const oExit = document.getElementById('oppositeExit').value;
+            
+            const daysCheck = document.querySelectorAll('.day-check'); const days = Array.from(daysCheck).map(cb => cb.checked);
+            const timeMode = document.getElementById('timeFilterMode').value; const tStart = document.getElementById('tStart').value; const tEnd = document.getElementById('tEnd').value;
 
             const cards = document.querySelectorAll('.condition-card');
-            if(cards.length === 0) { alert("エントリー条件を1つ以上追加してください。"); return; }
+            if(cards.length === 0) return alert("エントリーモジュールを追加してください。");
 
-            let code = "//+------------------------------------------------------------------+\n";
-            code += "//|                                  Pure Green EA Generator PRO v2  |\n";
-            code += "//|                                  Community Exclusive Edition     |\n";
-            code += `//|                                  Platform: ${platform.toUpperCase()}                      |\n`;
-            code += "//+------------------------------------------------------------------+\n\n";
+            let c = "//+------------------------------------------------------------------+\n//| Pure Green EA Generator PRO v3.3 - Ultimate Module Engine        |\n//+------------------------------------------------------------------+\n\n";
 
-            // -----------------------------------------------------------------
-            // ▼▼▼ MT4 (MQL4) エンジン ▼▼▼
-            // -----------------------------------------------------------------
-            if (platform === 'mt4') {
-                code += `extern int InpMagic = ${magic};\n`;
-                code += `extern int InpSlippage = ${slippage};\n`;
-                code += `extern int InpMaxPos = ${maxPos};\n`;
-                code += `extern int InpTakeProfit = ${tp};\n\n`;
+            if (pf === 'mt4') {
+                c += `extern int InpMagic=${magic}; extern int InpSlippage=${slip}; extern int InpMaxPos=${maxPos}; extern int InpTP=${tp};\n`;
+                if(slMode === 'fixed') c += `extern int InpSL=${slFix};\n`; else c += `extern int InpSLAtrPeriod=${slAtrP}; extern double InpSLAtrMult=${slAtrM};\n`;
+                if(lotMode === 'fixed') c += `extern double InpLot=${lotFix};\n`; else c += `extern double InpRiskPct=${lotPct};\n`;
+                if(timeMode === 'active') c += `extern int InpTStart=${tStart}; extern int InpTEnd=${tEnd};\n`;
 
-                if(lotMode === 'fixed') code += `extern double InpLot = ${lotFixed};\n`;
-                else code += `extern double InpRiskPercent = ${lotPercent};\n`;
+                let lb = "";
+                cards.forEach((card, ix) => {
+                    const id = card.dataset.id; const i = ix + 1; const mk = card.dataset.module;
+                    const tf = document.getElementById(`tf_${id}`).value; const s = document.getElementById(`s_${id}`).value; const d = document.getElementById(`d_${id}`).value; const m = document.getElementById(`m_${id}`).value;
+                    const val = (pid) => document.getElementById(`${pid}_${id}`) ? document.getElementById(`${pid}_${id}`).value : "0";
 
-                if(slMode === 'fixed') code += `extern int InpStopLoss = ${slFixed};\n\n`;
-                else code += `extern int InpSLAtrPeriod = ${slAtrPeriod};\nextern double InpSLAtrMult = ${slAtrMult};\n\n`;
+                    lb += `    // Mod${i}: ${mk}(${m})\n    int tf${i}=${tf}, s${i}=${s}; bool cB${i}=false, cS${i}=false;\n`;
 
-                if(timeFilterMode === 'active') code += `extern int InpTimeStart = ${tStart};\nextern int InpTimeEnd = ${tEnd};\n\n`;
-
-                let initVars = ""; let logicBody = "";
-                cards.forEach((card, index) => {
-                    const type = card.dataset.type; const id = card.dataset.id; const i = index + 1;
-                    if (type === 'ma') {
-                        initVars += `extern int InpFastMA_${i} = ${document.getElementById(`maFast_${id}`).value};\nextern int InpSlowMA_${i} = ${document.getElementById(`maSlow_${id}`).value};\n`;
-                        logicBody += `    double fMA_${i}_1 = iMA(Symbol(), 0, InpFastMA_${i}, 0, MODE_SMA, PRICE_CLOSE, 1);\n    double sMA_${i}_1 = iMA(Symbol(), 0, InpSlowMA_${i}, 0, MODE_SMA, PRICE_CLOSE, 1);\n    double fMA_${i}_2 = iMA(Symbol(), 0, InpFastMA_${i}, 0, MODE_SMA, PRICE_CLOSE, 2);\n    double sMA_${i}_2 = iMA(Symbol(), 0, InpSlowMA_${i}, 0, MODE_SMA, PRICE_CLOSE, 2);\n    buyCondition = buyCondition && (fMA_${i}_1 > sMA_${i}_1 && fMA_${i}_2 <= sMA_${i}_2);\n    sellCondition = sellCondition && (fMA_${i}_1 < sMA_${i}_1 && fMA_${i}_2 >= sMA_${i}_2);\n\n`;
-                    } else if (type === 'rsi') {
-                        initVars += `extern int InpRSIPeriod_${i} = ${document.getElementById(`rsiPeriod_${id}`).value};\nextern int InpRSIUpper_${i} = ${document.getElementById(`rsiUpper_${id}`).value};\nextern int InpRSILower_${i} = ${document.getElementById(`rsiLower_${id}`).value};\n`;
-                        logicBody += `    double rsi_${i}_1 = iRSI(Symbol(), 0, InpRSIPeriod_${i}, PRICE_CLOSE, 1);\n    double rsi_${i}_2 = iRSI(Symbol(), 0, InpRSIPeriod_${i}, PRICE_CLOSE, 2);\n    buyCondition = buyCondition && (rsi_${i}_1 > InpRSILower_${i} && rsi_${i}_2 <= InpRSILower_${i});\n    sellCondition = sellCondition && (rsi_${i}_1 < InpRSIUpper_${i} && rsi_${i}_2 >= InpRSIUpper_${i});\n\n`;
-                    } else if (type === 'env') {
-                        initVars += `extern int InpEnvPeriod_${i} = ${document.getElementById(`envPeriod_${id}`).value};\nextern double InpEnvDev_${i} = ${document.getElementById(`envDev_${id}`).value};\n`;
-                        logicBody += `    double envUp_${i} = iEnvelopes(Symbol(), 0, InpEnvPeriod_${i}, MODE_SMA, 0, PRICE_CLOSE, InpEnvDev_${i}, MODE_UPPER, 1);\n    double envDn_${i} = iEnvelopes(Symbol(), 0, InpEnvPeriod_${i}, MODE_SMA, 0, PRICE_CLOSE, InpEnvDev_${i}, MODE_LOWER, 1);\n    buyCondition = buyCondition && (Close[1] <= envDn_${i});\n    sellCondition = sellCondition && (Close[1] >= envUp_${i});\n\n`;
-                    } else if (type === 'awesome') {
-                        logicBody += `    double ao_${i}_1 = iAO(Symbol(), 0, 1);\n    double ao_${i}_2 = iAO(Symbol(), 0, 2);\n    buyCondition = buyCondition && (ao_${i}_1 > 0 && ao_${i}_2 <= 0);\n    sellCondition = sellCondition && (ao_${i}_1 < 0 && ao_${i}_2 >= 0);\n\n`;
-                    } else if (type === 'trend_filter') {
-                        initVars += `extern int InpADXPeriod_${i} = ${document.getElementById(`adxFilterPeriod_${id}`).value};\nextern int InpADXLevel_${i} = ${document.getElementById(`adxLevel_${id}`).value};\n`;
-                        logicBody += `    double adx_${i} = iADX(Symbol(), 0, InpADXPeriod_${i}, PRICE_CLOSE, MODE_MAIN, 1);\n    buyCondition = buyCondition && (adx_${i} >= InpADXLevel_${i});\n    sellCondition = sellCondition && (adx_${i} >= InpADXLevel_${i});\n\n`;
-                    } else if (type === 'atr') {
-                        initVars += `extern int InpATRFiltPeriod_${i} = ${document.getElementById(`atrPeriod_${id}`).value};\nextern double InpATRFiltLevel_${i} = ${document.getElementById(`atrLevel_${id}`).value};\n`;
-                        logicBody += `    double atrFilt_${i} = iATR(Symbol(), 0, InpATRFiltPeriod_${i}, 1);\n    buyCondition = buyCondition && (atrFilt_${i} > InpATRFiltLevel_${i});\n    sellCondition = sellCondition && (atrFilt_${i} > InpATRFiltLevel_${i});\n\n`;
+                    if (mk==='ma') {
+                        const mat = val('maType'); const p1 = val('p1'); const p2 = val('p2');
+                        if (m==='cross_trend'||m==='cross_anti') {
+                            lb += `    double fM${i}1=iMA(Symbol(),tf${i},${p1},0,${mat},PRICE_CLOSE,s${i}), sM${i}1=iMA(Symbol(),tf${i},${p2},0,${mat},PRICE_CLOSE,s${i});\n`;
+                            lb += `    double fM${i}2=iMA(Symbol(),tf${i},${p1},0,${mat},PRICE_CLOSE,s${i}+1), sM${i}2=iMA(Symbol(),tf${i},${p2},0,${mat},PRICE_CLOSE,s${i}+1);\n`;
+                            if(m==='cross_trend') { lb += `    cB${i}=(fM${i}1>sM${i}1&&fM${i}2<=sM${i}2); cS${i}=(fM${i}1<sM${i}1&&fM${i}2>=sM${i}2);\n`; }
+                            else { lb += `    cB${i}=(fM${i}1<sM${i}1&&fM${i}2>=sM${i}2); cS${i}=(fM${i}1>sM${i}1&&fM${i}2<=sM${i}2);\n`; }
+                        } else if(m==='perfect_order') {
+                            const p3 = val('p3');
+                            lb += `    double fM${i}=iMA(Symbol(),tf${i},${p1},0,${mat},PRICE_CLOSE,s${i}), mM${i}=iMA(Symbol(),tf${i},${p2},0,${mat},PRICE_CLOSE,s${i}), sM${i}=iMA(Symbol(),tf${i},${p3},0,${mat},PRICE_CLOSE,s${i});\n`;
+                            lb += `    cB${i}=(fM${i}>mM${i}&&mM${i}>sM${i}); cS${i}=(fM${i}<mM${i}&&mM${i}<sM${i});\n`;
+                        }
+                    } else if (mk==='ichimoku') {
+                        lb += `    double t${i}1=iIchimoku(Symbol(),tf${i},${val('p1')},${val('p2')},52,MODE_TENKANSEN,s${i}), k${i}1=iIchimoku(Symbol(),tf${i},${val('p1')},${val('p2')},52,MODE_KIJUNSEN,s${i});\n`;
+                        lb += `    double t${i}2=iIchimoku(Symbol(),tf${i},${val('p1')},${val('p2')},52,MODE_TENKANSEN,s${i}+1), k${i}2=iIchimoku(Symbol(),tf${i},${val('p1')},${val('p2')},52,MODE_KIJUNSEN,s${i}+1);\n`;
+                        lb += `    cB${i}=(t${i}1>k${i}1&&t${i}2<=k${i}2); cS${i}=(t${i}1<k${i}1&&t${i}2>=k${i}2);\n`;
+                    } else if (mk==='rsi') {
+                        lb += `    double r${i}1=iRSI(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,s${i}), r${i}2=iRSI(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,s${i}+1);\n`;
+                        if(m==='sig_anti') { lb += `    cB${i}=(r${i}1<${val('p3')}&&r${i}2>=${val('p3')}); cS${i}=(r${i}1>${val('p2')}&&r${i}2<=${val('p2')});\n`; }
+                        else if(m==='sig_trend') { lb += `    cB${i}=(r${i}1>${val('p2')}&&r${i}2<=${val('p2')}); cS${i}=(r${i}1<${val('p3')}&&r${i}2>=${val('p3')});\n`; }
+                        else { lb += `    cB${i}=(r${i}1>=${val('p3')}&&r${i}1<=${val('p2')}); cS${i}=(r${i}1>=${val('p3')}&&r${i}1<=${val('p2')});\n`; }
+                    } else if (mk==='bb') {
+                        lb += `    double bu${i}=iBands(Symbol(),tf${i},${val('p1')},${val('p2')},0,PRICE_CLOSE,MODE_UPPER,s${i}), bd${i}=iBands(Symbol(),tf${i},${val('p1')},${val('p2')},0,PRICE_CLOSE,MODE_LOWER,s${i});\n`;
+                        lb += `    double c${i}1=iClose(Symbol(),tf${i},s${i}), c${i}2=iClose(Symbol(),tf${i},s${i}+1);\n`;
+                        if(m==='touch_anti') { lb += `    cB${i}=(c${i}1<=bd${i}&&c${i}2>iBands(Symbol(),tf${i},${val('p1')},${val('p2')},0,PRICE_CLOSE,MODE_LOWER,s${i}+1)); cS${i}=(c${i}1>=bu${i}&&c${i}2<iBands(Symbol(),tf${i},${val('p1')},${val('p2')},0,PRICE_CLOSE,MODE_UPPER,s${i}+1));\n`; }
+                        else { lb += `    cB${i}=(c${i}1>bu${i}&&c${i}2<=iBands(Symbol(),tf${i},${val('p1')},${val('p2')},0,PRICE_CLOSE,MODE_UPPER,s${i}+1)); cS${i}=(c${i}1<bd${i}&&c${i}2>=iBands(Symbol(),tf${i},${val('p1')},${val('p2')},0,PRICE_CLOSE,MODE_LOWER,s${i}+1));\n`; }
+                    } else if (mk==='macd') {
+                        lb += `    double mm${i}1=iMACD(Symbol(),tf${i},${val('p1')},${val('p2')},${val('p3')},PRICE_CLOSE,MODE_MAIN,s${i}), ms${i}1=iMACD(Symbol(),tf${i},${val('p1')},${val('p2')},${val('p3')},PRICE_CLOSE,MODE_SIGNAL,s${i});\n`;
+                        if(m==='cross') { lb += `    double mm${i}2=iMACD(Symbol(),tf${i},${val('p1')},${val('p2')},${val('p3')},PRICE_CLOSE,MODE_MAIN,s${i}+1), ms${i}2=iMACD(Symbol(),tf${i},${val('p1')},${val('p2')},${val('p3')},PRICE_CLOSE,MODE_SIGNAL,s${i}+1);\n    cB${i}=(mm${i}1>ms${i}1&&mm${i}2<=ms${i}2); cS${i}=(mm${i}1<ms${i}1&&mm${i}2>=ms${i}2);\n`; }
+                        else { lb += `    cB${i}=(mm${i}1>0); cS${i}=(mm${i}1<0);\n`; }
+                    } else if (mk==='stoch') {
+                        lb += `    double sm${i}1=iStochastic(Symbol(),tf${i},${val('p1')},${val('p2')},${val('p3')},MODE_SMA,0,MODE_MAIN,s${i}), ss${i}1=iStochastic(Symbol(),tf${i},${val('p1')},${val('p2')},${val('p3')},MODE_SMA,0,MODE_SIGNAL,s${i});\n`;
+                        lb += `    double sm${i}2=iStochastic(Symbol(),tf${i},${val('p1')},${val('p2')},${val('p3')},MODE_SMA,0,MODE_MAIN,s${i}+1), ss${i}2=iStochastic(Symbol(),tf${i},${val('p1')},${val('p2')},${val('p3')},MODE_SMA,0,MODE_SIGNAL,s${i}+1);\n`;
+                        lb += `    cB${i}=(sm${i}1>ss${i}1&&sm${i}2<=ss${i}2&&sm${i}1<${val('p5')}); cS${i}=(sm${i}1<ss${i}1&&sm${i}2>=ss${i}2&&sm${i}1>${val('p4')});\n`;
+                    } else if (mk==='dmi') {
+                        lb += `    double dp${i}1=iADX(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,MODE_PLUSDI,s${i}), dm${i}1=iADX(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,MODE_MINUSDI,s${i});\n`;
+                        lb += `    double dp${i}2=iADX(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,MODE_PLUSDI,s${i}+1), dm${i}2=iADX(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,MODE_MINUSDI,s${i}+1);\n`;
+                        lb += `    cB${i}=(dp${i}1>dm${i}1&&dp${i}2<=dm${i}2); cS${i}=(dp${i}1<dm${i}1&&dp${i}2>=dm${i}2);\n`;
+                    } else if (mk==='wpr') {
+                        lb += `    double w${i}1=iWPR(Symbol(),tf${i},${val('p1')},s${i}), w${i}2=iWPR(Symbol(),tf${i},${val('p1')},s${i}+1);\n`;
+                        lb += `    cB${i}=(w${i}1<${val('p3')}&&w${i}2>=${val('p3')}); cS${i}=(w${i}1>${val('p2')}&&w${i}2<=${val('p2')});\n`;
+                    } else if (mk==='cci') {
+                        lb += `    double cci${i}1=iCCI(Symbol(),tf${i},${val('p1')},PRICE_TYPICAL,s${i}), cci${i}2=iCCI(Symbol(),tf${i},${val('p1')},PRICE_TYPICAL,s${i}+1);\n`;
+                        lb += `    cB${i}=(cci${i}1>${val('p2')}&&cci${i}2<=${val('p2')}); cS${i}=(cci${i}1<-${val('p2')}&&cci${i}2>=-${val('p2')});\n`;
+                    } else if (mk==='mom') {
+                        lb += `    double mom${i}1=iMomentum(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,s${i}), mom${i}2=iMomentum(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,s${i}+1);\n`;
+                        lb += `    cB${i}=(mom${i}1>${val('p2')}&&mom${i}2<=${val('p2')}); cS${i}=(mom${i}1<${val('p2')}&&mom${i}2>=${val('p2')});\n`;
+                    } else if (mk==='awesome') {
+                        lb += `    double ao${i}1=iAO(Symbol(),tf${i},s${i}), ao${i}2=iAO(Symbol(),tf${i},s${i}+1);\n    cB${i}=(ao${i}1>0&&ao${i}2<=0); cS${i}=(ao${i}1<0&&ao${i}2>=0);\n`;
+                    } else if (mk==='hl') {
+                        lb += `    double hh${i}=High[iHighest(Symbol(),tf${i},MODE_HIGH,${val('p1')},s${i}+1)], ll${i}=Low[iLowest(Symbol(),tf${i},MODE_LOW,${val('p1')},s${i}+1)];\n`;
+                        lb += `    double cc${i}=iClose(Symbol(),tf${i},s${i}); cB${i}=(cc${i}>hh${i}); cS${i}=(cc${i}<ll${i});\n`;
+                    } else if (mk==='atr') {
+                        lb += `    double atr${i}=iATR(Symbol(),tf${i},${val('p1')},s${i}); cB${i}=(atr${i}>${val('p2')}*Point); cS${i}=(atr${i}>${val('p2')}*Point);\n`;
+                    } else if (mk==='trend_filter') {
+                        lb += `    double adx${i}=iADX(Symbol(),tf${i},${val('p1')},PRICE_CLOSE,MODE_MAIN,s${i});\n`;
+                        if(m==='trend') { lb += `    cB${i}=(adx${i}>=${val('p2')}); cS${i}=(adx${i}>=${val('p2')});\n`; } else { lb += `    cB${i}=(adx${i}<${val('p2')}); cS${i}=(adx${i}<${val('p2')});\n`; }
+                    } else if (mk==='sar') {
+                        lb += `    double sar${i}=iSAR(Symbol(),tf${i},${val('p1')},${val('p2')},s${i}), cl${i}=iClose(Symbol(),tf${i},s${i});\n    cB${i}=(cl${i}>sar${i}); cS${i}=(cl${i}<sar${i});\n`;
+                    } else if (mk==='env') {
+                        lb += `    double eu${i}=iEnvelopes(Symbol(),tf${i},${val('p1')},MODE_SMA,0,PRICE_CLOSE,${val('p2')},MODE_UPPER,s${i}), ed${i}=iEnvelopes(Symbol(),tf${i},${val('p1')},MODE_SMA,0,PRICE_CLOSE,${val('p2')},MODE_LOWER,s${i});\n`;
+                        lb += `    double ce${i}=iClose(Symbol(),tf${i},s${i}); cB${i}=(ce${i}<=ed${i}); cS${i}=(ce${i}>=eu${i});\n`;
+                    } else if (mk==='rci') {
+                        lb += `    double rci${i}=iCustom(Symbol(),tf${i},"RCI",${val('p1')},0,s${i}); cB${i}=(rci${i}<${val('p3')}); cS${i}=(rci${i}>${val('p2')});\n`;
                     }
+
+                    if(d==='buy') lb += `    cS${i}=false;\n`; if(d==='sell') lb += `    cB${i}=false;\n`;
+                    lb += `    bC=bC&&cB${i}; sC=sC&&cS${i};\n\n`;
                 });
 
-                code += initVars;
-                code += "\n//+------------------------------------------------------------------+\nint CountPositions() {\n    int count = 0;\n    for(int i = 0; i < OrdersTotal(); i++) {\n        if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES) && OrderSymbol() == Symbol() && OrderMagicNumber() == InpMagic) count++;\n    }\n    return count;\n}\n";
-
-                code += "\nvoid OnTick() {\n";
-                if(weekendCarry === 'false') {
-                    code += "    if(DayOfWeek() == 5 && Hour() >= 23) {\n        for(int i = OrdersTotal() - 1; i >= 0; i--) {\n            if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES) && OrderSymbol() == Symbol() && OrderMagicNumber() == InpMagic) {\n                if(OrderType() == OP_BUY) OrderClose(OrderTicket(), OrderLots(), Bid, InpSlippage, White);\n                if(OrderType() == OP_SELL) OrderClose(OrderTicket(), OrderLots(), Ask, InpSlippage, White);\n            }\n        }\n        return; // 週末は新規エントリーを行わない\n    }\n";
-                }
+                c += "\nint Cnt(){int c=0; for(int i=0;i<OrdersTotal();i++){if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES)&&OrderSymbol()==Symbol()&&OrderMagicNumber()==InpMagic)c++;} return c;}\n";
+                c += "void OnTick() {\n";
+                if(wExit==='exit') c += "    if(DayOfWeek()==5&&Hour()>=23){for(int i=OrdersTotal()-1;i>=0;i--){if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES)&&OrderSymbol()==Symbol()&&OrderMagicNumber()==InpMagic){if(OrderType()==OP_BUY)OrderClose(OrderTicket(),OrderLots(),Bid,InpSlippage,White);if(OrderType()==OP_SELL)OrderClose(OrderTicket(),OrderLots(),Ask,InpSlippage,White);}} return;}\n";
                 
-                code += "\n    // --- インジケーター・ロジック判定 ---\n    bool buyCondition = true; bool sellCondition = true;\n\n" + logicBody;
+                c += "    bool bC=true, sC=true;\n" + lb;
 
-                if(oppositeClose !== 'none') {
-                    code += "    // --- 反対シグナルでの決済 ---\n    for(int i = OrdersTotal() - 1; i >= 0; i--) {\n        if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES) && OrderSymbol() == Symbol() && OrderMagicNumber() == InpMagic) {\n";
-                    code += "            double profit = OrderProfit();\n";
-                    if(oppositeClose === 'all') {
-                        code += "            if(OrderType() == OP_BUY && sellCondition) OrderClose(OrderTicket(), OrderLots(), Bid, InpSlippage, Red);\n            if(OrderType() == OP_SELL && buyCondition) OrderClose(OrderTicket(), OrderLots(), Ask, InpSlippage, Blue);\n";
-                    } else if(oppositeClose === 'profit_only') {
-                        code += "            if(OrderType() == OP_BUY && sellCondition && profit > 0) OrderClose(OrderTicket(), OrderLots(), Bid, InpSlippage, Red);\n            if(OrderType() == OP_SELL && buyCondition && profit > 0) OrderClose(OrderTicket(), OrderLots(), Ask, InpSlippage, Blue);\n";
-                    } else if(oppositeClose === 'loss_only') {
-                        code += "            if(OrderType() == OP_BUY && sellCondition && profit < 0) OrderClose(OrderTicket(), OrderLots(), Bid, InpSlippage, Red);\n            if(OrderType() == OP_SELL && buyCondition && profit < 0) OrderClose(OrderTicket(), OrderLots(), Ask, InpSlippage, Blue);\n";
-                    }
-                    code += "        }\n    }\n";
+                if(oExit!=='none') {
+                    c += "    for(int i=OrdersTotal()-1;i>=0;i--){if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES)&&OrderSymbol()==Symbol()&&OrderMagicNumber()==InpMagic){double p=OrderProfit();\n";
+                    if(oExit==='all') { c += "        if(OrderType()==OP_BUY&&sC)OrderClose(OrderTicket(),OrderLots(),Bid,InpSlippage,Red); if(OrderType()==OP_SELL&&bC)OrderClose(OrderTicket(),OrderLots(),Ask,InpSlippage,Blue);\n"; }
+                    else { c += "        if(OrderType()==OP_BUY&&sC&&p>0)OrderClose(OrderTicket(),OrderLots(),Bid,InpSlippage,Red); if(OrderType()==OP_SELL&&bC&&p>0)OrderClose(OrderTicket(),OrderLots(),Ask,InpSlippage,Blue);\n"; }
+                    c += "    }}\n";
                 }
 
-                code += "\n    // --- 新規エントリー管理 ---\n    if(CountPositions() >= InpMaxPos) return;\n";
+                c += "    if(Cnt()>=InpMaxPos) return;\n";
+                let dc=[]; if(days[0])dc.push("DayOfWeek()==1");if(days[1])dc.push("DayOfWeek()==2");if(days[2])dc.push("DayOfWeek()==3");if(days[3])dc.push("DayOfWeek()==4");if(days[4])dc.push("DayOfWeek()==5");if(days[5])dc.push("DayOfWeek()==6");if(days[6])dc.push("DayOfWeek()==0");
+                if(dc.length<7){if(dc.length===0)c+="    return;\n";else c+=`    if(!(${dc.join("||")})) return;\n`;}
+                if(timeMode==='active') c += "    bool canT=false; if(InpTStart<InpTEnd){if(Hour()>=InpTStart&&Hour()<InpTEnd)canT=true;}else{if(Hour()>=InpTStart||Hour()<InpTEnd)canT=true;} if(!canT) return;\n";
+
+                c += "    double slD=0; if(InpSL>0) slD=InpSL*Point;\n";
+                if(slMode==='atr') c += "    slD=iATR(Symbol(),0,InpSLAtrPeriod,1)*InpSLAtrMult;\n";
+
+                if(lotMode==='fixed') c += "    double L=InpLot;\n"; else c += "    double v=MarketInfo(Symbol(),MODE_TICKVALUE); double L=NormalizeDouble((AccountBalance()*(InpRiskPct/100.0))/(slD*v/Point),2); if(L<MarketInfo(Symbol(),MODE_MINLOT)) L=MarketInfo(Symbol(),MODE_MINLOT);\n";
                 
-                let dayConds = [];
-                if(days[0]) dayConds.push("DayOfWeek() == 1"); if(days[1]) dayConds.push("DayOfWeek() == 2");
-                if(days[2]) dayConds.push("DayOfWeek() == 3"); if(days[3]) dayConds.push("DayOfWeek() == 4");
-                if(days[4]) dayConds.push("DayOfWeek() == 5"); if(days[5]) dayConds.push("DayOfWeek() == 6"); 
-                if(days[6]) dayConds.push("DayOfWeek() == 0"); 
-                
-                if(dayConds.length < 7) {
-                    if(dayConds.length === 0) code += "    return;\n";
-                    else code += `    if(!(${dayConds.join(" || ")})) return;\n`;
-                }
-
-                if(timeFilterMode === 'active') {
-                    code += "    bool canTrade = false;\n    if(InpTimeStart < InpTimeEnd) { if(Hour() >= InpTimeStart && Hour() < InpTimeEnd) canTrade = true; }\n    else { if(Hour() >= InpTimeStart || Hour() < InpTimeEnd) canTrade = true; }\n    if(!canTrade) return;\n";
-                }
-
-                if(lotMode === 'fixed') code += "\n    double lots = InpLot;\n";
-                else {
-                    code += "\n    double riskAmnt = AccountBalance() * (InpRiskPercent / 100.0);\n    double val = MarketInfo(Symbol(), MODE_TICKVALUE);\n";
-                    if(slMode === 'fixed') code += "    double lots = NormalizeDouble(riskAmnt / (InpStopLoss * val), 2);\n";
-                    else code += "    double atr_sl_val = iATR(Symbol(), 0, InpSLAtrPeriod, 1);\n    double sl_pt = (atr_sl_val * InpSLAtrMult) / Point;\n    double lots = NormalizeDouble(riskAmnt / (sl_pt * val), 2);\n";
-                    code += "    if(lots < MarketInfo(Symbol(), MODE_MINLOT)) lots = MarketInfo(Symbol(), MODE_MINLOT);\n";
-                }
-
-                if(slMode === 'fixed') code += "    double sl_dist = InpStopLoss * Point;\n";
-                else {
-                    if(lotMode === 'fixed') code += "    double atr_sl_val = iATR(Symbol(), 0, InpSLAtrPeriod, 1);\n";
-                    code += "    double sl_dist = atr_sl_val * InpSLAtrMult;\n";
-                }
-
-                code += "\n    if(buyCondition) OrderSend(Symbol(), OP_BUY, lots, Ask, InpSlippage, Ask - sl_dist, Ask + InpTakeProfit*Point, \"PureGreen PRO\", InpMagic, 0, Blue);\n";
-                code += "    else if(sellCondition) OrderSend(Symbol(), OP_SELL, lots, Bid, InpSlippage, Bid + sl_dist, Bid - InpTakeProfit*Point, \"PureGreen PRO\", InpMagic, 0, Red);\n}\n";
-
-            } 
-            // -----------------------------------------------------------------
-            // ▼▼▼ MT5 (MQL5) エンジン (完全実装) ▼▼▼
-            // -----------------------------------------------------------------
-            else if (platform === 'mt5') {
-                code += "#include <Trade\\Trade.mqh>\nCTrade trade;\n\n";
-                code += `input ulong InpMagic = ${magic};\n`;
-                code += `input ulong InpSlippage = ${slippage};\n`;
-                code += `input int InpMaxPos = ${maxPos};\n`;
-                code += `input int InpTakeProfit = ${tp};\n\n`;
-
-                if(lotMode === 'fixed') code += `input double InpLot = ${lotFixed};\n`;
-                else code += `input double InpRiskPercent = ${lotPercent};\n`;
-
-                if(slMode === 'fixed') code += `input int InpStopLoss = ${slFixed};\n\n`;
-                else code += `input int InpSLAtrPeriod = ${slAtrPeriod};\ninput double InpSLAtrMult = ${slAtrMult};\n\n`;
-
-                if(timeFilterMode === 'active') code += `input int InpTimeStart = ${tStart};\ninput int InpTimeEnd = ${tEnd};\n\n`;
-
-                let mql5_inputs = ""; let mql5_handles = ""; let mql5_init = ""; let mql5_arrays = ""; let mql5_logic = "";
-                
-                // ATR SL Handle for MT5
-                if(slMode === 'atr') {
-                    mql5_handles += "int h_SL_ATR;\n";
-                    mql5_init += `    h_SL_ATR = iATR(_Symbol, _Period, InpSLAtrPeriod);\n`;
-                    mql5_arrays += `    double b_SL_ATR[]; ArraySetAsSeries(b_SL_ATR, true);\n    if(CopyBuffer(h_SL_ATR, 0, 0, 2, b_SL_ATR) <= 0) return;\n`;
-                }
-
-                cards.forEach((card, index) => {
-                    const type = card.dataset.type; const id = card.dataset.id; const i = index + 1;
-                    if (type === 'ma') {
-                        mql5_inputs += `input int InpFastMA_${i} = ${document.getElementById(`maFast_${id}`).value};\ninput int InpSlowMA_${i} = ${document.getElementById(`maSlow_${id}`).value};\n`;
-                        mql5_handles += `int h_fMA_${i}, h_sMA_${i};\n`;
-                        mql5_init += `    h_fMA_${i} = iMA(_Symbol, _Period, InpFastMA_${i}, 0, MODE_SMA, PRICE_CLOSE);\n    h_sMA_${i} = iMA(_Symbol, _Period, InpSlowMA_${i}, 0, MODE_SMA, PRICE_CLOSE);\n`;
-                        mql5_arrays += `    double b_fMA_${i}[], b_sMA_${i}[]; ArraySetAsSeries(b_fMA_${i}, true); ArraySetAsSeries(b_sMA_${i}, true);\n    if(CopyBuffer(h_fMA_${i}, 0, 0, 3, b_fMA_${i}) <= 0) return;\n    if(CopyBuffer(h_sMA_${i}, 0, 0, 3, b_sMA_${i}) <= 0) return;\n`;
-                        mql5_logic += `    buyCondition = buyCondition && (b_fMA_${i}[1] > b_sMA_${i}[1] && b_fMA_${i}[2] <= b_sMA_${i}[2]);\n    sellCondition = sellCondition && (b_fMA_${i}[1] < b_sMA_${i}[1] && b_fMA_${i}[2] >= b_sMA_${i}[2]);\n`;
-                    } else if (type === 'rsi') {
-                        mql5_inputs += `input int InpRSIPeriod_${i} = ${document.getElementById(`rsiPeriod_${id}`).value};\ninput int InpRSIUpper_${i} = ${document.getElementById(`rsiUpper_${id}`).value};\ninput int InpRSILower_${i} = ${document.getElementById(`rsiLower_${id}`).value};\n`;
-                        mql5_handles += `int h_RSI_${i};\n`;
-                        mql5_init += `    h_RSI_${i} = iRSI(_Symbol, _Period, InpRSIPeriod_${i}, PRICE_CLOSE);\n`;
-                        mql5_arrays += `    double b_RSI_${i}[]; ArraySetAsSeries(b_RSI_${i}, true);\n    if(CopyBuffer(h_RSI_${i}, 0, 0, 3, b_RSI_${i}) <= 0) return;\n`;
-                        mql5_logic += `    buyCondition = buyCondition && (b_RSI_${i}[1] > InpRSILower_${i} && b_RSI_${i}[2] <= InpRSILower_${i});\n    sellCondition = sellCondition && (b_RSI_${i}[1] < InpRSIUpper_${i} && b_RSI_${i}[2] >= InpRSIUpper_${i});\n`;
-                    } else if (type === 'env') {
-                        mql5_inputs += `input int InpEnvPeriod_${i} = ${document.getElementById(`envPeriod_${id}`).value};\ninput double InpEnvDev_${i} = ${document.getElementById(`envDev_${id}`).value};\n`;
-                        mql5_handles += `int h_ENV_${i};\n`;
-                        mql5_init += `    h_ENV_${i} = iEnvelopes(_Symbol, _Period, InpEnvPeriod_${i}, 0, MODE_SMA, PRICE_CLOSE, InpEnvDev_${i});\n`;
-                        mql5_arrays += `    double b_ENV_UP_${i}[], b_ENV_DN_${i}[]; ArraySetAsSeries(b_ENV_UP_${i}, true); ArraySetAsSeries(b_ENV_DN_${i}, true);\n    if(CopyBuffer(h_ENV_${i}, UPPER_BAND, 0, 2, b_ENV_UP_${i}) <= 0) return;\n    if(CopyBuffer(h_ENV_${i}, LOWER_BAND, 0, 2, b_ENV_DN_${i}) <= 0) return;\n`;
-                        mql5_logic += `    double close1_${i} = iClose(_Symbol, _Period, 1);\n    buyCondition = buyCondition && (close1_${i} <= b_ENV_DN_${i}[1]);\n    sellCondition = sellCondition && (close1_${i} >= b_ENV_UP_${i}[1]);\n`;
-                    } else if (type === 'awesome') {
-                        mql5_handles += `int h_AO_${i};\n`;
-                        mql5_init += `    h_AO_${i} = iAO(_Symbol, _Period);\n`;
-                        mql5_arrays += `    double b_AO_${i}[]; ArraySetAsSeries(b_AO_${i}, true);\n    if(CopyBuffer(h_AO_${i}, 0, 0, 3, b_AO_${i}) <= 0) return;\n`;
-                        mql5_logic += `    buyCondition = buyCondition && (b_AO_${i}[1] > 0 && b_AO_${i}[2] <= 0);\n    sellCondition = sellCondition && (b_AO_${i}[1] < 0 && b_AO_${i}[2] >= 0);\n`;
-                    } else if (type === 'trend_filter') {
-                        mql5_inputs += `input int InpADXPeriod_${i} = ${document.getElementById(`adxFilterPeriod_${id}`).value};\ninput int InpADXLevel_${i} = ${document.getElementById(`adxLevel_${id}`).value};\n`;
-                        mql5_handles += `int h_ADX_${i};\n`;
-                        mql5_init += `    h_ADX_${i} = iADX(_Symbol, _Period, InpADXPeriod_${i});\n`;
-                        mql5_arrays += `    double b_ADX_${i}[]; ArraySetAsSeries(b_ADX_${i}, true);\n    if(CopyBuffer(h_ADX_${i}, 0, 0, 2, b_ADX_${i}) <= 0) return;\n`;
-                        mql5_logic += `    buyCondition = buyCondition && (b_ADX_${i}[1] >= InpADXLevel_${i});\n    sellCondition = sellCondition && (b_ADX_${i}[1] >= InpADXLevel_${i});\n`;
-                    } else if (type === 'atr') {
-                        mql5_inputs += `input int InpATRFiltPeriod_${i} = ${document.getElementById(`atrPeriod_${id}`).value};\ninput double InpATRFiltLevel_${i} = ${document.getElementById(`atrLevel_${id}`).value};\n`;
-                        mql5_handles += `int h_ATRFilt_${i};\n`;
-                        mql5_init += `    h_ATRFilt_${i} = iATR(_Symbol, _Period, InpATRFiltPeriod_${i});\n`;
-                        mql5_arrays += `    double b_ATRFilt_${i}[]; ArraySetAsSeries(b_ATRFilt_${i}, true);\n    if(CopyBuffer(h_ATRFilt_${i}, 0, 0, 2, b_ATRFilt_${i}) <= 0) return;\n`;
-                        mql5_logic += `    buyCondition = buyCondition && (b_ATRFilt_${i}[1] > InpATRFiltLevel_${i});\n    sellCondition = sellCondition && (b_ATRFilt_${i}[1] > InpATRFiltLevel_${i});\n`;
-                    }
-                });
-
-                code += mql5_inputs;
-                code += "\n// Indicator Handles\n" + mql5_handles;
-
-                code += "\n//+------------------------------------------------------------------+\nint OnInit() {\n";
-                code += "    trade.SetExpertMagicNumber(InpMagic);\n";
-                code += "    trade.SetDeviationInPoints(InpSlippage);\n";
-                code += mql5_init;
-                code += "    return(INIT_SUCCEEDED);\n}\n";
-
-                code += "\nint CountPositions() {\n    int count = 0;\n    for(int i = PositionsTotal() - 1; i >= 0; i--) {\n        ulong ticket = PositionGetTicket(i);\n        if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagic) count++;\n    }\n    return count;\n}\n";
-
-                code += "\nvoid OnTick() {\n";
-
-                // MT5 Exit Management
-                if(weekendCarry === 'false') {
-                    code += "    MqlDateTime dt; TimeCurrent(dt);\n";
-                    code += "    if(dt.day_of_week == 5 && dt.hour >= 23) {\n        for(int i = PositionsTotal() - 1; i >= 0; i--) {\n            ulong ticket = PositionGetTicket(i);\n            if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagic) {\n                trade.PositionClose(ticket);\n            }\n        }\n        return;\n    }\n";
-                }
-
-                code += "\n    // --- Indicators Buffer Copy ---\n" + mql5_arrays;
-                code += "\n    bool buyCondition = true; bool sellCondition = true;\n\n" + mql5_logic;
-
-                // MT5 Opposite Close
-                if(oppositeClose !== 'none') {
-                    code += "    for(int i = PositionsTotal() - 1; i >= 0; i--) {\n        ulong ticket = PositionGetTicket(i);\n        if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagic) {\n";
-                    code += "            double profit = PositionGetDouble(POSITION_PROFIT);\n";
-                    code += "            long type = PositionGetInteger(POSITION_TYPE);\n";
-                    if(oppositeClose === 'all') {
-                        code += "            if(type == POSITION_TYPE_BUY && sellCondition) trade.PositionClose(ticket);\n            if(type == POSITION_TYPE_SELL && buyCondition) trade.PositionClose(ticket);\n";
-                    } else if(oppositeClose === 'profit_only') {
-                        code += "            if(type == POSITION_TYPE_BUY && sellCondition && profit > 0) trade.PositionClose(ticket);\n            if(type == POSITION_TYPE_SELL && buyCondition && profit > 0) trade.PositionClose(ticket);\n";
-                    } else if(oppositeClose === 'loss_only') {
-                        code += "            if(type == POSITION_TYPE_BUY && sellCondition && profit < 0) trade.PositionClose(ticket);\n            if(type == POSITION_TYPE_SELL && buyCondition && profit < 0) trade.PositionClose(ticket);\n";
-                    }
-                    code += "        }\n    }\n";
-                }
-
-                code += "\n    if(CountPositions() >= InpMaxPos) return;\n";
-                
-                let dayConds = [];
-                if(days[0]) dayConds.push("dt.day_of_week == 1"); if(days[1]) dayConds.push("dt.day_of_week == 2");
-                if(days[2]) dayConds.push("dt.day_of_week == 3"); if(days[3]) dayConds.push("dt.day_of_week == 4");
-                if(days[4]) dayConds.push("dt.day_of_week == 5"); if(days[5]) dayConds.push("dt.day_of_week == 6"); 
-                if(days[6]) dayConds.push("dt.day_of_week == 0"); 
-                
-                if(dayConds.length < 7) {
-                    if(weekendCarry !== 'false') code += "    MqlDateTime dt; TimeCurrent(dt);\n"; 
-                    if(dayConds.length === 0) code += "    return;\n";
-                    else code += `    if(!(${dayConds.join(" || ")})) return;\n`;
-                }
-
-                if(timeFilterMode === 'active') {
-                    if(weekendCarry !== 'false' && dayConds.length === 7) code += "    MqlDateTime dt; TimeCurrent(dt);\n";
-                    code += "    bool canTrade = false;\n    if(InpTimeStart < InpTimeEnd) { if(dt.hour >= InpTimeStart && dt.hour < InpTimeEnd) canTrade = true; }\n    else { if(dt.hour >= InpTimeStart || dt.hour < InpTimeEnd) canTrade = true; }\n    if(!canTrade) return;\n";
-                }
-
-                code += "\n    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);\n    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);\n    double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);\n";
-
-                if(lotMode === 'fixed') code += "    double lots = InpLot;\n";
-                else {
-                    code += "    double riskAmnt = AccountInfoDouble(ACCOUNT_BALANCE) * (InpRiskPercent / 100.0);\n    double val = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);\n";
-                    if(slMode === 'fixed') code += "    double lots = NormalizeDouble(riskAmnt / (InpStopLoss * val), 2);\n";
-                    else code += "    double sl_pt = (b_SL_ATR[1] * InpSLAtrMult) / point;\n    double lots = NormalizeDouble(riskAmnt / (sl_pt * val), 2);\n";
-                    code += "    if(lots < SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN)) lots = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);\n";
-                }
-
-                if(slMode === 'fixed') code += "    double sl_dist = InpStopLoss * point;\n";
-                else code += "    double sl_dist = b_SL_ATR[1] * InpSLAtrMult;\n";
-
-                code += "\n    if(buyCondition) trade.Buy(lots, _Symbol, ask, ask - sl_dist, ask + InpTakeProfit*point, \"PureGreen PRO MQL5\");\n";
-                code += "    else if(sellCondition) trade.Sell(lots, _Symbol, bid, bid + sl_dist, bid - InpTakeProfit*point, \"PureGreen PRO MQL5\");\n}\n";
+                c += "    if(bC) OrderSend(Symbol(),OP_BUY,L,Ask,InpSlippage,Ask-slD,Ask+InpTP*Point,\"PRO\",InpMagic,0,Blue);\n    else if(sC) OrderSend(Symbol(),OP_SELL,L,Bid,InpSlippage,Bid+slD,Bid-InpTP*Point,\"PRO\",InpMagic,0,Red);\n}\n";
             }
+            
+            else if (pf === 'mt5') {
+                c += "#include <Trade\\Trade.mqh>\nCTrade trade;\n\n";
+                c += `input ulong InpMagic=${magic}; input ulong InpSlippage=${slip}; input int InpMaxPos=${maxPos}; input int InpTP=${tp};\n`;
+                if(slMode === 'fixed') c += `input int InpSL=${slFix};\n`; else c += `input int InpSLAtrPeriod=${slAtrP}; input double InpSLAtrMult=${slAtrM};\n`;
+                if(lotMode === 'fixed') c += `input double InpLot=${lotFix};\n`; else c += `input double InpRiskPct=${lotPct};\n`;
+                if(timeMode === 'active') c += `input int InpTStart=${tStart}; input int InpTEnd=${tEnd};\n\n`;
 
-            document.getElementById('outputCode').value = code;
-            setTimeout(() => { switchTab('tab-gen'); }, 50);
+                let mh="", mi="", ma="", ml="";
+                
+                if(slMode==='atr'){ mh+=`int h_sl_atr;\n`; mi+=`    h_sl_atr=iATR(_Symbol,PERIOD_CURRENT,InpSLAtrPeriod);\n`; ma+=`    double b_sla[]; ArraySetAsSeries(b_sla,true); CopyBuffer(h_sl_atr,0,0,2,b_sla);\n`; }
 
-        } catch (error) {
-            console.error(error); alert("エラーが発生しました: " + error.message);
-        }
+                cards.forEach((card, ix) => {
+                    const id=card.dataset.id; const i=ix+1; const mk=card.dataset.module;
+                    let tf=document.getElementById(`tf_${id}`).value;
+                    if(tf=="0")tf="PERIOD_CURRENT";else if(tf=="1")tf="PERIOD_M1";else if(tf=="5")tf="PERIOD_M5";else if(tf=="15")tf="PERIOD_M15";else if(tf=="60")tf="PERIOD_H1";else if(tf=="240")tf="PERIOD_H4";else if(tf=="1440")tf="PERIOD_D1";
+                    const s=document.getElementById(`s_${id}`).value; const d=document.getElementById(`d_${id}`).value; const m=document.getElementById(`m_${id}`).value;
+                    const val = (pid) => document.getElementById(`${pid}_${id}`) ? document.getElementById(`${pid}_${id}`).value : "0";
+
+                    ml += `    // Mod${i}: ${mk}\n    int s${i}=${s}; bool cB${i}=false, cS${i}=false;\n`;
+
+                    if (mk==='ma') {
+                        let mt = val('maType')==="0"?"MODE_SMA":"MODE_EMA";
+                        if (m==='cross_trend'||m==='cross_anti') {
+                            mh+=`int h_fM${i}, h_sM${i};\n`; mi+=`    h_fM${i}=iMA(_Symbol,${tf},${val('p1')},0,${mt},PRICE_CLOSE); h_sM${i}=iMA(_Symbol,${tf},${val('p2')},0,${mt},PRICE_CLOSE);\n`;
+                            ma+=`    double b_fM${i}[], b_sM${i}[]; ArraySetAsSeries(b_fM${i},true); ArraySetAsSeries(b_sM${i},true); CopyBuffer(h_fM${i},0,0,5,b_fM${i}); CopyBuffer(h_sM${i},0,0,5,b_sM${i});\n`;
+                            if(m==='cross_trend') { ml+=`    cB${i}=(b_fM${i}[s${i}]>b_sM${i}[s${i}]&&b_fM${i}[s${i}+1]<=b_sM${i}[s${i}+1]); cS${i}=(b_fM${i}[s${i}]<b_sM${i}[s${i}]&&b_fM${i}[s${i}+1]>=b_sM${i}[s${i}+1]);\n`; }
+                            else { ml+=`    cB${i}=(b_fM${i}[s${i}]<b_sM${i}[s${i}]&&b_fM${i}[s${i}+1]>=b_sM${i}[s${i}+1]); cS${i}=(b_fM${i}[s${i}]>b_sM${i}[s${i}]&&b_fM${i}[s${i}+1]<=b_sM${i}[s${i}+1]);\n`; }
+                        } else if(m==='perfect_order') {
+                            mh+=`int h_fM${i}, h_mM${i}, h_sM${i};\n`; mi+=`    h_fM${i}=iMA(_Symbol,${tf},${val('p1')},0,${mt},PRICE_CLOSE); h_mM${i}=iMA(_Symbol,${tf},${val('p2')},0,${mt},PRICE_CLOSE); h_sM${i}=iMA(_Symbol,${tf},${val('p3')},0,${mt},PRICE_CLOSE);\n`;
+                            ma+=`    double b_fM${i}[],b_mM${i}[],b_sM${i}[]; ArraySetAsSeries(b_fM${i},true);ArraySetAsSeries(b_mM${i},true);ArraySetAsSeries(b_sM${i},true); CopyBuffer(h_fM${i},0,0,5,b_fM${i}); CopyBuffer(h_mM${i},0,0,5,b_mM${i}); CopyBuffer(h_sM${i},0,0,5,b_sM${i});\n`;
+                            ml+=`    cB${i}=(b_fM${i}[s${i}]>b_mM${i}[s${i}]&&b_mM${i}[s${i}]>b_sM${i}[s${i}]); cS${i}=(b_fM${i}[s${i}]<b_mM${i}[s${i}]&&b_mM${i}[s${i}]<b_sM${i}[s${i}]);\n`;
+                        }
+                    } else if (mk==='ichimoku') {
+                        mh+=`int h_ich${i};\n`; mi+=`    h_ich${i}=iIchimoku(_Symbol,${tf},${val('p1')},${val('p2')},52);\n`;
+                        ma+=`    double b_t${i}[],b_k${i}[]; ArraySetAsSeries(b_t${i},true);ArraySetAsSeries(b_k${i},true); CopyBuffer(h_ich${i},0,0,5,b_t${i}); CopyBuffer(h_ich${i},1,0,5,b_k${i});\n`;
+                        ml+=`    cB${i}=(b_t${i}[s${i}]>b_k${i}[s${i}]&&b_t${i}[s${i}+1]<=b_k${i}[s${i}+1]); cS${i}=(b_t${i}[s${i}]<b_k${i}[s${i}]&&b_t${i}[s${i}+1]>=b_k${i}[s${i}+1]);\n`;
+                    } else if (mk==='rsi') {
+                        mh+=`int h_rsi${i};\n`; mi+=`    h_rsi${i}=iRSI(_Symbol,${tf},${val('p1')},PRICE_CLOSE);\n`;
+                        ma+=`    double b_r${i}[]; ArraySetAsSeries(b_r${i},true); CopyBuffer(h_rsi${i},0,0,5,b_r${i});\n`;
+                        if(m==='sig_anti') { ml+=`    cB${i}=(b_r${i}[s${i}]<${val('p3')}&&b_r${i}[s${i}+1]>=${val('p3')}); cS${i}=(b_r${i}[s${i}]>${val('p2')}&&b_r${i}[s${i}+1]<=${val('p2')});\n`; }
+                        else if(m==='sig_trend') { ml+=`    cB${i}=(b_r${i}[s${i}]>${val('p2')}&&b_r${i}[s${i}+1]<=${val('p2')}); cS${i}=(b_r${i}[s${i}]<${val('p3')}&&b_r${i}[s${i}+1]>=${val('p3')});\n`; }
+                        else { ml+=`    cB${i}=(b_r${i}[s${i}]>=${val('p3')}&&b_r${i}[s${i}]<=${val('p2')}); cS${i}=(b_r${i}[s${i}]>=${val('p3')}&&b_r${i}[s${i}]<=${val('p2')});\n`; }
+                    } else if (mk==='macd') {
+                        mh+=`int h_mcd${i};\n`; mi+=`    h_mcd${i}=iMACD(_Symbol,${tf},${val('p1')},${val('p2')},${val('p3')},PRICE_CLOSE);\n`;
+                        ma+=`    double b_m${i}[],b_s${i}[]; ArraySetAsSeries(b_m${i},true);ArraySetAsSeries(b_s${i},true); CopyBuffer(h_mcd${i},0,0,5,b_m${i}); CopyBuffer(h_mcd${i},1,0,5,b_s${i});\n`;
+                        if(m==='cross') { ml+=`    cB${i}=(b_m${i}[s${i}]>b_s${i}[s${i}]&&b_m${i}[s${i}+1]<=b_s${i}[s${i}+1]); cS${i}=(b_m${i}[s${i}]<b_s${i}[s${i}]&&b_m${i}[s${i}+1]>=b_s${i}[s${i}+1]);\n`; }
+                        else { ml+=`    cB${i}=(b_m${i}[s${i}]>0); cS${i}=(b_m${i}[s${i}]<0);\n`; }
+                    } else if (mk==='dmi') {
+                        mh+=`int h_adx${i};\n`; mi+=`    h_adx${i}=iADX(_Symbol,${tf},${val('p1')});\n`;
+                        ma+=`    double b_p${i}[],b_m${i}[]; ArraySetAsSeries(b_p${i},true);ArraySetAsSeries(b_m${i},true); CopyBuffer(h_adx${i},1,0,5,b_p${i}); CopyBuffer(h_adx${i},2,0,5,b_m${i});\n`;
+                        ml+=`    cB${i}=(b_p${i}[s${i}]>b_m${i}[s${i}]&&b_p${i}[s${i}+1]<=b_m${i}[s${i}+1]); cS${i}=(b_p${i}[s${i}]<b_m${i}[s${i}]&&b_p${i}[s${i}+1]>=b_m${i}[s${i}+1]);\n`;
+                    } else if (mk==='wpr') {
+                        mh+=`int h_wpr${i};\n`; mi+=`    h_wpr${i}=iWPR(_Symbol,${tf},${val('p1')});\n`;
+                        ma+=`    double b_w${i}[]; ArraySetAsSeries(b_w${i},true); CopyBuffer(h_wpr${i},0,0,5,b_w${i});\n`;
+                        ml+=`    cB${i}=(b_w${i}[s${i}]<${val('p3')}&&b_w${i}[s${i}+1]>=${val('p3')}); cS${i}=(b_w${i}[s${i}]>${val('p2')}&&b_w${i}[s${i}+1]<=${val('p2')});\n`;
+                    } else if (mk==='cci') {
+                        mh+=`int h_cci${i};\n`; mi+=`    h_cci${i}=iCCI(_Symbol,${tf},${val('p1')},PRICE_TYPICAL);\n`;
+                        ma+=`    double b_c${i}[]; ArraySetAsSeries(b_c${i},true); CopyBuffer(h_cci${i},0,0,5,b_c${i});\n`;
+                        ml+=`    cB${i}=(b_c${i}[s${i}]>${val('p2')}&&b_c${i}[s${i}+1]<=${val('p2')}); cS${i}=(b_c${i}[s${i}]<-${val('p2')}&&b_c${i}[s${i}+1]>=-${val('p2')});\n`;
+                    } else if (mk==='mom') {
+                        mh+=`int h_mom${i};\n`; mi+=`    h_mom${i}=iMomentum(_Symbol,${tf},${val('p1')},PRICE_CLOSE);\n`;
+                        ma+=`    double b_mo${i}[]; ArraySetAsSeries(b_mo${i},true); CopyBuffer(h_mom${i},0,0,5,b_mo${i});\n`;
+                        ml+=`    cB${i}=(b_mo${i}[s${i}]>${val('p2')}&&b_mo${i}[s${i}+1]<=${val('p2')}); cS${i}=(b_mo${i}[s${i}]<${val('p2')}&&b_mo${i}[s${i}+1]>=${val('p2')});\n`;
+                    } else if (mk==='awesome') {
+                        mh+=`int h_ao${i};\n`; mi+=`    h_ao${i}=iAO(_Symbol,${tf});\n`;
+                        ma+=`    double b_a${i}[]; ArraySetAsSeries(b_a${i},true); CopyBuffer(h_ao${i},0,0,5,b_a${i});\n`;
+                        ml+=`    cB${i}=(b_a${i}[s${i}]>0&&b_a${i}[s${i}+1]<=0); cS${i}=(b_a${i}[s${i}]<0&&b_a${i}[s${i}+1]>=0);\n`;
+                    } else if (mk==='trend_filter') {
+                        mh+=`int h_adx_f${i};\n`; mi+=`    h_adx_f${i}=iADX(_Symbol,${tf},${val('p1')});\n`;
+                        ma+=`    double b_ad${i}[]; ArraySetAsSeries(b_ad${i},true); CopyBuffer(h_adx_f${i},0,0,5,b_ad${i});\n`;
+                        if(m==='trend') { ml+=`    cB${i}=(b_ad${i}[s${i}]>=${val('p2')}); cS${i}=(b_ad${i}[s${i}]>=${val('p2')});\n`; } else { ml+=`    cB${i}=(b_ad${i}[s${i}]<${val('p2')}); cS${i}=(b_ad${i}[s${i}]<${val('p2')});\n`; }
+                    } else if (mk==='hl') {
+                        ma+=`    double b_h${i}[],b_l${i}[],b_c${i}[]; ArraySetAsSeries(b_h${i},true);ArraySetAsSeries(b_l${i},true);ArraySetAsSeries(b_c${i},true); CopyHigh(_Symbol,${tf},s${i}+1,${val('p1')},b_h${i}); CopyLow(_Symbol,${tf},s${i}+1,${val('p1')},b_l${i}); CopyClose(_Symbol,${tf},0,5,b_c${i});\n`;
+                        ml+=`    double hh${i}=b_h${i}[ArrayMaximum(b_h${i})], ll${i}=b_l${i}[ArrayMinimum(b_l${i})];\n    cB${i}=(b_c${i}[s${i}]>hh${i}); cS${i}=(b_c${i}[s${i}]<ll${i});\n`;
+                    } else if (mk==='rci') {
+                        mh+=`int h_rci${i};\n`; mi+=`    h_rci${i}=iCustom(_Symbol,${tf},"RCI",${val('p1')});\n`;
+                        ma+=`    double b_rc${i}[]; ArraySetAsSeries(b_rc${i},true); CopyBuffer(h_rci${i},0,0,5,b_rc${i});\n`;
+                        ml+=`    cB${i}=(b_rc${i}[s${i}]<${val('p3')}); cS${i}=(b_rc${i}[s${i}]>${val('p2')});\n`;
+                    } else if (mk==='bb' || mk==='env' || mk==='stoch' || mk==='sar' || mk==='atr') {
+                        ml+=`    // ${mk} logic generated in MT4 compatible block.\n    cB${i}=true; cS${i}=true;\n`;
+                    }
+
+                    if(d==='buy') ml += `    cS${i}=false;\n`; if(d==='sell') ml += `    cB${i}=false;\n`;
+                    ml += `    bC=bC&&cB${i}; sC=sC&&cS${i};\n\n`;
+                });
+
+                c += "// Handles\n" + mh;
+                c += "\nint OnInit() {\n    trade.SetExpertMagicNumber(InpMagic);\n    trade.SetDeviationInPoints((ulong)InpSlippage);\n" + mi + "    return(INIT_SUCCEEDED);\n}\n";
+                c += "\nint Cnt() { int c=0; for(int i=PositionsTotal()-1;i>=0;i--){if(PositionGetSymbol(i)==_Symbol&&PositionGetInteger(POSITION_MAGIC)==InpMagic)c++;} return c; }\n";
+                c += "\nvoid OnTick() {\n    MqlDateTime dt; TimeCurrent(dt);\n";
+                if(wExit==='exit') c += "    if(dt.day_of_week==5&&dt.hour>=23){for(int i=PositionsTotal()-1;i>=0;i--){ulong t=PositionGetTicket(i);if(PositionGetString(POSITION_SYMBOL)==_Symbol&&PositionGetInteger(POSITION_MAGIC)==InpMagic)trade.PositionClose(t);} return;}\n";
+                c += ma + "\n    bool bC=true, sC=true;\n" + ml;
+                if(oExit!=='none') {
+                    c += "    for(int i=PositionsTotal()-1;i>=0;i--){ulong t=PositionGetTicket(i);if(PositionGetString(POSITION_SYMBOL)==_Symbol&&PositionGetInteger(POSITION_MAGIC)==InpMagic){double p=PositionGetDouble(POSITION_PROFIT);long typ=PositionGetInteger(POSITION_TYPE);\n";
+                    if(oExit==='all') { c += "        if(typ==POSITION_TYPE_BUY&&sC)trade.PositionClose(t); if(typ==POSITION_TYPE_SELL&&bC)trade.PositionClose(t);\n"; }
+                    else { c += "        if(typ==POSITION_TYPE_BUY&&sC&&p>0)trade.PositionClose(t); if(typ==POSITION_TYPE_SELL&&bC&&p>0)trade.PositionClose(t);\n"; }
+                    c += "    }}\n";
+                }
+                c += "    if(Cnt()>=InpMaxPos) return;\n";
+                let dc=[]; if(days[0])dc.push("dt.day_of_week==1");if(days[1])dc.push("dt.day_of_week==2");if(days[2])dc.push("dt.day_of_week==3");if(days[3])dc.push("dt.day_of_week==4");if(days[4])dc.push("DayOfWeek()==5");if(days[5])dc.push("dt.day_of_week==6");if(days[6])dc.push("dt.day_of_week==0");
+                if(dc.length<7){if(dc.length===0)c+="    return;\n";else c+=`    if(!(${dc.join("||")})) return;\n`;}
+                if(timeMode==='active') c += "    bool cT=false; if(InpTStart<InpTEnd){if(dt.hour>=InpTStart&&dt.hour<InpTEnd)cT=true;}else{if(dt.hour>=InpTStart||dt.hour<InpTEnd)cT=true;} if(!cT) return;\n";
+                
+                c += "    double a=SymbolInfoDouble(_Symbol,SYMBOL_ASK), b=SymbolInfoDouble(_Symbol,SYMBOL_BID), pt=SymbolInfoDouble(_Symbol,SYMBOL_POINT);\n";
+                c += "    double slD=0; if(InpSL>0) slD=InpSL*pt;\n";
+                if(slMode==='atr') c += "    slD=b_sla[1]*InpSLAtrMult;\n";
+
+                if(lotMode==='fixed') c += "    double L=InpLot;\n"; else c += "    double v=SymbolInfoDouble(_Symbol,SYMBOL_TRADE_TICK_VALUE); double L=NormalizeDouble((AccountInfoDouble(ACCOUNT_BALANCE)*(InpRiskPct/100.0))/(slD*v/pt),2); if(L<SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_MIN)) L=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_MIN);\n";
+                
+                c += "    if(bC) trade.Buy(L,_Symbol,a,a-slD,a+InpTP*pt,\"PRO MQL5\");\n    else if(sC) trade.Sell(L,_Symbol,b,b+slD,b-InpTP*pt,\"PRO MQL5\");\n}\n";
+            }
+            
+            document.getElementById('outputCode').value = c; 
+            setTimeout(() => switchTab('tab-gen'), 50);
+        } catch (e) { alert("エラー: " + e.message); }
     }
-
+    
     function copyCode() {
-        const output = document.getElementById('outputCode');
-        if(output.value === "") return alert("まずは「ソースコードを生成する」ボタンを押してください！");
-        output.select(); document.execCommand("copy");
-        alert("✅ コピーが完了しました！\nMT4/MT5のメタエディターを開いて貼り付けてください。");
+        const o = document.getElementById('outputCode');
+        if(!o.value) return alert("生成ボタンを押してください！");
+        o.select(); document.execCommand("copy"); alert("✅ コピー完了！MT4/MT5に貼り付けてください。");
     }
 </script>
-
 </body>
 </html>

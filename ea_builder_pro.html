@@ -339,7 +339,6 @@
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-        
         document.getElementById(tabId).classList.add('active');
         event.currentTarget.classList.add('active');
     }
@@ -410,13 +409,12 @@
     window.onload = () => { addCondition(); toggleLotMode(); toggleTimeFilter(); toggleSlMode(); };
 
     // ==========================================
-    // 3. EAソースコード生成エンジン (PRO仕様)
+    // 3. EAソースコード生成エンジン (MT4 / MT5 両対応)
     // ==========================================
     function generateCode() {
         try {
             const platform = document.getElementById('platform').value;
             const magic = document.getElementById('inpMagic').value;
-            
             const lotMode = document.getElementById('lotMode').value;
             const lotFixed = document.getElementById('inpLotFixed').value;
             const lotPercent = document.getElementById('inpRiskPercent').value;
@@ -437,10 +435,7 @@
             const oppositeClose = document.getElementById('oppositeClose').value;
 
             const cards = document.querySelectorAll('.condition-card');
-            if(cards.length === 0) {
-                alert("エントリー条件を1つ以上追加してください。");
-                return;
-            }
+            if(cards.length === 0) { alert("エントリー条件を1つ以上追加してください。"); return; }
 
             let code = "//+------------------------------------------------------------------+\n";
             code += "//|                                  Pure Green EA Generator PRO v2  |\n";
@@ -448,21 +443,22 @@
             code += `//|                                  Platform: ${platform.toUpperCase()}                      |\n`;
             code += "//+------------------------------------------------------------------+\n\n";
 
+            // -----------------------------------------------------------------
+            // ▼▼▼ MT4 (MQL4) エンジン ▼▼▼
+            // -----------------------------------------------------------------
             if (platform === 'mt4') {
                 code += `extern int InpMagic = ${magic};\n`;
                 code += `extern int InpSlippage = ${slippage};\n`;
                 code += `extern int InpMaxPos = ${maxPos};\n`;
                 code += `extern int InpTakeProfit = ${tp};\n\n`;
 
-                if(lotMode === 'fixed') { code += `extern double InpLot = ${lotFixed};\n`; }
-                else { code += `extern double InpRiskPercent = ${lotPercent};\n`; }
+                if(lotMode === 'fixed') code += `extern double InpLot = ${lotFixed};\n`;
+                else code += `extern double InpRiskPercent = ${lotPercent};\n`;
 
-                if(slMode === 'fixed') { code += `extern int InpStopLoss = ${slFixed};\n\n`; }
-                else { code += `extern int InpSLAtrPeriod = ${slAtrPeriod};\nextern double InpSLAtrMult = ${slAtrMult};\n\n`; }
+                if(slMode === 'fixed') code += `extern int InpStopLoss = ${slFixed};\n\n`;
+                else code += `extern int InpSLAtrPeriod = ${slAtrPeriod};\nextern double InpSLAtrMult = ${slAtrMult};\n\n`;
 
-                if(timeFilterMode === 'active') {
-                    code += `extern int InpTimeStart = ${tStart};\nextern int InpTimeEnd = ${tEnd};\n\n`;
-                }
+                if(timeFilterMode === 'active') code += `extern int InpTimeStart = ${tStart};\nextern int InpTimeEnd = ${tEnd};\n\n`;
 
                 let initVars = ""; let logicBody = "";
                 cards.forEach((card, index) => {
@@ -484,23 +480,18 @@
                     } else if (type === 'atr') {
                         initVars += `extern int InpATRFiltPeriod_${i} = ${document.getElementById(`atrPeriod_${id}`).value};\nextern double InpATRFiltLevel_${i} = ${document.getElementById(`atrLevel_${id}`).value};\n`;
                         logicBody += `    double atrFilt_${i} = iATR(Symbol(), 0, InpATRFiltPeriod_${i}, 1);\n    buyCondition = buyCondition && (atrFilt_${i} > InpATRFiltLevel_${i});\n    sellCondition = sellCondition && (atrFilt_${i} > InpATRFiltLevel_${i});\n\n`;
-                    } else {
-                        logicBody += `    // ${type} is supported in the full generator engine.\n`;
                     }
                 });
 
                 code += initVars;
-                
                 code += "\n//+------------------------------------------------------------------+\nint CountPositions() {\n    int count = 0;\n    for(int i = 0; i < OrdersTotal(); i++) {\n        if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES) && OrderSymbol() == Symbol() && OrderMagicNumber() == InpMagic) count++;\n    }\n    return count;\n}\n";
 
                 code += "\nvoid OnTick() {\n";
-                
                 if(weekendCarry === 'false') {
                     code += "    if(DayOfWeek() == 5 && Hour() >= 23) {\n        for(int i = OrdersTotal() - 1; i >= 0; i--) {\n            if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES) && OrderSymbol() == Symbol() && OrderMagicNumber() == InpMagic) {\n                if(OrderType() == OP_BUY) OrderClose(OrderTicket(), OrderLots(), Bid, InpSlippage, White);\n                if(OrderType() == OP_SELL) OrderClose(OrderTicket(), OrderLots(), Ask, InpSlippage, White);\n            }\n        }\n        return; // 週末は新規エントリーを行わない\n    }\n";
                 }
                 
-                code += "\n    // --- インジケーター・ロジック判定 ---\n";
-                code += "    bool buyCondition = true; bool sellCondition = true;\n\n" + logicBody;
+                code += "\n    // --- インジケーター・ロジック判定 ---\n    bool buyCondition = true; bool sellCondition = true;\n\n" + logicBody;
 
                 if(oppositeClose !== 'none') {
                     code += "    // --- 反対シグナルでの決済 ---\n    for(int i = OrdersTotal() - 1; i >= 0; i--) {\n        if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES) && OrderSymbol() == Symbol() && OrderMagicNumber() == InpMagic) {\n";
@@ -518,16 +509,13 @@
                 code += "\n    // --- 新規エントリー管理 ---\n    if(CountPositions() >= InpMaxPos) return;\n";
                 
                 let dayConds = [];
-                if(days[0]) dayConds.push("DayOfWeek() == 1");
-                if(days[1]) dayConds.push("DayOfWeek() == 2");
-                if(days[2]) dayConds.push("DayOfWeek() == 3");
-                if(days[3]) dayConds.push("DayOfWeek() == 4");
-                if(days[4]) dayConds.push("DayOfWeek() == 5");
-                if(days[5]) dayConds.push("DayOfWeek() == 6"); 
+                if(days[0]) dayConds.push("DayOfWeek() == 1"); if(days[1]) dayConds.push("DayOfWeek() == 2");
+                if(days[2]) dayConds.push("DayOfWeek() == 3"); if(days[3]) dayConds.push("DayOfWeek() == 4");
+                if(days[4]) dayConds.push("DayOfWeek() == 5"); if(days[5]) dayConds.push("DayOfWeek() == 6"); 
                 if(days[6]) dayConds.push("DayOfWeek() == 0"); 
                 
                 if(dayConds.length < 7) {
-                    if(dayConds.length === 0) code += "    return; // 全ての曜日のチェックが外れています\n";
+                    if(dayConds.length === 0) code += "    return;\n";
                     else code += `    if(!(${dayConds.join(" || ")})) return;\n`;
                 }
 
@@ -535,52 +523,179 @@
                     code += "    bool canTrade = false;\n    if(InpTimeStart < InpTimeEnd) { if(Hour() >= InpTimeStart && Hour() < InpTimeEnd) canTrade = true; }\n    else { if(Hour() >= InpTimeStart || Hour() < InpTimeEnd) canTrade = true; }\n    if(!canTrade) return;\n";
                 }
 
-                if(lotMode === 'fixed') {
-                    code += "\n    double lots = InpLot;\n";
-                } else {
-                    code += "\n    // 複利ロット計算 (リスク許容率に基づく)\n    double riskAmnt = AccountBalance() * (InpRiskPercent / 100.0);\n    double val = MarketInfo(Symbol(), MODE_TICKVALUE);\n";
+                if(lotMode === 'fixed') code += "\n    double lots = InpLot;\n";
+                else {
+                    code += "\n    double riskAmnt = AccountBalance() * (InpRiskPercent / 100.0);\n    double val = MarketInfo(Symbol(), MODE_TICKVALUE);\n";
                     if(slMode === 'fixed') code += "    double lots = NormalizeDouble(riskAmnt / (InpStopLoss * val), 2);\n";
                     else code += "    double atr_sl_val = iATR(Symbol(), 0, InpSLAtrPeriod, 1);\n    double sl_pt = (atr_sl_val * InpSLAtrMult) / Point;\n    double lots = NormalizeDouble(riskAmnt / (sl_pt * val), 2);\n";
                     code += "    if(lots < MarketInfo(Symbol(), MODE_MINLOT)) lots = MarketInfo(Symbol(), MODE_MINLOT);\n";
                 }
 
-                if(slMode === 'fixed') {
-                    code += "    double sl_dist = InpStopLoss * Point;\n";
-                } else {
+                if(slMode === 'fixed') code += "    double sl_dist = InpStopLoss * Point;\n";
+                else {
                     if(lotMode === 'fixed') code += "    double atr_sl_val = iATR(Symbol(), 0, InpSLAtrPeriod, 1);\n";
                     code += "    double sl_dist = atr_sl_val * InpSLAtrMult;\n";
                 }
 
-                code += "\n    // 注文送信\n";
-                code += "    if(buyCondition) OrderSend(Symbol(), OP_BUY, lots, Ask, InpSlippage, Ask - sl_dist, Ask + InpTakeProfit*Point, \"PureGreen PRO\", InpMagic, 0, Blue);\n";
+                code += "\n    if(buyCondition) OrderSend(Symbol(), OP_BUY, lots, Ask, InpSlippage, Ask - sl_dist, Ask + InpTakeProfit*Point, \"PureGreen PRO\", InpMagic, 0, Blue);\n";
                 code += "    else if(sellCondition) OrderSend(Symbol(), OP_SELL, lots, Bid, InpSlippage, Bid + sl_dist, Bid - InpTakeProfit*Point, \"PureGreen PRO\", InpMagic, 0, Red);\n}\n";
-                code += "//+------------------------------------------------------------------+\n";
+
+            } 
+            // -----------------------------------------------------------------
+            // ▼▼▼ MT5 (MQL5) エンジン (完全実装) ▼▼▼
+            // -----------------------------------------------------------------
+            else if (platform === 'mt5') {
+                code += "#include <Trade\\Trade.mqh>\nCTrade trade;\n\n";
+                code += `input ulong InpMagic = ${magic};\n`;
+                code += `input ulong InpSlippage = ${slippage};\n`;
+                code += `input int InpMaxPos = ${maxPos};\n`;
+                code += `input int InpTakeProfit = ${tp};\n\n`;
+
+                if(lotMode === 'fixed') code += `input double InpLot = ${lotFixed};\n`;
+                else code += `input double InpRiskPercent = ${lotPercent};\n`;
+
+                if(slMode === 'fixed') code += `input int InpStopLoss = ${slFixed};\n\n`;
+                else code += `input int InpSLAtrPeriod = ${slAtrPeriod};\ninput double InpSLAtrMult = ${slAtrMult};\n\n`;
+
+                if(timeFilterMode === 'active') code += `input int InpTimeStart = ${tStart};\ninput int InpTimeEnd = ${tEnd};\n\n`;
+
+                let mql5_inputs = ""; let mql5_handles = ""; let mql5_init = ""; let mql5_arrays = ""; let mql5_logic = "";
                 
-            } else {
-                code += "// MetaTrader 5 (MQL5) CTrade framework integration is supported in Full Export.\n";
-                code += "// Currently displaying MQL4 mode logic structure as reference.\n";
-                code += "void OnTick() { /* MQL5 Base Layout Auto-Generated */ }\n";
+                // ATR SL Handle for MT5
+                if(slMode === 'atr') {
+                    mql5_handles += "int h_SL_ATR;\n";
+                    mql5_init += `    h_SL_ATR = iATR(_Symbol, _Period, InpSLAtrPeriod);\n`;
+                    mql5_arrays += `    double b_SL_ATR[]; ArraySetAsSeries(b_SL_ATR, true);\n    if(CopyBuffer(h_SL_ATR, 0, 0, 2, b_SL_ATR) <= 0) return;\n`;
+                }
+
+                cards.forEach((card, index) => {
+                    const type = card.dataset.type; const id = card.dataset.id; const i = index + 1;
+                    if (type === 'ma') {
+                        mql5_inputs += `input int InpFastMA_${i} = ${document.getElementById(`maFast_${id}`).value};\ninput int InpSlowMA_${i} = ${document.getElementById(`maSlow_${id}`).value};\n`;
+                        mql5_handles += `int h_fMA_${i}, h_sMA_${i};\n`;
+                        mql5_init += `    h_fMA_${i} = iMA(_Symbol, _Period, InpFastMA_${i}, 0, MODE_SMA, PRICE_CLOSE);\n    h_sMA_${i} = iMA(_Symbol, _Period, InpSlowMA_${i}, 0, MODE_SMA, PRICE_CLOSE);\n`;
+                        mql5_arrays += `    double b_fMA_${i}[], b_sMA_${i}[]; ArraySetAsSeries(b_fMA_${i}, true); ArraySetAsSeries(b_sMA_${i}, true);\n    if(CopyBuffer(h_fMA_${i}, 0, 0, 3, b_fMA_${i}) <= 0) return;\n    if(CopyBuffer(h_sMA_${i}, 0, 0, 3, b_sMA_${i}) <= 0) return;\n`;
+                        mql5_logic += `    buyCondition = buyCondition && (b_fMA_${i}[1] > b_sMA_${i}[1] && b_fMA_${i}[2] <= b_sMA_${i}[2]);\n    sellCondition = sellCondition && (b_fMA_${i}[1] < b_sMA_${i}[1] && b_fMA_${i}[2] >= b_sMA_${i}[2]);\n`;
+                    } else if (type === 'rsi') {
+                        mql5_inputs += `input int InpRSIPeriod_${i} = ${document.getElementById(`rsiPeriod_${id}`).value};\ninput int InpRSIUpper_${i} = ${document.getElementById(`rsiUpper_${id}`).value};\ninput int InpRSILower_${i} = ${document.getElementById(`rsiLower_${id}`).value};\n`;
+                        mql5_handles += `int h_RSI_${i};\n`;
+                        mql5_init += `    h_RSI_${i} = iRSI(_Symbol, _Period, InpRSIPeriod_${i}, PRICE_CLOSE);\n`;
+                        mql5_arrays += `    double b_RSI_${i}[]; ArraySetAsSeries(b_RSI_${i}, true);\n    if(CopyBuffer(h_RSI_${i}, 0, 0, 3, b_RSI_${i}) <= 0) return;\n`;
+                        mql5_logic += `    buyCondition = buyCondition && (b_RSI_${i}[1] > InpRSILower_${i} && b_RSI_${i}[2] <= InpRSILower_${i});\n    sellCondition = sellCondition && (b_RSI_${i}[1] < InpRSIUpper_${i} && b_RSI_${i}[2] >= InpRSIUpper_${i});\n`;
+                    } else if (type === 'env') {
+                        mql5_inputs += `input int InpEnvPeriod_${i} = ${document.getElementById(`envPeriod_${id}`).value};\ninput double InpEnvDev_${i} = ${document.getElementById(`envDev_${id}`).value};\n`;
+                        mql5_handles += `int h_ENV_${i};\n`;
+                        mql5_init += `    h_ENV_${i} = iEnvelopes(_Symbol, _Period, InpEnvPeriod_${i}, 0, MODE_SMA, PRICE_CLOSE, InpEnvDev_${i});\n`;
+                        mql5_arrays += `    double b_ENV_UP_${i}[], b_ENV_DN_${i}[]; ArraySetAsSeries(b_ENV_UP_${i}, true); ArraySetAsSeries(b_ENV_DN_${i}, true);\n    if(CopyBuffer(h_ENV_${i}, UPPER_BAND, 0, 2, b_ENV_UP_${i}) <= 0) return;\n    if(CopyBuffer(h_ENV_${i}, LOWER_BAND, 0, 2, b_ENV_DN_${i}) <= 0) return;\n`;
+                        mql5_logic += `    double close1_${i} = iClose(_Symbol, _Period, 1);\n    buyCondition = buyCondition && (close1_${i} <= b_ENV_DN_${i}[1]);\n    sellCondition = sellCondition && (close1_${i} >= b_ENV_UP_${i}[1]);\n`;
+                    } else if (type === 'awesome') {
+                        mql5_handles += `int h_AO_${i};\n`;
+                        mql5_init += `    h_AO_${i} = iAO(_Symbol, _Period);\n`;
+                        mql5_arrays += `    double b_AO_${i}[]; ArraySetAsSeries(b_AO_${i}, true);\n    if(CopyBuffer(h_AO_${i}, 0, 0, 3, b_AO_${i}) <= 0) return;\n`;
+                        mql5_logic += `    buyCondition = buyCondition && (b_AO_${i}[1] > 0 && b_AO_${i}[2] <= 0);\n    sellCondition = sellCondition && (b_AO_${i}[1] < 0 && b_AO_${i}[2] >= 0);\n`;
+                    } else if (type === 'trend_filter') {
+                        mql5_inputs += `input int InpADXPeriod_${i} = ${document.getElementById(`adxFilterPeriod_${id}`).value};\ninput int InpADXLevel_${i} = ${document.getElementById(`adxLevel_${id}`).value};\n`;
+                        mql5_handles += `int h_ADX_${i};\n`;
+                        mql5_init += `    h_ADX_${i} = iADX(_Symbol, _Period, InpADXPeriod_${i});\n`;
+                        mql5_arrays += `    double b_ADX_${i}[]; ArraySetAsSeries(b_ADX_${i}, true);\n    if(CopyBuffer(h_ADX_${i}, 0, 0, 2, b_ADX_${i}) <= 0) return;\n`;
+                        mql5_logic += `    buyCondition = buyCondition && (b_ADX_${i}[1] >= InpADXLevel_${i});\n    sellCondition = sellCondition && (b_ADX_${i}[1] >= InpADXLevel_${i});\n`;
+                    } else if (type === 'atr') {
+                        mql5_inputs += `input int InpATRFiltPeriod_${i} = ${document.getElementById(`atrPeriod_${id}`).value};\ninput double InpATRFiltLevel_${i} = ${document.getElementById(`atrLevel_${id}`).value};\n`;
+                        mql5_handles += `int h_ATRFilt_${i};\n`;
+                        mql5_init += `    h_ATRFilt_${i} = iATR(_Symbol, _Period, InpATRFiltPeriod_${i});\n`;
+                        mql5_arrays += `    double b_ATRFilt_${i}[]; ArraySetAsSeries(b_ATRFilt_${i}, true);\n    if(CopyBuffer(h_ATRFilt_${i}, 0, 0, 2, b_ATRFilt_${i}) <= 0) return;\n`;
+                        mql5_logic += `    buyCondition = buyCondition && (b_ATRFilt_${i}[1] > InpATRFiltLevel_${i});\n    sellCondition = sellCondition && (b_ATRFilt_${i}[1] > InpATRFiltLevel_${i});\n`;
+                    }
+                });
+
+                code += mql5_inputs;
+                code += "\n// Indicator Handles\n" + mql5_handles;
+
+                code += "\n//+------------------------------------------------------------------+\nint OnInit() {\n";
+                code += "    trade.SetExpertMagicNumber(InpMagic);\n";
+                code += "    trade.SetDeviationInPoints(InpSlippage);\n";
+                code += mql5_init;
+                code += "    return(INIT_SUCCEEDED);\n}\n";
+
+                code += "\nint CountPositions() {\n    int count = 0;\n    for(int i = PositionsTotal() - 1; i >= 0; i--) {\n        ulong ticket = PositionGetTicket(i);\n        if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagic) count++;\n    }\n    return count;\n}\n";
+
+                code += "\nvoid OnTick() {\n";
+
+                // MT5 Exit Management
+                if(weekendCarry === 'false') {
+                    code += "    MqlDateTime dt; TimeCurrent(dt);\n";
+                    code += "    if(dt.day_of_week == 5 && dt.hour >= 23) {\n        for(int i = PositionsTotal() - 1; i >= 0; i--) {\n            ulong ticket = PositionGetTicket(i);\n            if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagic) {\n                trade.PositionClose(ticket);\n            }\n        }\n        return;\n    }\n";
+                }
+
+                code += "\n    // --- Indicators Buffer Copy ---\n" + mql5_arrays;
+                code += "\n    bool buyCondition = true; bool sellCondition = true;\n\n" + mql5_logic;
+
+                // MT5 Opposite Close
+                if(oppositeClose !== 'none') {
+                    code += "    for(int i = PositionsTotal() - 1; i >= 0; i--) {\n        ulong ticket = PositionGetTicket(i);\n        if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagic) {\n";
+                    code += "            double profit = PositionGetDouble(POSITION_PROFIT);\n";
+                    code += "            long type = PositionGetInteger(POSITION_TYPE);\n";
+                    if(oppositeClose === 'all') {
+                        code += "            if(type == POSITION_TYPE_BUY && sellCondition) trade.PositionClose(ticket);\n            if(type == POSITION_TYPE_SELL && buyCondition) trade.PositionClose(ticket);\n";
+                    } else if(oppositeClose === 'profit_only') {
+                        code += "            if(type == POSITION_TYPE_BUY && sellCondition && profit > 0) trade.PositionClose(ticket);\n            if(type == POSITION_TYPE_SELL && buyCondition && profit > 0) trade.PositionClose(ticket);\n";
+                    } else if(oppositeClose === 'loss_only') {
+                        code += "            if(type == POSITION_TYPE_BUY && sellCondition && profit < 0) trade.PositionClose(ticket);\n            if(type == POSITION_TYPE_SELL && buyCondition && profit < 0) trade.PositionClose(ticket);\n";
+                    }
+                    code += "        }\n    }\n";
+                }
+
+                code += "\n    if(CountPositions() >= InpMaxPos) return;\n";
+                
+                let dayConds = [];
+                if(days[0]) dayConds.push("dt.day_of_week == 1"); if(days[1]) dayConds.push("dt.day_of_week == 2");
+                if(days[2]) dayConds.push("dt.day_of_week == 3"); if(days[3]) dayConds.push("dt.day_of_week == 4");
+                if(days[4]) dayConds.push("dt.day_of_week == 5"); if(days[5]) dayConds.push("dt.day_of_week == 6"); 
+                if(days[6]) dayConds.push("dt.day_of_week == 0"); 
+                
+                if(dayConds.length < 7) {
+                    if(weekendCarry !== 'false') code += "    MqlDateTime dt; TimeCurrent(dt);\n"; 
+                    if(dayConds.length === 0) code += "    return;\n";
+                    else code += `    if(!(${dayConds.join(" || ")})) return;\n`;
+                }
+
+                if(timeFilterMode === 'active') {
+                    if(weekendCarry !== 'false' && dayConds.length === 7) code += "    MqlDateTime dt; TimeCurrent(dt);\n";
+                    code += "    bool canTrade = false;\n    if(InpTimeStart < InpTimeEnd) { if(dt.hour >= InpTimeStart && dt.hour < InpTimeEnd) canTrade = true; }\n    else { if(dt.hour >= InpTimeStart || dt.hour < InpTimeEnd) canTrade = true; }\n    if(!canTrade) return;\n";
+                }
+
+                code += "\n    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);\n    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);\n    double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);\n";
+
+                if(lotMode === 'fixed') code += "    double lots = InpLot;\n";
+                else {
+                    code += "    double riskAmnt = AccountInfoDouble(ACCOUNT_BALANCE) * (InpRiskPercent / 100.0);\n    double val = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);\n";
+                    if(slMode === 'fixed') code += "    double lots = NormalizeDouble(riskAmnt / (InpStopLoss * val), 2);\n";
+                    else code += "    double sl_pt = (b_SL_ATR[1] * InpSLAtrMult) / point;\n    double lots = NormalizeDouble(riskAmnt / (sl_pt * val), 2);\n";
+                    code += "    if(lots < SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN)) lots = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);\n";
+                }
+
+                if(slMode === 'fixed') code += "    double sl_dist = InpStopLoss * point;\n";
+                else code += "    double sl_dist = b_SL_ATR[1] * InpSLAtrMult;\n";
+
+                code += "\n    if(buyCondition) trade.Buy(lots, _Symbol, ask, ask - sl_dist, ask + InpTakeProfit*point, \"PureGreen PRO MQL5\");\n";
+                code += "    else if(sellCondition) trade.Sell(lots, _Symbol, bid, bid + sl_dist, bid - InpTakeProfit*point, \"PureGreen PRO MQL5\");\n}\n";
             }
 
             document.getElementById('outputCode').value = code;
-            
-            setTimeout(() => {
-                switchTab('tab-gen');
-            }, 50);
+            setTimeout(() => { switchTab('tab-gen'); }, 50);
 
         } catch (error) {
-            console.error(error);
-            alert("エラーが発生しました: " + error.message);
+            console.error(error); alert("エラーが発生しました: " + error.message);
         }
     }
 
     function copyCode() {
         const output = document.getElementById('outputCode');
         if(output.value === "") return alert("まずは「ソースコードを生成する」ボタンを押してください！");
-        output.select(); 
-        document.execCommand("copy");
+        output.select(); document.execCommand("copy");
         alert("✅ コピーが完了しました！\nMT4/MT5のメタエディターを開いて貼り付けてください。");
     }
 </script>
+
 </body>
 </html>

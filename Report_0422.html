@@ -60,6 +60,7 @@
         </p>
 
         <h2>【📈 主要銘柄の見通し（サマリー）】</h2>
+        <div style="text-align: right; font-size: 11px; color: #7f8c8d; margin-bottom: 5px;">※行をタップで詳細へジャンプ</div>
         <table class="summary-detail-table">
             <colgroup>
                 <col style="width: 14%;"><col style="width: 14%;"><col style="width: 14%;"><col style="width: 14%;"><col style="width: 14%;"><col style="width: 15%;"><col style="width: 15%;">
@@ -68,20 +69,21 @@
                 <tr><th>銘柄</th><th>見通し</th><th>前日の終値</th><th>現在値</th><th>前日比</th><th>サポート①/②</th><th>レジスタンス①/②</th></tr>
             </thead>
             <tbody>
-                <tr><td>🇺🇸 DXY</td><td class="view-bullish">🔵⬆️ 反発</td><td>98.068</td><td>98.420</td><td class="val-pos">+0.35%</td><td>98.00 / 97.80</td><td>98.80 / 99.00</td></tr>
-                <tr><td>🇺🇸 US500</td><td class="view-bearish">🔴⬇️ 調整</td><td>7,128.30</td><td>7,098.07</td><td class="val-neg">-0.41%</td><td>7,050 / 7,000</td><td>7,150 / 7,200</td></tr>
-                <tr><td>🇺🇸 US30</td><td class="view-bearish">🔴⬇️ 調整</td><td>49,567.0</td><td>49,358.6</td><td class="val-neg">-0.40%</td><td>49,000 / 48,800</td><td>49,800 / 50,000</td></tr>
-                <tr><td>💻 USTEC</td><td class="view-bearish">🔴⬇️ 調整</td><td>26,676.85</td><td>26,623.85</td><td class="val-neg">-0.20%</td><td>26,500 / 26,200</td><td>26,800 / 27,000</td></tr>
-                <tr><td>🇯🇵 JP225</td><td class="view-bearish">🔴⬇️ 調整</td><td>59,268.0</td><td>58,815.1</td><td class="val-neg">-0.39%</td><td>58,500 / 58,000</td><td>59,200 / 59,500</td></tr>
-                <tr><td>🥇 XAUUSD</td><td class="view-bearish">🔴⬇️ 急落</td><td>4,824.943</td><td>4,718.919</td><td class="val-neg">-2.13%</td><td>4,680 / 4,650</td><td>4,750 / 4,800</td></tr>
-                <tr><td>🛢️ USOIL</td><td class="view-bullish">🔵⬆️ 急騰</td><td>85.918</td><td>89.607</td><td class="val-pos">+4.55%</td><td>88.00 / 86.00</td><td>92.00 / 95.00</td></tr>
-                <tr><td>🇪🇺 EURUSD</td><td class="view-bearish">🔴⬇️ 下落</td><td>1.17856</td><td>1.17395</td><td class="val-neg">-0.38%</td><td>1.1700 / 1.1650</td><td>1.1780 / 1.1820</td></tr>
-                <tr><td>🇬🇧 GBPUSD</td><td class="view-bearish">🔴⬇️ 下落</td><td>1.35338</td><td>1.35032</td><td class="val-neg">-0.21%</td><td>1.3450 / 1.3400</td><td>1.3550 / 1.3600</td></tr>
-                <tr><td>🇯🇵 USDJPY</td><td class="view-bullish">🔵⬆️ 上昇</td><td>158.843</td><td>159.417</td><td class="val-pos">+0.35%</td><td>158.50 / 158.00</td><td>159.70 / 160.00</td></tr>
-                <tr><td>🇦🇺 AUDUSD</td><td class="view-bearish">🔴⬇️ 下落</td><td>0.71775</td><td>0.71519</td><td class="val-neg">-0.31%</td><td>0.7100 / 0.7050</td><td>0.7200 / 0.7250</td></tr>
-                <tr><td>🅑 BTCUSD</td><td class="view-bearish">🔴⬇️ 調整</td><td>75,733.98</td><td>75,647.48</td><td class="val-neg">-0.31%</td><td>74,000 / 73,000</td><td>76,500 / 77,000</td></tr>
+                <tr onclick="location.href='#detail-dxy'" style="cursor: pointer;"><td>🇺🇸 DXY</td><td class="view-bullish">🔵⬆️ 反発</td><td>98.068</td><td>98.420</td><td class="val-pos">+0.35%</td><td>98.00 / 97.80</td><td>98.80 / 99.00</td></tr>
+                <tr onclick="location.href='#detail-us500'" style="cursor: pointer;"><td>🇺🇸 US500</td><td class="view-bearish">🔴⬇️ 調整</td><td>7,128.30</td><td>7,098.07</td><td class="val-neg">-0.41%</td><td>7,050 / 7,000</td><td>7,150 / 7,200</td></tr>
+                <tr onclick="location.href='#detail-us30'" style="cursor: pointer;"><td>🇺🇸 US30</td><td class="view-bearish">🔴⬇️ 調整</td><td>49,567.0</td><td>49,358.6</td><td class="val-neg">-0.40%</td><td>49,000 / 48,800</td><td>49,800 / 50,000</td></tr>
+                <tr onclick="location.href='#detail-ustec'" style="cursor: pointer;"><td>💻 USTEC</td><td class="view-bearish">🔴⬇️ 調整</td><td>26,676.85</td><td>26,623.85</td><td class="val-neg">-0.20%</td><td>26,500 / 26,200</td><td>26,800 / 27,000</td></tr>
+                <tr onclick="location.href='#detail-jp225'" style="cursor: pointer;"><td>🇯🇵 JP225</td><td class="view-bearish">🔴⬇️ 調整</td><td>59,268.0</td><td>58,815.1</td><td class="val-neg">-0.39%</td><td>58,500 / 58,000</td><td>59,200 / 59,500</td></tr>
+                <tr onclick="location.href='#detail-xauusd'" style="cursor: pointer;"><td>🥇 XAUUSD</td><td class="view-bearish">🔴⬇️ 急落</td><td>4,824.943</td><td>4,718.919</td><td class="val-neg">-2.13%</td><td>4,680 / 4,650</td><td>4,750 / 4,800</td></tr>
+                <tr onclick="location.href='#detail-usoil'" style="cursor: pointer;"><td>🛢️ USOIL</td><td class="view-bullish">🔵⬆️ 急騰</td><td>85.918</td><td>89.607</td><td class="val-pos">+4.55%</td><td>88.00 / 86.00</td><td>92.00 / 95.00</td></tr>
+                <tr onclick="location.href='#detail-eurusd'" style="cursor: pointer;"><td>🇪🇺 EURUSD</td><td class="view-bearish">🔴⬇️ 下落</td><td>1.17856</td><td>1.17395</td><td class="val-neg">-0.38%</td><td>1.1700 / 1.1650</td><td>1.1780 / 1.1820</td></tr>
+                <tr onclick="location.href='#detail-gbpusd'" style="cursor: pointer;"><td>🇬🇧 GBPUSD</td><td class="view-bearish">🔴⬇️ 下落</td><td>1.35338</td><td>1.35032</td><td class="val-neg">-0.21%</td><td>1.3450 / 1.3400</td><td>1.3550 / 1.3600</td></tr>
+                <tr onclick="location.href='#detail-usdjpy'" style="cursor: pointer;"><td>🇯🇵 USDJPY</td><td class="view-bullish">🔵⬆️ 上昇</td><td>158.843</td><td>159.417</td><td class="val-pos">+0.35%</td><td>158.50 / 158.00</td><td>159.70 / 160.00</td></tr>
+                <tr onclick="location.href='#detail-audusd'" style="cursor: pointer;"><td>🇦🇺 AUDUSD</td><td class="view-bearish">🔴⬇️ 下落</td><td>0.71775</td><td>0.71519</td><td class="val-neg">-0.31%</td><td>0.7100 / 0.7050</td><td>0.7200 / 0.7250</td></tr>
+                <tr onclick="location.href='#detail-btcusd'" style="cursor: pointer;"><td>🅑 BTCUSD</td><td class="view-bearish">🔴⬇️ 調整</td><td>75,733.98</td><td>75,647.48</td><td class="val-neg">-0.31%</td><td>74,000 / 73,000</td><td>76,500 / 77,000</td></tr>
             </tbody>
         </table>
+
 
         <h2>【🔥 通貨・銘柄 24時間強弱メーター (対USD)】</h2>
         <div class="strength-meter-box">

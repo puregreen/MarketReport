@@ -130,3 +130,52 @@ tr:nth-child(even) { background-color: #fcfcfc; }
 
 .comment-box { background-color: #eafaf1; border-left: 5px solid #2ecc71; padding: 18px; margin-top: 30px; border-radius: 4px; font-size: 14px; line-height: 1.7; }
 .footer { margin-top: 40px; border-top: 1px solid #bdc3c7; padding-top: 20px; text-align: center; color: #7f8c8d; font-size: 11px; line-height: 1.5; }
+
+
+    /* 詳細分析用のテーブルスタイル追加 */
+    .detail-stats-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+        font-size: 12px;
+        text-align: center;
+        background-color: #fff;
+    }
+    .detail-stats-table th {
+        background-color: #f2f4f4;
+        color: #555;
+        font-weight: normal;
+        border: 1px solid #bdc3c7;
+        padding: 8px 4px;
+    }
+    .detail-stats-table td {
+        border: 1px solid #bdc3c7;
+        padding: 8px 4px;
+        font-weight: bold;
+        color: #333;
+    }
+    .detail-stats-table .val-pos { color: #2980b9; }
+    .detail-stats-table .val-neg { color: #c0392b; }
+    .view-bullish { color: #2980b9; }
+    .view-bearish { color: #c0392b; }
+    
+    .symbol-title {
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+        color: #2c3e50;
+        border-left: 5px solid #e67e22;
+        padding-left: 10px;
+        margin-bottom: 15px;
+        margin-top: 30px;
+    }
+
+
+    /* ==========================================
+       箇条書きマーカー（黒丸）のサイズ統一修正
+       ========================================== */
+    ul li::marker {
+        font-size: 13.5px;      /* 点のサイズを本文に揃えて固定 */
+        color: #333333;         /* 点の色をダークグレーに固定（スパンの文字色に引っ張られない） */
+        font-weight: normal;    /* 点の太さを固定 */
+    }

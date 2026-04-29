@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚨 緊急特集：米FOMC後のドル円160円攻防とトレード戦略 - Pure Green</title>
+<style>
+    /* 全体設定 */
+    body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px 0; }
+    .container { max-width: 800px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius: 10px; padding: 40px; box-sizing: border-box; }
+
+    /* ナビゲーション */
+    .top-nav { margin-bottom: 30px; }
+    .back-link { font-size: 14px; color: #3498db; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ヘッダー */
+    .header { text-align: center; margin-bottom: 40px; border-bottom: 3px solid #e74c3c; padding-bottom: 20px; }
+    .header h1 { color: #c0392b; margin: 0 0 15px 0; font-size: 24px; line-height: 1.4; }
+    .header p { color: #7f8c8d; font-size: 15px; margin: 0; }
+    .alert-badge { display: inline-block; background-color: #e74c3c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 10px; }
+
+    /* セクション見出し */
+    h2 { color: #2c3e50; margin-top: 40px; margin-bottom: 20px; border-left: 5px solid #e74c3c; padding-left: 12px; font-size: 20px; background: #fdf3f2; padding-top: 10px; padding-bottom: 10px; }
+    h3 { color: #d35400; font-size: 17px; margin-top: 25px; margin-bottom: 10px; border-bottom: 1px dashed #e67e22; padding-bottom: 5px;}
+    p { line-height: 1.8; font-size: 14.5px; margin-bottom: 20px; }
+
+    /* 強調ボックス */
+    .danger-box { background-color: #fff0f0; border: 1px solid #ffcccc; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+    .danger-box p { margin: 0; color: #c0392b; font-size: 15px; }
+    .danger-title { font-weight: bold; font-size: 16px; margin-bottom: 10px; display: block; }
+
+    .success-box { background-color: #f0fdf4; border: 1px solid #c2f0c2; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+    .success-box p { margin: 0; color: #27ae60; font-size: 15px; }
+
+    /* シナリオ・ステップボックス */
+    .scenario-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 30px; }
+    .scenario-card { background-color: #fdfdfd; border: 1px solid #ecf0f1; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+    .scenario-title { font-weight: bold; font-size: 16px; margin-bottom: 10px; display: flex; align-items: center; }
+    .scenario-title.up { color: #e74c3c; }
+    .scenario-title.down { color: #3498db; }
+    .scenario-title.range { color: #f39c12; }
+    
+    .timeline-list { list-style: none; padding: 0; margin: 0 0 30px 0; }
+    .timeline-item { position: relative; padding-left: 30px; margin-bottom: 20px; }
+    .timeline-item::before { content: ''; position: absolute; left: 0; top: 5px; width: 12px; height: 12px; border-radius: 50%; background-color: #3498db; }
+    .timeline-item::after { content: ''; position: absolute; left: 5px; top: 20px; width: 2px; height: calc(100% + 10px); background-color: #ecf0f1; }
+    .timeline-item:last-child::after { display: none; }
+    .time-badge { font-weight: bold; color: #2980b9; margin-right: 10px; }
+
+    .step-box { background-color: #fafafa; border-left: 4px solid #34495e; padding: 15px; margin-bottom: 20px; }
+
+    /* 特別戦略ボックス */
+    .special-night-box { background-color: #fff9e6; border: 2px solid #f39c12; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+    .special-night-title { font-weight: bold; color: #d35400; font-size: 17px; display: block; margin-bottom: 10px; text-align: center; }
+
+    @media (max-width: 650px) {
+        .container { padding: 20px; }
+        .header h1 { font-size: 20px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-nav">
+        <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    </div>
+
+    <div class="header">
+        <span class="alert-badge">緊急特設ページ：2026年4月29日</span>
+        <h1>🚨 今夜深夜3:00 米FOMC発表！<br>ドル円160円攻防と介入警戒の立ち回り方</h1>
+        <p>薄商いのGW相場に直撃するパウエル砲。歴史的なボラティリティに備えるプロの戦略</p>
+    </div>
+
+    <div class="danger-box">
+        <span class="danger-title">⚠️ 大前提：深夜のポジション持ち越し・指標またぎは「厳禁」</span>
+        <p>
+            今夜のFOMCは「政策金利の据え置き」が確実視されていますが、焦点は3:30からのパウエル議長による記者会見です。直近のインフレ再燃を受けた「タカ派発言（利下げ先送り）」が出る可能性が高く、日本が休場でオーダーが極端に薄い中、一言のニュアンスで上下に数円規模の強烈な「往復ビンタ」が発生します。<span style="font-weight:bold;">深夜2:30までには全ポジションを決済し、EAを完全停止して「ノーポジションでの通過」を絶対条件としてください。</span>
+        </p>
+    </div>
+
+    <h2>【🎯 メインシナリオ】「介入や防衛OPを警戒した戻り売り」一択</h2>
+    <p>
+        現在の水準（159.60円付近）から「160円突破のトレンドに乗る押し目買い（ロング）」をメインに据えるのは、期待値が非常に悪く完全にギャンブルです。今夜の戦略は<span style="font-weight:bold; color:#e74c3c;">「160円・161円での逆張りショート、または介入後の戻り売り」</span>をメインシナリオに据えます。
+    </p>
+    <div class="success-box">
+        <span style="font-weight:bold; display:block; margin-bottom:8px;">💡 なぜ「売り（ショート）」が優位なのか？</span>
+        <p>
+            160.00円と161.00円には「非常に大きめ」のオプションと売りオーダーが集中しており、何よりこのレッドゾーンを突破すれば「日銀の実弾介入（数円規模の暴落）」がいつ落ちてきてもおかしくない状態です。上に抜けた場合の利益に対し、介入を被弾した場合の損失が全く見合っていません。上値は極めて重く、下値にはストップロスを巻き込む真空地帯が広がっているため、最終的に「売り」が機能しやすい相場環境です。
+        </p>
+    </div>
+
+    <h2>【📈 FOMC結果別：3つの値動きシナリオ】</h2>
+    <div class="scenario-grid">
+        <div class="scenario-card">
+            <div class="scenario-title up">🔥 シナリオA：タカ派発言（160円突破と介入リスク）</div>
+            <p><span style="font-weight:bold; color:#7f8c8d;">【値動き】</span> パウエル議長が「利下げを急ぐ理由はない」と発言。一気に160.00円、さらに161.00円へ向けて急騰します。</p>
+            <p><span style="font-weight:bold; color:#7f8c8d;">【戦　略】</span> 大台到達時の<span style="font-weight:bold; color:#e74c3c;">「逆張りショート」または「介入待ち」</span>。急騰の先端をロングで追いかけるのは自殺行為です。大台にタッチして強烈に上値を叩かれたのを確認してからのショート、または介入による大暴落が発生した後の戻り売りを狙います。</p>
+        </div>
+        <div class="scenario-card">
+            <div class="scenario-title down">🧊 シナリオB：ハト派発言（安心感のドル急落）</div>
+            <p><span style="font-weight:bold; color:#7f8c8d;">【値動き】</span> 議長が「インフレは一時的」と発言し、年内利下げを維持した場合。強烈なドル売り（円買い）が発生します。</p>
+            <p><span style="font-weight:bold; color:#7f8c8d;">【戦　略】</span> 下落トレンドへの<span style="font-weight:bold; color:#3498db;">「順張りショート」</span>。159.00円や158.50円の下のストップロスを巻き込む下落を狙い、戻り目を待ってショートを構築。ターゲットは158.00円です。</p>
+        </div>
+        <div class="scenario-card">
+            <div class="scenario-title range">⚖️ シナリオC：決定打に欠け乱高下（往復ビンタ）</div>
+            <p><span style="font-weight:bold; color:#7f8c8d;">【値動き】</span> タカ・ハト発言が入り混じり、上下に数円規模のヒゲをつけた後、元の水準に回帰します。</p>
+            <p><span style="font-weight:bold; color:#7f8c8d;">【戦　略】</span> 無理なトレードを控える<span style="font-weight:bold; color:#f39c12;">「完全静観」</span>。ボラティリティが収束する明日の夕方まで手を出さないのが正解です。</p>
+        </div>
+    </div>
+
+    <h2>【🕒 時間帯別：チャート監視の極意】</h2>
+    <ul class="timeline-list">
+        <li class="timeline-item">
+            <span class="time-badge">深夜 3:00 〜 3:30</span> <span style="font-weight:bold; color:#e74c3c;">【絶対静観】声明発表の乱高下</span><br>
+            政策金利と声明文が発表される時間です。アルゴリズムが機械的に反応し数十pipsの「ダマシのヒゲ」を乱発するため、絶対に手を出さないでください。
+        </li>
+        <li class="timeline-item">
+            <span class="time-badge">深夜 3:30 〜 4:30</span> <span style="font-weight:bold; color:#e74c3c;">【絶対静観】パウエル議長会見</span><br>
+            議長の発言内容が一言伝わるごとに、上へ下へと「ノコギリの歯」のような往復ビンタを形成します。ここでポジションを持つことはただのギャンブルです。
+        </li>
+        <li class="timeline-item">
+            <span class="time-badge">翌 16:00 以降</span> <span style="font-weight:bold; color:#27ae60;">【本命参入】トレンドの確定</span><br>
+            欧州の機関投資家が参入し、ここからが「本物のトレンド」となります。ここからの順張り、または明確なレジサポでの反発狙いが最も安全です。
+        </li>
+    </ul>
+
+    <div class="special-night-box">
+        <span class="special-night-title">🌙 【深夜起きている方への特別戦略】</span>
+        <p style="font-size: 14px; margin-bottom: 10px;">
+            リアルタイムでチャートを監視できる場合の最大の優位性は、<strong>「パニックが一巡した後のプライスアクションを視認できること」</strong>です。以下の条件が揃った時のみ、短期の参戦を検討してください。
+        </p>
+        <ul style="font-size: 13.5px; line-height: 1.6; padding-left: 20px;">
+            <li><strong>「飛び乗り」は100%厳禁：</strong> 指標発表（3:00）や会見開始（3:30）の瞬間のクリックは、スリッページで不利なレートを掴まされるため絶対に避けてください。</li>
+            <li><strong>15分足の確定を待つ：</strong> 最初の乱高下が起きた後、最初の15分足が「どのような形で確定したか」を見ます。特に160円や161円にタッチして、実体が残らず「長い上ヒゲ」で確定した場合は、強力な売り圧力（介入・防衛）のサインです。</li>
+            <li><strong>逆張りは「壁」がある時だけ：</strong> 大台（160.00 / 161.00）での明確な反発、または下値サポート（159.00 / 158.50）での反発を確認してから、引き付けてエントリーしてください。</li>
+        </ul>
+        <p style="font-size: 13px; color: #7f8c8d; margin-top: 10px; text-align: center;">※少しでも迷いや違和感がある場合は、即座に画面を閉じて寝るのが正解です。</p>
+    </div>
+
+    <h2>【⚔️ 具体的なアクションプラン（160円突破時）】</h2>
+    <p>
+        もし深夜にドル円が160円の大台に突入した場合、実弾介入がいつ降ってくるか読めないレッドゾーンへと変貌します。以下のポイントに絞って監視を行ってください。
+    </p>
+
+    <div class="step-box">
+        <span style="font-weight:bold; color:#2c3e50; display:block; margin-bottom:5px;">① 「上ヒゲ」の確定を確認する</span>
+        15分足チャートで、160.00円、あるいは161.00円付近まで急騰したローソク足が、実体を残せずに<span style="font-weight:bold; color:#e74c3c;">「長い上ヒゲ（陰線がベスト）」</span>で確定したのを確認します。これが上値拒否の強力なサインです。
+    </div>
+    
+    <div class="step-box">
+        <span style="font-weight:bold; color:#2c3e50; display:block; margin-bottom:5px;">② 0.01ロット単位での打診ショート</span>
+        上ヒゲ確定を確認した次の足の始値付近から、ショート（売り）を仕掛けます。ボラティリティが異常に高いため、必ず<span style="font-weight:bold;">0.01ロット単位の極小サイズ</span>から入り、リスクを限定してください。
+    </div>
+
+    <div class="step-box">
+        <span style="font-weight:bold; color:#2c3e50; display:block; margin-bottom:5px;">③ 明確な撤退（完全静観）の決断</span>
+        形成された上ヒゲの最先端（最高値）を実体で明確に上抜けていく場合は、潔く損切りをしてその日は静観します。また、<strong>「15分足で上下に100pips以上のヒゲを乱発している」</strong>場合は、優位性がないため即座に画面を閉じてください。
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    </div>
+</div>
+
+</body>
+</html>

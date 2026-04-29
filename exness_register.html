@@ -60,22 +60,28 @@
 
     /* リストのデザイン */
     .info-list { list-style-type: none; padding-left: 0; margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #3498db; }
-    .info-list li { margin-bottom: 10px; font-size: 14.5px; line-height: 1.6; }
+    .info-list li { margin-bottom: 15px; font-size: 14.5px; line-height: 1.6; }
     .info-list li:last-child { margin-bottom: 0; }
     .info-number { font-weight: bold; color: #e74c3c; margin-right: 5px; }
+
+    /* パートナー特典ボックス（新規追加） */
+    .partner-benefit-box { background-color: #fff9e6; border: 1px solid #f1c40f; padding: 15px; border-radius: 6px; margin-top: 10px; font-size: 13.5px; }
+    .partner-benefit-box strong { color: #d35400; display: block; margin-bottom: 8px; font-size: 14.5px;}
+    .partner-benefit-list { margin: 0; padding-left: 20px; color: #2c3e50; }
+    .partner-benefit-list li { margin-bottom: 4px; }
 
     /* ワンポイントアドバイス */
     .tip-box { background-color: #eafaf1; border: 1px solid #2ecc71; padding: 15px; border-radius: 6px; margin-top: 20px; }
     .tip-box strong { color: #27ae60; display: block; margin-bottom: 5px; font-size: 15px; }
     .tip-box p { margin: 0; font-size: 14px; color: #2c3e50; }
 
-    /* 🌟 新規追加：Exness登録用CTAボタン 🌟 */
+    /* CTAボタン */
     .btn-exness-cta {
         display: block;
         width: 100%;
         max-width: 380px;
         margin: 50px auto 20px auto;
-        background-color: #ffc900; /* Exnessのブランドイエロー */
+        background-color: #ffc900;
         color: #1a1a1a;
         text-align: center;
         padding: 18px 20px;
@@ -142,7 +148,20 @@
                 <li><span class="info-number">①</span><strong>居住国 (Country / Region)：</strong>プルダウンから「Japan（日本）」を選択します。</li>
                 <li><span class="info-number">②</span><strong>メールアドレス：</strong>ご自身で普段利用しているメールアドレスを入力します。</li>
                 <li><span class="info-number">③</span><strong>パスワード：</strong>8〜15文字で、英大文字・英小文字・数字・特殊文字をすべて含める必要があります。</li>
-                <li><span class="info-number">④</span><strong>パートナーコード（任意）：</strong>指定のコード（例：<code>tgmn3e45hc</code>）がある場合はこちらに入力します。</li>
+                <li>
+                    <span class="info-number">④</span><strong>パートナーコード（任意）：</strong><code>tgmn3e45hc</code> とご入力ください。
+                    
+                    <div class="partner-benefit-box">
+                        <strong>🎁 Pure Green 経由で登録するメリット</strong>
+                        こちらのコードを入力して紐付けを行っていただくと、以下のコミュニティ特典をすべて無料で受け取ることができます！
+                        <ul class="partner-benefit-list">
+                            <li><strong>安心のトラブルサポート：</strong> 万が一のトラブル時、一般のサポート窓口ではなく、Pure Greenが直接「日本担当の責任者」へ確認・交渉を行います。</li>
+                            <li><strong>専用コミュニティへのご招待：</strong> メンバー限定の投資コミュニティへ参加し、リアルタイムの相場分析やレポートを受け取れます。</li>
+                            <li><strong>優秀なツールの無償提供：</strong> コミュニティ参加者限定で、市場分析に役立つインジケーターや、検証済みのEA（自動売買システム）を無料でご提供します。</li>
+                            <li><strong>特別イベントへの参加権：</strong> トレードイベントや、コミュニティ限定の勉強会へ優先的にご参加いただけます。</li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
             
             <p>最後に、米国市民ではないことを確認するチェックボックス（I declare and confirm...）にチェックを入れ、<strong>「Register」</strong>をタップします。</p>
@@ -202,7 +221,7 @@
     <a href="https://one.exness.link/a/tgmn3e45hc" target="_blank" rel="noopener" class="btn-exness-cta">
         👉 今すぐExnessで口座を開設する
     </a>
-    <div class="cta-subtext">※公式サイトの登録ページへ安全に移動します。</div>
+    <div class="cta-subtext">※公式サイトの登録ページへ安全に移動し、特典コードが自動適用されます。</div>
 
     <div style="text-align: center; margin-top: 10px; border-top: 1px solid #ecf0f1; padding-top: 25px;">
         <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>

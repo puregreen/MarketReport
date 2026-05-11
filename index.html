@@ -276,7 +276,7 @@
     .archive-accordion {
         margin: 30px 0 15px 0;
     }
-    .archive-accordion summary {
+    .archive-accordion > summary {
         font-size: 18px;
         color: #2c3e50;
         padding: 12px 15px;
@@ -292,24 +292,25 @@
         transition: background-color 0.3s ease;
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .archive-accordion summary::-webkit-details-marker {
+    .archive-accordion > summary::-webkit-details-marker {
         display: none;
     }
-    .archive-accordion summary:hover {
+    .archive-accordion > summary:hover {
         background-color: #f1f4f8;
     }
-    .toggle-icon {
+    /* 修正ポイント: > を使って直下のsummary内のアイコンだけをターゲットにする */
+    .archive-accordion > summary .toggle-icon {
         color: #3498db;
         font-size: 20px;
         font-weight: bold;
         transition: transform 0.3s ease;
     }
-    .archive-accordion[open] .toggle-icon {
+    .archive-accordion[open] > summary .toggle-icon {
         transform: rotate(45deg);
         color: #e74c3c;
     }
-    .archive-accordion[open] .archive-list,
-    .archive-accordion[open] .tool-grid {
+    .archive-accordion[open] > .archive-list,
+    .archive-accordion[open] > .tool-grid {
         animation: fadeIn 0.4s ease-in-out;
         margin-top: 15px;
     }
@@ -318,7 +319,7 @@
     .show-more-accordion {
         margin: 10px 0 30px 0;
     }
-    .show-more-accordion summary {
+    .show-more-accordion > summary {
         display: block;
         text-align: center;
         background-color: #f8f9fa;
@@ -332,25 +333,27 @@
         transition: all 0.3s ease;
         border: 2px dashed #bdc3c7;
     }
-    .show-more-accordion summary::-webkit-details-marker {
+    .show-more-accordion > summary::-webkit-details-marker {
         display: none;
     }
-    .show-more-accordion summary:hover {
+    .show-more-accordion > summary:hover {
         background-color: #eaf2f8;
         border-color: #3498db;
     }
-    .show-more-accordion[open] summary {
+    .show-more-accordion[open] > summary {
         margin-bottom: 15px;
         background-color: #ffffff;
         border-style: solid;
         color: #2c3e50;
     }
-    .show-more-accordion .toggle-icon {
+    /* 修正ポイント: > を使って独立させる */
+    .show-more-accordion > summary .toggle-icon {
         display: inline-block;
         transition: transform 0.3s ease;
         margin-left: 5px;
+        color: #3498db;
     }
-    .show-more-accordion[open] .toggle-icon {
+    .show-more-accordion[open] > summary .toggle-icon {
         transform: rotate(45deg);
         color: #e74c3c;
     }
@@ -411,7 +414,6 @@
         <p>日々の市場動向、大口注文情報、ファンダメンタルズ分析、テクニカル分析の記録</p>
     </div>
 
-    <!-- FX分析＆便利ツール アコーディオン -->
     <details class="archive-accordion">
         <summary style="border-left: 4px solid #2ecc71;">
             🛠 FX分析＆便利ツール <span class="toggle-icon">＋</span>
@@ -453,10 +455,9 @@
         </div>
     </details>
 
-    <!-- 🔥 トレードの勝率を劇的に上げる アコーディオン (デフォルト閉じ) -->
     <details class="archive-accordion">
         <summary style="border-left: 4px solid #e74c3c;">
-            🔥 トレードの勝率を上げる <span class="toggle-icon">＋</span>
+            🔥 利益を『安定』させよう <span class="toggle-icon">＋</span>
         </summary>
         <div class="archive-list">
             <a href="fx_firststep.html" class="report-card" style="border-left: 4px solid #2ecc71; margin-bottom: 0px;">
@@ -511,7 +512,6 @@
         </div>
     </details>
 
-    <!-- 🌟 おすすめの取引環境 アコーディオン -->
     <details class="archive-accordion">
         <summary style="border-left: 4px solid #f39c12;">
             🌟 おすすめの取引環境 <span class="toggle-icon">＋</span>
@@ -1184,3 +1184,61 @@
 
 </body>
 </html>
+"""
+
+# Apply the precise CSS fixes directly to the generated string
+# First, let's target the exact CSS block for .archive-accordion
+import re
+
+css_to_fix_archive = r"""    \.archive-accordion > summary \.toggle-icon \{
+        color: #3498db;
+        font-size: 20px;
+        font-weight: bold;
+        transition: transform 0\.3s ease;
+    \}
+    \.archive-accordion\[open\] > summary \.toggle-icon \{
+        transform: rotate\(45deg\);
+        color: #e74c3c;
+    \}"""
+
+replacement_archive = """    .archive-accordion > summary .toggle-icon {
+        color: #3498db;
+        font-size: 20px;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+    }
+    .archive-accordion[open] > summary > .toggle-icon {
+        transform: rotate(45deg);
+        color: #e74c3c;
+    }"""
+
+# Fix show-more-accordion
+css_to_fix_show_more = r"""    \.show-more-accordion > summary \.toggle-icon \{
+        display: inline-block;
+        transition: transform 0\.3s ease;
+        margin-left: 5px;
+        color: #3498db;
+    \}
+    \.show-more-accordion\[open\] > summary \.toggle-icon \{
+        transform: rotate\(45deg\);
+        color: #e74c3c;
+    \}"""
+
+replacement_show_more = """    .show-more-accordion > summary .toggle-icon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        margin-left: 5px;
+        color: #3498db;
+    }
+    .show-more-accordion[open] > summary > .toggle-icon {
+        transform: rotate(45deg);
+        color: #e74c3c;
+    }"""
+
+
+html_content = re.sub(css_to_fix_archive, replacement_archive, html_content)
+html_content = re.sub(css_to_fix_show_more, replacement_show_more, html_content)
+
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)}

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛠 【完全網羅】FX分析＆便利ツールのトリセツ - Pure Green</title>
+<style>
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 850px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    .back-link {
+        font-size: 14px;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+    .back-link:hover { text-decoration: underline; }
+    
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 26px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-bottom: 3px solid #2ecc71;
+        padding-bottom: 15px;
+    }
+    p.desc {
+        text-align: center;
+        color: #7f8c8d;
+        font-size: 14px;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    /* 目次 */
+    .toc-box {
+        background-color: #f9fbfd;
+        border: 1px solid #dcdde1;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 40px;
+    }
+    .toc-title {
+        font-weight: bold;
+        color: #2980b9;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+    .toc-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 10px;
+    }
+    .toc-list li a {
+        text-decoration: none;
+        color: #34495e;
+        font-size: 14.5px;
+        display: block;
+        padding: 5px 0;
+        transition: color 0.2s;
+    }
+    .toc-list li a:hover {
+        color: #3498db;
+        font-weight: bold;
+    }
+
+    /* ツール解説セクション */
+    .tool-section {
+        margin-bottom: 50px;
+        padding-top: 20px;
+    }
+    .tool-header {
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid #ecf0f1;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .tool-icon {
+        font-size: 28px;
+        margin-right: 15px;
+    }
+    .tool-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin: 0;
+    }
+
+    .content-box {
+        background-color: #ffffff;
+        border-left: 5px solid;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .box-overview { border-color: #3498db; background-color: #f0f8ff; }
+    .box-strategy { border-color: #2ecc71; background-color: #f0fff4; }
+    .box-warning { border-color: #e74c3c; background-color: #fffaf9; }
+
+    .box-title {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 15px;
+    }
+    .box-overview .box-title { color: #2980b9; }
+    .box-strategy .box-title { color: #27ae60; }
+    .box-warning .box-title { color: #c0392b; }
+
+    .tool-section p, .tool-section ul {
+        font-size: 14.5px;
+        line-height: 1.7;
+        color: #333;
+        margin-top: 0;
+    }
+    .tool-section ul {
+        padding-left: 20px;
+    }
+
+    .footer { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #7f8c8d; font-size: 12px; }
+
+    @media (max-width: 600px) {
+        .toc-list { grid-template-columns: 1fr; }
+        .container { padding: 15px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    
+    <h1>🛠 FX分析＆便利ツールのトリセツ</h1>
+    <p class="desc">
+        各種ツールの「意味」と「実際のトレードでの活かし方」をまとめたマニュアルです。<br>
+        ツールは使いこなして初めて強力な「武器」と「盾」になります。
+    </p>
+
+    <div class="toc-box">
+        <div class="toc-title">📑 目次（タップでジャンプします）</div>
+        <ul class="toc-list">
+            <li><a href="#tool-1">🏦 資金管理シミュレーター</a></li>
+            <li><a href="#tool-2">🔥 強弱メーター ＆ ヒートマップ</a></li>
+            <li><a href="#tool-3">📊 コモディティ＆重要銘柄 動向</a></li>
+            <li><a href="#tool-4">📰 リアルタイム・マーケットニュース</a></li>
+            <li><a href="#tool-5">📅 リアルタイム経済指標カレンダー</a></li>
+            <li><a href="#tool-6">🌍 土日・未来レート＆週末リスクレーダー</a></li>
+            <li><a href="#tool-7">⚙️ ノーコードEA作成ツール (簡易/Pro版)</a></li>
+        </ul>
+    </div>
+
+    <div id="tool-1" class="tool-section">
+        <div class="tool-header">
+            <div class="tool-icon">🏦</div>
+            <h2 class="tool-title">資金管理シミュレーター</h2>
+        </div>
+        <div class="content-box box-overview">
+            <div class="box-title">📌 ツールの概要</div>
+            <p>ご自身の口座資金と許容リスク（％）を入力するだけで、「このトレードで張っていい適切なロット数」を自動計算してくれるツールです。</p>
+        </div>
+        <div class="content-box box-strategy">
+            <div class="box-title">💡 Pure Green流・活かし方</div>
+            <ul>
+                <li><strong>「25%ルール」の徹底：</strong> どんなに自信があっても、シェルター口座（生活資金）には手を付けず、トレード口座の資金から許容できる損失額を正確に割り出します。</li>
+                <li><strong>感情の排除：</strong> 「負けを取り返したい！」と熱くなった時こそ、このツールを開いてください。機械的にロットを計算させることで、無謀なハイレバトレード（ギャンブル）を未然に防ぐ「最強の盾」になります。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="tool-2" class="tool-section">
+        <div class="tool-header">
+            <div class="tool-icon">🔥</div>
+            <h2 class="tool-title">強弱メーター ＆ ヒートマップ（法定通貨/暗号資産）</h2>
+        </div>
+        <div class="content-box box-overview">
+            <div class="box-title">📌 ツールの概要</div>
+            <p>現在、世界中で「どの通貨（銘柄）が一番買われていて、どれが一番売られているか」を一目で視覚化するツールです。</p>
+        </div>
+        <div class="content-box box-strategy">
+            <div class="box-title">💡 Pure Green流・活かし方</div>
+            <ul>
+                <li><strong>最強 × 最弱を狙う：</strong> トレードの勝率を最も高めるコツは「一番強い通貨を買い、一番弱い通貨を売る」ペアを選ぶことです。ドル（USD）が最強で、円（JPY）が最弱なら、迷わず「ドル円のロング（買い）」を狙います。</li>
+                <li><strong>手を出してはいけない相場の察知：</strong> ドルも円も両方強い（ヒートマップが同じような色）時は、レンジ相場になりやすく値幅が抜けません。その通貨ペアの取引は見送るという判断基準にします。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="tool-3" class="tool-section">
+        <div class="tool-header">
+            <div class="tool-icon">📊</div>
+            <h2 class="tool-title">コモディティ＆重要銘柄 動向</h2>
+        </div>
+        <div class="content-box box-overview">
+            <div class="box-title">📌 ツールの概要</div>
+            <p>原油（USOIL）、ゴールド（XAUUSD）、日経平均などの「為替以外の超重要銘柄」の動向を一覧できるダッシュボードです。</p>
+        </div>
+        <div class="content-box box-strategy">
+            <div class="box-title">💡 Pure Green流・活かし方</div>
+            <ul>
+                <li><strong>インフレ再燃の察知：</strong> 原油価格が急騰している時は、「インフレ再燃 → 米国の利下げが遠のく → ドル高円安になる」という風向きをいち早く予測できます。</li>
+                <li><strong>リスクオフ（有事）の察知：</strong> 株価が暴落し、ゴールド（安全資産）が急騰している時は、市場がパニックになっています。この時はテクニカルが効きにくいため、EAを停止して様子見をするサインとなります。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="tool-4" class="tool-section">
+        <div class="tool-header">
+            <div class="tool-icon">📰</div>
+            <h2 class="tool-title">リアルタイム・マーケットニュース (標準/日本語版)</h2>
+        </div>
+        <div class="content-box box-overview">
+            <div class="box-title">📌 ツールの概要</div>
+            <p>ロイターやみんかぶ等から、為替や株価を動かすヘッドラインニュースをリアルタイムで自動取得するツールです。</p>
+        </div>
+        <div class="content-box box-strategy">
+            <div class="box-title">💡 Pure Green流・活かし方</div>
+            <ul>
+                <li><strong>急変動の「犯人」探し：</strong> チャートが突然セオリーを無視して暴落・暴騰した時は、必ず何かしらのニュース（要人発言や中東情勢）が出ています。X（旧Twitter）のノイズに惑わされず、ここで「事実」だけを確認します。</li>
+                <li><strong>日本語版と海外版の使い分け：</strong> 日本語版で国内の速報（日銀の発言など）を追い、より広範なグローバルニュース（海外投資家の心理）を知りたい場合は標準（英語ベース）版をチェックします。</li>
+            </ul>
+        </div>
+        <div class="content-box box-warning">
+            <div class="box-title">⚠️ 注意点</div>
+            <p>ヘッドライン（ニュース）で相場が動いている最中は、テクニカル分析が一切通用しません。EAを即座に停止し、嵐が過ぎ去るまで「完全静観」してください。</p>
+        </div>
+    </div>
+
+    <div id="tool-5" class="tool-section">
+        <div class="tool-header">
+            <div class="tool-icon">📅</div>
+            <h2 class="tool-title">リアルタイム経済指標カレンダー (標準/日本語版)</h2>
+        </div>
+        <div class="content-box box-overview">
+            <div class="box-title">📌 ツールの概要</div>
+            <p>その日に発表される各国の経済指標（雇用統計やCPIなど）の時間、予想値、結果を表示するプロ必須のツールです。</p>
+        </div>
+        <div class="content-box box-strategy">
+            <div class="box-title">💡 Pure Green流・活かし方</div>
+            <ul>
+                <li><strong>地雷原の回避：</strong> 毎朝必ずチェックし、重要度「高（★3つや赤いマーク）」の指標発表時間を把握します。発表の前後30分〜1時間はスプレッドが異常拡大し、乱高下するため、必ずEAを停止します。</li>
+                <li><strong>ダマシの回避：</strong> 指標発表直後の数分間は、AIアルゴリズムによる「ダマシのヒゲ」が乱発します。手を出さず、15分足が確定して方向感が出てから順張りでついていくのが鉄則です。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="tool-6" class="tool-section">
+        <div class="tool-header">
+            <div class="tool-icon">🌍</div>
+            <h2 class="tool-title">土日・未来レート＆週末リスクレーダー</h2>
+        </div>
+        <div class="content-box box-overview">
+            <div class="box-title">📌 ツールの概要</div>
+            <p>土日に動いている中東の気配値や、24時間365日動く仮想通貨（BTC）のチャートから、月曜朝の「窓開け」の方向を事前に察知するツールです。</p>
+        </div>
+        <div class="content-box box-strategy">
+            <div class="box-title">💡 Pure Green流・活かし方</div>
+            <ul>
+                <li><strong>月曜朝のシナリオ構築：</strong> 週末に中東で有事が発生した際、「BTCが暴落しているから、月曜日はリスクオフ（株安・円高）の窓開けでスタートしそうだ」と、事前に心の準備と逃げる準備ができます。</li>
+            </ul>
+        </div>
+        <div class="content-box box-warning">
+            <div class="box-title">⚠️ 注意点</div>
+            <p>中東レートは参加者が極端に少ないため、価格の信憑性は低いです。表示されている「価格そのもの」を信じて月曜朝の指値を置くような使い方は絶対にやめてください。あくまで「風向き」を測る風見鶏です。</p>
+        </div>
+    </div>
+
+    <div id="tool-7" class="tool-section">
+        <div class="tool-header">
+            <div class="tool-icon">⚙️</div>
+            <h2 class="tool-title">ノーコードEA作成ツール (簡易版 / Pro版)</h2>
+        </div>
+        <div class="content-box box-overview">
+            <div class="box-title">📌 ツールの概要</div>
+            <p>プログラミングの知識（MQL4/5など）が一切不要で、画面の指示に従うだけで自分専用の自動売買システム（EA）が作成できるツールです。</p>
+        </div>
+        <div class="content-box box-strategy">
+            <div class="box-title">💡 Pure Green流・活かし方</div>
+            <ul>
+                <li><strong>ブラックボックスからの脱却：</strong> 市販の「中身が分からないEA」で資金を溶かすのをやめ、自分が完全に理解しているロジック（例：RSIが70を超えたら売り）だけを自動化します。</li>
+                <li><strong>防衛機能の実装（Pro版）：</strong> 稼働時間を指定して重要指標を避けたり、ボラティリティフィルター（ATR）を組み込んで「相場が荒れている時はエントリーしない」といった、鉄壁の防衛ロジックを自由に組み込めます。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        Copyright 2026 Pure Green All Rights Reserved.
+    </div>
+</div>
+
+</body>
+</html>

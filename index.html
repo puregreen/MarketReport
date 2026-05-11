@@ -308,7 +308,8 @@
         transform: rotate(45deg);
         color: #e74c3c;
     }
-    .archive-accordion[open] .archive-list {
+    .archive-accordion[open] .archive-list,
+    .archive-accordion[open] .tool-grid {
         animation: fadeIn 0.4s ease-in-out;
         margin-top: 15px;
     }
@@ -410,6 +411,7 @@
         <p>日々の市場動向、大口注文情報、ファンダメンタルズ分析、テクニカル分析の記録</p>
     </div>
 
+    <!-- FX分析＆便利ツール アコーディオン -->
     <details class="archive-accordion">
         <summary style="border-left: 4px solid #2ecc71;">
             🛠 FX分析＆便利ツール <span class="toggle-icon">＋</span>
@@ -448,98 +450,106 @@
             <a href="ea_builder_pro.html" class="tool-card" style="border-color: #8e44ad; color: #8e44ad;">
               ⚙️ ノーコードEA作成ツール(Pro版)
             </a>
-
-            
         </div>
     </details>
 
-    <h3 class="section-title" style="border-left: 4px solid #e74c3c;">🔥 トレードの勝率を劇的に上げる</h3>
+    <!-- 🔥 トレードの勝率を劇的に上げる アコーディオン (デフォルト閉じ) -->
+    <details class="archive-accordion">
+        <summary style="border-left: 4px solid #e74c3c;">
+            🔥 トレードの勝率を上げる <span class="toggle-icon">＋</span>
+        </summary>
+        <div class="archive-list">
+            <a href="fx_firststep.html" class="report-card" style="border-left: 4px solid #2ecc71; margin-bottom: 0px;">
+                <div class="date-badge" style="background-color: #2ecc71;">基礎知識</div>
+                <div class="report-info">
+                    <div class="report-title">🔰 FX超入門 - はじめの一歩（PureFXサロン提供）</div>
+                    <p class="report-summary">FXをギャンブルにしないための「マインドセット」、チャートの読み方、そして生き残るための「25%ルール・シェルター口座」などの絶対的な資金管理術をまとめた必読マニュアルです。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
+            
+            <a href="tool_ikoku.html" class="lp-banner" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); border-left: 5px solid #f1c40f; margin-bottom: 0px;">
+                <h4 style="color: #fff;">【必読】相場の答えは「通貨強弱」にある</h4>
+                <p style="color: #fdfdfd;">最強通貨と最弱通貨を一瞬で見抜き、圧倒的なトレンドに乗る極意とシステムを紹介 ➔</p>
+            </a>
 
-    <a href="fx_firststep.html" class="report-card" style="border-left: 4px solid #2ecc71; margin-bottom: 15px;">
-        <div class="date-badge" style="background-color: #2ecc71;">基礎知識</div>
-        <div class="report-info">
-            <div class="report-title">🔰 FX超入門 - はじめの一歩（PureFXサロン提供）</div>
-            <p class="report-summary">FXをギャンブルにしないための「マインドセット」、チャートの読み方、そして生き残るための「25%ルール・シェルター口座」などの絶対的な資金管理術をまとめた必読マニュアルです。</p>
+            <a href="report_guide.html" class="report-card" style="border-left: 4px solid #9b59b6; margin-bottom: 0px;">
+                <div class="date-badge" style="background-color: #9b59b6;">必読ガイド</div>
+                <div class="report-info">
+                    <div class="report-title">📖 【初心者必見】マーケットレポートの「トリセツ」と活かし方</div>
+                    <p class="report-summary">レポートの各項目が「何を意味しているか」「今日のトレードにどう直結するのか」を分かりやすく解説。勝率を上げるためのカンニングペーパーとしてお使いください。</p>
+                </div>
+                <div class="arrow-icon" style="color: #9b59b6;">➔</div>
+            </a>
+
+            <a href="tools_manual.html" class="report-card" style="border-left: 4px solid #2ecc71; margin-bottom: 0px;">
+                <div class="date-badge" style="background-color: #2ecc71;">必読マニュアル</div>
+                <div class="report-info">
+                    <div class="report-title">🛠 【完全網羅】FX分析＆便利ツールの「トリセツ」と活かし方</div>
+                    <p class="report-summary">当サイトに設置されている12個の分析ツールの意味と、トレードの勝率を上げるための「Pure Green流の具体的な使い方・注意点」をすべてまとめました。ツールを使う前に必ずご一読ください。</p>
+                </div>
+                <div class="arrow-icon" style="color: #2ecc71;">➔</div>
+            </a>
+
+            <a href="ea_advantages.html" class="report-card" style="border-left: 4px solid #8e44ad; margin-bottom: 0px;">
+                <div class="date-badge" style="background-color: #8e44ad;">必読理論</div>
+                <div class="report-info">
+                    <div class="report-title">⚙️ 自作EAがトレード勝率を劇的に上げる理由〜ブラックボックスからの脱却〜</div>
+                    <p class="report-summary">なぜ市販のEAで資金を溶かすのか？「ロジックの透明性」「時間・ボラティリティ制限による防衛」など、ノーコードで自分専用のシステム（盾と矛）を持つことの絶大なメリットを徹底解説。</p>
+                </div>
+                <div class="arrow-icon" style="color: #8e44ad;">➔</div>
+            </a>
+
+            <a href="scam_warning.html" class="report-card" style="border-left: 4px solid #e74c3c; margin-bottom: 0px;">
+                <div class="date-badge" style="background-color: #e74c3c;">🚨 警告/防衛</div>
+                <div class="report-info">
+                    <div class="report-title">🚨 【警告】コピトレ・自動売買の罠。全財産を失う前の絶対防衛ルール</div>
+                    <p class="report-summary">「ほったらかしで月利〇％」の裏側と、悪質ブローカーの架空履歴の手口を暴露。大切なお金を守るための業者調査術と、どうしても運用する際のリスクヘッジの鉄則を解説します。</p>
+                </div>
+                <div class="arrow-icon" style="color: #e74c3c;">➔</div>
+            </a>
         </div>
-        <div class="arrow-icon">➔</div>
-    </a>
-    
-    <a href="tool_ikoku.html" class="lp-banner" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); border-left: 5px solid #f1c40f; margin-bottom: 15px;">
-        <h4 style="color: #fff;">【必読】相場の答えは「通貨強弱」にある</h4>
-        <p style="color: #fdfdfd;">最強通貨と最弱通貨を一瞬で見抜き、圧倒的なトレンドに乗る極意とシステムを紹介 ➔</p>
-    </a>
+    </details>
 
-    <a href="report_guide.html" class="report-card" style="border-left: 4px solid #9b59b6; margin-bottom: 15px;">
-        <div class="date-badge" style="background-color: #9b59b6;">必読ガイド</div>
-        <div class="report-info">
-            <div class="report-title">📖 【初心者必見】マーケットレポートの「トリセツ」と活かし方</div>
-            <p class="report-summary">レポートの各項目が「何を意味しているか」「今日のトレードにどう直結するのか」を分かりやすく解説。勝率を上げるためのカンニングペーパーとしてお使いください。</p>
-        </div>
-        <div class="arrow-icon" style="color: #9b59b6;">➔</div>
-    </a>
+    <!-- 🌟 おすすめの取引環境 アコーディオン -->
+    <details class="archive-accordion">
+        <summary style="border-left: 4px solid #f39c12;">
+            🌟 おすすめの取引環境 <span class="toggle-icon">＋</span>
+        </summary>
+        <div class="archive-list">
+            <a href="exness_intro.html" class="lp-banner" style="margin-bottom: 0px;">
+                <h4>プロトレーダーが行き着く究極の口座「Exness」</h4>
+                <p>無制限レバレッジ・極狭スプレッド・即時入出金の詳細を見る ➔</p>
+            </a>
+            
+            <a href="exness_register.html" class="report-card" style="border-left: 4px solid #f39c12; margin-bottom: 0px;">
+                <div class="date-badge" style="background-color: #f39c12;">マニュアル</div>
+                <div class="report-info">
+                    <div class="report-title">📱 Exness（エクスネス）口座開設ガイド</div>
+                    <p class="report-summary">スマホからの登録手順から、使いやすい日本語設定（ダッシュボードの日本語化）までの流れを画像付きで分かりやすく解説しています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>   
 
-    <a href="tools_manual.html" class="report-card" style="border-left: 4px solid #2ecc71; margin-bottom: 20px;">
-        <div class="date-badge" style="background-color: #2ecc71;">必読マニュアル</div>
-        <div class="report-info">
-            <div class="report-title">🛠 【完全網羅】FX分析＆便利ツールの「トリセツ」と活かし方</div>
-            <p class="report-summary">当サイトに設置されている12個の分析ツールの意味と、トレードの勝率を上げるための「Pure Green流の具体的な使い方・注意点」をすべてまとめました。ツールを使う前に必ずご一読ください。</p>
-        </div>
-        <div class="arrow-icon" style="color: #2ecc71;">➔</div>
-    </a>
+            <details class="show-more-accordion" style="margin-bottom: 0;">
+                <summary>その他のおすすめツールを見る <span class="toggle-icon">＋</span></summary>
+                <div class="show-more-content">
+                    <div class="ext-link-card" style="margin-bottom: 15px;">
+                        <a href="bitwallet_intro.html" class="ext-link-btn" style="background-color: #1976d2;">bitwallet</a>
+                        <div class="ext-link-desc">海外FXトレーダーの「必須インフラ」安全かつスムーズな資金管理を実現する必須ツール。</div>
+                    </div>
 
-    <a href="ea_advantages.html" class="report-card" style="border-left: 4px solid #8e44ad; margin-bottom: 15px;">
-        <div class="date-badge" style="background-color: #8e44ad;">必読理論</div>
-        <div class="report-info">
-            <div class="report-title">⚙️ 自作EAがトレード勝率を劇的に上げる理由〜ブラックボックスからの脱却〜</div>
-            <p class="report-summary">なぜ市販のEAで資金を溶かすのか？「ロジックの透明性」「時間・ボラティリティ制限による防衛」など、ノーコードで自分専用のシステム（盾と矛）を持つことの絶大なメリットを徹底解説。</p>
-        </div>
-        <div class="arrow-icon" style="color: #8e44ad;">➔</div>
-    </a>
+                    <div class="ext-link-card" style="margin-bottom: 15px;">
+                        <a href="wikifx_intro.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX</a>
+                        <div class="ext-link-desc">業者に入金する前に必ずチェック。世界最大のFX安全性評価ツール。</div>
+                    </div>
 
-    
-    <a href="scam_warning.html" class="report-card" style="border-left: 4px solid #e74c3c; margin-top: 15px; margin-bottom: 30px;">
-        <div class="date-badge" style="background-color: #e74c3c;">🚨 警告/防衛</div>
-        <div class="report-info">
-            <div class="report-title">🚨 【警告】コピトレ・自動売買の罠。全財産を失う前の絶対防衛ルール</div>
-            <p class="report-summary">「ほったらかしで月利〇％」の裏側と、悪質ブローカーの架空履歴の手口を暴露。大切なお金を守るための業者調査術と、どうしても運用する際のリスクヘッジの鉄則を解説します。</p>
-        </div>
-        <div class="arrow-icon" style="color: #e74c3c;">➔</div>
-    </a>
-
-    
-    
-    <h3 class="section-title" style="border-left: 4px solid #f39c12;">🌟 おすすめの取引環境</h3>
-    <a href="exness_intro.html" class="lp-banner" style="margin-bottom: 20px;">
-        <h4>プロトレーダーが行き着く究極の口座「Exness」</h4>
-        <p>無制限レバレッジ・極狭スプレッド・即時入出金の詳細を見る ➔</p>
-    </a>
-    
-    <a href="exness_register.html" class="report-card" style="border-left: 4px solid #f39c12; margin-bottom: 20px;">
-        <div class="date-badge" style="background-color: #f39c12;">マニュアル</div>
-        <div class="report-info">
-            <div class="report-title">📱 Exness（エクスネス）口座開設ガイド</div>
-            <p class="report-summary">スマホからの登録手順から、使いやすい日本語設定（ダッシュボードの日本語化）までの流れを画像付きで分かりやすく解説しています。</p>
-        </div>
-        <div class="arrow-icon">➔</div>
-    </a>   
-
-    <details class="show-more-accordion">
-        <summary>その他のおすすめツールを見る <span class="toggle-icon">＋</span></summary>
-        <div class="show-more-content">
-            <div class="ext-link-card">
-                <a href="bitwallet_intro.html" class="ext-link-btn" style="background-color: #1976d2;">bitwallet</a>
-                <div class="ext-link-desc">海外FXトレーダーの「必須インフラ」安全かつスムーズな資金管理を実現する必須ツール。</div>
-            </div>
-
-            <div class="ext-link-card">
-                <a href="wikifx_intro.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX</a>
-                <div class="ext-link-desc">業者に入金する前に必ずチェック。世界最大のFX安全性評価ツール。</div>
-            </div>
-
-            <div class="ext-link-card">
-                <a href="wikifx_vps.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX 無料VPS</a>
-                <div class="ext-link-desc">EA運用に必須のVPS（仮想サーバー）を完全無料で構築する裏ワザを解説。</div>
-            </div>
+                    <div class="ext-link-card">
+                        <a href="wikifx_vps.html" class="ext-link-btn" style="background-color: #1976d2;">WikiFX 無料VPS</a>
+                        <div class="ext-link-desc">EA運用に必須のVPS（仮想サーバー）を完全無料で構築する裏ワザを解説。</div>
+                    </div>
+                </div>
+            </details>
         </div>
     </details>
 
@@ -989,8 +999,8 @@
                 
             <a href="Report_0319.html" class="report-card">
                 <div class="date-badge">3月19日</div>
+                <div class="report-title">【スーパーサーズデー到来】米PPIショックで株安・ドル高急進。各国の政策金利発表に厳重警戒</div>
                 <div class="report-info">
-                    <div class="report-title">【スーパーサーズデー到来】米PPIショックで株安・ドル高急進。各国の政策金利発表に厳重警戒</div>
                     <p class="report-summary">米PPIの強烈な上振れでインフレ再燃懸念が高まり、米国株とゴールド、BTCが急落。本日は日銀・英中銀・ECBの発表が重なる極めてボラティリティの高い1日に。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
@@ -1104,7 +1114,7 @@
                 <div class="date-badge" style="background-color: #e74c3c;">🚨 警告/防衛</div>
                 <div class="report-info">
                     <div class="report-title">🚨 【警告】コピトレ・自動売買の罠。全財産を失う前の絶対防衛ルール</div>
-                    <p class="report-summary">「ほったらかしで月利〇％」の裏側と、悪質ブローカーの架空履歴の手口を暴露。投資詐欺から身を守るプロの調査手法を徹底解説しています。</p>
+                    <p class="report-summary">「ほったらかしで月利〇％」の裏側と悪質ブローカーの架空履歴の手口を暴露。投資詐欺から身を守るプロの調査手法を徹底解説しています。</p>
                 </div>
                 <div class="arrow-icon" style="color: #e74c3c;">➔</div>
             </a>

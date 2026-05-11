@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📅 完全日本語版・リアルタイム経済指標カレンダー - Pure Green</title>
+<style>
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .back-link {
+        font-size: 14px;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+    .back-link:hover { text-decoration: underline; }
+    
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        font-size: 24px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 15px;
+    }
+    p.desc {
+        text-align: center;
+        color: #7f8c8d;
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    /* 解説セクション */
+    .guide-box {
+        background-color: #ffffff;
+        border: 1px solid #ecf0f1;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .guide-box p {
+        font-size: 14.5px;
+        line-height: 1.6;
+        margin: 0 0 10px 0;
+    }
+    .guide-box ul {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14px;
+        color: #34495e;
+        line-height: 1.8;
+    }
+    .highlight-red { color: #e74c3c; font-weight: bold; }
+
+    /* ウィジェットコンテナ */
+    .widget-card {
+        background-color: #ffffff;
+        border: 1px solid #ecf0f1;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        overflow: hidden;
+    }
+
+    .footer-link { text-align: center; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    
+    <h1>📅 リアルタイム経済指標カレンダー</h1>
+    <p class="desc">世界中のプロが愛用するInvesting.comの完全日本語版データです。</p>
+
+    <div class="guide-box">
+        <p><strong>💡 Pure Green流・カレンダーの活用術（二段構えの一段目）</strong></p>
+        <ul>
+            <li>マーケットレポートにある<span class="highlight-red">★3つ以上の指標</span>は相場が急変（スプレッド異常拡大・乱高下）する危険地帯です。発表前後のEA稼働は必ず停止してください。</li>
+            <li>「予想」と「結果」の乖離（サプライズ）が大きいほど、相場は激しく一方向に動きます。</li>
+            <li>指標発表直後の数分間はHFT（超高速取引アルゴリズム）による「ダマシのヒゲ」が乱発するため、手を出さず15分足の確定を待つのがプロの鉄則です。</li>
+        </ul>
+    </div>
+
+    <div class="widget-card">
+        <iframe src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=5,35,72,4,43,12,6,37,26,11&calType=week&timeZone=18&lang=11" width="100%" height="750" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
+        
+        <div style="text-align: right; font-size: 11px; margin-top: 5px; color: #7f8c8d; padding-right: 10px;">
+            Powered by <a href="https://jp.investing.com/" rel="nofollow" target="_blank" style="color: #3498db; text-decoration: none;">Investing.com</a>
+        </div>
+    </div>
+
+    <div class="footer-link">
+        <a href="index.html" class="back-link">← 目次（インデックス）に戻る</a>
+    </div>
+</div>
+
+</body>
+</html>

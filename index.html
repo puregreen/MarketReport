@@ -42,7 +42,7 @@
         margin: 0;
     }
 
-    /* 🌟 セクション見出し共通 🌟 */
+    /* セクション見出し共通 */
     .section-title {
         font-size: 18px;
         color: #2c3e50;
@@ -272,7 +272,7 @@
         }
     }
 
-    /* 🌟 折りたたみ（アコーディオン）用の追加CSS 🌟 */
+    /* 折りたたみ（アコーディオン）用の追加CSS */
     .archive-accordion {
         margin: 30px 0 15px 0;
     }
@@ -298,7 +298,6 @@
     .archive-accordion > summary:hover {
         background-color: #f1f4f8;
     }
-    /* 修正ポイント: > を使って直下のsummary内のアイコンだけをターゲットにする */
     .archive-accordion > summary .toggle-icon {
         color: #3498db;
         font-size: 20px;
@@ -315,7 +314,7 @@
         margin-top: 15px;
     }
 
-    /* 🌟 新設：もっと見るボタン用のCSS 🌟 */
+    /* 新設：もっと見るボタン用のCSS */
     .show-more-accordion {
         margin: 10px 0 30px 0;
     }
@@ -346,7 +345,6 @@
         border-style: solid;
         color: #2c3e50;
     }
-    /* 修正ポイント: > を使って独立させる */
     .show-more-accordion > summary .toggle-icon {
         display: inline-block;
         transition: transform 0.3s ease;
@@ -366,7 +364,7 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 🌟 タブメニュー用のCSS 🌟 */
+    /* タブメニュー用のCSS */
     .tab-menu {
         display: flex;
         border-bottom: 2px solid #ecf0f1;
@@ -464,7 +462,7 @@
                 <div class="date-badge" style="background-color: #2ecc71;">基礎知識</div>
                 <div class="report-info">
                     <div class="report-title">🔰 FX超入門 - はじめの一歩（PureFXサロン提供）</div>
-                    <p class="report-summary">FXをギャンブルにしないための「マインドセット」、チャートの読み方、そして生き残るための「25%ルール・シェルター口座」などの絶対的な資金管理術をまとめた必読マニュアルです。</p>
+                    <p class="report-summary">FXをギャンブルにしないための「マインドセット」、チャートの読み方、精度高く生き残るための「25%ルール・シェルター口座」などの絶対的な資金管理術をまとめた必読マニュアルです。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
@@ -554,13 +552,22 @@
     </details>
 
     <div class="tab-menu">
-        <button class="tab-btn active" onclick="switchTab('tab-may')">2026年 5月</button>
+        <button class="tab-btn active" onclick="switchTab('tab-june')">2026年 6月</button>
+        <button class="tab-btn" onclick="switchTab('tab-may')">2026年 5月</button>
         <button class="tab-btn" onclick="switchTab('tab-apr')">2026年 4月</button>
         <button class="tab-btn" onclick="switchTab('tab-mar')">2026年 3月</button>
         <button class="tab-btn" onclick="switchTab('tab-history')">更新履歴・解説</button>
     </div>
+
+    <div id="tab-june" class="tab-content active">
+        <div class="archive-list">
+            <p style="text-align: center; color: #7f8c8d; padding: 20px; border: 1px dashed #bdc3c7; border-radius: 8px; background-color: #f9fbfd;">
+                🐌 6月のマーケットレポートです☔
+            </p>
+        </div>
+    </div>
     
-    <div id="tab-may" class="tab-content active">
+    <div id="tab-may" class="tab-content">
         <div class="archive-list">
             <p style="text-align: center; color: #7f8c8d; padding: 20px; border: 1px dashed #bdc3c7; border-radius: 8px; background-color: #f9fbfd;">
                 🌱 5月のマーケットレポートです🎏
@@ -584,17 +591,15 @@
     <div class="arrow-icon" style="color: #8e44ad;">➔</div>
 </a>
             
-            
 <a href="report_20260527.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
     <div class="date-badge" style="background-color: #c0392b;">5月27日 (159円突破・介入警戒MAX)</div>
     <div class="report-info">
         <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円159円の防衛線ついに決壊！実弾介入レッドゾーンへ突入</div>
-        <p class="report-summary">米消費者信頼感指数の好結果を受けたドル買いを背景に、ドル円を抑え込んでいた159.00円の特大オプションの壁が突破されました。現在159.29円まで急騰しており、財務省による実弾介入の極限警戒領域に入っています。一方、米ナスダックは3万ドルの大台を突破しています。</p>
+        <p class="report-summary">米消費者信頼感指数の好結果を受けたドル買いを背景に、ドル円を抑え込んでいた159.00円の特大オプションの壁が突破されました。現在 159.29円まで急騰しており、財務省による実弾介入の極限警戒領域に入っています。一方、米ナスダックは3万ドルの大台を突破しています。</p>
     </div>
     <div class="arrow-icon" style="color: #c0392b;">➔</div>
 </a>
 
-            
 <a href="report_20260526.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f0f8ff;">
     <div class="date-badge" style="background-color: #2980b9;">5月26日 (米英休場明け・終戦期待)</div>
     <div class="report-info">
@@ -622,7 +627,6 @@
     <div class="arrow-icon" style="color: #f39c12;">➔</div>
 </a>
             
-            
 <a href="report_20260521.html" class="report-card">
     <div class="date-badge" style="background-color: #27ae60;">5月21日 (リスクオン・日経大暴騰)</div>
     <div class="report-info">
@@ -632,7 +636,6 @@
     <div class="arrow-icon">➔</div>
 </a>
             
-
 <a href="special_fomc_20260520.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
     <div class="date-badge" style="background-color: #e74c3c;">🚨 緊急特設ページ (5月20日)</div>
     <div class="report-info">
@@ -642,7 +645,6 @@
     <div class="arrow-icon" style="color: #e74c3c;">➔</div>
 </a>
 
-            
 <a href="report_20260520.html" class="report-card">
     <div class="date-badge" style="background-color: #2980b9;">5月20日 (159円突破・介入警戒MAX)</div>
     <div class="report-info">
@@ -670,7 +672,6 @@
     <div class="arrow-icon">➔</div>
 </a>
            
-
 <a href="report_20260515.html" class="report-card">
     <div class="date-badge" style="background-color: #2980b9;">5月15日 (月曜朝の窓開けリスク)</div>
     <div class="report-info">
@@ -680,25 +681,22 @@
     <div class="arrow-icon">➔</div>
 </a>
 
-            
 <a href="report_20260514.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9; margin-bottom: 20px; display: block; text-decoration: none; padding: 15px; border-radius: 8px;">
     <div class="date-badge" style="background-color: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">5月14日 (米中首脳会談・今夜小売売上高)</div>
     <div class="report-info">
         <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨 【特報】米中首脳会談と今夜の小売売上高！為替介入警戒の中、158円防衛線を睨む攻防</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">本日の焦点は『日本による為替介入への思惑』と『米中首脳会談』、そして今夜21:30発表の『米小売売上高』です。ドル円は157.5円付近まで上昇後、158円の厚い売りオーダーとオプションを前に底堅く推移しています。</p>
+        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">本日の焦点は『日本による為替介入への思惑』と『米中首脳会談』、精度高く今夜21:30発表の『米小売売上高』です。ドル円は157.5円付近まで上昇後、158円の厚い売りオーダーとオプションを前に底堅く推移しています。</p>
     </div>
 </a>
          
-
 <a href="report_20260513.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9; margin-bottom: 20px; display: block; text-decoration: none; padding: 15px; border-radius: 8px;">
     <div class="date-badge" style="background-color: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">5月13日（米CPI上振れ・今夜PPI警戒）</div>
     <div class="report-info">
         <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨 【特報】米CPI上振れでドル買い加速。今夜PPIで158円突破と実弾介入への最終局面</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">昨晩の米CPI上振れを受け、米長期金利が上昇。ドル円は157.60円台のレッドゾーンで高止まりしています。今夜の米PPIが158.00円の巨大な壁を突破する引き金となるか、市場の緊張は最高潮に達しています。</p>
+        <p class="report-summary">昨晩の米CPI上振れを受け、米長期金利が上昇。ドル円は157.60円台のレッドゾーンで高止まりしています。今夜の米PPIが158.00円の巨大な壁を突破する引き金となるか、市場の緊張は最高潮に達しています。</p>
     </div>
 </a>
 
-            
 <a href="ppi_strategy_20260512.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
     <div class="date-badge" style="background-color: #c0392b;">緊急特設</div>
     <div class="report-info">
@@ -708,7 +706,6 @@
     <div class="arrow-icon" style="color: #e74c3c;">➔</div>
 </a>
           
-
 <a href="report_20260512.html" class="report-card">
     <div class="date-badge" style="background-color: #e74c3c;">5月12日 (米PPI・要人発言)</div>
     <div class="report-info">
@@ -718,7 +715,6 @@
     <div class="arrow-icon">➔</div>
 </a>
 
-            
 <a href="report_20260511.html" class="report-card">
     <div class="date-badge" style="background-color: #2980b9;">5月11日 (原油高騰・財務長官訪日)</div>
     <div class="report-info">
@@ -728,18 +724,15 @@
     <div class="arrow-icon">➔</div>
 </a>
 
-            
 <a href="employment_strategy_20260508.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
     <div class="date-badge" style="background-color: #e74c3c;">緊急特設ページ（5月8日）</div>
     <div class="report-info">
         <div class="report-title" style="color: #c0392b;">🚨 今夜21:30 運命の米雇用統計！介入警戒×中東リスクの特異点と防衛戦略</div>
-        <p class="report-summary">米景気の特大イベント。158円の防衛線と155円の真空地帯における、プロの「絶対静観」と「下値での極小ロット打診（下ヒゲ確認）」戦略を徹底解説しています。</p>
+        <p class="report-summary">米景気の特大イベント。158円の防衛線と155円の真空地帯における、プロの「absolute静観」と「下値での極小ロット打診（下ヒゲ確認）」戦略を徹底解説しています。</p>
     </div>
     <div class="arrow-icon" style="color: #e74c3c;">➔</div>
 </a>            
 
-            
-            
 <a href="report_20260508.html" class="report-card">
     <div class="date-badge" style="background-color: #d35400;">5月8日 (運命の金曜日・雇用統計本番)</div>
     <div class="report-info">
@@ -758,7 +751,6 @@
     <div class="arrow-icon">➔</div>
 </a>
 
-            
 <a href="report_20260506.html" class="report-card">
     <div class="date-badge" style="background-color: #c0392b;">5月6日 (休場・指標・有事警戒)</div>
     <div class="report-info">
@@ -768,7 +760,6 @@
     <div class="arrow-icon">➔</div>
 </a>
 
-            
 <a href="report_20260505.html" class="report-card">
     <div class="date-badge" style="background-color: #c0392b;">5月5日 (介入・指標警戒)</div>
     <div class="report-info">
@@ -787,7 +778,6 @@
     <div class="arrow-icon">➔</div>
 </a>
 
-
 <a href="report_20260501.html" class="report-card">
     <div class="date-badge" style="background-color: #e74c3c;">5月1日 (実弾介入)</div>
     <div class="report-info">
@@ -797,7 +787,6 @@
     <div class="arrow-icon">➔</div>
 </a>
 
-            
         </div>
     </div>
 
@@ -812,12 +801,11 @@
                 <div class="date-badge" style="background-color: #c0392b;">4月30日 (緊急特設)</div>
                 <div class="report-info">
                     <div class="report-title">【緊急特設】🚨今夜の3大爆弾「BOE・ECB・米PCE」完全防衛マニュアル</div>
-                    <p class="report-summary">18時の欧州指標を起点に始まる歴史的な地雷原。161円への介入アタックを見据えた極小ショート戦略と、クロス円取引禁止の絶対ルールを解説。</p>
+                    <p class="report-summary">18時の欧州指標を起点に始まる歴史的な地雷原。161円への介入アタックを見据えた極小ショート戦略と、クロス円取引禁止のabsoluteルールを解説。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
 
-            
             <a href="report_20260430_0730.html" class="report-card">
                 <div class="date-badge" style="background-color: #e74c3c;">4月30日 (介入警戒)</div>
                 <div class="report-info">
@@ -836,7 +824,6 @@
                 <div class="arrow-icon" style="color: #e74c3c;">➔</div>
             </a>
 
-            
             <a href="strategy_fomc_20260429.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
                 <div class="date-badge" style="background-color: #c0392b;">緊急特設</div>
                 <div class="report-info">
@@ -855,7 +842,6 @@
                 <div class="arrow-icon">➔</div>
             </a>
 
-            
             <a href="strategy_0428.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
                 <div class="date-badge" style="background-color: #c0392b;">緊急特設</div>
                 <div class="report-info">
@@ -883,7 +869,6 @@
                 <div class="arrow-icon">➔</div>
             </a>
 
-            
             <a href="Report_0424.html" class="report-card">
                 <div class="date-badge" style="background-color: #e74c3c;">4月24日 (週末警戒)</div>
                 <div class="report-info">
@@ -893,8 +878,6 @@
                 <div class="arrow-icon">➔</div>
             </a>
 
-
-            
             <a href="PMI_strategy_0423.html" class="report-card">
                 <div class="date-badge" style="background-color: #e67e22;">特設解説</div>
                 <div class="report-info">
@@ -903,7 +886,6 @@
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
-
 
              <a href="Report_0423.html" class="report-card">
                 <div class="date-badge" style="background-color: #e74c3c;">4月23日 (特報)</div>
@@ -932,7 +914,6 @@
                 <div class="arrow-icon">➔</div>
             </a>
             
-
             <a href="Report_0420.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
                 <div class="date-badge">4月20日</div>
                 <div class="date-badge" style="background-color: #c0392b;">緊急特報</div>
@@ -1152,8 +1133,8 @@
                 
             <a href="Report_0319.html" class="report-card">
                 <div class="date-badge">3月19日</div>
-                <div class="report-title">【スーパーサーズデー到来】米PPIショックで株安・ドル高急進。各国の政策金利発表に厳重警戒</div>
                 <div class="report-info">
+                    <div class="report-title">【スーパーサーズデー到来】米PPIショックで株安・ドル高急進。各国の政策金利発表に厳重警戒</div>
                     <p class="report-summary">米PPIの強烈な上振れでインフレ再燃懸念が高まり、米国株とゴールド、BTCが急落。本日は日銀・英中銀・ECBの発表が重なる極めてボラティリティの高い1日に。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
@@ -1172,7 +1153,7 @@
                 <div class="date-badge">3月17日</div>
                 <div class="report-info">
                     <div class="report-title">原油急落でリスクオン鮮明、ドル円は159円台のオプション密集地帯で膠着</div>
-                    <p class="report-summary">USOILが-3.48%と急落し株価は全面高。ドル円は上値に大量の売りとNYカットが控え、レンジ相場の様相を強める。</p>
+                    <p class="report-summary">USOILが-3.48%と急落し株価は全面高。ドル円は上値に大量の売りとNYカットが控え、レンジ相場の様模様を強める。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
@@ -1272,7 +1253,6 @@
                 <div class="arrow-icon" style="color: #e74c3c;">➔</div>
             </a>
 
-            
             <a href="report_guide.html" class="report-card" style="border-left: 4px solid #9b59b6;">
                 <div class="date-badge" style="background-color: #9b59b6;">必読ガイド</div>
                 <div class="report-info">
@@ -1291,7 +1271,6 @@
                 <div class="arrow-icon" style="color: #3498db;">➔</div>
             </a>
 
-            
             <a href="cnh_krw_benefits.html" class="report-card" style="border-left: 4px solid #9b59b6;">
                 <div class="date-badge" style="background-color: #9b59b6;">追加解説</div>
                 <div class="report-info">
@@ -1337,3 +1316,4 @@
 
 </body>
 </html>
+""")}

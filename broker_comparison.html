@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 海外ブローカー徹底比較（Exness / Axi / XM / XS） - Pure Green</title>
+<style>
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+
+    /* ヘッダー部分 */
+    .header {
+        text-align: center;
+        margin-bottom: 40px;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 20px;
+    }
+    .header h1 {
+        color: #2c3e50;
+        margin: 0 0 10px 0;
+        font-size: 28px;
+        letter-spacing: 1px;
+    }
+    .header p {
+        color: #7f8c8d;
+        font-size: 14px;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* セクション共通見出し */
+    .section-title {
+        font-size: 20px;
+        color: #2c3e50;
+        margin: 40px 0 20px 0;
+        padding-left: 12px;
+        border-left: 5px solid #3498db;
+        font-weight: bold;
+    }
+
+    /* 比較テーブルのスタイル */
+    .comparison-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        border-radius: 8px;
+    }
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 14px;
+        background-color: #fff;
+        min-width: 700px;
+    }
+    .comparison-table th {
+        background-color: #2c3e50;
+        color: #ffffff;
+        padding: 15px;
+        font-weight: bold;
+        border: 1px solid #34495e;
+    }
+    .comparison-table td {
+        padding: 15px;
+        border: 1px solid #e1e8ed;
+        line-height: 1.5;
+        vertical-align: top;
+    }
+    .comparison-table tr:nth-child(even) {
+        background-color: #f9fbfd;
+    }
+
+    /* ブローカー別特徴カード */
+    .broker-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+    .broker-card {
+        background-color: #fcfcfc;
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+    .broker-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 5px;
+    }
+    .broker-card.exness::before { background-color: #f39c12; }
+    .broker-card.axi::before { background-color: #f1c40f; }
+    .broker-card.xm::before { background-color: #34495e; }
+    .broker-card.xs::before { background-color: #2ecc71; }
+
+    .broker-name {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .broker-card.exness .broker-name { color: #e67e22; }
+    .broker-card.axi .broker-name { color: #d35400; }
+    .broker-card.xm .broker-name { color: #2c3e50; }
+    .broker-card.xs .broker-name { color: #27ae60; }
+
+    .role-badge {
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        color: #fff;
+        font-weight: bold;
+    }
+    .role-badge.spear { background-color: #e74c3c; } /* 矛 */
+    .role-badge.shield { background-color: #2980b9; } /* 盾 */
+    .role-badge.hybrid { background-color: #9b59b6; } /* 万能・育成 */
+
+    .broker-desc {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: #555;
+        margin: 0 0 15px 0;
+    }
+
+    .point-list {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: #444;
+    }
+    .point-list li {
+        margin-bottom: 5px;
+    }
+
+    /* 立ち回り・資金管理の鉄則 */
+    .strategy-box {
+        background-color: #fffaf0;
+        border: 1px solid #f39c12;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 40px;
+    }
+    .strategy-box h3 {
+        margin: 0 0 12px 0;
+        color: #d35400;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .strategy-box p {
+        margin: 0 0 10px 0;
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: #444;
+    }
+    .strategy-box p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* 各種リンクボタン */
+    .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .link-btn {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-size: 13px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+    .link-btn.detail { background-color: #34495e; color: #fff; }
+    .link-btn.detail:hover { background-color: #2c3e50; }
+    .link-btn.register { background-color: #2ecc71; color: #fff; }
+    .link-btn.register:hover { background-color: #27ae60; }
+
+    /* フッター */
+    .footer {
+        margin-top: 5px;
+        border-top: 1px solid #bdc3c7;
+        padding-top: 20px;
+        text-align: center;
+    }
+    .copyright {
+        color: #7f8c8d;
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* スマホ調整 */
+    @media (max-width: 650px) {
+        .broker-name {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        .btn-group {
+            flex-direction: column;
+        }
+        .link-btn {
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📊 主要海外ブローカー 4社徹底比較</h1>
+        <p>トレードスタイルや資金量に応じて環境を使い分けるのが「生き残るプロ」の鉄則。<br>各ブローカーの特性を理解し、あなたにとって最適な「矛」と「盾」を選び抜いてください。</p>
+    </div>
+
+    <h2 class="section-title">スペック一括比較一覧</h2>
+    <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>ブローカー</th>
+                    <th>最大レバレッジ</th>
+                    <th>スプレッド水準</th>
+                    <th>独自の特徴・強み</th>
+                    <th>Pure Green流の役割</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold; color: #e67e22;">Exness<br>(エクスネス)</td>
+                    <td>無制限<br>(条件あり / 通常2,000倍)</td>
+                    <td>極狭<br>(ロースプレッド・ゼロ口座あり)</td>
+                    <td>圧倒的な資金効率<br>ロスカット水準0%<br>即時入出金インフラ</td>
+                    <td><span class="role-badge spear">最強の「矛」</span><br>小資金をボラティリティを活かして一気に増やす場所。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #d35400;">Axi<br>(アクシ)</td>
+                    <td>1,000倍</td>
+                    <td>優秀<br>(プレミアム・プロ口座あり)</td>
+                    <td>プロッププログラム(Axi Select)<br>機関投資家レベルの約定力<br>制限なしのEA環境</td>
+                    <td><span class="role-badge hybrid">育成・ステップアップ</span><br>実力を磨き、最大100万ドルの運用資金提供を狙う場所。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #2c3e50;">XM Trading<br>(エックスエム)</td>
+                    <td>1,000倍</td>
+                    <td>普通 〜 狭い<br>(KIWAMI極口座は優秀)</td>
+                    <td>圧倒的な知名度と日本語サポート<br>豊富な入金・取引ボーナス<br>確実な出金実績</td>
+                    <td><span class="role-badge hybrid">王道・初心者安心</span><br>各種ボーナスをクッションにして、安全に相場感を養う場所。</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #27ae60;">XS<br>(エックスエス)</td>
+                    <td>2,000倍</td>
+                    <td>極狭<br>(機関投資家向け環境)</td>
+                    <td>業界最高峰の強固なライセンス<br>分別管理・信託保全の安心感<br>多種多様なCFD銘柄</td>
+                    <td><span class="role-badge shield">最強の「盾」</span><br>海外口座の資金効率を保ちつつ、大口資金を安全に回す場所。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-title">各ブローカーの詳細と立ち回り方</h2>
+    <div class="broker-grid">
+        
+        <div class="broker-card exness">
+            <div class="broker-name">
+                Exness（エクスネス）
+                <span class="role-badge spear">役割：矛</span>
+            </div>
+            <p class="broker-desc">
+                圧倒的なハイレバレッジと狭いスプレッドを誇り、小資金から爆発的な利益を狙うための環境が完璧に整っています。ロスカット水準0%のため、証拠金を限界まで使い切るトレードが可能です。
+            </p>
+            <ul class="point-list">
+                <li><strong>強み：</strong> 無制限レバレッジによる圧倒的なポジション保有能力、主要通貨ペアの極狭スプレッド。</li>
+                <li><strong>注意点：</strong> 経済指標発表の前後など、ボラティリティ急増時にレバレッジ規制が入る時間帯があります。</li>
+                <li><strong>最適なスタイル：</strong> 独自のATRフィルターを用いた時間帯制限EAの運用、デイトレ〜スキャル。</li>
+            </ul>
+            <div class="btn-group">
+                <a href="exness_intro.html" class="link-btn detail">📱 解説ページを見る</a>
+                <a href="exness_register.html" class="link-btn register">🚀 口座開設マニュアル</a>
+            </div>
+        </div>
+
+        <div class="broker-card axi">
+            <div class="broker-name">
+                Axi（アクシ）
+                <span class="role-badge hybrid">役割：育成</span>
+            </div>
+            <p class="broker-desc">
+                2007年設立の老舗であり、世界中のプロから「約定の硬さ」で絶大な信頼を得ています。最大の特徴は、クリアすることで最大100万ドルの運用資金をブローカー側から提供してもらえる「Axi Select」プログラムです。
+            </p>
+            <ul class="point-list">
+                <li><strong>強み：</strong> 機間投資家レベルの流動性（滑らない約定）、自由度の高いノーコードEA運用環境、プロップファームへの登竜門。</li>
+                <li><strong>注意点：</strong> プラットフォームがMT4メインであるため、MT5環境での開発には事前の確認が必要です。</li>
+                <li><strong>最適なスタイル：</strong> 自作EAの長期フォワードテスト、自身の腕を磨いてプロ運用者を目指すステップアップ。</li>
+            </ul>
+            <div class="btn-group">
+                <a href="axi_intro.html" class="link-btn detail">📱 解説ページを見る</a>
+                <a href="Https://www.axi.com/int/live-account?promocode=4743839" target="_blank" class="link-btn register">🌐 Axi 公式サイトへ</a>
+            </div>
+        </div>
+
+        <div class="broker-card xm">
+            <div class="broker-name">
+                XM Trading（エックスエム）
+                <span class="role-badge hybrid">役割：王道</span>
+            </div>
+            <p class="broker-desc">
+                日本の海外FXトレーダーのパイオニアであり、圧倒的なシェアを誇ります。口座開設ボーナスや入金ボーナスが非常に充実しており、自己資金以上の証拠金（クッション効果）を持って安全にスタートできます。
+            </p>
+            <ul class="point-list">
+                <li><strong>強み：</strong> 10年以上の盤石な出金実績、手厚い完全日本語サポート、1万円〜数万円規模のボーナス。</li>
+                <li><strong>注意点：</strong> スタンダード口座はスプレッドがやや広め。コストを抑えたい場合は「KIWAMI極口座」の一択になります。</li>
+                <li><strong>最適なスタイル：</strong> 裁量トレードの練習、ボーナスを活用した低リスクな相場分析・検証。</li>
+            </ul>
+        </div>
+
+        <div class="broker-card xs">
+            <div class="broker-name">
+                XS（エックスエス）
+                <span class="role-badge shield">役割：盾</span>
+            </div>
+            <p class="broker-desc">
+                世界最高峰の金融ライセンス（ASIC、FCA等）を複数保有し、海外ブローカー随一の安全性・信頼性を誇る次世代の巨大ブローカー。大口の資金を安全に預けながら、プロフェッショナルな環境で取引できます。
+            </p>
+            <ul class="point-list">
+                <li><strong>強み：</strong> 徹底された分別管理と信託保全、最大2,000倍のハイレバを維持したまま、大口のロット注文が一切滑らずに通る約定力。</li>
+                <li><strong>注意点：</strong> 原則としてボーナスキャンペーンなどは行わないため、完全な実力主義・取引環境重視の設計です。</li>
+                <li><strong>最適なスタイル：</strong> コミュニティで増えた利益を保管・運用するシェルター口座、ゴールド（XAUUSD）や原油などの大口CFD取引。</li>
+            </ul>
+            <div class="btn-group">
+                <a href="xs_intro.html" target="_blank" class="link-btn detail">📱 解説ページを見る</a>
+            </div>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">🛡️ Pure Green流・資金防衛と使い分けの鉄則</h2>
+    <div class="strategy-box">
+        <h3>1. 役割の「多層防御」を構築せよ</h3>
+        <p>一つのブローカーに全ての資金を集中させるのは、リスク管理の観点から推奨しません。小資金で攻める「Exness」、技術を磨き運用額を大きく狙う「Axi」、増えた利益を安全に守りながら回す「XS（または国内シェルター口座）」というように、明確に分けることが最大の防御です。</p>
+        
+        <h3>2. ファンダメンタルズ（嵐）の日はインフラを守る</h3>
+        <p>各中銀の政策金利発表、米雇用統計、CPI発表など、相場に巨大な突発的リスク（ボラティリティ）が想定される場合は、どのブローカーであってもEAの完全停止やポジションのスクエア化（中立）を徹底してください。環境を選ぶ前に、まず自らの手で負けをコントロールすることが勝ち筋に直結します。</p>
+        
+        <h3>3. 出金経路の複数化</h3>
+        <p>銀行送金だけに依存せず、bitwalletやメタマスク（自己管理型ウォレット）などの決済インフラをいつでも動かせるように多層化しておくことが、今後の送金規制時代を生き抜くトレーダーの必須スキルとなります。</p>
+    </div>
+
+    <div class="footer">
+        <div class="copyright">Copyright 2026 Pure Green All Rights Reserved.</div>
+    </div>
+    
+    <a href="index.html" class="back-link">🔙 アーカイブ トップに戻る</a>
+</div>
+
+</body>
+</html>

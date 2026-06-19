@@ -45,8 +45,10 @@ body {
 .link-btn.bitwallet:hover { background-color: #2c3e50; }
 .link-desc { font-size: 11px; color: #7f8c8d; line-height: 1.4; text-align: left; flex-grow: 1; }
 
-.ext-link-btn.axi { background-color: #f1c40f; color: #2c3e50; }
-.ext-link-btn.axi:hover { background-color: #f39c12; color: #ffffff; }
+    /* Axiボタンの視認性改善（文字色を白にし、背景を少し濃く） */
+    .ext-link-btn.axi { background-color: #e67e22; color: #ffffff; }
+    .ext-link-btn.axi:hover { background-color: #d35400; color: #ffffff; }
+
 
 
 /* レポート本体 */

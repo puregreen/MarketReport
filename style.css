@@ -46,8 +46,8 @@ body {
 .link-desc { font-size: 11px; color: #7f8c8d; line-height: 1.4; text-align: left; flex-grow: 1; }
 
     /* Axiボタンの視認性改善（文字色を白にし、背景を少し濃く） */
-    .ext-link-btn.axi { background-color: #e67e22; color: #ffffff; }
-    .ext-link-btn.axi:hover { background-color: #d35400; color: #ffffff; }
+    .link-btn.axi { background-color: #e67e22; color: #ffffff; }
+    .link-btn.axi:hover { background-color: #d35400; color: #ffffff; }
 
 
 

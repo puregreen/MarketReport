@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外FXの新たな必須インフラ - Peska（ペスカ）紹介＆キャンペーン</title>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* 🌟 ヒーローセクション（ファーストビュー） 🌟 */
+    .hero {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: #ffffff;
+        padding: 60px 30px;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 32px;
+        margin: 0 0 15px 0;
+        letter-spacing: 1px;
+        color: #48c6ef;
+    }
+    .hero p {
+        font-size: 16px;
+        margin: 0 0 30px 0;
+        color: #ecf0f1;
+        font-weight: 300;
+    }
+    
+    /* CTAボタン（リンクボタン） */
+    .cta-btn {
+        display: inline-block;
+        background-color: #ff416c; 
+        color: #ffffff;
+        text-decoration: none;
+        padding: 16px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        box-shadow: 0 6px 15px rgba(255, 65, 108, 0.4);
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
+    }
+    .cta-btn:hover {
+        background-color: #ff4b2b;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 65, 108, 0.6);
+    }
+
+    /* コンテンツエリア */
+    .content-area {
+        padding: 40px 30px;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 24px;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #48c6ef;
+        margin: 15px auto 0;
+    }
+
+    /* 🌟 特徴グリッド 🌟 */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+    .feature-card {
+        background-color: #f9fbfd;
+        border: 1px solid #e1e8ed;
+        border-radius: 10px;
+        padding: 25px 20px;
+        text-align: left;
+        transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #bdc3c7;
+    }
+    .feature-icon {
+        font-size: 30px;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+    .feature-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2a5298;
+        margin-bottom: 10px;
+    }
+    .feature-desc {
+        font-size: 14.5px;
+        color: #555;
+        margin: 0;
+    }
+
+    /* 🌟 訴求ボックス 🌟 */
+    .highlight-box {
+        background-color: #f4f9ff;
+        border-left: 5px solid #3498db;
+        padding: 25px;
+        border-radius: 4px;
+        margin-bottom: 30px;
+    }
+    .highlight-box.warning {
+        background-color: #fff9f9;
+        border-left: 5px solid #e74c3c;
+    }
+    .highlight-box.campaign {
+        background-color: #fffbf0;
+        border-left: 5px solid #f39c12;
+        border-radius: 8px;
+        border-top: 1px solid #f39c12;
+        border-right: 1px solid #f39c12;
+        border-bottom: 1px solid #f39c12;
+    }
+    .highlight-box h3 {
+        margin: 0 0 15px 0;
+        font-size: 19px;
+    }
+    .highlight-box p {
+        font-size: 15px;
+        color: #444;
+        margin-bottom: 10px;
+    }
+    .highlight-box ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #444;
+        font-size: 14.5px;
+    }
+    .highlight-box li {
+        margin-bottom: 8px;
+    }
+
+    .campaign-title {
+        font-size: 22px;
+        color: #d35400;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* 🌟 フッターCTA 🌟 */
+    .bottom-cta {
+        text-align: center;
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        border-top: 1px solid #ecf0f1;
+    }
+    .bottom-cta p {
+        font-size: 15px;
+        margin-bottom: 25px;
+        color: #7f8c8d;
+    }
+
+    .footer-copy {
+        text-align: center;
+        font-size: 12px;
+        color: #95a5a6;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 600px) {
+        .hero h1 { font-size: 24px; }
+        .hero p { font-size: 14px; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .content-area { padding: 30px 20px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="hero">
+        <h1>bitwalletに代わる、海外FXの「新・決済インフラ」</h1>
+        <p>長期メンテナンスのストレスから、今すぐ解放されましょう。<br>Exnessへのシームレスな入出金ハブとして機能する次世代オンラインウォレット。</p>
+        <a href="https://peska.co/ja/top-ja/" target="_blank" class="cta-btn">Peska口座を無料で開設する</a>
+    </div>
+
+    <div class="content-area">
+        
+        <div class="highlight-box warning">
+            <h3 style="color: #c0392b; font-weight: bold;">🚨 bitwalletとExness間の長期メンテナンスでお悩みの方へ</h3>
+            <p>現在、一部のユーザーにおいて<strong>bitwalletとExness間の長期メンテナンス</strong>が続いており、従来の入出金ルートが利用しづらい状況が発生しています。</p>
+            <p><strong>「Peska（ペスカ）」</strong>は、bitwalletと極めて近い使い勝手と操作性を備えた、まさに今もっとも確実な代替決済手段です。Exnessとの高い親和性を誇り、資金移動のハブとしてトレーダーのインフラを強力に支えます。</p>
+        </div>
+
+        <h2 class="section-title">Peskaが選ばれる4つの強み</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Exnessへの即時反映・ハブ機能</div>
+                <p class="feature-desc">bitwalletと同様に、PeskaとExness口座間の資金移動はスピーディーに完結。トレードチャンスを逃さず、瞬時に資金を移動・隔離させることが可能です。</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <div class="feature-title">bitwalletに極めて近い操作性</div>
+                <p class="feature-desc">直感的で分かりやすい管理画面を採用しているため、これまでbitwalletを利用していたトレーダーなら、違和感なくすぐに使いこなすことができます。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">安心の日本語環境とサポート</div>
+                <p class="feature-desc">各種手続きやサポート体制も日本語に対応しているため、海外サービス特有のトラブルや入出金遅延の不安がなく、初心者でも安心して導入できます。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">当サイト専用の安心連携</div>
+                <p class="feature-desc">当サイト（Pure Green）の専用リンクを経由して登録することで、ブローカーとのスムーズな紐付けと、限定キャンペーンの適用を確実に受けることができます。</p>
+            </div>
+        </div>
+
+        <!-- 🌟 キャッシュバックキャンペーン訴求セクション 🌟 -->
+        <div class="highlight-box campaign">
+            <div class="campaign-title">🎁 【期間限定】最大1万円キャッシュバックキャンペーン</div>
+            <p style="text-align: center; font-size: 14px; color: #7f8c8d; margin-top: -10px; margin-bottom: 20px;">当サイトからExness＆Peskaを開設・利用した方が対象となります！</p>
+            
+            <h4 style="color: #e67e22; margin: 15px 0 5px 0; font-size: 16px;">【開催期間】</h4>
+            <p style="font-weight: bold; color: #2c3e50; margin: 0 0 15px 0;">2026年7月1日 〜 2026年8月31日</p>
+            
+            <h4 style="color: #e67e22; margin: 15px 0 5px 0; font-size: 16px;">【対象となる方】</h4>
+            <ul style="margin-bottom: 15px;">
+                <li>期間中にPeska口座を<strong>新規開設</strong>した方</li>
+                <li>すでに口座があり、<strong>Exnessへの入金のみ</strong>に利用している方</li>
+            </ul>
+            
+            <h4 style="color: #e67e22; margin: 15px 0 5px 0; font-size: 16px;">【条件と特典内容】</h4>
+            <ul style="margin-bottom: 20px;">
+                <li>PeskaからExnessへ<strong>5万円〜10万円</strong>を入金し、1LOT取引：<span style="color: #e74c3c; font-weight: bold;">5,000円</span>のキャッシュバック</li>
+                <li>PeskaからExnessへ<strong>10万円〜</strong>を入金し、2LOT取引：<span style="color: #e74c3c; font-weight: bold;">10,000円</span>のキャッシュバック</li>
+            </ul>
+
+            <h4 style="color: #c0392b; margin: 15px 0 5px 0; font-size: 15px;">⚠️ キャンペーンに関する注意点</h4>
+            <ul style="font-size: 13.5px; color: #555;">
+                <li>条件達成後、<strong>10営業日以内</strong>にPeska口座へキャッシュバックが付与されます。</li>
+                <li>本キャンペーンの適用は<strong>お一人様1回限り</strong>とさせていただきます。</li>
+                <li>PeskaとExnessに登録するメールアドレスは、必ず<strong>同一</strong>にしていただくようお願いいたします。</li>
+                <li><strong>銀行振込時の名義：</strong>銀行からPeskaへ振込む際は、振込名義を必ず<span style="color: #c0392b; font-weight: bold;">「お名前＋Peska口座番号」</span>にしてください。記載が漏れると口座への反映が大幅に遅れる原因となります。</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; background-color: #fdfefe; border: 1px dashed #bdc3c7; padding: 25px; border-radius: 8px;">
+            <p style="margin-top: 0; font-weight: bold; color: #2c3e50;">Exnessの口座環境・開設手順はこちら</p>
+            <a href="https://puregreen.github.io/MarketReport/exness_intro.html" target="_blank" style="margin-right: 15px; color: #3498db; font-weight: bold; text-decoration: none;">▶ Exnessの魅力・特徴解説</a>
+            <a href="https://puregreen.github.io/MarketReport/exness_register.html" target="_blank" style="color: #3498db; font-weight: bold; text-decoration: none;">▶ Exness 安心口座開設ガイド</a>
+        </div>
+
+    </div>
+
+    <div class="bottom-cta">
+        <p>bitwalletのメンテナンスで足止めされている時間は機会損失です。<br>当サイトからPeskaへ移行し、最大1万円のボーナスと共に快適な取引を再開しましょう！</p>
+        <a href="https://peska.co/ja/top-ja/" target="_blank" class="cta-btn">Peskaで口座開設してキャンペーンに参加</a>
+    </div>
+
+    <div class="footer-copy">
+        Copyright 2026 Pure Green All Rights Reserved.
+    </div>
+
+</div>
+
+</body>
+</html>

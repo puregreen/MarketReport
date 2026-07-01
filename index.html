@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>📊 マーケットレポート アーカイブ - Pure Green</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <style>
     body {
         font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
@@ -235,13 +237,12 @@
     .ext-link-btn.bitwallet { background-color: #34495e; }
     .ext-link-btn.bitwallet:hover { background-color: #2c3e50; }
 
-    /* Axiボタンの視認性改善（文字色を白にし、背景を少し濃く） */
     .ext-link-btn.axi { background-color: #e67e22; color: #ffffff; }
     .ext-link-btn.axi:hover { background-color: #d35400; color: #ffffff; }
 
-    .ext-link-btn.peska { background-color: #34495e; }
-    .ext-link-btn.peska:hover { background-color: #2c3e50; }
-
+    /* Peskaボタンの背景色を桃色（ピンク）に変更 */
+    .ext-link-btn.peska { background-color: #ff416c; color: #ffffff; }
+    .ext-link-btn.peska:hover { background-color: #e91e63; color: #ffffff; }
 
     .ext-link-desc {
         font-size: 11px;
@@ -322,7 +323,7 @@
         margin-top: 15px;
     }
 
-    /* 新設：もっと見るボタン用のCSS */
+    /* もっと見るボタン用のCSS */
     .show-more-accordion {
         margin: 10px 0 30px 0;
     }
@@ -417,7 +418,7 @@
 <div class="container">
     <div class="header">
         <h1>📊 マーケットレポート アーカイブ</h1>
-        <p>日々の市場動向、大口注文情報、ファンダメンタルズ分析、テクニカル分析の記録</p>
+        <p>日々の市場動向、大口注文情報、ファンダメンタルズ分析、テクニカル分析 of 記録</p>
     </div>
 
     <details class="archive-accordion">
@@ -430,34 +431,13 @@
             <a href="tool_forex_heat.html" class="tool-card">💪 法定通貨 強弱ヒートマップ</a>
             <a href="tool_crypto_heat.html" class="tool-card">🪙 暗号資産 強弱ヒートマップ</a>
             <a href="tool_overview.html" class="tool-card">📊 コモディティ＆重要銘柄 動向</a>
-            
-            <a href="news_timeline.html" class="tool-card" >
-                📰 リアルタイム・マーケットニュース
-            </a>
-
-            <a href="news_timeline_JP.html" class="tool-card" >
-                📰 リアルタイム・マーケットニュース（日本語対応版）
-            </a>
-
-            <a href="economic_calendar.html" class="tool-card">
-                📅 リアルタイム経済指標カレンダー
-            </a>
-
-            <a href="economic_calendar_JP.html" class="tool-card">
-                📅 リアルタイム経済指標カレンダー（日本語対応版）
-            </a>
-            
-            <a href="tool_weekend_radar.html" class="tool-card" style="border-color: #f39c12; color: #d35400;">
-                🌍 土日・未来レート＆週末リスクレーダー
-            </a>
-
-            <a href="ea_builder_old.html" class="tool-card" style="border-color: #8e44ad; color: #8e44ad;">
-              ⚙️ ノーコードEA作成ツール(簡易版)
-            </a>
-            
-            <a href="ea_builder_pro.html" class="tool-card" style="border-color: #8e44ad; color: #8e44ad;">
-              ⚙️ ノーコードEA作成ツール(Pro版)
-            </a>
+            <a href="news_timeline.html" class="tool-card">📰 リアルタイム・マーケットニュース</a>
+            <a href="news_timeline_JP.html" class="tool-card">📰 リアルタイム・マーケットニュース（日本語対応版）</a>
+            <a href="economic_calendar.html" class="tool-card">📅 リアルタイム経済指標カレンダー</a>
+            <a href="economic_calendar_JP.html" class="tool-card">📅 リアルタイム経済指標カレンダー（日本語対応版）</a>
+            <a href="tool_weekend_radar.html" class="tool-card" style="border-color: #f39c12; color: #d35400;">🌍 土日・未来レート＆週末リスクレーダー</a>
+            <a href="ea_builder_old.html" class="tool-card" style="border-color: #8e44ad; color: #8e44ad;">⚙️ ノーコードEA作成ツール(簡易版)</a>
+            <a href="ea_builder_pro.html" class="tool-card" style="border-color: #8e44ad; color: #8e44ad;">⚙️ ノーコードEA作成ツール(Pro版)</a>
         </div>
     </details>
 
@@ -518,7 +498,7 @@
         </div>
     </details>
 
-    <details class="archive-accordion">
+    <details class="archive-accordion" open>
         <summary style="border-left: 4px solid #f39c12;">
             🌟 おすすめの取引環境 <span class="toggle-icon">＋</span>
         </summary>
@@ -540,21 +520,20 @@
             <a href="broker_comparison.html" class="report-card" style="border-left: 4px solid #3498db; margin-bottom: 0px;">
                 <div class="date-badge" style="background-color: #3498db;">必読比較</div>
                 <div class="report-info">
-                    <div class="report-title">📊 主要海外ブローカー 4社徹底比較（Exness/Axi/XM/XS）</div>
+                    <div class="report-title" style="color: #2980b9;">📊 主要海外ブローカー 4社徹底比較（Exness/Axi/XM/XS）</div>
                     <p class="report-summary">資金量や目的に応じて「矛」と「盾」の環境を使い分けるのがプロの鉄則。各社のスペックや特徴、Pure Green流の立ち回り方を徹底解説しています。</p>
                 </div>
                 <div class="arrow-icon" style="color: #3498db;">➔</div>
             </a>
 
             <a href="peska_intro.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-    <div class="date-badge" style="background-color: #2980b9; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">キャンペーン (7/1〜8/31)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #2980b9; font-weight: bold; font-size: 16px;">💳【特別開催】最大1万円キャッシュバック！次世代ウォレット「Peska」のご紹介</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">Exnessへの入出金をより便利に、お得にする次世代ウォレット「Peska」のご紹介ページです。新規開設およびExnessへの入金・取引条件クリアで、最大10,000円がもらえる期間限定キャッシュバックキャンペーン（7月1日〜8月31日）の詳細と注意点はこちらからご確認ください。</p>
-    </div>
-    <div class="arrow-icon" style="color: #2980b9; text-align: right; font-weight: bold;">➔</div>
-</a>
-
+                <div class="date-badge" style="background-color: #2980b9; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">キャンペーン (7/1〜8/31)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #2980b9; font-weight: bold; font-size: 16px;">💳【特別開催】最大1万円キャッシュバック！次世代ウォレット「Peska」のご紹介</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">Exnessへの入出金をより便利に、お得にする次世代ウォレット「Peska」のご紹介ページです。新規開設およびExnessへの入金・取引条件クリアで、最大10,000円がもらえる期間限定キャッシュバックキャンペーン（7月1日〜8月31日）の詳細と注意点はこちらからご確認ください。</p>
+                </div>
+                <div class="arrow-icon" style="color: #2980b9; text-align: right; font-weight: bold;">➔</div>
+            </a>
 
             <details class="show-more-accordion" style="margin-bottom: 0;">
                 <summary>その他のおすすめツールを見る <span class="toggle-icon">＋</span></summary>
@@ -589,245 +568,225 @@
 
     <div id="tab-july" class="tab-content active">
         <div class="archive-list">
-
             <p style="text-align: center; color: #7f8c8d; padding: 20px; border: 1px dashed #bdc3c7; border-radius: 8px; background-color: #f9fbfd;">
                 🎋 7月のマーケットレポートです⭐️
             </p>
 
-<a href="report_20260701.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-    <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">7月1日 (日米介入合意・162.70円台暴騰)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【日米緊密連携】三村財務官「米側からの異論なし」と言及！ドル円162.79円の39年半ぶり高値圏で介入カウントダウン</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">東京市場でドル円は一時162.79円まで急騰し、1986年以来の歴史的安値を再び更新しました。三村財務官が「為替対応を巡る日米関係はこれ以上深まりようがないくらい深まっている」「米側からの異論はただの一度も出ていない」と極めて踏み込んだ発言を行い、実弾介入へのお墨付きを公式に示唆。今夜は米ADP雇用統計やISM製造業景気指数に加え、ECBフォーラムでウォーシュFRB議長、ラガルドECB総裁、ベイリーBOE総裁が揃い踏みする特大イベントを控えており、極限の緊張感が市場に走っています。</p>
+            <a href="report_20260701.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">7月1日 (日米介入合意・162.70円台暴騰)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【日米緊密連携】三村財務官「米側からの異論なし」と言及！ドル円162.79円の39年半ぶり高値圏で介入カウントダウン</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">東京市場でドル円は一時162.79円まで急騰し、1986年以来の歴史的安値を再び更新しました。三村財務官が「為替対応を巡る日米関係はこれ以上深まりようがないくらい深まっている」「米側からの異論はただの一度も出ていない」と極めて踏み込んだ発言を行い、実弾介入へのお墨付きを公式に示唆。今夜は米ADP雇用統計やISM製造業景気指数に加え、ECBフォーラムでウォーシュFRB議長、ラガルドECB総裁、ベイリーBOE総裁が揃い踏みする特大イベントを控えており、極限の緊張感が市場に走っています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
+            </a>
+        </div>
     </div>
-    <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
-</a>
 
-            </div>
-    </div>
-
-    <div id="tab-june" class="tab-content active">
+    <div id="tab-june" class="tab-content">
         <div class="archive-list">
             <p style="text-align: center; color: #7f8c8d; padding: 20px; border: 1px dashed #bdc3c7; border-radius: 8px; background-color: #f9fbfd;">
                 🐌 6月のマーケットレポートです☔
             </p>
 
-<a href="report_20260630.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-    <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月30日 (月末特異日・162.40円到達)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【極限警戒】ドル円162.40円へ暴騰！月末・四半期末のロンドンフィキシングで介入ナイアガラの危機</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">本日は6月末・四半期末・半期末が重なる極めて重要な特異日です。大口のポジション調整（リバランス）が集中する中、ドル円はついに162.40円まで暴騰し、39年半ぶりの高値を更新しました。片山財務相や木原官房長官による強烈な牽制が繰り返される中、24時のロンドンフィキシングに向けて流動性が乱高下しやすくなっており、政府・日銀による実弾介入の「ナイアガラ」が発動するリスクが最高潮に達しています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
-</a>
+            <a href="report_20260630.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月30日 (月末特異日・162.40円到達)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【極限警戒】ドル円162.40円へ暴騰！月末・四半期末のロンドンフィキシングで介入ナイアガラの危機</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">本日は6月末・四半期末・半期末が重なる極めて重要な特異日です。大口のポジション調整（リバランス）が集中する中、ドル円はついに162.40円まで暴騰し、39年半ぶりの高値を更新しました。片山財務相や木原官房長官による強烈な牽制が繰り返される中、24時のロンドンフィキシングに向けて流動性が乱高下しやすくなっており、政府・日銀による実弾介入の「ナイアガラ」が発動するリスクが最高潮に達しています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
+            </a>
+            
+            <a href="report_20260629.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月29日 (オプション攻防・米欧指標警戒)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【極限警戒】ドル円161.75円の巨大オプションで完全膠着！深夜のNYカット明けに実弾介入リスクMAX</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">週末の中東報復攻撃から一転、米イラン協議再開の報道で市場は一旦落ち着きを見せています。しかしドル円は、本日NYカットの161.75円の特大オプションと、162円手前の防衛線の間に挟まれ、異常な膠着状態に陥っています。日本時間23時のNYカット通過後、東北発表される米欧の重要指標の結果次第で、ついに162円を突破し財務省の「ナイアガラ（実弾介入）」が発動する危険性が極限まで高まっています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
+            </a>            
 
+            <a href="report_20260626.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月26日 (日経大暴落・162円介入攻防)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【緊急警戒】日経平均一時2800円超の大暴落！ホルムズ海峡再燃とドル円162円目前の極限チキンレース</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">イラン軍による貨物船攻撃報道でホルムズ海峡の不透明感が再燃。米ハイテク株安の流れも引き継ぎ、日経平均株価は一時2800円超の歴史的な大暴落を記録しました。一方のドル円は161円台後半で高止まりしており、162円の最終防衛線を前に異常な膠着状態を続けています。財務省の実弾介入によるナイアガラがいつ起きてもおかしくない極限の相場環境です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
+            </a>
             
-<a href="report_20260629.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-    <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月29日 (オプション攻防・米欧指標警戒)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【極限警戒】ドル円161.75円の巨大オプションで完全膠着！深夜のNYカット明けに実弾介入リスクMAX</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">週末の中東報復攻撃から一転、米イラン協議再開の報道で市場は一旦落ち着きを見せています。しかしドル円は、本日NYカットの161.75円の特大オプションと、162円手前の防衛線の間に挟まれ、異常な膠着状態に陥っています。日本時間23時のNYカット通過後、そして今週発表される米欧の重要指標の結果次第で、ついに162円を突破し財務省の「ナイアガラ（実弾介入）」が発動する危険性が極限まで高まっています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
-</a>            
+            <a href="report_20260625.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月25日 (田村委員タカ派発言・PCE警戒)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【特報】田村日銀審議委員のタカ派発言炸裂！ドル円161円後半で介入と指標の板挟み</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">日銀の田村審議委員から「2%中立水準に向けた利上げ」という極めてタカ派な発言が飛び出しましたが、ドル円は一時的な下落にとどまり161.70円台で不気味な底堅さを見せています。一方、トランプ大統領の原油引き下げ圧力で原油価格は70ドル割れへ暴落。今夜は米PCEデフレーターやGDP確報値などインフレの根幹に関わる超重要指標が集中しており、指標結果次第では162円突破からの実弾介入ナイアガラリスクが極限まで高まっています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
+            </a>
+            
+            <a href="report_20260624.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月24日 (161円後半膠着・介入警戒限界突破)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【極限警戒】ドル円161.60円で完全膠着！介入リスクと米PMI好調の板挟みで嵐の前の静けさ</div>
+                    <p class="report-summary">昨夜発表された米PMI速報値は製造業・非製造業ともに予想を上回り、米国の強固な景況感とインフレ圧力が再確認されました。これを受けてドル全面高の展開となり、DXYは101.40台へ急伸、ユーロやゴールドは下落トレンドを強めています。一方、ドル円は日米財務相の「断固たる措置」合意という強烈なストッパーが機能し、161円台後半でピタリと値動きが止まる異常な膠着状態に陥っています。いつ実弾介入の大暴落が起きてもおかしくない、極めて危険な相場環境です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
+            
+            <a href="report_20260623.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月23日 (日米会談・介入警戒最高潮)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【日米緊密連携】ドル円162円手前で日米財務相が緊急会談！「断固たる措置」合意で介入警戒は最高潮へ</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">海外市場で一時1ドル＝161.93円まで下落し、約39年半ぶりの安値水準に肉薄したドル円。これを受けて片山財務相とベッセント米財務長官が緊急オンライン会談を行い、「必要とあれば断固たる措置を取る」ことで合意し、日米間の強固な足並みを誇示しました。為替介入への圧倒的な恐怖が市場を支配する中、161円台後半での極限の神経戦が続いています。本日午後に控える欧米PMI速報値の発表を前に、不用意なポジションは一瞬で吹き飛ぶ極めて危険な相場環境です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
+            </a>
 
-<a href="report_20260626.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-    <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月26日 (日経大暴落・162円介入攻防)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【緊急警戒】日経平均一時2800円超の大暴落！ホルムズ海峡再燃とドル円162円目前の極限チキンレース</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">イラン軍による貨物船攻撃報道でホルムズ海峡の不透明感が再燃。米ハイテク株安の流れも引き継ぎ、日経平均株価は一時2800円超の歴史的な大暴落を記録しました。一方のドル円は161円台後半で高止まりしており、162円の最終防衛線を前に異常な膠着状態を続けています。財務省の実弾介入によるナイアガラがいつ起きてもおかしくない極限の相場環境です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
-</a>
-            
+            <a href="report_20260622.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月22日 (日経猛進・ドル円161.50円台攻防)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】日経平均7万2000円突破！ホルムズ海峡再閉鎖の波乱と161円台の介入チキンレース</div>
+                    <p class="report-summary">日経平均が7万2000円台へ驚異的な暴騰を見せる一方、中東ではイラン革命防衛隊がホルムズ海峡の再閉鎖を宣言し、市場に不透明感が漂っています。ドル円は日米金利差を背景に161.50円台まで上昇していますが、財務相の牽制と162円に控える防衛線の前で極限のチキンレースが続いており、実弾介入による大暴落リスクがかつてなく高まっています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>            
 
-<a href="report_20260625.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-    <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月25日 (田村委員タカ派発言・PCE警戒)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【特報】田村日銀審議委員のタカ派発言炸裂！ドル円161円後半で介入と指標の板挟み</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">日銀の田村審議委員から「2%中立水準に向けた利上げ」という極めてタカ派な発言が飛び出しましたが、ドル円は一時的な下落にとどまり161.70円台で不気味な底堅さを見せています。一方、トランプ大統領の原油引き下げ圧力で原油価格は70ドル割れへ暴落。今夜は米PCEデフレーターやGDP確報値などインフレの根幹に関わる超重要指標が集中しており、指標結果次第では162円突破からの実弾介入ナイアガラリスクが極限まで高まっています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
-</a>
+            <a href="report_20260619.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月19日 (161円台突破・介入超警戒)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】ついにドル円161円台へ！米国休場の薄商いで実弾介入のナイアガラに厳重警戒</div>
+                    <p class="report-summary">FOMCのタカ派余波が続き、ドル円はついに約2年ぶりとなる161円台後半（一時161.81円）まで急騰しました。片山財務相の「断固たる措置」発言で161円を挟む攻防となっていますが、本日は米国市場がジューンティーンスで休場のため、流動性が低下しています。少額 de 資金で相場が急変動しやすいため、不意の介入による大暴落リスクが市場を支配する極めて危険な相場環境です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
             
+            <a href="report_20260618.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月18日 (FOMCタカ派通過・介入警戒MAX)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】ウォーシュ・ショックでドル全面高！ドル円160.80円到達で介入の足音</div>
+                    <p class="report-summary">注目のFOMCは年内利上げを示唆する超タカ派な結果となり、ドルが全面高の展開へ。ドル円は年初来高値となる160.80円まで急騰し、財務省による実弾介入のレッドゾーンのど真ん中に突入しています。日経平均は7万1000円台へ上昇する一方、為替はいつ「ナイアガラ」が起きてもおかしくない極限状態です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
+            
+            <a href="report_20260617.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff;">
+                <div class="date-badge" style="background-color: #2980b9;">6月17日 (FOMC・新FRB議長会見)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #2980b9; font-weight: bold;">🚨【緊急警戒】今夜FOMC！ウォーシュ新FRB議長初会見と160円台のドル円介入防衛戦</div>
+                    <p class="report-summary">米イラン和平による原油安が進む中、市場の全神経は今夜のFOMCとウォーシュ新FRB議長の初会見に集中しています。タカ派적据え置きや強い米小売売上高が示されれば、ドル円は160.70円の介入防衛線を突破し、財務省による実弾介入のナイアガラが引き起こされる極めて危険な夜となります。</p>
+                </div>
+                <div class="arrow-icon" style="color: #2980b9;">➔</div>
+            </a>
 
-<a href="report_20260624.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月24日 (161円後半膠着・介入警戒限界突破)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【極限警戒】ドル円161.60円で完全膠着！介入リスクと米PMI好調の板挟みで嵐の前の静けさ</div>
-        <p class="report-summary">昨夜発表された米PMI速報値は製造業・非製造業ともに予想を上回り、米国の強固な景況感とインフレ圧力が再確認されました。これを受けてドル全面高の展開となり、DXYは101.40台へ急伸、ユーロやゴールドは下落トレンドを強めています。一方、ドル円は日米財務相の「断固たる措置」合意という強烈なストッパーが機能し、161円台後半でピタリと値動きが止まる異常な膠着状態に陥っています。いつ実弾介入の大暴落が起きてもおかしくない、極めて危険な相場環境です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
+            <a href="report_20260616.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff;">
+                <div class="date-badge" style="background-color: #2980b9;">6月16日 (日銀利上げ・日経7万円突破)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #2980b9; font-weight: bold;">🚨【特報】日経平均が史上初の7万円突破！日銀1%利上げでもドル円は160円台で不気味な膠着</div>
+                    <p class="report-summary">米イラン和平合意を受けた歴史的なリスクオン相場の中、日経平均株価がついに7万円の大台を突破しました。一方、注目の日銀会合では予想通り1.00%への利上げが決定されましたが、市場は織り込み済みで為替への影響は限定的。ドル円は介入警戒のレッドゾーンである160円台での膠着を続けており、明日のFOMCへ向けて嵐の前の静けさとなっています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #2980b9;">➔</div>
+            </a>
             
+            <a href="report_20260615.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff;">
+                <div class="date-badge" style="background-color: #2980b9;">6月15日 (米イラン和平合意・日銀会合開始)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #2980b9; font-weight: bold;">🚨【特報】米イラン和平合意で原油80ドル割れ！日経平均大暴騰と日銀会合を控えたドル円の膠着</div>
+                    <p class="report-summary">週末にトランプ大統領とパキスタン首相から「米イラン和平合意」が発表され、中東リスクが完全に後退しました。原油は79ドル台へ下落し、日経平均株価は一時2300円超の大暴騰を記録しています。一方ドル円は、本日から始まる日銀金融政策決定会合と為替介入への警戒感から160円台前半で極度の膠着状態が続いています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #2980b9;">➔</div>
+            </a>
+            
+            <a href="report_20260612.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff;">
+                <div class="date-badge" style="background-color: #2980b9;">6月12日 (イラン停戦・SpaceX上場)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #2980b9; font-weight: bold;">🚨【特報】米イラン電撃和解で原油暴落！160円台の膠着とSpaceX上場に沸く週末相場</div>
+                    <p class="report-summary">トランプ大統領がイランへの攻撃中止と「偉大な和解」を発表し、中東リスクが急後退。原油は一時85ドル台へ急落しました。昨夜の米PPI上振れにも関わらず、ドル円は日米の金融政策発表と介入警戒を前に160円台前半で膠着しています。本日は大注目のSpaceXナスダック上場を控え、株式市場への資金流入が注目されます。</p>
+                </div>
+                <div class="arrow-icon" style="color: #2980b9;">➔</div>
+            </a>
+            
+            <a href="report_20260611.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月11日 (米PPI・ECB金利・介入警戒MAX)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】160円台の膠着と米PPI！中東緊迫化とECB利上げ思惑が交錯する嵐の夜</div>
+                    <p class="report-summary">ドル円は160円台半ばで高止まりしており、介入への恐怖と底堅い買い意欲が激突しています。今夜は米PPI（生産者物価指数）とECB政策金利の発表が連続し、トランプ大統領のイラン報復発言による地政学リスクも重なり、突発的な大ボラティリティが予想される極めて危険な相場環境です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
+            
+            <a href="report_20260610.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月10日 (米CPI発表・160円台攻防)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】今夜の米CPIに全集中！160円台の攻防とトランプ発言による地政学リスク再燃</div>
+                    <p class="report-summary">今夜21:30の米CPI（消費者物価指数）発表を控え、ドル円は160円台での神経質な展開が続いています。片山財務相による介入牽制と、トランプ米大統領の「イラン報復」発言が交錯しており、突発的なボラティリティの急拡大に厳重な警戒が必要です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
+            
+            <a href="report_20260609.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月9日 (160円台攻防・介入警戒MAX)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】ドル円160円台での極限神経戦！米利上げ観測と実弾介入の板挟み</div>
+                    <p class="report-summary">米追加利上げ観測を背景にドル円は一時160.39円まで上昇。しかし、日本政府の実弾介入への恐怖と大口オプションの売りが上値を強烈に抑え込み、160.20円前後で膠着しています。昨日の世界的な株安からは一旦落ち着きを見せていますが、突発的な為替介入による大暴落リスクが市場を支配する極めて危険な相場環境です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
 
-<a href="report_20260623.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-    <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">6月23日 (日米会談・介入警戒最高潮)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【日米緊密連携】ドル円162円手前で日米財務相が緊急会談！「断固たる措置」合意で介入警戒は最高潮へ</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">海外市場で一時1ドル＝161.93円まで下落し、約39年半ぶりの安値水準に肉薄したドル円。これを受けて片山財務相とベッセント米財務長官が緊急オンライン会談を行い、「必要とあれば断固たる措置を取る」ことで合意し、日米間の強固な足並みを誇示しました。為替介入への圧倒的な恐怖が市場を支配する中、161円台後半での極限の神経戦が続いています。本日午後に控える欧米PMI速報値の発表を前に、不用意なポジションは一瞬で吹き飛ぶ極めて危険な相場環境です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
-</a>
-
-
-<a href="report_20260622.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月22日 (日経猛進・ドル円161.50円台攻防)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】日経平均7万2000円突破！ホルムズ海峡再閉鎖の波乱と161円台の介入チキンレース</div>
-        <p class="report-summary">日経平均が7万2000円台へ驚異的な暴騰を見せる一方、中東ではイラン革命防衛隊がホルムズ海峡の再閉鎖を宣言し、市場に不透明感が漂っています。ドル円は日米金利差を背景に161.50円台まで上昇していますが、財務相の牽制と162円に控える防衛線の前で極限のチキンレースが続いており、実弾介入による大暴落リスクがかつてなく高まっています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>            
-
-<a href="report_20260619.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月19日 (161円台突破・介入超警戒)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】ついにドル円161円台へ！米国休場の薄商いで実弾介入のナイアガラに厳重警戒</div>
-        <p class="report-summary">FOMCのタカ派余波が続き、ドル円はついに約2年ぶりとなる161円台後半（一時161.81円）まで急騰しました。片山財務相の「断固たる措置」発言で161円を挟む攻防となっていますが、本日は米国市場がジューンティーンスで休場のため、流動性が低下しています。少額の資金で相場が急変動しやすいため、不意の介入による大暴落リスクが極めて高い危険な一日です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
-            
-
-<a href="report_20260618.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月18日 (FOMCタカ派通過・介入警戒MAX)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】ウォーシュ・ショックでドル全面高！ドル円160.80円到達で介入の足音</div>
-        <p class="report-summary">注目のFOMCは年内利上げを示唆する超タカ派な結果となり、ドルが全面高の展開へ。ドル円は年初来高値となる160.80円まで急騰し、財務省による実弾介入のレッドゾーンのど真ん中に突入しています。日経平均は7万1000円台へ上昇する一方、為替はいつ「ナイアガラ」が起きてもおかしくない極限状態です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
-            
-
-<a href="report_20260617.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff;">
-    <div class="date-badge" style="background-color: #2980b9;">6月17日 (FOMC・新FRB議長会見)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #2980b9; font-weight: bold;">🚨【緊急警戒】今夜FOMC！ウォーシュ新FRB議長初会見と160円台のドル円介入防衛戦</div>
-        <p class="report-summary">米イラン和平による原油安が進む中、市場の全神経は今夜のFOMCとウォーシュ新FRB議長の初会見に集中しています。タカ派的据え置きや強い米小売売上高が示されれば、ドル円は160.70円の介入防衛線を突破し、財務省による実弾介入のナイアガラが引き起こされる極めて危険な夜となります。</p>
-    </div>
-    <div class="arrow-icon" style="color: #2980b9;">➔</div>
-</a>
-
-            
-
-<a href="report_20260616.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff;">
-    <div class="date-badge" style="background-color: #2980b9;">6月16日 (日銀利上げ・日経7万円突破)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #2980b9; font-weight: bold;">🚨【特報】日経平均が史上初の7万円突破！日銀1%利上げでもドル円は160円台で不気味な膠着</div>
-        <p class="report-summary">米イラン和平合意を受けた歴史的なリスクオン相場の中、日経平均株価がついに7万円の大台を突破しました。一方、注目の日銀会合では予想通り1.00%への利上げが決定されましたが、市場は織り込み済みで為替への影響は限定的。ドル円は介入警戒のレッドゾーンである160円台での膠着を続けており、明日のFOMCへ向けて嵐の前の静けさとなっています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #2980b9;">➔</div>
-</a>
-            
-<a href="report_20260615.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff;">
-    <div class="date-badge" style="background-color: #2980b9;">6月15日 (米イラン和平合意・日銀会合開始)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #2980b9; font-weight: bold;">🚨【特報】米イラン和平合意で原油80ドル割れ！日経平均大暴騰と日銀会合を控えたドル円の膠着</div>
-        <p class="report-summary">週末にトランプ大統領とパキスタン首相から「米イラン和平合意」が発表され、中東リスクが完全に後退しました。原油は79ドル台へ下落し、日経平均株価は一時2300円超の大暴騰を記録しています。一方ドル円は、本日から始まる日銀金融政策決定会合と為替介入への警戒感から160円台前半で極度の膠着状態が続いています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #2980b9;">➔</div>
-</a>
-            
-<a href="report_20260612.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f4f9ff;">
-    <div class="date-badge" style="background-color: #2980b9;">6月12日 (イラン停戦・SpaceX上場)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #2980b9; font-weight: bold;">🚨【特報】米イラン電撃和解で原油暴落！160円台の膠着とSpaceX上場に沸く週末相場</div>
-        <p class="report-summary">トランプ大統領がイランへの攻撃中止と「偉大な和解」を発表し、中東リスクが急後退。原油は一時85ドル台へ急落しました。昨夜の米PPI上振れにも関わらず、ドル円は日米の金融政策発表と介入警戒を前に160円台前半で膠着しています。本日は大注目のSpaceXナスダック上場を控え、株式市場への資金流入が注目されます。</p>
-    </div>
-    <div class="arrow-icon" style="color: #2980b9;">➔</div>
-</a>
-            
-            
-<a href="report_20260611.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-<div class="date-badge" style="background-color: #c0392b;">6月11日 (米PPI・ECB金利・介入警戒MAX)</div>
-<div class="report-info">
-<div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】160円台の膠着と米PPI！中東緊迫化とECB利上げ思惑が交錯する嵐の夜</div>
-<p class="report-summary">ドル円は160円台半ばで高止まりしており、介入への恐怖と底堅い買い意欲が激突しています。今夜は米PPI（生産者物価指数）とECB政策金利の発表が連続し、トランプ大統領のイラン報復発言による地政学リスクも重なり、突発的な大ボラティリティが予想される極めて危険な相場環境です。</p>
-</div>
-<div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
-            
-<a href="report_20260610.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月10日 (米CPI発表・160円台攻防)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】今夜の米CPIに全集中！160円台の攻防とトランプ発言による地政学リスク再燃</div>
-        <p class="report-summary">今夜21:30の米CPI（消費者物価指数）発表を控え、ドル円は160円台での神経質な展開が続いています。片山財務相による介入牽制と、トランプ米大統領の「イラン報復」発言が交錯しており、突発的なボラティリティの急拡大に厳重な警戒が必要です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
-            
-            
-<a href="report_20260609.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月9日 (160円台攻防・介入警戒MAX)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】ドル円160円台での極限神経戦！米利上げ観測と実弾介入の板挟み</div>
-        <p class="report-summary">米追加利上げ観測を背景にドル円は一時160.39円まで上昇。しかし、日本政府の実弾介入への恐怖と大口オプションの売りが上値を強烈に抑え込み、160.20円前後で膠着しています。昨日の世界的な株安からは一旦落ち着きを見せていますが、突発的な為替介入による大暴落リスクが市場を支配する極めて危険な相場環境です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
-
-<a href="report_20260608.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #e74c3c;">6月8日 (160円突破・株安連鎖)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円160.30円台へ急伸、160円大台を完全突破！米雇用統計の激震と中東緊迫化でトリプル安の危機</div>
-        <p class="report-summary">前週末の米雇用統計が歴史的な上振れとなり、FRBの年内利上げ観測が70%超へ急騰。米国債利回り上昇に伴いNY株が大幅下落し、大阪CME先物は2600円超安の壊滅的暴落でブラックマンデーへの警戒が高まっています。さらに週末の中東戦闘応酬による有事のドル買いと原油高が重なり、ドル円は160.36円まで急伸。160.72円の介入最高値に迫る中、今朝も片山財務相から「日米覚書による断固たる措置」への言及が飛び出し、実弾介入の秒読みフェーズへ突入しています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #e74c3c;">➔</div>
-</a>
+            <a href="report_20260608.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #e74c3c;">6月8日 (160円突破・株安連鎖)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円160.30円台へ急伸、160円大台を完全突破！米雇用統計の激震と中東緊迫化でトリプル安の危機</div>
+                    <p class="report-summary">前週末の米雇用統計が歴史的な上振れとなり、FRBの年内利上げ観測が70%超へ急騰。米国債利回り上昇に伴いNY株が大幅下落し、大阪CME先物は2600円超安の壊滅的暴落でブラックマンデーへの警戒が高まっています。さらに週末の中東戦闘応酬による有事のドル買いと原油高が重なり、ドル円は160.36円まで急伸。160.72円の介入最高値に迫る中、今朝も片山財務相から「日米覚書による断固たる措置」への言及が飛び出し、実弾介入の秒読みフェーズへ突入しています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #e74c3c;">➔</div>
+            </a>
             
 
-<a href="report_20260605.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月5日 (米雇用統計・介入決戦)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【最警戒】今夜、運命の米雇用統計発表！ドル円160円目前で政府・日銀が総力戦の構え</div>
-        <p class="report-summary">今夜21:30、市場最大の超特大イベント「米5月雇用統計」が発表されます。ドル円は160円を目前に159.90円台で完全に膠着状態。昨日の植田日銀総裁による利上げ前向き発言や片山財務相の牽制など、円安阻止への圧力が極限まで強まる中、今夜の指標結果と実弾介入の激突による歴史的な大荒れ相場へ最大級の警戒が必要です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
+            <a href="report_20260605.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月5日 (米雇用統計・介入決戦)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急警戒】今夜、運命の米雇用統計発表！ドル円160円目の前で政府・日銀が総力戦の構え</div>
+                    <p class="report-summary">今夜21:30、市場最大の超特大イベント「米5月雇用統計」が発表されます。ドル円は160円を目前に159.90円台で完全に膠着状態。昨日の植田日銀総裁による利上げ前向き発言や片山財務相の牽制など、円安阻止への圧力が極限まで強まる中、今夜の指標結果と実弾介入の激突による歴史的な大荒れ相場へ最大級 of 警戒が必要です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
 
-            
+            <a href="report_20260604.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月4日 (160円到達・日銀報道で乱高下)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円ついに160円到達！直後に「日銀6月利上げ検討」報道で乱高下へ</div>
+                    <p class="report-summary">昨晩の米ISM非製造業指数の上振れを背景に、ドル円はついに160円の大台を突破（高値160.09円）。しかし本日昼、「日銀が6月会合で利上げ検討」との報道が伝わると一時159.60円台まで急落するなど、神経質な展開となっています。明日の米雇用統計を前に、介入警戒感と日米金融政策の思惑が激しく交錯しています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
 
+            <a href="report_20260603.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月3日 (160円到達・実弾介入警戒)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ついに160円の大台到達！実弾介入の限界点と今夜の米ADP・ISM非製造業</div>
+                    <p class="report-summary">昨晩の米JOLTS求人件数の大幅な上振れや中東情勢の緊迫化を背景に、ドル円はついに160.00円の大台へ到達しました。片山財務相の牽制発言が繰り返される中、為替介入警戒感は極限に達しています。今夜は米ADP雇用統計とISM非製造業指数の発表を控え、指標結果と実弾介入が激突する超危険な相場環境です。一方で日経平均は大幅高となっています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
 
-<a href="report_20260604.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月4日 (160円到達・日銀報道で乱高下)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円ついに160円到達！直後に「日銀6月利上げ検討」報道で乱高下へ</div>
-        <p class="report-summary">昨晩の米ISM非製造業指数の上振れを背景に、ドル円はついに160円の大台を突破（高値160.09円）。しかし本日昼、「日銀が6月会合で利上げ検討」との報道が伝わると一時159.60円台まで急落するなど、神経質な展開となっています。明日の米雇用統計を前に、介入警戒感と日米金融政策の思惑が激しく交錯しています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
+            <a href="report_20260602.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月2日 (160円目前・介入警戒MAX)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円159.70円台へ突入！160円の巨大防衛線と実弾介入のカウントダウン</div>
+                    <p class="report-summary">昨晩の米ISM製造業景気指数の上振れ（54.0）を受け、ドル買いが加速。ドル円はついに159.70円台へと足を踏み入れ、160.00円の巨大な壁を目前にしています。片山財務相からは「為替は必要に応じ適切に対応」と連日の口先介入が入り、市場はいつ数十円規模の実弾介入が降ってくるか分からない極限のチキンレース状態に陥っています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </table>
 
-            
-<a href="report_20260603.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月3日 (160円到達・実弾介入警戒)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ついに160円の大台到達！実弾介入の限界点と今夜の米ADP・ISM非製造業</div>
-        <p class="report-summary">昨晩の米JOLTS求人件数の大幅な上振れや中東情勢の緊迫化を背景に、ドル円はついに160.00円の大台へ到達しました。片山財務相の牽制発言が繰り返される中、為替介入警戒感は極限に達しています。今夜は米ADP雇用統計とISM非製造業指数の発表を控え、指標結果と実弾介入が激突する超危険な相場環境です。一方で日経平均は大幅高となっています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
-
-<a href="report_20260602.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月2日 (160円目前・介入警戒MAX)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円159.70円台へ突入！160円の巨大防衛線と実弾介入のカウントダウン</div>
-        <p class="report-summary">昨晩の米ISM製造業景気指数の上振れ（54.0）を受け、ドル買いが加速。ドル円はついに159.70円台へと足を踏み入れ、160.00円の巨大な壁を目前にしています。片山財務相からは「為替は必要に応じ適切に対応」と連日の口先介入が入り、市場はいつ数十円規模の実弾介入が降ってくるか分からない極限のチキンレース状態に陥っています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
-
-            
-<a href="report_20260601.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">6月1日 (月初・介入警戒MAX)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【最警戒】6月相場入り！ドル円159.50円到達で相次ぐ強烈な口先介入と今夜の米ISM</div>
-        <p class="report-summary">6月相場がスタートしました。ドル円が159.50円付近へ上昇する中、片山財務相や木原官房長官から「断固たる措置」「日米間で緊密連携」など、極めて強いトーンでの円安牽制（口先介入）が相次いでいます。今夜23時には米ISM製造業景気指数の発表を控え、実弾介入のトリガーと米経済指標が激突する非常に危険な相場環境です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
-
-            
+            <a href="report_20260601.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">6月1日 (月初・介入警戒MAX)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【最警戒】6月相場入り！ドル円159.50円到達で相次ぐ強烈な口先介入と今夜の米ISM</div>
+                    <p class="report-summary">6月相場がスタートしました。ドル円が159.50円付近へ上昇する中、片山財務相や木原官房長官から「断固たる措置」「日米間で緊密連携」など、極めて強いトーンでの円安牽制（口先介入）が相次いでいます。今夜23時には米ISM製造業景気指数の発表を控え、実弾介入のトリガーと米経済指標が激突する非常に危険な相場環境です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
         </div>
     </div>
     
@@ -837,226 +796,224 @@
                 🌱 5月のマーケットレポートです🎏
             </p>
 
-<a href="report_20260529.html" class="report-card" style="border: 2px solid #8e44ad; background-color: #f5eef8;">
-    <div class="date-badge" style="background-color: #8e44ad;">5月29日 (月末・介入実績公表)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #4a235a; font-weight: bold;">🚨【特報】米PCE通過でインフレ鈍化・株高へ！今夜の介入実績発表と月末フローに警戒</div>
-        <p class="report-summary">昨晩の米PCEコアデフレーターは予想を下回り、インフレ鈍化と景気減速が意識され米金利が低下。ハイテク株中心に史上最高値圏での推移となっています。ドル円は片山財務相の牽制発言もあり159円前半で膠着。本日は月末最後の営業日であり、19時の為替介入実績の公表や月末特有のフローによる突発的な乱高下に最大限の警戒が必要です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #8e44ad;">➔</div>
-</a>            
+            <a href="report_20260529.html" class="report-card" style="border: 2px solid #8e44ad; background-color: #f5eef8;">
+                <div class="date-badge" style="background-color: #8e44ad;">5月29日 (月末・介入実績公表)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #4a235a; font-weight: bold;">🚨【特報】米PCE通過でインフレ鈍化・株高へ！今夜の介入実績発表と月末フローに警戒</div>
+                    <p class="report-summary">昨晩の米PCEコアデフレーターは予想を下回り、インフレ鈍化と景気減速が意識され米金利が低下。ハイテク株中心に史上最高値圏での推移となっています。ドル円は片山財務相の牽制発言もあり159円前半で膠着。本日は月末最後の営業日であり、19時の為替介入実績の公表や月末特有のフローによる突発的な乱高下に最大限の警戒が必要です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #8e44ad;">➔</div>
+            </a>            
 
-<a href="report_20260528.html" class="report-card" style="border: 2px solid #8e44ad; background-color: #f5eef8;">
-    <div class="date-badge" style="background-color: #8e44ad;">5月28日 (159.50円突破・PCE決戦)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #4a235a; font-weight: bold;">🚨【最警戒】ドル円ついに159.50円突破！今夜、運命の米PCEコア＆GDP改定値</div>
-        <p class="report-summary">本日21:30、FRBが最重要視するインフレ指標「米PCEデフレーター」と「米実質GDP改定値」が同時発表されます。発表を前にドル円は159.50円の防衛線をも突破し159.52円台へ急騰。ゴールドやBTCが大きく崩れる中、今夜の特大指標通過によるボラティリティ爆発と実弾介入に最大級の警戒が必要です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #8e44ad;">➔</div>
-</a>
+            <a href="report_20260528.html" class="report-card" style="border: 2px solid #8e44ad; background-color: #f5eef8;">
+                <div class="date-badge" style="background-color: #8e44ad;">5月28日 (159.50円突破・PCE決戦)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #4a235a; font-weight: bold;">🚨【最警戒】ドル円ついに159.50円突破！今夜、運命の米PCEコア＆GDP改定値</div>
+                    <p class="report-summary">本日21:30、FRBが最重要視するインフレ指標「米PCEデフレーター」と「米実質GDP改定値」が同時発表されます。発表を前にドル円は159.50円の防衛線をも突破し159.52円台へ急騰。ゴールドやBTCが大きく崩れる中、今夜の特大指標通過によるボラティリティ爆発と実弾介入に最大級の警戒が必要です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #8e44ad;">➔</div>
+            </a>
             
-<a href="report_20260527.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">5月27日 (159円突破・介入警戒MAX)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円159円の防衛線ついに決壊！実弾介入レッドゾーンへ突入</div>
-        <p class="report-summary">米消費者信頼感指数の好結果を受けたドル買いを背景に、ドル円を抑え込んでいた159.00円の特大オプションの壁が突破されました。現在 159.29円まで急騰しており、財務省による実弾介入の極限警戒領域に入っています。一方、米ナスダックは3万ドルの大台を突破しています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #c0392b;">➔</div>
-</a>
+            <a href="report_20260527.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">5月27日 (159円突破・介入警戒MAX)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">🚨【緊急特報】ドル円159円の防衛線ついに決壊！実弾介入レッドゾーンへ突入</div>
+                    <p class="report-summary">米消費者信頼感指数の好結果を受けたドル買いを背景に、ドル円を抑え込んでいた159.00円の特大オプションの壁が突破されました。現在 159.29円まで急騰しており、財務省による実弾介入の極限警戒領域に入っています。一方、米ナスダックは3万ドルの大台を突破しています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b;">➔</div>
+            </a>
 
-<a href="report_20260526.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f0f8ff;">
-    <div class="date-badge" style="background-color: #2980b9;">5月26日 (米英休場明け・終戦期待)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #2c3e50; font-weight: bold;">🚨【警戒】米英休場明けで流動性回復。ドル円は159円の壁と下値ストップの板挟み</div>
-        <p class="report-summary">イラン・米国の合意（終戦）期待によるリスクオン環境が継続しています。本日は米英の祝日休場明けで市場参加者が戻る中、ドル円は159.00円の厚い売り壁（OP）と158.80円の買い支えに挟まれて膠着。下値のストップロス（158.70円割れ）を巻き込んだ急落リスクに警戒が必要です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #2980b9;">➔</div>
-</a>
+            <a href="report_20260526.html" class="report-card" style="border: 2px solid #2980b9; background-color: #f0f8ff;">
+                <div class="date-badge" style="background-color: #2980b9;">5月26日 (米英休場明け・終戦期待)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #2c3e50; font-weight: bold;">🚨【警戒】米英休場明けで流動性回復。ドル円は159円の壁と下値ストップの板挟み</div>
+                    <p class="report-summary">イラン・米国の合意（終戦）期待によるリスクオン環境が継続しています。本日は米英の祝日休場明けで市場参加者が戻る中、ドル円は159.00円の厚い売り壁（OP）と158.80円の買い支えに挟まれて膠着。下値のストップロス（158.70円割れ）を巻き込んだ急落リスクに警戒が必要です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #2980b9;">➔</div>
+            </a>
 
-<a href="" class="report-card" style="border: 2px solid #f39c12; background-color: #fffdf5;">
-    <div class="date-badge" style="background-color: #f39c12;">5月25日 (月)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #d35400; font-weight: bold;">本日のマーケットレポートは休刊</div>
-        <p class="report-summary">本日のマーケットレポートは休刊致します。※コミュニティ内で週間レポートは共有します。</p>
-    </div>
-    <div class="arrow-icon" style="color: #f39c12;">➔</div>
-</a>
+            <a href="" class="report-card" style="border: 2px solid #f39c12; background-color: #fffdf5;">
+                <div class="date-badge" style="background-color: #f39c12;">5月25日 (月)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #d35400; font-weight: bold;">本日のマーケットレポートは休刊</div>
+                    <p class="report-summary">本日のマーケットレポートは休刊致します。※コミュニティ内で週間レポートは共有します。</p>
+                </div>
+                <div class="arrow-icon" style="color: #f39c12;">➔</div>
+            </a>
             
-<a href="report_20260522.html" class="report-card" style="border: 2px solid #f39c12; background-color: #fffdf5;">
-    <div class="date-badge" style="background-color: #f39c12;">5月22日 (週末・日替わり相場)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #d35400; font-weight: bold;">🚨【警戒】米ドル日替わり相場で方向感喪失。ドル円は159円特大OPと介入の壁で膠着</div>
-        <p class="report-summary">週末金曜日。米ドルの方向性が定まらない日替わり相場となっており、ドル円は158円後半〜159円前半の狭いレンジで膠着しています。159.00円に控えるNYカット特大オプションと介入警戒感が上値を重くしており、週末特有の突発的なポジション調整に注意が必要です。</p>
-    </div>
-    <div class="arrow-icon" style="color: #f39c12;">➔</div>
-</a>
+            <a href="report_20260522.html" class="report-card" style="border: 2px solid #f39c12; background-color: #fffdf5;">
+                <div class="date-badge" style="background-color: #f39c12;">5月22日 (週末・日替わり相場)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #d35400; font-weight: bold;">🚨【警戒】米ドル日替わり相場で方向感喪失。ドル円は159円特大OPと介入の壁で膠着</div>
+                    <p class="report-summary">週末金曜日。米ドルの方向性が定まらない日替わり相場となっており、ドル円は158円後半〜159円前半の狭いレンジで膠着しています。159.00円に控えるNYカット特大オプションと介入警戒感が上値を重くしており、週末特有の突発的なポジション調整に注意が必要です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #f39c12;">➔</div>
+            </a>
             
-<a href="report_20260521.html" class="report-card">
-    <div class="date-badge" style="background-color: #27ae60;">5月21日 (リスクオン・日経大暴騰)</div>
-    <div class="report-info">
-        <div class="report-title">🚨【特報】米・イラン終戦期待で株爆上げ。介入警戒からリスクオン相場へ完全シフト</div>
-        <p class="report-summary">トランプ大統領のイラン交渉最終段階発言により、原油安・株高のリスクオン相場へ転換。日経平均は一時2000円超の暴騰を記録。昨日までの介入警戒一辺倒から、投資家のリスク選好が急速に回復しています。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260521.html" class="report-card">
+                <div class="date-badge" style="background-color: #27ae60;">5月21日 (リスクオン・日経大暴騰)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨【特報】米・イラン終戦期待で株爆上げ。介入警戒からリスクオン相場へ完全シフト</div>
+                    <p class="report-summary">トランプ大統領のイラン交渉最終段階発言により、原油安・株高のリスクオン相場へ転換。日経平均は一時2000円超の暴騰を記録。昨日までの介入警戒一辺倒から、投資家のリスク選好が急速に回復しています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
             
-<a href="special_fomc_20260520.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #e74c3c;">🚨 緊急特設ページ (5月20日)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold;">【緊急特集】今夜27:00 米FOMC議事録公表！ドル円159円突破の介入警戒と立ち回り方</div>
-        <p class="report-summary">ドル円が159円台へ突入し、いつ実弾が降ってきてもおかしくない介入レッドゾーンへ。深夜のFOMC議事録公表と明朝のNVIDIA決算という超大型イベントを控えた極限の警戒相場において、パニック急落の押し目を狙って資金を守り抜くプロの「盾の防御」戦略を公開しています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #e74c3c;">➔</div>
-</a>
+            <a href="special_fomc_20260520.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #e74c3c;">🚨 緊急特設ページ (5月20日)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold;">【緊急特集】今夜27:00 米FOMC議事録公表！ドル円159円突破の介入警戒と立ち回り方</div>
+                    <p class="report-summary">ドル円が159円台へ突入し、いつ実弾が降ってきてもおかしくない介入レッドゾーンへ。深夜のFOMC議事録公表と明朝のNVIDIA決算という超大型イベントを控えた極限の警戒相場において、プロの「盾の防御」戦略を公開しています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #e74c3c;">➔</div>
+            </a>
 
-<a href="report_20260520.html" class="report-card">
-    <div class="date-badge" style="background-color: #2980b9;">5月20日 (159円突破・介入警戒MAX)</div>
-    <div class="report-info">
-        <div class="report-title">🚨【特報】ドル円159円突破で実弾介入レッドゾーン。今夜FOMC議事録とNVIDIA決算を控える超警戒相場</div>
-        <p class="report-summary">ドル円がついに159円の大台を突破し、片山財務相の「断固たる行動」牽制と相まって介入警戒が極限に達しています。今夜のFOMC議事録や明朝のNVIDIA決算を控え、相場は急変動リスクを孕んだボラティリティの高い状態に突入しました。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260520.html" class="report-card">
+                <div class="date-badge" style="background-color: #2980b9;">5月20日 (159円突破・介入警戒MAX)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨【特報】ドル円159円突破で実弾介入レッドゾーン。今夜FOMC議事録とNVIDIA決算を控える超警戒相場</div>
+                    <p class="report-summary">ドル円がついに159円の大台を突破し、片山財務相の「断固たる行動」牽制と相まって介入警戒が極限に達しています。今夜のFOMC議事録や明朝のNVIDIA決算を控え、相場は急変動リスクを孕んだボラティリティの高い状態に突入しました。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
             
-<a href="report_20260519.html" class="report-card">
-    <div class="date-badge" style="background-color: #2980b9;">5月19日 (日本GDPポジティブサプライズ・159円OP攻防)</div>
-    <div class="report-info">
-        <div class="report-title">🚨【特報】日本GDPは予想上回る年率+2.1%。利上げ警戒で日経平均急落も、ドル円は158.96円特大OPの磁力圏で高止まり</div>
-        <p class="report-summary">日本の1-3月期GDP速報値は市場予想を上回る力強い伸びを記録。日銀の利上げスタンスが意識されて日経平均は大幅反落。しかしドル円は円高に振れることなく158.96円台に張り付き、本日NYカットの159円特大オプションと介入警戒のチキンレースが続いています。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260519.html" class="report-card">
+                <div class="date-badge" style="background-color: #2980b9;">5月19日 (日本GDPポジティブサプライズ・159円OP攻防)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨【特報】日本GDPは予想上回る年率+2.1%。利上げ警戒で日経平均急落も、ドル円は158.96円特大OPの磁力圏で高止まり</div>
+                    <p class="report-summary">日本の1-3月期GDP速報値は市場予想を上回る力強い伸びを記録。日銀の利上げスタンスが意識されて日経平均は大幅反落。しかしドル円は円高に振れることなく158.96円台に張り付き、本日NYカットの159円特大オプションと介入警戒のチキンレースが続いています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
 
-<a href="report_20260518.html" class="report-card">
-    <div class="date-badge" style="background-color: #2980b9;">5月18日 (中東リスク・日銀通過)</div>
-    <div class="report-info">
-        <div class="report-title">🚨【特報】原油102ドル到達でインフレ警戒感高まる。日経大幅反落、ドル円は159円目前</div>
-        <p class="report-summary">週末の氷見野日銀副総裁の講演は想定内の内容で無難に通過、ドル円は158.80円台へ上昇し、159円突破を伺う展開です。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260518.html" class="report-card">
+                <div class="date-badge" style="background-color: #2980b9;">5月18日 (中東リスク・日銀通過)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨【特報】原油102ドル到達でインフレ警戒感高まる。日経大幅反落、ドル円は159円目前</div>
+                    <p class="report-summary">週末の氷見野日銀副総裁の講演は想定内の内容で無難に通過、ドル円は158.80円台へ上昇し、159円突破を伺う展開です。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
            
-<a href="report_20260515.html" class="report-card">
-    <div class="date-badge" style="background-color: #2980b9;">5月15日 (月曜朝の窓開けリスク)</div>
-    <div class="report-info">
-        <div class="report-title">🚨【特報】米インフレ再燃と地政学リスク後退。強烈なドル買いと週末の「日銀窓開け」リスク</div>
-        <p class="report-summary">米国の物価指標大幅上振れにより、通貨強弱はUSD独歩高の様相を呈しています。一方で中東情勢の緊張緩和を受けゴールドは急落。週末の氷見野日銀副総裁の講演を控え、月曜朝の巨大な窓開けリスクに対する最大級の防衛が必要です。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260515.html" class="report-card">
+                <div class="date-badge" style="background-color: #2980b9;">5月15日 (月曜朝の窓開けリスク)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨【特報】米インフレ再燃と地政学リスク後退。強烈なドル買いと週末の「日銀窓開け」リスク</div>
+                    <p class="report-summary">米国の物価指標大幅上振れにより、通貨強弱はUSD独歩高の様相を呈しています。一方で中東情勢の緊張緩和を受けゴールドは急落。週末の氷見野日銀副総裁の講演を控え、月曜朝の巨大な窓開けリスクに対する最大級の防衛が必要です。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
 
-<a href="report_20260514.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9; margin-bottom: 20px; display: block; text-decoration: none; padding: 15px; border-radius: 8px;">
-    <div class="date-badge" style="background-color: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">5月14日 (米中首脳会談・今夜小売売上高)</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨 【特報】米中首脳会談と今夜の小売売上高！為替介入警戒の中、158円防衛線を睨む攻防</div>
-        <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">本日の焦点は『日本による為替介入への思惑』と『米中首脳会談』、精度高く今夜21:30発表の『米小売売上高』です。ドル円は157.5円付近まで上昇後、158円の厚い売りオーダーとオプションを前に底堅く推移しています。</p>
-    </div>
-</a>
+            <a href="report_20260514.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9; margin-bottom: 20px; display: block; text-decoration: none; padding: 15px; border-radius: 8px;">
+                <div class="date-badge" style="background-color: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">5月14日 (米中首脳会談・今夜小売売上高)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨 【特報】米中首脳会談と今夜の小売売上高！為替介入警戒の中、158円防衛線を睨む攻防</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">本日の焦点は『日本による為替介入への思惑』と『米中首脳会談』、精度高く今夜21:30発表の『米小売売上高』です。ドル円は157.5円付近まで上昇後、158円の厚い売りオーダーとオプションを前に底堅く推移しています。</p>
+                </div>
+            </a>
          
-<a href="report_20260513.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9; margin-bottom: 20px; display: block; text-decoration: none; padding: 15px; border-radius: 8px;">
-    <div class="date-badge" style="background-color: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">5月13日（米CPI上振れ・今夜PPI警戒）</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨 【特報】米CPI上振れでドル買い加速。今夜PPIで158円突破と実弾介入への最終局面</div>
-        <p class="report-summary">昨晩の米CPI上振れを受け、米長期金利が上昇。ドル円は157.60円台のレッドゾーンで高止まりしています。今夜の米PPIが158.00円の巨大な壁を突破する引き金となるか、市場の緊張は最高潮に達しています。</p>
-    </div>
-</a>
+            <a href="report_20260513.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9; margin-bottom: 20px; display: block; text-decoration: none; padding: 15px; border-radius: 8px;">
+                <div class="date-badge" style="background-color: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">5月13日（米CPI上振れ・今夜PPI警戒）</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨 【特報】米CPI上振れでドル買い加速。今夜PPIで158円突破と実弾介入への最終局面</div>
+                    <p class="report-summary">昨晩の米CPI上振れを受け、米長期金利が上昇。ドル円は157.60円台のレッドゾーンで高止まりしています。今夜の米PPIが158.00円の巨大な壁を突破する引き金となるか、市場の緊張は最高潮に達しています。</p>
+                </div>
+            </a>
 
-<a href="ppi_strategy_20260512.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #c0392b;">緊急特設</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b;">🚨 【特設】今夜21:30 米PPI発表！完全防衛・攻略マニュアル</div>
-        <p class="report-summary">圧倒的なドル一強相場の中で迎えるインフレ指標。158円トライか、失望の急落か。乱高下から資金を守るための「絶対防衛ルール」と、発表後の具体的なアクションプランを解説しています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #e74c3c;">➔</div>
-</a>
+            <a href="ppi_strategy_20260512.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #c0392b;">緊急特設</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b;">🚨 【特設】今夜21:30 米PPI発表！完全防衛・攻略マニュアル</div>
+                    <p class="report-summary">圧倒的なドル一強相場の中で迎えるインフレ指標。158円トライか、失望の急落か。乱高下から資金を守るための「絶対防衛ルール」と、発表後の具体的なアクションプランを解説しています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #e74c3c;">➔</div>
+            </a>
           
-<a href="report_20260512.html" class="report-card">
-    <div class="date-badge" style="background-color: #e74c3c;">5月12日 (米PPI・要人発言)</div>
-    <div class="report-info">
-        <div class="report-title">🚨 【特報】圧倒的なドル一強相場。今夜の米PPIと要人発言ラッシュに向けた緊張状態</div>
-        <p class="report-summary">通貨強弱メーターは「最強のUSD」と「最弱のオセアニア通貨（AUD/NZD）」という明確なトレンドを示しています。インフレ懸念を背景としたドル買い圧力が市場を支配する中、今夜の米PPIと中銀総裁らの発言ラッシュを前に、リスクオフの警戒感が最高潮に達しています。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260512.html" class="report-card">
+                <div class="date-badge" style="background-color: #e74c3c;">5月12日 (米PPI・要人発言)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨 【特報】圧倒的なドル一強相場。今夜の米PPIと要人発言ラッシュに向けた緊張状態</div>
+                    <p class="report-summary">通貨強弱メーターは「最強のUSD」と「最弱のオセアニア通貨（AUD/NZD）」という明確なトレンドを示しています。インフレ懸念を背景としたドル買い圧力が市場を支配する中、今夜の米PPIと中銀総裁らの発言ラッシュを前に、リスクオフの警戒感が最高潮に達しています。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
 
-<a href="report_20260511.html" class="report-card">
-    <div class="date-badge" style="background-color: #2980b9;">5月11日 (原油高騰・財務長官訪日)</div>
-    <div class="report-info">
-        <div class="report-title">🚨 【特報】原油3%超の急騰でインフレ懸念再燃！米財務長官訪日で介入牽制のジリ高相場へ</div>
-        <p class="report-summary">イランの停戦拒否により原油が窓開け急騰。さらに本日からベッセント米財務長官が訪日するため「日銀は介入できない」との思惑が広がり、ドル円は156円台後半で底堅く推移しています。明日のCPIを睨んだ神経戦です。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260511.html" class="report-card">
+                <div class="date-badge" style="background-color: #2980b9;">5月11日 (原油高騰・財務長官訪日)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨 【特報】原油3%超の急騰でインフレ懸念再燃！米財務長官訪日で介入牽制のジリ高相場へ</div>
+                    <p class="report-summary">イランの停戦拒否により原油が窓開け急騰。さらに本日からベッセント米財務長官が訪日するため「日銀は介入できない」との思慢が広がり、ドル円は156円台後半で底堅く推移しています。明日のCPIを睨んだ神経戦です。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
 
-<a href="employment_strategy_20260508.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
-    <div class="date-badge" style="background-color: #e74c3c;">緊急特設ページ（5月8日）</div>
-    <div class="report-info">
-        <div class="report-title" style="color: #c0392b;">🚨 今夜21:30 運命の米雇用統計！介入警戒×中東リスクの特異点と防衛戦略</div>
-        <p class="report-summary">米景気の特大イベント。158円の防衛線と155円の真空地帯における、プロの「absolute静観」と「下値での極小ロット打診（下ヒゲ確認）」戦略を徹底解説しています。</p>
-    </div>
-    <div class="arrow-icon" style="color: #e74c3c;">➔</div>
-</a>            
+            <a href="employment_strategy_20260508.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
+                <div class="date-badge" style="background-color: #e74c3c;">緊急特設ページ（5月8日）</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b;">🚨 今夜21:30 運命の米雇用統計！介入警戒×中東リスクの特異点と防衛戦略</div>
+                    <p class="report-summary">米景気の特大イベント。158円の防衛線と155円の真空地帯における、プロの「absolute静観」と「下値での極小ロット打診（下ヒゲ確認）」戦略を徹底解説しています。</p>
+                </div>
+                <div class="arrow-icon" style="color: #e74c3c;">➔</div>
+            </a>            
 
-<a href="report_20260508.html" class="report-card">
-    <div class="date-badge" style="background-color: #d35400;">5月8日 (運命の金曜日・雇用統計本番)</div>
-    <div class="report-info">
-        <div class="report-title">🚨 【特報】今夜、運命の米雇用統計！中東緊張再燃と「長官訪日」の介入牽制が交錯する嵐の金曜日</div>
-        <p class="report-summary">トランプ発言の楽観ムードから一転、米軍の攻撃報道で地政学リスクが再燃。さらに来週の「米財務長官訪日」を控えた思惑が介入への牽制となり、ドル円は不気味な底堅さを保ったまま今夜の大一番を迎えます。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260508.html" class="report-card">
+                <div class="date-badge" style="background-color: #d35400;">5月8日 (運命の金曜日・雇用統計本番)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨 【特報】今夜、運命の米雇用統計！中東緊張再燃と「長官訪日」の介入牽制が交錯する嵐の金曜日</div>
+                    <p class="report-summary">トランプ発言の楽観ムードから一転、米軍の攻撃報道で地政学リスクが再燃。さらに来週の「米財務長官訪日」を控えた思惑が介入への牽制となり、ドル円は不気味な底堅さを保ったまま今夜の大一番を迎えます。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
             
-<a href="report_20260507.html" class="report-card">
-    <div class="date-badge" style="background-color: #2980b9;">5月7日 (GW明け・株高・明日の雇用統計警戒)</div>
-    <div class="report-info">
-        <div class="report-title">🚨 【特報】トランプ発言で原油急落・株高の「リスクオン」へ！ドル円は介入余波と指標待ちの神経戦</div>
-        <p class="report-summary">イラン戦闘終結期待から原油が暴落し、米株は最高値更新。一方ドル円は昨日の「覆面介入疑惑」を経て156円台へ。今夜のFRB高官発言ラッシュと明日の雇用統計を控えた嵐の前の静けさです。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260507.html" class="report-card">
+                <div class="date-badge" style="background-color: #2980b9;">5月7日 (GW明け・株高・明日の雇用統計警戒)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨 【特報】トランプ発言で原油急落・株高の「リスクオン」へ！ドル円は介入余波と指標待ちの神経戦</div>
+                    <p class="report-summary">イラン戦闘終結期待から原油が暴落し、米株は最高値更新。一方ドル円は昨日の「覆面介入疑惑」を経て156円台へ。今夜のFRB高官発言ラッシュと明日の雇用統計を控えた嵐の前の静けさです。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
 
-<a href="report_20260506.html" class="report-card">
-    <div class="date-badge" style="background-color: #c0392b;">5月6日 (休場・指標・有事警戒)</div>
-    <div class="report-info">
-        <div class="report-title">🚨 【特報】薄商い×指標×地政学×介入警戒！極限の「クアドラプルコンボ」相場へ突入</div>
-        <p class="report-summary">GW終盤の薄商いの中、中東情勢の錯綜と今夜のADP雇用統計が激突。介入レッドゾーン（158円手前）での予測不能な相場展開につき、EA完全停止・静観推奨。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260506.html" class="report-card">
+                <div class="date-badge" style="background-color: #c0392b;">5月6日 (休場・指標・有事警戒)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨 【特報】薄商い×指標×地政学×介入警戒！極限の「クアドラプルコンボ」相場へ突入</div>
+                    <p class="report-summary">GW終盤の薄商いの中、中東情勢の錯綜と今夜のADP雇用統計が激突。介入レッドゾーン（158円手前）での予測不能な相場展開につき、EA完全停止・静観推奨。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
 
-<a href="report_20260505.html" class="report-card">
-    <div class="date-badge" style="background-color: #c0392b;">5月5日 (介入・指標警戒)</div>
-    <div class="report-info">
-        <div class="report-title">🚨 【特報】片山財務相「米国と合意」の強烈牽制！介入チキンレースと今夜のISM・JOLTS警戒</div>
-        <p class="report-summary">薄商いの中で一時急落するも全戻しとなる異常事態。今夜の米重要指標（ISM・JOLTS）で相場が再び大きく動く転換点となります。EAは完全停止推奨。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260505.html" class="report-card">
+                <div class="date-badge" style="background-color: #c0392b;">5月5日 (介入・指標警戒)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨 【特報】片山財務相「米国と合意」の強烈牽制！介入チキンレースと今夜のISM・JOLTS警戒</div>
+                    <p class="report-summary">薄商いの中で一時急落するも全戻しとなる異常事態。今夜の米重要指標（ISM・JOLTS）で相場が再び大きく動く転換点となります。EAは完全停止推奨。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
             
-<a href="report_20260504.html" class="report-card">
-    <div class="date-badge" style="background-color: #c0392b;">5月4日 (有事警戒)</div>
-    <div class="report-info">
-        <div class="report-title">🚨 【特報】トランプ大統領「ホルムズ海峡で武力対処」示唆！薄商いに直撃する有事リスク</div>
-        <p class="report-summary">週明け早々、米軍の船舶護衛開始という超ド級の地政学リスクが浮上。日・英休場の薄商いの中、原油暴騰と第3波介入リスクが入り乱れる危険な月曜日です。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
+            <a href="report_20260504.html" class="report-card">
+                <div class="date-badge" style="background-color: #c0392b;">5月4日 (有事警戒)</div>
+                <div class="report-info">
+                    <div class="report-title">🚨 【特報】トランプ大統領「ホルムズ海峡で武力対処」示唆！薄商いに直撃する有事リスク</div>
+                    <p class="report-summary">週明け早々、米軍の船舶護衛開始という超ド級の地政学リスクが浮上。日・英休場の薄商いの中、原油暴騰と第3波介入リスクが入り乱れる危険な月曜日です。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
 
-<a href="report_20260501.html" class="report-card">
-    <div class="date-badge" style="background-color: #e74c3c;">5月1日 (実弾介入)</div>
-    <div class="report-info">
-        <div class="report-title">【特報】ついに実弾介入発動！160円からの5円大暴落と「歪んだ相場」の現在地</div>
-        <p class="report-summary">日銀の数兆円規模の実弾介入によりドル円は一時155円台へ暴落。強い米指標と介入の恐怖が交錯する中、本日はメーデー休場で流動性が枯渇します。週末の地政学リスクに備えた戦略を解説。</p>
-    </div>
-    <div class="arrow-icon">➔</div>
-</a>
-
+            <a href="report_20260501.html" class="report-card">
+                <div class="date-badge" style="background-color: #e74c3c;">5月1日 (実弾介入)</div>
+                <div class="report-info">
+                    <div class="report-title">【特報】ついに実弾介入発動！160円からの5円大暴落と「歪んだ相場」の現在地</div>
+                    <p class="report-summary">日銀の数兆円規模の実弾介入によりドル円は一時155円台へ暴落。強い米指標と介入の恐怖が交錯する中、本日はメーデー休場で流動性が枯渇します。週末の地政学リスクに備えた戦略を解説。</p>
+                </div>
+                <div class="arrow-icon">➔</div>
+            </a>
         </div>
     </div>
 
     <div id="tab-apr" class="tab-content">
         <div class="archive-list">
-
             <p style="text-align: center; color: #7f8c8d; padding: 20px; border: 1px dashed #bdc3c7; border-radius: 8px; background-color: #f9fbfd;">
                 🌸 4月のマーケットレポートです‼️
             </p>     
@@ -1119,7 +1076,7 @@
                 <div class="date-badge" style="background-color: #e74c3c;">4月28日 (日銀会合)</div>
                 <div class="report-info">
                     <div class="report-title">【特報】本日「日銀会合」結果発表！GWの薄商いと重なる極限のボラティリティに警戒</div>
-                    <p class="report-summary">本日昼頃の日銀政策金利発表および「展望レポート」、そして15:30の植田総裁会見に世界の注目が集まります。GW特有の流動性低下と相まって、結果次第では数円規模のフラッシュ・クラッシュ（急変動）が起こる極限の環境です。本日はEA稼働を停止し、結果発表後の順張りを徹底してください。</p>
+                    <p class="report-summary">本日昼頃の日銀政策金利発表および「展望レポート」、精度高く15:30の植田総裁会見に世界の注目が集まります。GW特有の流動性低下と相まって、結果次第では数円規模のフラッシュ・クラッシュ（急変動）が起こる極限の環境です。本日はEA稼働を停止し、結果発表後の順張りを徹底してください。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
@@ -1179,7 +1136,6 @@
             </a>
             
             <a href="Report_0420.html" class="report-card" style="border: 2px solid #e74c3c; background-color: #fffaf9;">
-                <div class="date-badge">4月20日</div>
                 <div class="date-badge" style="background-color: #c0392b;">緊急特報</div>
                 <div class="report-info">
                     <div class="report-title" style="color: #c0392b;">🚨 【緊急】ホルムズ海峡「再封鎖」で原油暴騰！米の新提案にイラン回答待ちの爆弾相場へ</div>
@@ -1263,7 +1219,7 @@
             <a href="Report_0408.html" class="report-card">
                 <div class="date-badge">4月8日</div>
                 <div class="report-info">
-                    <div class="report-title">イラン攻撃回避。「2週間の停戦」電撃合意！原油が89ドル台へ大暴落！インフレ懸念消滅で日経56,000円迫る「エブリシング・ラリー」到来</div>
+                    <div class="report-title">イラン攻撃回避。「2週間の停戦」電撃合意！原油が89ドル台へ大暴落！インフレ懸念後退で日経56,000円迫る「エブリシング・ラリー」到来</div>
                     <p class="report-summary">USOILが105ドル台から89ドル台へと暴落し、スタグフレーションの恐怖が完全消滅。安心した資金がリスク資産に殺到し、日経平均、ゴールド、BTCが歴史的高値を更新。ドル円はドル安の波及で158.5円台へと下落し、介入警戒感が後退しています。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
@@ -1273,7 +1229,7 @@
                 <div class="date-badge">4月7日</div>
                 <div class="report-info">
                     <div class="report-title">ISM下振れと原油反落でリスクオン再燃！日米株が全面高も、ドル円は160円の壁で極限の膠着</div>
-                    <p class="report-summary">米国のISM非製造業景気指数の下振れを好感し、インフレ懸念が後退。日経平均は54,000円の大台回復を目前に急反発しました。一方でドル円は、ドル安環境にもかかわらず160円の介入警戒ゾーンで売り買いが激突し、不気味な膠着状態が続いています。</p>
+                    <p class="report-summary">米国のISM非製造業景気指数の下振れを好感し、インフレ懸念が後退。日経平均は54,000円の大台回復を最初前に急反発しました。一方でドル円は、ドル安環境にもかかわらず160円の介入警戒ゾーンで売り買いが激突し、不気味な膠着状態が続いています。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
@@ -1318,7 +1274,6 @@
             
     <div id="tab-mar" class="tab-content">
         <div class="archive-list">
-            
             <p style="text-align: center; color: #7f8c8d; padding: 20px; border: 1px dashed #bdc3c7; border-radius: 8px; background-color: #f9fbfd;">
                 🎎 3月のマーケットレポートです‼️
             </p>     
@@ -1363,7 +1318,7 @@
                 <div class="date-badge">3月25日</div>
                 <div class="report-info">
                     <div class="report-title">市場は方向感探るレンジ相場。ドル円は158.00円の巨大な防衛壁を背に揉み合い</div>
-                    <p class="report-summary">激क्रोश相場から一服し、日経・ゴールドは小幅反発、原油は続落。ドル円は直下に特大の買いオーダーとOPを控え、下値の固い膠着状態に。</p>
+                    <p class="report-summary">激クロス相場から一服し、日経・ゴールドは小幅反発、原油は続落。ドル円は直下に特大の買いオーダーとOPを控え、下値の固い膠着状態に。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
@@ -1426,7 +1381,7 @@
                 <div class="date-badge">3月16日</div>
                 <div class="report-info">
                     <div class="report-title">原油高一服で調整先行も、ドル円は介入警戒で158円台へ反落</div>
-                    <p class="report-summary">週末の外交交渉報道でWTI原油がやや反落。ドル円は160円を目前にした介入警戒感から利益確定売りが優勢に。</p>
+                    <p class="report-summary">週末の外交交渉報道でWTI原油がやや反落。ドル円は160円を手前にした介入警戒感から利益確定売りが優勢に。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
@@ -1507,7 +1462,6 @@
 
     <div id="tab-history" class="tab-content">
         <div class="archive-list">
-
             <a href="scam_warning.html" class="report-card" style="border-left: 4px solid #e74c3c;">
                 <div class="date-badge" style="background-color: #e74c3c;">🚨 警告/防衛</div>
                 <div class="report-info">
@@ -1538,7 +1492,7 @@
             <a href="cnh_krw_benefits.html" class="report-card" style="border-left: 4px solid #9b59b6;">
                 <div class="date-badge" style="background-color: #9b59b6;">追加解説</div>
                 <div class="report-info">
-                    <div class="report-title">💡 【解説】CNH（人民元）とKRW（ウォン）を把握するメリット</div>
+                    <div class="report-title" style="color: #9b59b6;">💡 【解説】CNH（人民元）とKRW（ウォン）を把握するメリット</div>
                     <p class="report-summary">強弱メーターに追加された新通貨の活用術。アジア時間のボラティリティとリスクオン/オフの先行指標としての重要性を徹底解説しています。</p>
                 </div>
                 <div class="arrow-icon" style="color: #9b59b6;">➔</div>
@@ -1548,11 +1502,9 @@
 
     <script>
         function switchTab(tabId) {
-            // すべてのボタンとコンテンツから active クラスを外す
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            // 押されたボタンと対象のコンテンツに active クラスを付ける
             document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
             document.getElementById(tabId).classList.add('active');
         }

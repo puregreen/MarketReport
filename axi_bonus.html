@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axi 100%入金ボーナスキャンペーン - Pure Green</title>
+<style>
+    /* 全体設定 */
+    body {
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* ヒーローセクション（ファーストビュー） */
+    .hero {
+        background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+        color: #ffffff;
+        padding: 60px 30px;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 32px;
+        margin: 0 0 15px 0;
+        letter-spacing: 1px;
+        color: #fffaf0;
+    }
+    .hero p {
+        font-size: 16px;
+        margin: 0 0 30px 0;
+        color: #fdfdfd;
+        font-weight: 300;
+    }
+    
+    /* CTAボタン（リンクボタン） */
+    .cta-btn {
+        display: inline-block;
+        background-color: #2c3e50; 
+        color: #ffffff;
+        text-decoration: none;
+        padding: 16px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        box-shadow: 0 6px 15px rgba(44, 62, 80, 0.4);
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
+    }
+    .cta-btn:hover {
+        background-color: #1a252f;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(44, 62, 80, 0.6);
+    }
+
+    /* コンテンツエリア */
+    .content-area {
+        padding: 40px 30px;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 24px;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: #e67e22;
+        margin: 15px auto 0;
+    }
+
+    /* 特徴グリッド */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+    .feature-card {
+        background-color: #fcfcfc;
+        border: 1px solid #e1e8ed;
+        border-radius: 10px;
+        padding: 25px 20px;
+        text-align: left;
+        transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #e67e22;
+    }
+    .feature-icon {
+        font-size: 30px;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+    .feature-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #d35400;
+        margin-bottom: 10px;
+    }
+    .feature-desc {
+        font-size: 14.5px;
+        color: #555;
+        margin: 0;
+    }
+
+    /* 訴求ボックス */
+    .highlight-box {
+        background-color: #fffaf0;
+        border-left: 5px solid #e67e22;
+        padding: 25px;
+        border-radius: 4px;
+        margin-bottom: 30px;
+    }
+    .highlight-box.warning {
+        background-color: #fff9f9;
+        border-left: 5px solid #e74c3c;
+    }
+    .highlight-box h3 {
+        margin: 0 0 15px 0;
+        font-size: 19px;
+    }
+    .highlight-box p {
+        font-size: 15px;
+        color: #444;
+        margin-bottom: 0;
+    }
+    .highlight-box ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #444;
+        font-size: 14.5px;
+    }
+    .highlight-box li {
+        margin-bottom: 8px;
+    }
+
+    /* 手順リスト */
+    .step-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 30px 0;
+    }
+    .step-item {
+        background-color: #ffffff;
+        border: 1px solid #dcdde1;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+    .step-number {
+        background-color: #e67e22;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 16px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+    .step-text {
+        font-size: 15px;
+        color: #2c3e50;
+        font-weight: bold;
+    }
+
+    /* フッターCTA */
+    .bottom-cta {
+        text-align: center;
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        border-top: 1px solid #ecf0f1;
+    }
+    .bottom-cta p {
+        font-size: 15px;
+        margin-bottom: 25px;
+        color: #7f8c8d;
+    }
+
+    .footer-copy {
+        text-align: center;
+        font-size: 12px;
+        color: #95a5a6;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    /* スマホ対応 */
+    @media (max-width: 600px) {
+        .hero h1 { font-size: 24px; }
+        .hero p { font-size: 14px; }
+        .feature-grid { grid-template-columns: 1fr; }
+        .content-area { padding: 30px 20px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="hero">
+        <h1>Axi 100% Loyalty Bonus</h1>
+        <p>Axiユーザー必見！最大 USD 10,000 の100%入金ボーナスキャンペーン開催中。<br>プロモコードを適用して、証拠金を一気に倍増させましょう。</p>
+        <a href="https://puregreen.github.io/MarketReport/axi_intro.html" target="_blank" class="cta-btn">Axiで口座を開設する</a>
+    </div>
+
+    <div class="content-area">
+        
+        <h2 class="section-title">🎁 キャンペーンの詳細</h2>
+
+        <div class="highlight-box">
+            <h3 style="color: #d35400;">📅 開催期間</h3>
+            <p style="font-weight: bold; font-size: 18px; color: #2c3e50;">2026年7月1日 00:00 〜 2026年9月30日 23:59</p>
+        </div>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <div class="feature-title">ボーナス付与率・上限</div>
+                <p class="feature-desc">
+                    <span style="font-weight: bold; color: #c0392b;">100% ボーナス</span><br>
+                    最大 <span style="font-weight: bold;">USD 10,000</span> まで適用
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <div class="feature-title">最低入金額</div>
+                <p class="feature-desc">
+                    対象となる最低入金額は <span style="font-weight: bold; color: #c0392b;">USD 200</span> からとなります。
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔑</div>
+                <div class="feature-title">専用プロモコード</div>
+                <p class="feature-desc">
+                    <span style="font-size: 18px; font-weight: bold; color: #c0392b; background-color: #fdf1e6; padding: 5px 10px; border-radius: 4px; border: 1px dashed #d35400;">BONUS 100</span>
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <div class="feature-title">ボーナス有効期限</div>
+                <p class="feature-desc">
+                    付与されたボーナスの有効期限は <span style="font-weight: bold;">180日間</span> です。
+                </p>
+            </div>
+        </div>
+
+        <h2 class="section-title">📲 ボーナスの申請・適用手順</h2>
+        
+        <p style="text-align: center; margin-bottom: 25px; color: #555;">ボーナスを受け取るためには、入金前にクライアントポータルでのプロモコード入力が必要です。</p>
+
+        <ul class="step-list">
+            <li class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-text">Axiの Client Portal にログインする</div>
+            </li>
+            <li class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-text">メニューから「Settings」を開き、「Promo Code」を選択する</div>
+            </li>
+            <li class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-text">コード入力欄に <span style="color: #d35400;">BONUS 100</span> と入力し、「Apply」をクリックする</div>
+            </li>
+            <li class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-text">対象口座へ USD 200 以上を入金する</div>
+            </li>
+        </ul>
+
+        <div class="highlight-box warning">
+            <h3 style="color: #c0392b;">⚠️ その他の注意点・利用規約</h3>
+            <ul>
+                <li>本キャンペーンはプロップトレード機能である「Axi Select」にも対応しています。</li>
+                <li>プロモコードを入力せずに入金した場合、後からボーナスを付与することはできませんのでご注意ください。</li>
+                <li>詳細な規約については、Axi公式の「Promotions Terms & Conditions」および「Q1 FY27 100% Loyalty Bonus for Clients」をご確認ください。</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="bottom-cta">
+        <p>証拠金を一気に倍増させ、Axiの優れた取引環境を最大限に活かしましょう！</p>
+        <a href="https://puregreen.github.io/MarketReport/axi_intro.html" target="_blank" class="cta-btn">Axiの口座開設・詳細はこちら</a>
+    </div>
+
+    <div class="footer-copy">
+        Copyright 2026 Pure Green All Rights Reserved.
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -373,17 +373,34 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* タブメニュー用のCSS */
+    /* タブメニュー用のCSS（横スクロール対応） */
     .tab-menu {
         display: flex;
         border-bottom: 2px solid #ecf0f1;
         margin: 40px 0 20px 0;
         background-color: #fdfdfd;
         border-radius: 8px 8px 0 0;
-        overflow: hidden;
+        overflow-x: auto; /* タブが増えた場合に横スクロールを許可 */
+        white-space: nowrap; /* テキストの改行を防ぐ */
+        -webkit-overflow-scrolling: touch; /* iOSでの滑らかなスクロール */
     }
+    
+    /* タブメニューのスクロールバー装飾 */
+    .tab-menu::-webkit-scrollbar {
+        height: 6px;
+    }
+    .tab-menu::-webkit-scrollbar-track {
+        background: #f1f4f8;
+        border-radius: 8px 8px 0 0;
+    }
+    .tab-menu::-webkit-scrollbar-thumb {
+        background: #bdc3c7;
+        border-radius: 3px;
+    }
+
     .tab-btn {
-        flex: 1;
+        flex: 1 1 auto;
+        min-width: 80px; /* タブが潰れすぎないように最小幅を確保 */
         background: none;
         border: none;
         padding: 15px 10px;
@@ -567,7 +584,8 @@
     </details>
 
     <div class="tab-menu">
-        <button class="tab-btn active" onclick="switchTab('tab-july')">7月</button>
+        <button class="tab-btn active" onclick="switchTab('tab-aug')">8月</button>
+        <button class="tab-btn" onclick="switchTab('tab-july')">7月</button>
         <button class="tab-btn" onclick="switchTab('tab-june')">6月</button>
         <button class="tab-btn" onclick="switchTab('tab-may')">5月</button>
         <button class="tab-btn" onclick="switchTab('tab-apr')">4月</button>
@@ -575,8 +593,24 @@
         <button class="tab-btn" onclick="switchTab('tab-history')">解説</button>
     </div>
     
+    <div id="tab-aug" class="tab-content active">
+        <div class="archive-list">
+            <p style="text-align: center; color: #7f8c8d; padding: 20px; border: 1px dashed #bdc3c7; border-radius: 8px; background-color: #f9fbfd;">
+                🌻 8月のマーケットレポートです🌻
+            </p>
 
-    <div id="tab-july" class="tab-content active">
+            <a href="report_20260803.html" class="report-card" style="border: 2px solid #c0392b; background-color: #fffaf9; display: block; text-decoration: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <div class="date-badge" style="background-color: #c0392b; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">8月3日 (日米協調介入・原油急落)</div>
+                <div class="report-info">
+                    <div class="report-title" style="color: #c0392b; font-weight: bold; font-size: 16px;">🚨【緊急特報】日米協調介入の正式公表でドル円155円台へ暴落！イラン停戦協議で原油も急落の激震相場</div>
+                    <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">片山財務相とベッセント米財務長官が日米協調の円買い介入を正式に公表し、さらなる介入も躊躇しないと明言しました。これによりドル円は午前中に一時155.23円まで急落。また、トランプ大統領がイランとの合意を条件に攻撃見送りを示唆したことで中東の地政学リスクが後退し、WTI原油が78ドル台へと急落しています。「有事のドル買い」の巻き戻しと「実弾介入」が重なり、為替・商品市場は歴史的なボラティリティに見舞われています。今後の乱高下に最大級の警戒が必要です。</p>
+                </div>
+                <div class="arrow-icon" style="color: #c0392b; text-align: right; font-weight: bold;">➔</div>
+            </a>
+        </div>
+    </div>
+
+    <div id="tab-july" class="tab-content">
         <div class="archive-list">
             <p style="text-align: center; color: #7f8c8d; padding: 20px; border: 1px dashed #bdc3c7; border-radius: 8px; background-color: #f9fbfd;">
                 🎋 7月のマーケットレポートです⭐️
@@ -1124,7 +1158,7 @@
                 <div class="date-badge" style="background-color: #2980b9;">5月15日 (月曜朝の窓開けリスク)</div>
                 <div class="report-info">
                     <div class="report-title">🚨【特報】米インフレ再燃と地政学リスク後退。強烈なドル買いと週末の「日銀窓開け」リスク</div>
-                    <p class="report-summary">米国の物価指標大幅上振れにより、通貨強弱はUSD独歩高の様相を呈しています。一方で中東情勢の緊張緩和を受けゴールドは急落。週末の氷見野日銀副総裁の講演を控え、月曜朝の巨大な窓開けリスクに対する最大級の防衛が必要です。</p>
+                    <p class="report-summary">米国の物価指標大幅上振れにより、通貨強弱はUSD独歩高の様模様を呈しています。一方で中東情勢の緊張緩和を受けゴールドは急落。週末の氷見野日銀副総裁の講演を控え、月曜朝の巨大な窓開けリスクに対する最大級の防衛が必要です。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>
@@ -1167,7 +1201,7 @@
                 <div class="date-badge" style="background-color: #2980b9;">5月11日 (原油高騰・財務長官訪日)</div>
                 <div class="report-info">
                     <div class="report-title">🚨 【特報】原油3%超の急騰でインフレ懸念再燃！米財務長官訪日で介入牽制のジリ高相場へ</div>
-                    <p class="report-summary">イランの停戦拒否により原油が窓開け急騰。さらに本日からベッセント米財務長官が訪日するため「日銀は介入できない」との思慢が広がり、ドル円は156円台後半で底堅く推移しています。明日のCPIを睨んだ神経戦です。</p>
+                    <p class="report-summary">イランの停戦拒否により原油が窓開け急騰。さらに本日からベッセント米財務長官が訪日するため「日銀は介入できない」との思惑が広がり、ドル円は156円台後半で底堅く推移しています。明日のCPIを睨んだ神経戦です。</p>
                 </div>
                 <div class="arrow-icon">➔</div>
             </a>

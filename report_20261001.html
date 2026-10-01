@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=850, user-scalable=yes">
+<title>📊 マーケットレポート - 2026年10月1日</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+</head>
+
+<body>
+
+<div class="report-wrapper">
+    <div class="top-nav">
+        <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
+        <button class="btn-save" onclick="saveAsImage()">📷 レポートを画像として保存</button>
+    </div>
+
+    <div class="report-card" style="border: 2px solid #3498db; background-color: #f4f9ff; margin-bottom: 20px; display: block; text-decoration: none; padding: 15px; border-radius: 8px;">
+        <div class="date-badge" style="background-color: #3498db; color: white; padding: 3px 8px; border-radius: 4px; display: inline-block; font-size: 12px; margin-bottom: 5px;">10月1日 (米金利高止まり・日銀早期利上げ観測後退)</div>
+        <div class="report-info">
+            <div class="report-title" style="color: #2980b9; font-weight: bold; font-size: 16px;">🚨 【市場概況】米10年債利回り5.3%へ急騰！日銀の早期利上げ観測後退でドル円158円台へ</div>
+            <p class="report-summary" style="color: #333; font-size: 13px; margin-top: 5px;">本日の金融市場は、米長期金利の歴史的な高止まりと、日銀の金融政策に対する思惑の変化が相場を大きく動かしています。前日に発表された米経済指標が総じて強く、米10年債利回りは一時2007年以来の5.30%台へ到達しました。これによる強いドル買い圧力が継続する中、本日の東京市場では、日銀の「主な意見」や日銀短観において早期の大幅利上げ（10月会合での連続利上げ等）を示唆する強いトーンが見られなかったことから円売りが優勢となり、ドル円は200日移動平均線に迫る158.40円まで上昇しました。円安の進行を好感し、日経平均は一時2200円超の大幅反発を見せています。一方でユーロドルは年初来安値（1.1312ドル）目前の1.1315ドルまで下落。今夜は米ISM製造業景気指数の発表を控え、米金利動向と日米為替当局による介入警戒感が激しく交錯する神経質な展開となっています。</p>
+        </div>
+    </div>
+
+    <div class="link-section">
+        <div class="link-card"><a href="exness_intro.html" class="link-btn exness">Exness</a><div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる極狭スプレッド。</div></div>
+        <div class="link-card"><a href="axi_intro.html" class="link-btn axi">Axi</a><div class="link-desc">プロップファームへの登竜門。老舗ならではの約定力。</div></div>
+    </div>
+
+    <div class="tradingview-widget-container" style="margin-bottom: 25px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+      {
+      "symbols": [
+        { "proName": "CAPITALCOM:DXY", "title": "DXY" },
+        { "proName": "OANDA:SPX500USD", "title": "S&P 500" },
+        { "proName": "OANDA:US30USD", "title": "US 30" },
+        { "proName": "OANDA:NAS100USD", "title": "US 100" },
+        { "proName": "OANDA:JP225YJPY", "title": "Nikkei 225" },
+        { "proName": "OANDA:XAUUSD", "title": "Gold" },
+        { "proName": "OANDA:WTICOUSD", "title": "WTI Oil" },
+        { "proName": "OANDA:USDJPY", "title": "USD/JPY" },
+        { "proName": "OANDA:EURUSD", "title": "EUR/USD" },
+        { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" }
+      ],
+      "showSymbolLogo": true, "colorTheme": "light", "isTransparent": false, "displayMode": "adaptive", "locale": "ja"
+      }</script>
+    </div>
+
+    <div class="a4-container" id="report-content">
+        <div style="text-align: right; font-size: 12px; color: #7f8c8d;">発行日: 2026年10月1日 15:30現在</div>
+        
+        <h1>📊 マーケットレポート</h1>
+
+        <div class="emergency-box" style="border-left-color: #3498db; background-color: #f4f9ff;">
+            <div class="emergency-title" style="color: #2980b9;">【📌 市場概況まとめ】</div>
+            <p style="margin: 0; font-size: 14px; font-weight: bold;">
+                本日の市場は、「米長期金利の高止まり」と「日銀の早期利上げ期待後退」がテーマとなっています。<br>
+                米国では、経済指標の強さを背景に米10年債利回りが一時5.30%へ上昇し、強烈なドル買いの地合いが継続しています。<br>
+                東京市場では、日銀短観の非製造業DI悪化や「主な意見」での慎重姿勢から、10月の早期追加利上げ期待が後退。円売りが優勢となり、ドル円は158.40円まで上昇しました。円安進行を好感し、日経平均は一時2200円超の大暴騰を記録しています。<br>
+                一方、欧州通貨はドル一強の波に押され、ユーロドルは年初来安値に迫る1.13ドル台前半へ下落するなど、ドル独歩高の様相を呈しています。
+            </p>
+        </div>
+
+        <h2>【📈 主要銘柄の見通し（サマリー）】</h2>
+        <div style="text-align: right; font-size: 11px; color: #7f8c8d; margin-bottom: 5px;">※2026年10月1日 15:00現在 (行をタップで詳細へジャンプ)</div>
+        <table class="summary-detail-table" style="width: 100%;">
+            <colgroup>
+                <col style="width: 14%;"><col style="width: 16%;"><col style="width: 12%;"><col style="width: 14%;"><col style="width: 22%;"><col style="width: 22%;">
+            </colgroup>
+            <thead>
+                <tr><th>銘柄</th><th>見通し</th><th>日%</th><th>現在値※</th><th>サポート①/②</th><th>レジスタンス①/②</th></tr>
+            </thead>
+            <tbody>
+                <tr onclick="location.href='#detail-dxy'"><td>🇺🇸 DXY</td><td class="view-bullish">🔵⬆️ 堅調</td><td class="val-pos">+0.15%</td><td>101.646</td><td>101.30 / 101.00</td><td>102.00 / 102.30</td></tr>
+                <tr onclick="location.href='#detail-us500'"><td>🇺🇸 US500</td><td class="view-neutral">🟡➡️ もみ合い</td><td class="val-pos">+0.26%</td><td>7,714.96</td><td>7,680.0 / 7,650.0</td><td>7,750.0 / 7,780.0</td></tr>
+                <tr onclick="location.href='#detail-us30'"><td>🇺🇸 US30</td><td class="view-neutral">🟡➡️ もみ合い</td><td class="val-pos">+0.05%</td><td>51,168.5</td><td>50,800.0 / 50,500.0</td><td>51,500.0 / 51,800.0</td></tr>
+                <tr onclick="location.href='#detail-ustec'"><td>💻 USTEC</td><td class="view-bullish">🔵⬆️ 堅調</td><td class="val-pos">+0.88%</td><td>30,863.45</td><td>30,500.0 / 30,200.0</td><td>31,200.0 / 31,500.0</td></tr>
+                <tr onclick="location.href='#detail-jp225'"><td>🇯🇵 JP225</td><td class="view-bullish">🔵⬆️ 急騰</td><td class="val-pos">+2.66%</td><td>68,922.9</td><td>68,000.0 / 67,500.0</td><td>69,500.0 / 70,000.0</td></tr>
+                <tr onclick="location.href='#detail-xauusd'"><td>🥇 XAUUSD</td><td class="view-bullish">🔵⬆️ 反発</td><td class="val-pos">+0.77%</td><td>4,188.004</td><td>4,150.0 / 4,120.0</td><td>4,220.0 / 4,250.0</td></tr>
+                <tr onclick="location.href='#detail-usoil'"><td>🛢️ USOIL</td><td class="view-bearish">🔴⬇️ 調整</td><td class="val-neg">-0.51%</td><td>88.596</td><td>87.000 / 85.000</td><td>90.000 / 92.000</td></tr>
+                <tr onclick="location.href='#detail-eurusd'"><td>🇪🇺 EURUSD</td><td class="view-bearish">🔴⬇️ 軟調</td><td class="val-neg">-0.08%</td><td>1.13179</td><td>1.13000 / 1.12800</td><td>1.13500 / 1.13800</td></tr>
+                <tr onclick="location.href='#detail-gbpusd'"><td>🇬🇧 GBPUSD</td><td class="view-bearish">🔴⬇️ 軟調</td><td class="val-neg">-0.14%</td><td>1.32450</td><td>1.32000 / 1.31500</td><td>1.33000 / 1.33500</td></tr>
+                <tr onclick="location.href='#detail-usdjpy'"><td>🇯🇵 USDJPY</td><td class="view-bullish">🔵⬆️️ 堅調</td><td class="val-pos">+0.51%</td><td>158.373</td><td>157.80 / 157.50</td><td>158.50 / 159.00</td></tr>
+                <tr onclick="location.href='#detail-audusd'"><td>🇦🇺 AUDUSD</td><td class="view-neutral">🟡➡️ もみ合い</td><td class="val-pos">+0.03%</td><td>0.69474</td><td>0.69200 / 0.69000</td><td>0.69800 / 0.70000</td></tr>
+                <tr onclick="location.href='#detail-btcusd'"><td>🅑 BTCUSD</td><td class="view-bullish">🔵⬆️ 堅調</td><td class="val-pos">+0.77%</td><td>84,196.97</td><td>83,000.00 / 82,000.00</td><td>85,000.00 / 86,000.00</td></tr>
+            </tbody>
+        </table>
+
+        <h2>【🔥 通貨・銘柄 24時間強弱メーター (対USD)】</h2>
+        <div class="strength-meter-box">
+            <div class="strength-header">
+                <div class="strength-title">主要8通貨 ＋ XAU ＋ BTC</div>
+                <button id="updateBtn" class="update-btn" onclick="fetchAndRenderData()">🔄 最新データ取得</button>
+            </div>
+            <div id="statusText" class="status-text">データを取得待機中...</div>
+            <div id="api-chart-container"></div>
+            <p style="font-size: 12px; color: #7f8c8d; text-align: center; margin-top: 10px;">※米長期金利が5.3%台へ急伸し、ドル（USD）が全面高の展開です。日銀の早期利上げ観測後退により円（JPY）が売られ、日経平均は急騰。ドル高の圧力によりユーロ（EUR）は年初来安値に接近しています。</p>
+        </div>
+
+        <h2>【💪 法定通貨 強弱（ヒートマップ）】</h2>
+        <div class="tradingview-widget-container" style="margin-bottom:20px;">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js">
+          { "width": "100%", "height": 350, "currencies": ["EUR","USD","JPY","GBP","CHF","AUD","CAD","NZD"], "isTransparent": false, "colorTheme": "light", "locale": "ja" }</script>
+        </div>
+
+        <h2>【🪙 暗号資産 強弱（ヒートマップ）】</h2>
+        <div class="tradingview-widget-container" style="margin-bottom:20px;">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js">
+          { "dataSource": "Crypto", "blockSize": "market_cap_calc", "blockColor": "change", "locale": "ja", "symbolUrl": "", "colorTheme": "light", "hasTopBar": false, "isDataSetEnabled": false, "isZoomEnabled": true, "hasSymbolTooltip": true, "width": "100%", "height": 350 }</script>
+        </div>
+
+        <h2>【📉 恐怖指数 (VIX) 動向】</h2>
+        <div class="asset-dashboard" style="margin-bottom:20px;">
+            <div class="asset-info-col">
+                <p class="asset-description">米長期金利が5.3%台へ到達するという歴史的局面において、株式市場は金利上昇への警戒感を強めています。今夜の米ISM製造業景気指数の結果次第で、ボラティリティが再燃する可能性があります。</p>
+            </div>
+            <div class="asset-meter-col">
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
+                  { "symbol": "CAPITALCOM:VIX", "width": "100%", "height": "220", "locale": "ja", "dateRange": "1M", "colorTheme": "light", "isTransparent": true, "autosize": false }</script>
+                </div>
+            </div>
+        </div>
+
+        <h2>【🗣️ 本日の要人発言・ニュースハイライト】</h2>
+        <div class="box-warning" style="background-color: #fffaf9; border-left: 5px solid #3498db; padding: 15px; margin-bottom: 20px; font-size: 13.5px; line-height: 1.6;">
+            <ul style="margin: 0; padding-left: 20px;">
+                <li><span style="color:#2980b9; font-weight:bold;">日銀「主な意見」と早期利上げ観測後退：</span> 9月会合の主な意見では「物価が過度に上昇を続けないよう、適切な政策運営を進めるべき」などの意見が出たものの、直近での10月連続利上げなど、市場が警戒していた過激なタカ派姿勢は示されませんでした。また、日銀短観の非製造業DIが5期ぶりに悪化したことも、円売り材料となっています。</li>
+                <li><span style="color:#c0392b; font-weight:bold;">米長期金利5.3%到達とFRB高官発言：</span> ウィリアムズNY連銀総裁の「年末にかけてもう1度利上げが必要になる可能性」とのタカ派発言などを受け、米10年債利回りは一時2007年以来の5.30%台まで急上昇し、ドル高を牽引しています。</li>
+                <li><span style="color:#d35400; font-weight:bold;">ECB高官のハト派発言：</span> シュナーベルECB専務理事が「経済は想定以上に最近の世界的な利回り上昇に反応している可能性。それは物価への圧力を抑制するだろう」と発言し、ユーロの上値を重くしています。</li>
+            </ul>
+        </div>
+
+        <h2>【🔔 市場イベントハイライト】</h2>
+        <ul style="font-size: 13.5px; margin-bottom: 25px; line-height: 1.8;">
+            <li><span style="color:#c0392b; font-weight:bold;">今夜23:00 米国 ISM製造業景気指数 09月：</span> 米国の製造業の景況感を示す重要指標です。予想（55.0）を上回れば、利上げ長期化観測がさらに強まり、ドル円が159円を試す展開になる可能性があります。</li>
+            <li><span style="color:#e67e22; font-weight:bold;">今夜21:30 米国 新規失業保険申請件数：</span> 労働市場の強弱を確認する指標です。金利動向に影響を与えるため注目されています。</li>
+        </ul>
+
+        <h2>【📅 経済指標カレンダー - 前営業日（9月30日）】</h2>
+        <table class="calendar-table" style="width: 100%;">
+            <colgroup><col style="width:10%"><col style="width:6%"><col style="width:38%"><col style="width:20%"><col style="width:13%"><col style="width:13%"></colgroup>
+            <thead>
+                <tr><th>時刻</th><th>国</th><th>指標名</th><th>結果(予想)</th><th>前回</th><th>前回変動幅</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>08:50</td><td>🇯🇵</td><td>日 小売業販売額 08月 [前年比]</td><td><span style="color:#c0392b; font-weight:bold;">2.7%</span> (3.3%)</td><td>4.0%</td><td><span style="color:#c0392b; font-weight:bold;">-0.8 pips</span></td></tr>
+                <tr><td>08:50</td><td>🇯🇵</td><td>日 鉱工業生産(速報値) 08月 [前月比]</td><td><span style="color:#c0392b; font-weight:bold;">-1.7%</span> (1.3%)</td><td>-0.2%</td><td><span style="color:#c0392b; font-weight:bold;">-0.8 pips</span></td></tr>
+                <tr><td>10:30</td><td>🇦🇺</td><td>豪 消費者物価指数(CPI) 08月 [前年比]</td><td><span style="color:#c0392b; font-weight:bold;">4.0%</span> (4.1%)</td><td>3.5%</td><td><span style="color:#c0392b; font-weight:bold;">-6.3 pips</span></td></tr>
+                <tr><td>10:30</td><td>🇨🇳</td><td>中 製造業PMI 09月</td><td><span style="color:#c0392b; font-weight:bold;">50.1</span> (50.2)</td><td>49.8</td><td><span style="color:#2980b9; font-weight:bold;">+0.9 pips</span></td></tr>
+                <tr><td>10:30</td><td>🇨🇳</td><td>中 サービス業PMI 09月</td><td><span style="color:#2980b9; font-weight:bold;">50.2</span> (49.4)</td><td>49.0</td><td><span style="color:#2980b9; font-weight:bold;">+0.9 pips</span></td></tr>
+                <tr><td>15:00</td><td>🇬🇧</td><td>英 実質GDP(確報値) 2Q [前期比]</td><td><span style="color:#2980b9; font-weight:bold;">0.5%</span> (0.4%)</td><td>0.4%</td><td><span style="color:#2980b9; font-weight:bold;">+6.7 pips</span></td></tr>
+                <tr><td>15:00</td><td>🇬🇧</td><td>英 経常収支 2Q</td><td><span style="color:#2980b9; font-weight:bold;">-199億GBP</span> (-224億)</td><td>-221億</td><td><span style="color:#2980b9; font-weight:bold;">+6.7 pips</span></td></tr>
+                <tr><td>16:55</td><td>🇩🇪</td><td>独 失業率 09月</td><td><span style="color:#7f8c8d; font-weight:bold;">6.4%</span> (6.4%)</td><td>6.4%</td><td><span style="color:#2980b9; font-weight:bold;">+2.6 pips</span></td></tr>
+                <tr><td>21:00</td><td>🇩🇪</td><td>独 消費者物価指数(速報) 09月 [前月比]</td><td><span style="color:#7f8c8d; font-weight:bold;">0.6%</span> (0.6%)</td><td>0.2%</td><td><span style="color:#2980b9; font-weight:bold;">+0.5 pips</span></td></tr>
+                <tr><td>21:15</td><td>🇺🇸</td><td>米 ADP雇用者数 09月</td><td><span style="color:#2980b9; font-weight:bold;">9.0万人</span> (7.0万)</td><td>3.8万</td><td>---</td></tr>
+                <tr><td>21:30</td><td>🇺🇸</td><td>米 PCE価格指数 08月 [前年比]</td><td><span style="color:#c0392b; font-weight:bold;">3.4%</span> (3.7%)</td><td>3.7%</td><td><span style="color:#2980b9; font-weight:bold;">+19.1 pips</span></td></tr>
+                <tr><td>21:30</td><td>🇺🇸</td><td>米 コアPCE価格指数 08月 [前年比]</td><td><span style="color:#c0392b; font-weight:bold;">3.0%</span> (3.3%)</td><td>3.3%</td><td><span style="color:#2980b9; font-weight:bold;">+19.1 pips</span></td></tr>
+                <tr><td>21:30</td><td>🇺🇸</td><td>米 実質GDP(確報値) 2Q [前期比年率]</td><td><span style="color:#2980b9; font-weight:bold;">2.2%</span> (1.5%)</td><td>1.5%</td><td><span style="color:#c0392b; font-weight:bold;">-6.1 pips</span></td></tr>
+                <tr><td>22:45</td><td>🇺🇸</td><td>米 シカゴ購買部協会景気指数 09月</td><td><span style="color:#2980b9; font-weight:bold;">58.8</span> (51.2)</td><td>47.1</td><td><span style="color:#c0392b; font-weight:bold;">-3.5 pips</span></td></tr>
+            </tbody>
+        </table>
+
+        <h2>【📅 経済指標カレンダー - 本⽇（10月1日）】</h2>
+        <table class="calendar-table" style="width: 100%;">
+            <colgroup><col style="width:10%"><col style="width:6%"><col style="width:38%"><col style="width:20%"><col style="width:13%"><col style="width:13%"></colgroup>
+            <thead>
+                <tr><th>時刻</th><th>国</th><th>指標名</th><th>予想(結果)</th><th>前回</th><th>前回変動幅</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>08:50</td><td>🇯🇵</td><td><span style="color:#e67e22; font-weight:bold;">★★</span> 日 日銀短観 大企業製造業・業況判断 3Q</td><td>25 (<span style="color:#c0392b; font-weight:bold;">24</span>)</td><td>22</td><td><span style="color:#2980b9; font-weight:bold;">+3.7 pips</span></td></tr>
+                <tr><td>08:50</td><td>🇯🇵</td><td><span style="color:#e67e22; font-weight:bold;">★★</span> 日 日銀短観 大企業非製造業・業況判断 3Q</td><td>36 (<span style="color:#c0392b; font-weight:bold;">35</span>)</td><td>37</td><td><span style="color:#2980b9; font-weight:bold;">+3.7 pips</span></td></tr>
+                <tr><td>08:50</td><td>🇯🇵</td><td>日 対外対内証券投資(中長期ネット)</td><td>--- (<span style="color:#c0392b; font-weight:bold;">-6845億円</span>)</td><td>10829億</td><td><span style="color:#c0392b; font-weight:bold;">-7.8 pips</span></td></tr>
+                <tr><td>10:30</td><td>🇦🇺</td><td>豪 貿易収支 08月</td><td>21.00億 (<span style="color:#c0392b; font-weight:bold;">4.95億</span>)</td><td>19.23億</td><td><span style="color:#c0392b; font-weight:bold;">-15.0 pips</span></td></tr>
+                <tr><td>15:00</td><td>🇬🇧</td><td>英 ネーションワイド住宅価格指数 09月 [前月比]</td><td>0.1% (<span style="color:#c0392b; font-weight:bold;">-0.2%</span>)</td><td>0.2%</td><td><span style="color:#2980b9; font-weight:bold;">+1.3 pips</span></td></tr>
+                <tr><td>16:55</td><td>🇩🇪</td><td>独 製造業PMI(確報値) 09月</td><td>53.8</td><td>53.8</td><td><span style="color:#2980b9; font-weight:bold;">+2.6 pips</span></td></tr>
+                <tr><td>17:00</td><td>🇪🇺</td><td>欧 ユーロ圏製造業PMI(確報値) 09月</td><td>52.7</td><td>52.7</td><td><span style="color:#2980b9; font-weight:bold;">+2.9 pips</span></td></tr>
+                <tr><td>17:30</td><td>🇬🇧</td><td>英 製造業PMI(確報値) 09月</td><td>52.0</td><td>52.0</td><td><span style="color:#c0392b; font-weight:bold;">-1.7 pips</span></td></tr>
+                <tr><td>21:30</td><td>🇺🇸</td><td>米 新規失業保険申請件数 09/20-09/26</td><td>20.0万件</td><td>19.7万件</td><td><span style="color:#2980b9; font-weight:bold;">+5.5 pips</span></td></tr>
+                <tr><td>22:45</td><td>🇺🇸</td><td>米 製造業PMI(確報値) 09月</td><td>57.0</td><td>57.0</td><td><span style="color:#c0392b; font-weight:bold;">-12.4 pips</span></td></tr>
+                <tr><td>23:00</td><td>🇺🇸</td><td><span style="color:#e74c3c; font-weight:bold;">★★★</span> 米 ISM製造業景気指数 09月</td><td>55.0</td><td>54.6</td><td><span style="color:#c0392b; font-weight:bold;">-1.1 pips</span></td></tr>
+                <tr><td>23:00</td><td>🇺🇸</td><td>米 建設支出 08月 [前月比]</td><td>0.2%</td><td>-0.5%</td><td><span style="color:#c0392b; font-weight:bold;">-1.1 pips</span></td></tr>
+            </tbody>
+        </table>
+
+        <h2>【🎙️ 要人発言・イベント - 本日】</h2>
+        <table class="calendar-table" style="width: 100%;">
+            <colgroup><col style="width:15%"><col style="width:85%"></colgroup>
+            <thead>
+                <tr><th>時刻</th><th>内容 / イベント名</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>17:00</td><td>🇬🇧 ベイリー英中銀総裁 英中銀主催会議開会挨拶</td></tr>
+                <tr><td>19:35</td><td>🇩🇪 ナーゲル独連銀総裁 対談</td></tr>
+                <tr><td>21:00</td><td>🇬🇧 マン英中銀委員 イベント出席</td></tr>
+                <tr><td>21:30</td><td>🇺🇸 カシュカリ・ミネアポリス連銀総裁 インタビュー応じる</td></tr>
+                <tr><td>22:05</td><td>🇺🇸 バーキン・リッチモンド連銀総裁 討論会出席</td></tr>
+                <tr><td>22:30</td><td>🇪🇺 ラガルドECB総裁 欧州システミックリスク理事会（ESRB）会議出席</td></tr>
+                <tr><td>23:00</td><td>🇺🇸 ウォラーFRB理事 FED経済データについて講演（質疑応答あり）</td></tr>
+                <tr><td>23:50</td><td>🇬🇧 ピル英中銀チーフエコノミスト 会議出席</td></tr>
+                <tr><td>明 00:30</td><td>🇨🇭 シュレーゲル・スイス中銀総裁 イベント講演</td></tr>
+            </tbody>
+        </table>
+
+        <h2>【📝 各銘柄の詳細分析（ファンダメンタル＆テクニカル）】</h2>
+        <ul class="analysis-list">
+            
+            <li id="detail-dxy">
+                <span class="symbol-title">🇺🇸 DXY (ドルインデックス)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bullish">🔵⬆️ 堅調</td><th>日%</th><td class="val-pos">+0.15%</td><th>現在値※</th><td>101.646</td></tr>
+                    <tr><th>前日の終値</th><td>101.498</td><th>サポート①/②</th><td>101.30 / 101.00</td><th>レジスタンス①/②</th><td>102.00 / 102.30</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "CAPITALCOM:DXY", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">米長期金利が5.30%台へ急騰したことで、圧倒的なドル買い圧力が継続しています。主要通貨に対して全面高の展開となり、101ポイント台半ばを固めています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "TVC:DXY", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_dxy"></div>
+                <div class="strategy-box">📝 本日の戦略：金利主導のドル一強。押し目買い継続。</div>
+            </li>
+
+            <li id="detail-us500">
+                <span class="symbol-title">🇺🇸 US500 (S&P500)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-neutral">🟡➡️ もみ合い</td><th>日%</th><td class="val-pos">+0.26%</td><th>現在値※</th><td>7,714.96</td></tr>
+                    <tr><th>前日の終値</th><td>7,694.94</td><th>サポート①/②</th><td>7,680.0 / 7,650.0</td><th>レジスタンス①/②</th><td>7,750.0 / 7,780.0</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:SPX500USD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">米長期金利が5.3%まで上昇していることが株式市場への強烈な逆風となっています。前日の下落からの自律反発も見られますが、上値は限定的で今夜のISM待ちです。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "SP:SPX", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_us500"></div>
+                <div class="strategy-box">📝 本日の戦略：金利高が重石。戻り売りスタンスを推奨。</div>
+            </li>
+
+            <li id="detail-us30">
+                <span class="symbol-title">🇺🇸 US30 (NYダウ)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-neutral">🟡➡️ もみ合い</td><th>日%</th><td class="val-pos">+0.05%</td><th>現在値※</th><td>51,168.5</td></tr>
+                    <tr><th>前日の終値</th><td>51,142.9</td><th>サポート①/②</th><td>50,800.0 / 50,500.0</td><th>レジスタンス①/②</th><td>51,500.0 / 51,800.0</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:US30USD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">前日に大きく下落した反動や、月末のポジション調整により膠着状態となっています。追加利上げ観測と金利高が景気敏感株の重しです。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:US30USD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_us30"></div>
+                <div class="strategy-box">📝 本日の戦略：下落一服も上値重い。レンジでの様子見。</div>
+            </li>
+
+            <li id="detail-ustec">
+                <span class="symbol-title">💻 USTEC (ナスダック100)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bullish">🔵⬆️ 堅調</td><th>日%</th><td class="val-pos">+0.88%</td><th>現在値※</th><td>30,863.45</td></tr>
+                    <tr><th>前日の終値</th><td>30,594.22</td><th>サポート①/②</th><td>30,500.0 / 30,200.0</td><th>レジスタンス①/②</th><td>31,200.0 / 31,500.0</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:NAS100USD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">金利上昇は逆風ですが、半導体メモリーのマイクロンテクノロジーなどの好決算期待が支えとなり、ハイテク株には強い買い戻しが入っています。相対的な底堅さが際立ちます。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "MEXC:NAS100USDT.P", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_ustec"></div>
+                <div class="strategy-box">📝 本日の戦略：個別株の材料に支えられ反発。押し目買い。</div>
+            </li>
+
+            <li id="detail-jp225">
+                <span class="symbol-title">🇯🇵 JP225 (日経225)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bullish">🔵⬆️ 急騰</td><th>日%</th><td class="val-pos">+2.66%</td><th>現在値※</th><td>68,922.9</td></tr>
+                    <tr><th>前日の終値</th><td>67,137.0</td><th>サポート①/②</th><td>68,000.0 / 67,500.0</td><th>レジスタンス①/②</th><td>69,500.0 / 70,000.0</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:JP225YJPY", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">日銀の早期大幅利上げへの懸念が「主な意見」や短観を通じて後退したこと、およびドル円が158円台へ円安推移していることを好感し、半導体株や銀行株に強烈な買いが殺到。一時2200円超の大暴騰を記録しています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OSE:NK2251!", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_jp225"></div>
+                <div class="strategy-box">📝 本日の戦略：利上げ懸念後退で大幅高。押し目買い一択。</div>
+            </li>
+
+            <li id="detail-xauusd">
+                <span class="symbol-title">🥇 XAUUSD (ゴールド)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bullish">🔵⬆️ 反発</td><th>日%</th><td class="val-pos">+0.77%</td><th>現在値※</th><td>4,188.004</td></tr>
+                    <tr><th>前日の終値</th><td>4,156.020</td><th>サポート①/②</th><td>4,150.0 / 4,120.0</td><th>レジスタンス①/②</th><td>4,220.0 / 4,250.0</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:XAUUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">米長期金利が5.3%台に到達するなど逆風が強い環境ですが、前日に大きく売られた反動や、地政学リスクのくすぶりから押し目買いが優勢となり、自律反発しています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:XAUUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_xauusd"></div>
+                <div class="strategy-box">📝 本日の戦略：反落後の買い戻し。金利動向に注意しつつ戻り売り。</div>
+            </li>
+
+            <li id="detail-usoil">
+                <span class="symbol-title">🛢️ USOIL (WTI原油)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bearish">🔴⬇️ 調整</td><th>日%</th><td class="val-neg">-0.51%</td><th>現在値※</th><td>88.596</td></tr>
+                    <tr><th>前日の終値</th><td>89.050</td><th>サポート①/②</th><td>87.000 / 85.000</td><th>レジスタンス①/②</th><td>90.000 / 92.000</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:WTICOUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">米国の週間原油在庫が予想外に増加したことや、中東情勢を巡る過度な供給懸念が和らいでいることから、88ドル台へと調整下落が続いています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "NSE:OIL", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_usoil"></div>
+                <div class="strategy-box">📝 本日の戦略：供給懸念後退で軟調。戻り売りスタンス。</div>
+            </li>
+
+            <li id="detail-eurusd">
+                <span class="symbol-title">🇪🇺 EURUSD (ユーロドル)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bearish">🔴⬇️ 軟調</td><th>日%</th><td class="val-neg">-0.08%</td><th>現在値※</th><td>1.13179</td></tr>
+                    <tr><th>前日の終値</th><td>1.13270</td><th>サポート①/②</th><td>1.13000 / 1.12800</td><th>レジスタンス①/②</th><td>1.13500 / 1.13800</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:EURUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">米長期金利が5.30%台へ上昇する中、「ドル一強」相場に押し潰され、ユーロは年初来安値（1.1312ドル）に迫る水準まで売り込まれています。下値警戒感が非常に強いです。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:EURUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_eurusd"></div>
+                <div class="strategy-box">📝 本日の戦略：ドル一強相場。年初来安値更新に警戒し戻り売り。</div>
+            </li>
+
+            <li id="detail-gbpusd">
+                <span class="symbol-title">🇬🇧 GBPUSD (ポンドドル)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bearish">🔴⬇️ 軟調</td><th>日%</th><td class="val-neg">-0.14%</td><th>現在値※</th><td>1.32450</td></tr>
+                    <tr><th>前日の終値</th><td>1.32635</td><th>サポート①/②</th><td>1.32000 / 1.31500</td><th>レジスタンス①/②</th><td>1.33000 / 1.33500</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:GBPUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">ユーロ同様に強烈なドル買い圧力に押されています。1.32ドル台半ばで下値を模索する展開が続いており、上値は重いです。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:GBPUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_gbpusd"></div>
+                <div class="strategy-box">📝 本日の戦略：ドル高に連動した戻り売り。下値ブレイクに注意。</div>
+            </li>
+
+            <li id="detail-usdjpy">
+                <span class="symbol-title">🇯🇵 USDJPY (ドル円)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bullish">🔵⬆️ 堅調</td><th>日%</th><td class="val-pos">+0.51%</td><th>現在値※</th><td>158.373</td></tr>
+                    <tr><th>前日の終値</th><td>157.569</td><th>サポート①/②</th><td>157.80 / 157.50</td><th>レジスタンス①/②</th><td>158.50 / 159.00</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:USDJPY", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">米長期金利が5.30%台という歴史的高水準へ上昇し、日米金利差の拡大を意識した強烈なドル買い圧力がかかっています。さらに、本日の日銀短観の悪化や「主な意見」から、日銀の早期（10月）追加利上げ観測が大きく後退し、円売りが加速。ドル円は日足一目均衡表の転換線を突破し、200日移動平均線が位置する158.49円に迫る158.40円まで急上昇しました。158.00円台に乗せたことで、日本政府による実弾の為替介入への恐怖感も極限に達しており、今夜の米ISM製造業景気指数次第で、159円を試す大暴騰か、介入によるフラッシュクラッシュ（大暴落）か、非常に危険な領域に突入しています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:USDJPY", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_usdjpy"></div>
+                <div class="strategy-box">📝 本日の戦略：<span style="color:#e74c3c; font-weight:bold;">158円台は介入警戒MAX。突発的な急落に注意しポジション縮小を。</span></div>
+            </li>
+
+            <li id="detail-audusd">
+                <span class="symbol-title">🇦🇺 AUDUSD (豪ドル米ドル)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-neutral">🟡➡️ もみ合い</td><th>日%</th><td class="val-pos">+0.03%</td><th>現在値※</th><td>0.69474</td></tr>
+                    <tr><th>前日の終値</th><td>0.69453</td><th>サポート①/②</th><td>0.69200 / 0.69000</td><th>レジスタンス①/②</th><td>0.69800 / 0.70000</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "OANDA:AUDUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">圧倒的な米ドル高の波に押され、0.69ドル台半ばへと水準を切り下げていますが、0.6940ドル付近に買いオーダーがあり、下げ渋る推移となっています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "OANDA:AUDUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_audusd"></div>
+                <div class="strategy-box">📝 本日の戦略：ドル一強の逆風。戻り売りスタンス。</div>
+            </li>
+
+            <li id="detail-btcusd">
+                <span class="symbol-title">🅑 BTCUSD (ビットコイン)</span>
+                <table class="detail-stats-table">
+                    <tr><th>見通し</th><td class="view-bullish">🔵⬆️ 堅調</td><th>日%</th><td class="val-pos">+0.77%</td><th>現在値※</th><td>84,196.97</td></tr>
+                    <tr><th>前日の終値</th><td>83,553.33</td><th>サポート①/②</th><td>83,000.00 / 82,000.00</td><th>レジスタンス①/②</th><td>85,000.00 / 86,000.00</td></tr>
+                </table>
+                <div class="asset-dashboard">
+                    <div class="asset-info-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js">{ "symbol": "BITSTAMP:BTCUSD", "width": "100%", "colorTheme": "light", "isTransparent": false, "locale": "ja" }</script></div>
+                        <p class="asset-description">米長期金利が5.3%台へ上昇する逆風の中でも、代替資産としての需要やテクノロジー関連株（ナスダック）の反発に支えられ、84,000ドル台へ底堅く上昇しています。</p>
+                    </div>
+                    <div class="asset-meter-col">
+                        <div class="tradingview-widget-container"><div class="tradingview-widget-container__widget"></div><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js">{ "interval": "15m", "width": "100%", "isTransparent": false, "height": "280", "symbol": "BITSTAMP:BTCUSD", "showIntervalTabs": true, "displayMode": "single", "locale": "ja", "colorTheme": "light" }</script></div>
+                    </div>
+                </div>
+                <div class="chart-container" id="tv_btcusd"></div>
+                <div class="strategy-box">📝 本日の戦略：金利高の中でも底堅い。押し目を丁寧に拾う。</div>
+            </li>
+        </ul>
+
+        <h2>【🐋 大口注文情報 (オプション・機関投資家動向)】</h2>
+        <div class="order-box">
+            <div class="order-item"><span class="order-price-label" style="color:#c0392b; font-weight:bold;">158.00円防衛線の陥落と為替介入への恐怖：</span> ドル円は米金利急騰（5.30%）と日銀の利上げ観測後退を背景に、強固なレジスタンスと見られていた158.00円の巨大なオプションの壁を突き破り、一時158.40円まで急上昇しました。オーダー状況を見ると、本日（1日）NYカットの「大きめ」のオプションが158.25円に控えており、ここが目先のマグネットとして機能しています。また、158.00円はレジスタンスから強力なサポート（ストップロス売りと大きめなOPが混在）に転換しています。上値は、159.00円に2日NYカットのオプションと売りオーダーが控えています。この158円台という水準は、過去に日銀がレートチェック（為替介入の事前準備）を行った「絶対防衛線」であり、いつ日本政府・日銀による実弾介入（フラッシュクラッシュ）が実施されてもおかしくない、極めて危険な水域に突入しています。</div>
+        </div>
+
+        <h2>【🎯 各国通貨 大口注文ピックアップ】</h2>
+        <div class="ob-time">▼ ドル円オーダー状況（14:10 注文実況データ反映）</div>
+        <table class="ob-table" style="width: 100%; margin-bottom: 15px;">
+            <tbody>
+                <tr class="ob-sell"><td class="ob-price">160.40円</td><td>売りやや小さめ</td></tr>
+                <tr class="ob-sell"><td class="ob-price">160.00円</td><td>売り、OP1日(本日)NYカット/OP8日大きめ</td></tr>
+                <tr class="ob-sell"><td class="ob-sell"><td class="ob-price">159.50円</td><td>売り小さめ</td></tr>
+                <tr class="ob-sell"><td class="ob-price">159.25円</td><td>OP5日NYカット</td></tr>
+                <tr class="ob-sell"><td class="ob-price">159.00円</td><td>売りやや小さめ、OP2日NYカット/OP8日大きめ</td></tr>
+                <tr class="ob-sell"><td class="ob-price">158.80-90円</td><td>売り小さめ</td></tr>
+                <tr class="ob-sell"><td class="ob-price">158.50円</td><td>OP6日NYカット</td></tr>
+                <tr class="ob-sell"><td class="ob-price">158.40円</td><td>売り小さめ</td></tr>
+                <tr class="ob-current"><td class="ob-price">158.37円</td><td>10/1 15:30現在 レポート発行値 (本日 高値158.40 - 安値157.34)</td></tr>
+                <tr class="ob-buy"><td class="ob-price">158.30円</td><td>OP1日(本日)・5日NYカット</td></tr>
+                <tr class="ob-buy"><td class="ob-price">158.25円</td><td><span style="color:#e74c3c; font-weight:bold;">OP1日(本日)NYカット大きめ (14:10実況)</span></td></tr>
+                <tr class="ob-buy"><td class="ob-price">158.00円</td><td>割り込むとSL売り小さめ、<span style="color:#e74c3c; font-weight:bold;">OP1日(本日)大きめ/OP2日非常に大きめ</span>/OP5・7日</td></tr>
+                <tr class="ob-buy"><td class="ob-price">157.80円</td><td>買い小さめ</td></tr>
+                <tr class="ob-buy"><td class="ob-price">157.75円</td><td>OP1日(本日)NYカット</td></tr>
+                <tr class="ob-buy"><td class="ob-price">157.55円</td><td>OP2日NYカット</td></tr>
+                <tr class="ob-buy"><td class="ob-price">157.40円</td><td>買い小さめ</td></tr>
+                <tr class="ob-buy"><td class="ob-price">157.00-10円</td><td>買い小さめ（157.00 OP1日(本日)大きめ/OP2日非常に大きめ）</td></tr>
+                <tr class="ob-buy"><td class="ob-price">156.60円</td><td>割り込むとSL売り小さめ</td></tr>
+            </tbody>
+        </table>
+
+        <div class="ob-time">▼ 他通貨オーダー状況</div>
+        <table class="ob-table" style="width: 100%;">
+            <tbody>
+                <tr><td class="ob-price" style="background:#fdedec;">🇬🇧 GBPJPY</td><td>210.00円 売り試す動きになるか注目 (12:49) / 209.00円 売り (07:10)</td></tr>
+                <tr><td class="ob-price" style="background:#fdedec;">🇦🇺 AUDJPY</td><td>108.80円 買い (14:57) / 110.20円 売り小さめ (07:02)</td></tr>
+                <tr><td class="ob-price" style="background:#eafaf1;">🇬🇧 GBPUSD</td><td>1.3220ドル 割り込むとSL売り (14:51) / 1.3250ドル OP1日(本日)NYカット (06:54)</td></tr>
+                <tr><td class="ob-price" style="background:#eafaf1;">🇦🇺 AUDUSD</td><td>0.6990ドル 売り・超えるとSL買い (14:39) / 0.6940ドル 買い・割るとSL売り (06:46)</td></tr>
+                <tr><td class="ob-price" style="background:#fdedec;">🇪🇺 EURJPY</td><td>180.60円 売り (14:28) / 179.00円 売り小さめ (06:38)</td></tr>
+                <tr><td class="ob-price" style="background:#eafaf1;">🇪🇺 EURUSD</td><td>1.1325ドル OP5・6日NYカット (14:18) / 1.1320ドル 買い・SL売りやや小さめ (06:30)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="comment-box">
+            <span style="color:#27ae60; font-weight:bold;">【💡 Pure Greenからの総括・防衛コメント】</span><br>
+            コミュニティの皆さん、こんにちは。いよいよドル円が「神の領域」とも言える危険水域に突入しました。<br>
+            我々の「二段構え投資法」において、第一段階の「風（ファンダメンタルズ）」は日米双方で激しくぶつかっています。米10年債利回りが2007年以来の「5.30%」へ暴騰し、ドル買いの巨大なハリケーンが吹き荒れています。それに加えて、本日の日銀「主な意見」や日銀短観が悪化したことで、市場が警戒していた「日銀の早期大幅利上げ」の観測が大きく後退し、強烈な円売りの風も加わりました。このダブルの追い風により、ドル円は158.40円まで押し上げられています。<br><br>
+            第二段階の「型（大口の環境）」を見ると、ついに158.00円の巨大な壁が決壊しました。この158円という水準は、先週日銀が「レートチェック（為替介入の事前準備）」を行った「絶対防衛線」です。ここを突破したことで、いつ日本政府・日銀による実弾介入（フラッシュクラッシュ）が実施されてもおかしくない、極めて危険なマグマが溜まっています。<br><br>
+            <span style="color:#e74c3c; font-weight:bold;">🛡️ 絶対防衛ルール：158円台は介入警戒MAX。今夜の米指標で大暴落のリスク。EAは完全停止！</span><br>
+            今夜の米ISM製造業景気指数の結果次第で、159円に向けたストップロスを巻き込む暴騰が起きるか、あるいは日本政府の介入による数円単位の大暴落（ナイアガラ）が起きるか、テクニカル分析が全く機能しないギャンブル相場となっています。こんな日に大切な資金を晒す必要はありません。<br>
+            EA（自動売買）は問答無用で「完全停止」を継続し、裁量トレードにおいても「絶対にノーポジション」で嵐が過ぎ去るのを待つ「盾のディフェンス」を徹底してください！生き残ることだけを最優先にしてください！(๑•̀ㅁ•́ฅ✨
+        </div>
+
+        <div class="footer">
+            ※本資料に掲載されている情報は情報提供を目的としたものであり、投資勧誘を目的としたものではありません。異常な相場環境につき、各自の資金管理を最優先してください。<br>
+            Copyright 2026 Pure Green All Rights Reserved.
+        </div>
+    </div> 
+    
+    <div class="link-section" style="margin-top: 20px;">
+        <div class="link-card">
+            <a href="exness_intro.html" class="link-btn exness">Exness</a>
+            <div class="link-desc">無制限レバレッジと圧倒的約定力。プロに選ばれる世界最高峰の極狭スプレッド口座。</div>
+        </div>
+        <div class="link-card">
+            <a href="axi_intro.html" class="link-btn axi">Axi</a>
+            <div class="link-desc">プロップファームへの登竜門。老舗ならではの約定力。</div>
+        </div>
+        <div class="link-card">
+            <a href="xs_intro.html" class="link-btn xs" style="background-color: #2ecc71;">XS</a>
+            <div class="link-desc">機関投資家レベルの最高水準環境。多種多様な銘柄を誇る次世代マルチアセットブローカー。</div>
+        </div>
+        <div class="link-card">
+            <a href="xmtrading_intro.html" class="link-btn" style="background-color: #e74c3c;">XMTrading</a>
+            <div class="link-desc">日本人シェアNo.1。豪華な100%入金ボーナスと追証なしの安心環境。</div>
+        </div>
+        <div class="link-card">
+            <a href="bitwallet_intro.html" class="link-btn" style="background-color: #34495e;">bitwallet</a>
+            <div class="link-desc">海外FXの入出金を最速・安価に。安全かつスムーズな資金管理を実現する必須ツール。</div>
+        </div>
+        <div class="link-card">
+            <a href="peska_intro.html" class="link-btn" style="background-color: #ff416c;">Peska</a>
+            <div class="link-desc">次世代ウォレット。使い勝手と安全性を備えた、確実な決済手段。</div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="index.html" class="back-link">← インデックス(目次)に戻る</a>
+    </div>
+
+</div> 
+
+<script src="script.js"></script>
+
+</body>
+</html>
